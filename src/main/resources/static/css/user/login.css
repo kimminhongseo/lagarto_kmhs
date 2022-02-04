@@ -1,0 +1,81 @@
+.logoMain{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.logo{
+    padding: 2%;
+    width: 20%;
+}
+
+.social{
+    float: none;
+    margin: 0 auto;
+    width: 30%;
+    height: 15%;
+}
+
+.row-cols-2{
+    width: 100%;
+    height: 100%;
+}
+
+.col{
+    text-align: center;
+    font-weight: bolder;
+    width: 100%;
+    height: 50%;
+    border: 1px solid #000;
+}
+
+#btnLogin{
+    margin-left: 5px;
+}
+
+#formId{
+    float: none;
+    margin: 0 auto;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 20% !important;
+}
+
+#formPw{
+    float: none;
+    margin: 0 auto;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 20% !important;
+}
+#msg-login{
+    text-align: center;
+    color: red;
+    margin-bottom: 10px;
+}
+#btnUser{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+
+#btnUser > button:nth-child(2){
+    margin-left: 1%;
+}
+
+.findUser{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+#test{
+    float: none;
+    margin: 0 auto;
+    border: 1px solid #000000;
+    width: 50px;
+    height: 50px;
+}

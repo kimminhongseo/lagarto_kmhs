@@ -1,0 +1,133 @@
+#profileImg{
+    float: left;
+    width: 200px;
+    height: 200px;
+    margin-right: 100px;
+}
+
+#headerP, header-password{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#mypage_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+
+#certification{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#profile_level{
+    width: 200px;
+    height: 200px;
+    border-collapse: collapse;
+    border: 1px solid #000000;
+}
+
+#certification_h5{
+    margin-right: 750px;
+}
+#h1_User, #header-password{
+    text-align: center;
+}
+#profile_my{
+    width: 600px;
+}
+#certification_span{
+    float: left;
+}
+#phone-modal, #email-modal{
+    margin-top: 100px;
+}
+
+#formPhone, #formEmail{
+    float: left;
+    margin-bottom: 20px;
+}
+#formPhone-send, #formEmail-send{
+    margin-left: 10px;
+}
+#formEmail, formEmail_Number, #formPhone, formPhone_Number{
+    width: 300px;
+}
+
+#formEmail_submit, #formPhone_submit{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    float: none;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+#email-button, #Phone-button{
+    background-color: transparent;
+    color: black;
+}
+#Precautions{
+    margin: 10px;
+    border: 1px solid lightslategrey;
+    opacity: 70%;
+    width: 1000px;
+    height: 300px;
+    color: darkred;
+}
+
+#Precautions-text{
+    margin-top: 7%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+}
+
+#password-frm{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    float: none;
+    margin: 0 auto;
+    padding: 30px;
+    width: 1000px;
+    height: 300px;
+    border: solid 1px #e7e7e7;
+}
+
+#password-update{
+    flex-direction: column;
+}
+
+
+
+#password-current, #password-upd, #password-chk{
+    font-size: 15px;
+    border: 2px solid #e7e7e7;
+    padding: 10px 10px;
+    margin-top: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    float: left;
+}
+
+#password-current-input , #password-upd-input, #password-chk-input{
+    margin-left: 2px;
+    padding: 10px 10px;
+    margin-top: 10px;
+    border: 2px solid #e7e7e7;
+}
+
+#password-smt{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    float: none;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+

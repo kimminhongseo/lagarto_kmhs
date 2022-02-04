@@ -15,6 +15,6 @@ public interface UserMapper {
     UserEntity selUser(UserEntity entity);
     UserEntity facebookPk(UserEntity entity);
     UserEntity loginSel(UserEntity entity);
-    UserEntity passwordSel(UserDto entity);
-    UserEntity passwordUpd(UserEntity entity);
+    UserEntity passwordSel(UserDto dto);
+    int passwordUpd(UserDto dto);
 }

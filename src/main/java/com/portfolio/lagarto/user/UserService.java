@@ -129,13 +129,13 @@ public class UserService {
     }
 
 
-    public UserEntity passwordSel(UserDto entity){
-        UserEntity dbUpw = mapper.passwordSel(entity);
-        if(BCrypt.checkpw(entity.getUpw(), dbUpw.getUpw())){
-            entity.setNewUpw(BCrypt.hashpw(entity.getNewUpw(), BCrypt.gensalt()));
-            return mapper.passwordUpd(entity);
+    public int passwordSel(UserDto dto){
+        UserEntity dbUpw = mapper.passwordSel(dto);
+        if(BCrypt.checkpw(dto.getUpw(), dbUpw.getUpw())){
+            dto.setNewUpw(BCrypt.hashpw(dto.getNewUpw(), BCrypt.gensalt()));
+            return mapper.passwordUpd(dto);
         }
-        return null;
+        return 0;
     }
 
 

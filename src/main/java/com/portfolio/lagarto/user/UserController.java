@@ -23,17 +23,16 @@ public class UserController {
     private UserService service;
     @Autowired
     private Utils utils;
-    @GetMapping("/login")
-    public void login(){};
 
-//    @GetMapping("/login")
-//    public String login(Model model) {
-//        if (0 != utils.getLoginUserPk()){
-//            return "redirect:/main/page";
-//        }
-//        model.addAttribute("title", "로그인");
-//        return "user/login";
-//    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        if (0 != utils.getLoginUserPk()){
+            return "redirect:/main";
+        }
+        model.addAttribute("title", "로그인");
+        return "user/login";
+    }
 
     @PostMapping("/login")
     public String loginproc(UserEntity entity, Model model) {
@@ -136,14 +135,14 @@ public class UserController {
 
     @PostMapping("/passwordCurrent")
     @ResponseBody
-    public Map<String, Integer> passwordSel(@RequestBody UserDto entity){
-        System.out.println(entity.getIuser());
-        System.out.println(entity.getUpw());
-        System.out.println(entity.getNewUpw());
-        UserEntity userEntity = service.passwordSel(entity);
+    public Map<String, Integer> passwordSel(@RequestBody UserDto dto){
+        System.out.println(dto.getIuser());
+        System.out.println(dto.getUpw());
+        System.out.println(dto.getNewUpw());
+        int userEntity = service.passwordSel(dto);
 
         Map<String, Integer> result = new HashMap<>();
-        if(userEntity != null){
+        if(userEntity != 0){
             result.put("result", 1);
             return result;
         }

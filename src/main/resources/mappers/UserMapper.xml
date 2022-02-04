@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.portfolio.lagarto.user.UserMapper">
+    <insert id="insUser">
+        INSERT INTO `lagarto`.`lagarto_user`
+        (`uid`, `upw`, `contact_first`, `contact_second`, `contact_third`, `disc_agree_a`, `disc_agree_b`, `disc_agree_c`, `platform_cd`)
+        VALUES (#{uid}, #{upw}, #{contact_first}, #{contact_second}, #{contact_third}, #{disc_agree_a}, #{disc_agree_b}, #{disc_agree_c}, #{platform_cd})
+    </insert>
+
+    <select id="selContactCount" resultType="int">
+        SELECT COUNT(`iuser`)
+        FROM `lagarto`.`lagarto_user`
+        WHERE `contact_first` = #{contact_first}
+          AND `contact_second` = #{contact_second}
+          AND `contact_third` = #{contact_third}
+    </select>
+
+    <select id="selUidCount" resultType="int">
+        SELECT COUNT(`iuser`)
+        FROM `lagarto`.`lagarto_user`
+        WHERE `uid` = #{uid}
+    </select>
+
+    <insert id="apiInsUser" useGeneratedKeys="true" keyProperty="iuser">
+        INSERT INTO `lagarto`.`t_user`
+            (`iuser`, `email`, `name`, `upw`)
+        VALUES (#{iuser}, #{email}, #{name}, #{upw})
+    </insert>
+
+    <select id="selUser" resultType="UserEntity">
+        SELECT *
+        FROM `lagarto`.`t_user`
+        WHERE `email` = #{email}
+    </select>
+
+    <insert id="facebookPk">
+        UPDATE `lagarto`.`lagarto_user`
+        SET `nickname` = #{nickname}
+        WHERE `email` = #{email};
+    </insert>
+
+    <select id="loginSel" resultType="UserEntity">
+        SELECT * FROM `lagarto`.`lagarto_user`
+        WHERE
+        <if test=" uid != null and uid != '' "> `uid` = #{uid} </if>
+        <if test=" iuser > 0 "> `iuser` = #{iuser} </if>
+    </select>
+
+    <!--현재 비밀번호 비밀번호-->
+    <select id="passwordSel" resultType="UserEntity">
+        SELECT upw FROM `lagarto`.`lagarto_user`
+        WHERE iuser = #{iuser}
+    </select>
+    <!--비밀번호 업데이트-->
+    <update id="passwordUpd">
+        update `lagarto`.`lagarto_user` set upw = #{newUpw} where iuser=#{iuser}
+    </update>
+</mapper>

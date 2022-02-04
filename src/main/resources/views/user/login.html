@@ -5,10 +5,28 @@
 
 <head>
   <title>로그인</title>
+  <link rel="stylesheet" th:href="@{/css/user/login.css}">
+  <script defer th:src="@{/js/user/login.js}"></script>
 </head>
 
 <th:block layout:fragment="content">
-<div id="container">
-  z
-</div>
+
+  <div class="logoMain"><img class="logo" src="/img/Lagarto.PNG"></div>
+
+  <form id="login" action="/user/login" method="post">
+    <div>
+      <div class="my-3"><input type="text" class="form-control" id="formId" placeholder="아이디" aria-label="Username"
+                               aria-describedby="basic-addon1" name="uid"></div>
+    </div>
+    <div>
+      <div class="my-3"><input type="password" class="form-control" id="formPw" placeholder="비밀번호"
+                               aria-label="Username" aria-describedby="basic-addon1" name="upw"></div>
+    </div>
+    <div>
+      <div class="my-4" id="btnUser">
+        <button type="button" class="btn btn-outline-success" id="btnLogin" >로그인</button>
+        <button type="button" class="btn btn-outline-success" id="btnJoin">회원가입</button>
+      </div>
+    </div>
+  </form>
 </th:block>

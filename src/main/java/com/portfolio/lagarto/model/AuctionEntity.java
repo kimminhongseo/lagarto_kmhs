@@ -1,12 +1,12 @@
 package com.portfolio.lagarto.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
+
+@Data
 public class AuctionEntity {
     private int iboard;
     private int icategory;

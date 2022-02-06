@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--메퍼 설정 하세요-->
-<mapper namespace="com.portfolio.lagarto.user.UserMapper">
+<mapper namespace="com.portfolio.lagarto.auction.AuctionMapper">
 
     <insert id="insAuction">
         insert into auction
@@ -14,7 +14,7 @@
     <!--전체 sel 하는거 하나 만들어야할듯-->
 
     <select id="selAuctionList" resultType="AuctionVo">
-        select A.iboard, A.title, A.iuser, A.hits, A.images, A.ctnt , A.imbuy, A.buy,
+        select A.iboard,A.icategory, A.title, A.iuser, A.hits, A.images, A.ctnt , A.imbuy, A.buy,
         B.nm as writernm
         From auction A
         Left join lagarto_user B
@@ -26,7 +26,7 @@
     </select>
 
     <select id="selAuctionListAll" resultType="AuctionVo">
-        select A.iboard, A.title, A.iuser, A.hits, A.images, A.ctnt , A.imbuy, A.buy,
+        select A.iboard, A.icategory, A.title, A.iuser, A.hits, A.images, A.ctnt , A.imbuy, A.buy,
         B.nm as writernm
         from auction A
         left join lagarto_user B

@@ -20,7 +20,7 @@
         <button><a href="/user/logout">로그아웃</a></button>
     </div>
     <div th:if="${#lists.size(list) == 0}">게시글이 없습니다.</div>
-    <th:block th:unless="${#lists.size(list) > 0}">
+    <div th:unless="${#lists.size(list) > 0}">
         <table class="table table-hover">
             <tr class="table-dark">
                 <th>번호</th>
@@ -45,5 +45,5 @@
                 </tr>
             </th:block>
         </table>
-    </th:block>
+    </div>
 </th:block>

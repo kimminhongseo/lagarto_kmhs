@@ -38,10 +38,12 @@
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">
         select A.iboard, A.title,A.icategory ,A.iuser, A.hits, A.images, A.ctnt , A.imbuy, A.buy,
-        B.nm as writernm, B.profile_img
+        B.nm as writernm, B.profile_img , C.nm as categorynm
         from auction A
-        left join lagarto_user B
-        on A.iuser = B.iuser
+            left join lagarto_user B
+            on A.iuser = B.iuser
+            left join auction_category C
+            on A.icategory = C.icategory
         where A.isdel = 0
         AND A.iboard = ${iboard}
 

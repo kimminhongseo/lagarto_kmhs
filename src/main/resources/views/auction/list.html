@@ -18,8 +18,7 @@
 <!--a태그로 이동하는 이벤트 했음. -->
     <div class="auction_container">
         <ul class="auction_list">
-            <li class="record"  th:each="data:${List}"><a th:href="@{/auction/detail/(iboard=${data.iboard})}">
-
+            <li class="record"  th:each="data:${List}"><a th:href="@{/auction/detail(iboard=${data.iboard})}">
                 <div hidden>게시판 번호: <span class="iboard" th:text="${data.iboard}"/></div>
                 <div th>
                     <img th:src="@{/img/Lagarto.PNG}"/>

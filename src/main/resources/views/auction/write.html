@@ -20,14 +20,14 @@
                 <input type="hidden" th:with="icate=${param.icategory}" th:data-icategory="${icate}" th:field="*{icategory}" th:value="${icategory}">
                 <!--icategory value를 안정해서 오류가 났다.-->
                 <div>
-                    <label for="title">내용 : <input required type="text" placeholder="제목을 입력하세요" th:field="*{title}"></label>
+                    <label for="title">내용 : <input id="title" required type="text" placeholder="제목을 입력하세요" th:field="*{title}"></label>
                 </div>
                 <div>
-                    <label for="ctnt">내용 : <input required type="text" placeholder="내용을 입력하세요" th:field="*{ctnt}"></label>
+                    <label for="ctnt">내용 : <input  id="ctnt" required type="text" placeholder="내용을 입력하세요" th:field="*{ctnt}"></label>
                 </div>
                 <div>
-                    <label for="imbuy">즉시구매가: <input required type="number" placeholder="즉시구매가" th:field="*{imbuy}"></label>
-                    <label for="buy">경매가 :<input required type="number" placeholder="경매가" th:field="*{buy}"></label>
+                    <label for="imbuy">즉시구매가: <input  id="imbuy" required type="number" placeholder="즉시구매가" th:field="*{imbuy}"></label>
+                    <label for="buy">경매가 :<input  id="buy" required type="number" placeholder="경매가" th:field="*{buy}"></label>
                 </div>
 
                 <div><input type="submit"></div>

@@ -51,8 +51,9 @@ public class AuctionController {
 
 
     @GetMapping("/detail")
-    public void detail(AuctionDto dto,Model model){
-        model.addAttribute("data",service.selAuctionDetail(dto));
+    public String detail(AuctionDto dto,Model model){
+        model.addAttribute("Data",service.selAuctionDetail(dto));
+        return "auction/detail";
     }
 
 

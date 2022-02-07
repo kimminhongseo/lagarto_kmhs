@@ -8,9 +8,20 @@
     <link rel="stylesheet" th:href="@{/css/auction/detail.css}">
     <script defer th:src="@{/js/auction/detail.js}"></script>
 </head>
+<th:block layout:fragment="content">
+
 
 <div>
-    안녕
+    ~~~~~여기는 디테일 부분 ~~~~~
+    <div class="detail_item" th:with="data=${Data}"}>
+    <div>카테고리 : <span th:text="${data.categorynm}"/></div>
+    <div>제목 :<span  th:text="${data.title}"/> </div>
+    <div>내용 : <span  th:text="${data.ctnt}"/></div>
+    <div>즉시 구매가: <span th:text="${data.imbuy}"/> 원</div>
+    <div>현재가 :<span th:text="${data.imbuy}"/> 원 <span><button>// 가격올리는 기능 어찌할꼬 //</button></span></div>
+    <div><span th:text="${data.images}"/></div>
+    </div>
 </div>
 
+</th:block>
 </html>

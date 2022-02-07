@@ -10,5 +10,14 @@
 </head>
 
 <th:block layout:fragment="content">
-
+    <div th:object="${dto}" th:text="*{iboard}"/>
+    <div th:if="${session.loginUser.iuser == param.iuser}">
+        <button id="modBtn">수정</button>
+        <button id="delBtn">삭제</button>
+    </div>
+    <div>제목 : <span th:text="${param.title}"/></div>
+    <div>작성자 : <span th:text="${param.nickname}"/></div>
+    <div>조회수 : <span th:text="${param.hits}"/></div>
+    <div>내용</div>
+    <div th:text="${param.ctnt}"></div>
 </th:block>

@@ -6,10 +6,7 @@ import com.portfolio.lagarto.model.CustomerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/customer")
@@ -27,7 +24,9 @@ public class CustomerController {
     }
 
     @GetMapping("/write")
-    public void write() {}
+    public void write(@ModelAttribute("entity") CustomerEntity entity) {
+
+    }
 
     @PostMapping("/write")
     public String writeProc(CustomerEntity entity) {
@@ -36,8 +35,8 @@ public class CustomerController {
     }
 
     @GetMapping("/detail")
-    public void detail(CustomerDto dto, Model model) {
-        CustomerVo vo = service.selCustomerDetail(dto);
-        model.addAttribute("data", vo);
+    public String detail(Model model, CustomerDto dto) {
+       model.addAttribute("data", service.selCustomerDetail(dto));
+       return "redirect:/customer/detail?iboard=" + dto.getIboard();
     }
 }

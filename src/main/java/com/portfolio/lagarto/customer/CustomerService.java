@@ -28,7 +28,6 @@ public class CustomerService {
     }
 
     public CustomerVo selCustomerDetail(CustomerDto dto) {
-        CustomerVo detail = mapper.selCustomerDetail(dto);
-        return detail;
+        return mapper.selCustomerDetail(dto);
     }
 }

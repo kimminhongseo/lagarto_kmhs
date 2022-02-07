@@ -19,9 +19,8 @@
         <button><a href="/customer/write">글쓰기</a></button>
         <button><a href="/user/logout">로그아웃</a></button>
     </div>
-    <div th:if="${#lists.size(list) == 0}">게시글이 없습니다.</div>
-    <div th:unless="${#lists.size(list) > 0}">
         <table class="table table-hover">
+            <thead>
             <tr class="table-dark">
                 <th>번호</th>
                 <span th:if="${board_cd == 1}">
@@ -32,18 +31,22 @@
                 <th>조회수</th>
                 <th>작성일시</th>
             </tr>
-            <th:block th:each="item : ${list}">
-                <tr class="record" data-iboard="${item.iboard}">
-                    <td>${item.iboard}</td>
+            </thead>
+            <tbody>
+            <span th:each="item : ${list}">
+                <tr class="record" th:data="${param.iboard}">
+                    <a th:href="@{/customer/detail(iboard=${item.iboard})}">
+                     <td>[[${item.iboard}]]</td>
                     <th:block th:if="${board_cd == 1}">
-                        <td>${item.productTitle}</td>
+                        <td>[[${item.productTitle}]]</td>
                     </th:block>
-                    <td>${item.title}</td>
-                    <td>${item.nickname}"</td>
-                    <td>${item.hits}</td>
-                    <td>${item.rdt}</td>
+                    <td>[[${item.title}]]</td>
+                    <td>[[${item.nickname}]]</td>
+                    <td>[[${item.hits}]]</td>
+                    <td>[[${item.rdt}]]</td>
+                    </a>
                 </tr>
-            </th:block>
+            </span>
+            </tbody>
         </table>
-    </div>
 </th:block>

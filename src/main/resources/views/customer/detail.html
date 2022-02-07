@@ -4,20 +4,23 @@
       layout:decorate="temp/thymeleaf_layout">
 
 <head>
-    <title>상세화면</title>
+    <title>상세 정보</title>
     <link rel="stylesheet" th:href="@{/css/customer/detail.css}">
     <script defer th:src="@{/js/customer/detail.js}"></script>
 </head>
 
 <th:block layout:fragment="content">
-    <div th:object="${dto}" th:text="*{iboard}"/>
-    <div th:if="${session.loginUser.iuser == param.iuser}">
+
+    <div class="detail" th:with="data=${data}">
+    <div th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
         <button id="modBtn">수정</button>
         <button id="delBtn">삭제</button>
     </div>
-    <div>제목 : <span th:text="${param.title}"/></div>
-    <div>작성자 : <span th:text="${param.nickname}"/></div>
-    <div>조회수 : <span th:text="${param.hits}"/></div>
+    <div>제목 : <span th:text="${data.title}"/></div>
+    <div>작성자 : <span th:text="${data.nickname}"/></div>
+    <div>조회수 : <span th:text="${data.hits}"/></div>
     <div>내용</div>
-    <div th:text="${param.ctnt}"></div>
+    <div th:text="${data.ctnt}"></div>
+    </div>
 </th:block>
+</html>

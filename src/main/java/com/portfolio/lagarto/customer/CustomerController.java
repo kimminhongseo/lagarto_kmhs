@@ -35,8 +35,8 @@ public class CustomerController {
     }
 
     @GetMapping("/detail")
-    public String detail(Model model, CustomerDto dto) {
-       model.addAttribute("data", service.selCustomerDetail(dto));
-       return "redirect:/customer/detail?iboard=" + dto.getIboard();
+    public String detail(CustomerDto dto, Model model) {
+        model.addAttribute("data", service.selCustomerDetail(dto));
+        return "customer/detail";
     }
 }

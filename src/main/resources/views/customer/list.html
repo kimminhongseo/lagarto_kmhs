@@ -10,6 +10,7 @@
 </head>
 
 <th:block layout:fragment="content">
+    <div id="data" th:with="board_cd=${param.board_cd}" th:data-board_cd="${board_cd}"></div>
     <div th:switch="${board_cd}">
         <span th:case="1"><h1>리뷰</h1></span>
         <span th:case="2"><h1>커뮤니티</h1></span>
@@ -19,34 +20,33 @@
         <button><a href="/customer/write">글쓰기</a></button>
         <button><a href="/user/logout">로그아웃</a></button>
     </div>
-        <table class="table table-hover">
-            <thead>
-            <tr class="table-dark">
-                <th>번호</th>
-                <span th:if="${board_cd == 1}">
+    <table class="table table-hover" >
+        <thead>
+        <tr class="table-dark">
+            <th>번호</th>
+            <span th:if="${board_cd == 1}">
                     <th>상품제목</th>
                 </span>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>조회수</th>
-                <th>작성일시</th>
-            </tr>
-            </thead>
-            <tbody>
-            <span th:each="item : ${list}">
-                <tr class="record" th:data="${param.iboard}">
-                    <a th:href="@{/customer/detail(iboard=${item.iboard})}">
-                     <td>[[${item.iboard}]]</td>
-                    <th:block th:if="${board_cd == 1}">
-                        <td>[[${item.productTitle}]]</td>
-                    </th:block>
-                    <td>[[${item.title}]]</td>
-                    <td>[[${item.nickname}]]</td>
-                    <td>[[${item.hits}]]</td>
-                    <td>[[${item.rdt}]]</td>
-                    </a>
-                </tr>
-            </span>
-            </tbody>
-        </table>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>조회수</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="record" th:each="item : ${list}">
+            <a th:href="@{/customer/detail(iboard=${item.iboard})}">
+                <td th:text="${item.iboard}">번호</td>
+                <span th:if="${board_cd == 1}">
+                        <td th:text="${item.productTitle}">상품제목</td>
+                    </span>
+                <td th:text="${item.title}">제목</td>
+                <td th:text="${item.nickname}">작성자</td>
+                <td th:text="${item.hits}">조회수</td>
+                <td th:text="${item.rdt}">작성일시</td>
+            </a>
+        </tr>
+        </tbody>
+    </table>
 </th:block>
+</html>

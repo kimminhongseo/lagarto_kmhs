@@ -10,23 +10,24 @@
 </head>
 
 <th:block layout:fragment="content">
-    <div id="data" th:with="board_cd=${param.board_cd}" th:data-board_cd="${board_cd}"></div>
+    <div id="data" ></div>
     <div th:switch="${board_cd}">
         <span th:case="1"><h1>리뷰</h1></span>
         <span th:case="2"><h1>커뮤니티</h1></span>
         <span th:case="3"><h1>문의</h1></span>
     </div>
     <div th:if="${session.loginUser != null}">
-        <button><a href="/customer/write">글쓰기</a></button>
+        <button th:with="board_cd=${param.board_cd}" th:data-board_cd="${board_cd}">
+            <a href="/customer/write">글쓰기</a></button>
         <button><a href="/user/logout">로그아웃</a></button>
     </div>
-    <table class="table table-hover" >
+
+    <table class="table table-hover">
         <thead>
+
         <tr class="table-dark">
             <th>번호</th>
-            <span th:if="${board_cd == 1}">
-                    <th>상품제목</th>
-                </span>
+            <th th:if="${board_cd == 1}">상품제목</th>
             <th>제목</th>
             <th>작성자</th>
             <th>조회수</th>
@@ -34,19 +35,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="record" th:each="item : ${list}">
-            <a th:href="@{/customer/detail(iboard=${item.iboard})}">
+        <div id="list" th:each="item : ${list}" th:with="iboard=${item.getIboard()}" th:data-iboard="${iboard}">
+        <tr th:onclick="location.href=`/customer/detail?iboard=`+[[${iboard}]]"  class="record pointer">
                 <td th:text="${item.iboard}">번호</td>
-                <span th:if="${board_cd == 1}">
-                        <td th:text="${item.productTitle}">상품제목</td>
-                    </span>
-                <td th:text="${item.title}">제목</td>
-                <td th:text="${item.nickname}">작성자</td>
+                <td th:if="${board_cd == 1}" th:text="${item.productTitle}">상품제목</td>
+                <td th:href="@{/customer/detail(iboard=${item.iboard})}" th:text="${item.title}">제목</td>
+                <td th:text="${item.nickname}">작성자</td></a>
                 <td th:text="${item.hits}">조회수</td>
                 <td th:text="${item.rdt}">작성일시</td>
-            </a>
         </tr>
+        </div>
         </tbody>
+
     </table>
 </th:block>
 </html>

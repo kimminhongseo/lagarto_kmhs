@@ -3,7 +3,7 @@
 <mapper namespace="com.portfolio.lagarto.customer.CustomerMapper">
 
     <insert id="insCustomer">
-        INSERT INTO lararto_customer
+        INSERT INTO lagarto_customer
         (board_cd, title, ctnt, ctnt_img, iuser)
         VALUES
         (${board_cd}, #{title}, #{ctnt}, #{ctnt_img}, ${iuser})

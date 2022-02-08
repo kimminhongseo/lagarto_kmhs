@@ -5,22 +5,28 @@
 
 <head>
     <title>글쓰기</title>
+    <link rel="stylesheet" th:href="@{/css/customer/write.css}">
+    <script defer th:src="@{/js/customer/write.js}"></script>
 </head>
 
 <th:block layout:fragment="content">
     <div class="container">
         <h1>글쓰기</h1>
         <div>
-            <form method="post" th:action="@{/customer/write}" th:object="${entity}">
-                <input type="hidden" th:field="*{board_cd}">
+            <form th:action="@{/customer/write}" th:object="${entity}" method="post">
+                <input type="hidden" value="${board_cd}" th:with="board_cd=${param.board_cd}" th:data-board_cd="${board_cd}" th:field="*{board_cd}" th:value="${board_cd}">
                 <div class="form-floating mb-3">
-                    <input required type="text" class="form-control" placeholder="title" th:field="*{title}">
-                    <label class="form-label" for="title">타이틀</label>
+                    <input required type="text" id="title" class="form-control" placeholder="title" th:field="*{title}">
+                    <label class="form-label" for="title">제목</label>
                 </div>
 
                 <div class="mb-3">
                     <label for="ctnt" class="form-label">내용</label>
-                    <textarea class="form-control" th:field="*{ctnt}" rows="3"></textarea>
+                    <textarea class="form-control" id="ctnt" th:field="*{ctnt}" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="formFileSm" class="form-label"></label>
+                    <input class="form-control form-control-sm" id="formFileSm" type="file">
                 </div>
                 <div>
                     <button class="btn btn-primary" type="submit">저장</button>

@@ -12,15 +12,15 @@
 <th:block layout:fragment="content">
 
     <div class="detail" th:with="data=${data}">
-    <div th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
-        <button id="modBtn">수정</button>
-        <button id="delBtn">삭제</button>
-    </div>
-    <div>제목 : <span th:text="${data.title}"/></div>
-    <div>작성자 : <span th:text="${data.nickname}"/></div>
-    <div>조회수 : <span th:text="${data.hits}"/></div>
-    <div>내용</div>
-    <div th:text="${data.ctnt}"></div>
+        <div th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
+            <button id="modBtn">수정</button>
+            <button id="delBtn">삭제</button>
+        </div>
+        <div>제목 : <span th:text="${data.title}"/></div>
+        <div>작성자 : <span th:text="${data.nickname}"/></div>
+        <div>조회수 : <span th:text="${data.hits}"/></div>
+        <div>내용</div>
+        <div th:text="${data.ctnt}"></div>
     </div>
 </th:block>
 </html>

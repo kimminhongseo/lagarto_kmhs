@@ -1,10 +1,12 @@
 // {
-//     const recordList = document.querySelectorAll('.record');
+//     const list = document.querySelectorAll('#list');
+//     const iboard = list.dataset.iboard;
+//
 //     const recordEvent = (item) => {
 //         item.addEventListener('click', () => {
-//             console.log(item.iboard);
-//             location.href = `/customer/detail?iboard=${item.iboard}`;
+//             console.log(iboard);
+//             location.href = `/customer/detail?iboard=${iboard}`;
 //         });
 //     };
-//     recordList.forEach(recordEvent);
+//     list.forEach(recordEvent);
 // }

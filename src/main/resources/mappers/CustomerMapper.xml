@@ -12,7 +12,7 @@
     <select id="selCustomerList" resultType="CustomerVo">
         SELECT A.* , B.nickname, C.title AS productTitle, C.iboard FROM lagarto_customer A
         INNER JOIN lagarto_user B ON A.iuser = B.iuser
-        LEFT JOIN lagarto_main C ON A.product_cd = C.iboard
+        LEFT JOIN auction C ON A.product_cd = C.iboard
         WHERE A.board_cd = ${board_cd}
         ORDER BY A.iboard DESC
     </select>

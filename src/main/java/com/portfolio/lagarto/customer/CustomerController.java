@@ -18,22 +18,19 @@ public class CustomerController {
     @GetMapping("/list/{board_cd}")
     public String list(@PathVariable int board_cd, CustomerDto dto, Model model) {
         model.addAttribute("board_cd", board_cd);
-//        model.addAttribute("iboard", dto.getIboard());
         model.addAttribute("list", service.selCustomerList(dto));
         dto.setBoard_cd(board_cd);
         return "customer/list";
     }
 
-    @GetMapping("/write/{board_cd}")
-    public String write(@ModelAttribute CustomerEntity entity) {
+    @GetMapping("/write")
+    public String write(@ModelAttribute("entity") CustomerEntity entity) {
         return "customer/write";
     }
 
     @PostMapping("/write")
     public String writeProc(CustomerEntity entity) {
         int result = service.insCustomer(entity);
-        System.out.println(result);
-        System.out.println(entity.getBoard_cd());
         return "redirect:/customer/list/" + entity.getBoard_cd();
     }
 

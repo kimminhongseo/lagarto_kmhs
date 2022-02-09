@@ -1,10 +1,7 @@
 package com.portfolio.lagarto.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
+import lombok.Data;
 
 @Data
 public class AuctionEntity {
@@ -13,7 +10,11 @@ public class AuctionEntity {
     private String title;
     private String ctnt;
     private int iuser;
-    private String images;
+    private String image1;
+    private String image2;
+    private String image3;
+    private String image4;
+    private String image5;
     private int hits;
     private int isdel;
     private int buy;

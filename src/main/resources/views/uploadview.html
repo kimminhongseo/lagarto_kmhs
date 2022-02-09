@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글쓰기칸~~~~~실험</title>
+</head>
+<th:block layout:fragment="content">
+<body>
+    <h1>글쓰기 되라 제발</h1>
+    <form th:action="@{/upload}" th:object="${auctionEntity}" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="icategory">카테고리 : <input id="icategory" th:field="*{icategory}"></label>
+        </div>
+
+        <div>
+            <label for="title">제목 : <input id="title" required type="text" placeholder="제목을 입력하세요" th:field="*{title}"></label>
+        </div>
+        <div>
+            <label for="ctnt">내용 : <input  id="ctnt" required type="text" placeholder="내용을 입력하세요" th:field="*{ctnt}"></label>
+        </div>
+        <div>
+            <label for="imbuy">즉시구매가: <input  id="imbuy" required type="number" placeholder="즉시구매가" th:field="*{imbuy}"></label>
+            <label for="buy">경매가 :<input  id="buy" required type="number" placeholder="경매가" th:field="*{buy}"></label>
+        </div>
+        <input type="file" name="files" multiple>
+        <input type="submit" value="등록하기">
+    </form>
+
+
+
+</body>
+</th:block>
+</html>

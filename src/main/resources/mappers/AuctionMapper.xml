@@ -5,11 +5,25 @@
 
     <insert id="insAuction">
         insert into auction
-        (icategory, title, ctnt, iuser, buy, imbuy)
+        (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5)
         values
-        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy})
+        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5})
 
     </insert>
+
+
+    <!--총 게시판 번호가져오려고 적음.-->
+    <select id="insAuctionList" resultType="AuctionVo">
+        select A.iboard, A.title, A.iuser, A.hits, A.image1, A.image2, A.image3, A.image4, A.image5, A.ctnt , A.imbuy, A.buy,
+        B.nm as writernm
+        From auction A
+        Left join lagarto_user B
+        ON A.iuser = B.iuser
+        where A.isdel = 0
+        Order by A.iboard DESC
+        LIMIT 1
+
+    </select>
 
     <!--전체 sel 하는거 하나 만들어야할듯-->
 

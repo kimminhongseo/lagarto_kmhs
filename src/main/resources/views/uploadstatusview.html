@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>insert sadas</title>
+</head>
+
+<th:block layout:fragment="content" >
+
+    <div th:if="${msg}">
+        <span th:text="${msg}"></span>
+    </div>
+    <div>
+        <span><a href="/">Upload More</a></span>
+    </div>
+    <div>
+        //////~~~~~여기는 실험하는 디테일 부분 ~~~~~////////
+        <div class="detail_item" th:with="ins=${ins1}">
+            <div>게시판 번호: <span th:text="${ins.iboard}"/> </div>
+            <div>제목 :<span th:text="${ins.title}"/> </div>
+            <div>내용 :<span th:text="${ins.ctnt}"/></span></div>
+            <div>즉시 구매가: <span th:text="${ins.imbuy}"/></span> 원</div>
+            <div>현재가 :<span th:text="${ins.buy}"/> 원 </div>
+         <!--<img th:src="@{/resources/uploadfile/} + ${ins.iboard} + &#47; + ${ins.image1}">-->
+            <img th:src="@{/uploadfile/} + ${ins.iboard} + ${ins.image1}">
+
+        </div>
+
+
+        <!--todo upload/게시판번호/.jpg  들을 뿌려줄거야 여기에-->
+
+
+
+    </div>
+</th:block>
+
+
+
+</html>

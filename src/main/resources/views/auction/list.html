@@ -12,7 +12,7 @@
 <th:block layout:fragment="content" >
     <div id="data" th:with="icate=${param.icategory}" th:data-icategory="${icate}"></div>
     <div>
-        <div th:if="${icategory ge 1}"><a th:href="@{/auction/write/{icategory}(icategory=${icategory})}">글쓰기</a></div>
+        <div th:if="${icategory ge 1}"><a th:href="@{/auction/write(icategory=${icategory})}">글쓰기</a></div>
     </div>
 
 <!--a태그로 이동하는 이벤트 했음. -->

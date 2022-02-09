@@ -1,3 +1,4 @@
+
 {
     const joinForm = document.querySelector('#join_form');
 
@@ -50,11 +51,6 @@
 
 
         // 약관 동의 전체 체크
-        const discAgreeAll = document.querySelector('#disc_agree_all');
-        const discAgreeA = document.querySelector('#disc_agree_a');
-        const discAgreeB = document.querySelector('#disc_agree_b');
-        const discAgreeC = document.querySelector('#disc_agree_c');
-
         joinForm['disc_agree_all'].addEventListener('change', (e) => {
             joinForm['disc_agree_a'].checked = e.currentTarget.checked;
             joinForm['disc_agree_b'].checked = e.currentTarget.checked;
@@ -136,6 +132,34 @@
 
             return true;
         }
+
+        // 이용약관
+        const discSpanElem = joinForm.querySelector('.disc > span');
+        const modalElem = document.querySelector('#modal');
+        const bodyElem = document.querySelector('body');
+
+        if (modalElem) {
+            discSpanElem.addEventListener('click', () => {
+                modalElem.style.display = 'flex';
+                bodyElem.style.overflow = 'hidden';
+            });
+
+            const closeBtn = modalElem.querySelector('.close_btn');
+
+            closeBtn.addEventListener('click', () => {
+                modalElem.style.display = 'none';
+                bodyElem.style.overflow = 'visible';
+            });
+
+            modalElem.addEventListener('click', (e) => {
+                const eventTarget = e.target;
+                if (eventTarget.classList.contains('modal_overlay')) {
+                    modalElem.style.display = 'none';
+                    bodyElem.style.overflow = 'visible';
+                }
+            })
+
+        }
         
     }
 
@@ -144,3 +168,5 @@
 
 
 }
+
+

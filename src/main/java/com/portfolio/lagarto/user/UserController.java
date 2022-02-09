@@ -21,6 +21,7 @@ import java.util.Map;
 public class UserController {
     @Autowired //필요한 메소드 자동찾기
     private UserService service;
+
     @Autowired
     private Utils utils;
 
@@ -74,10 +75,10 @@ public class UserController {
         int contactCheck = 0;
 
         service.contactCheck(entity);
-        JoinResult joinRslt = entity.getResult();
+        JoinResult joinResult = entity.getResult();
 
         // 사용 가능한 번호
-        if (joinRslt == JoinResult.AVAILABLE_CONTACT) {
+        if (joinResult == JoinResult.AVAILABLE_CONTACT) {
             contactCheck = 1;
         }
 
@@ -87,7 +88,15 @@ public class UserController {
     }
 
     @GetMapping("/join")
-    public void join(Model model) {}
+    public void join(@ModelAttribute("entity") UserEntity entity, Model model) {
+        model.addAttribute("UID", Const.UID);
+        model.addAttribute("UPW", Const.UPW);
+        model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
+        model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
+        model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
+        model.addAttribute("test", "hi");
+
+    }
 
     @PostMapping("/join")
     public String joinProc(UserEntity entity, Model model) {

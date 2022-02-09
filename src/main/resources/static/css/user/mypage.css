@@ -4,8 +4,16 @@
     height: 200px;
     margin-right: 100px;
 }
-
-#headerP, #header-password, #header-trade{
+#review-img{
+    width: 200px;
+    height: 200px;
+}
+#review-div{
+    display: flex;
+    justify-items: start;
+    justify-content: center;
+}
+#headerP, #header-password, #header-trade, #header-review{
     display: flex;
     justify-items: center;
     justify-content: center;
@@ -35,7 +43,7 @@
 #certification_h5{
     margin-right: 750px;
 }
-#h1_User, #header-password, #header-trade{
+#h1_User, #header-password, #header-trade, #header-review{
     text-align: center;
 }
 #profile_my{
@@ -156,7 +164,7 @@
     float: none;
     margin: 0 auto;
 }
-#buy-container, #sell-container{
+#buy-container, #sell-container, #review-container{
     margin-top: 10px;
     width: 1000px;
     height: 350px;
@@ -180,7 +188,20 @@
     text-align: center;
 }
 
-#buy-tbody, #sell-tbody{
+#review-table{
+    table-layout: fixed;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    color: #1d1d1d;
+    box-sizing: border-box;
+    height: 40px;
+    padding: 7px 0;
+    border-bottom: 1px solid #e1e1e1;
+    text-align: center;
+}
+
+#buy-tbody, #sell-tbody ,#review-tbody{
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
@@ -201,4 +222,18 @@
     border-bottom: 1px solid #e1e1e1;
     background-color: #f0f0f0;
     text-align: center;
+}
+
+#review-tr2{
+    box-sizing: border-box;
+    height: 40px;
+    padding: 7px 0;
+    border-bottom: 1px solid #e1e1e1;
+    text-align: center;
+}
+
+#review-my{
+    padding-right: 950px;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }

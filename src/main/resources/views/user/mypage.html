@@ -17,7 +17,6 @@
 				<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">비밀번호 변경</a>
 				<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">거래 내역</a>
 				<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">나의 리뷰</a>
-				<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-steamed" role="tab" aria-controls="list-steamed">나의 찜</a>
 			</div>
 		</div>
 		<div class="col-8">
@@ -524,10 +523,26 @@
 				</div>
 
 				<div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-					...
-				</div>
-				<div class="tab-pane fade" id="list-steamed" role="tabpanel" aria-labelledby="list-steamed-list">
-					ㅋ
+					<form>
+						<div id="header-review">
+							<div>
+								<h1>나의 리뷰</h1>
+							</div>
+							<div id="review-my">내가 쓴 총 리뷰 1개</div>
+							<div id="review-container">
+								<table class="g_blue_table tb_list" id="review-table">
+									<tbody id="review-tbody">
+										<tr id="review-tr2">
+											<td><img id="review-img" src="/img/pro.png" class="img-thumbnail" alt="..."></td>
+											<td>리자드걸</td>
+											<td>예쁜 도마뱀 팝니다</td>
+											<td>★★★★☆</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

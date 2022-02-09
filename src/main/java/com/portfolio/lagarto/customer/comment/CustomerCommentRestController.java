@@ -1,12 +1,25 @@
 package com.portfolio.lagarto.customer.comment;
 
+import com.portfolio.lagarto.customer.comment.model.CustomerCommentEntity;
+import com.portfolio.lagarto.customer.comment.model.CustomerCommentVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/ajax/customer")
+@RequestMapping("/ajax/customerCmt")
 public class CustomerCommentRestController {
 
     @Autowired private CustomerCommentService service;
+
+    @PostMapping
+    public int insCustomerCmt(@RequestBody CustomerCommentEntity entity) {
+        return service.insCustomerCmt(entity);
+    }
+
+    @GetMapping
+    public List<CustomerCommentVo> selCustomerCmtList(CustomerCommentEntity entity) {
+        return service.selCustomerCmtList(entity);
+    }
 }

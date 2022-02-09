@@ -87,7 +87,15 @@ public class UserController {
     }
 
     @GetMapping("/join")
-    public void join(Model model) {}
+    public void join(@ModelAttribute("entity") UserEntity entity, Model model) {
+        model.addAttribute("UID", Const.UID);
+        model.addAttribute("UPW", Const.UPW);
+        model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
+        model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
+        model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
+        model.addAttribute("test", "hi");
+
+    }
 
     @PostMapping("/join")
     public String joinProc(UserEntity entity, Model model) {
@@ -127,6 +135,7 @@ public class UserController {
         result.put("result", service.contactCheck(entity));
         return result;
     }
+
 
     @GetMapping("/mypage")
     public void mypage(Model model) {

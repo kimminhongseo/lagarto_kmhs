@@ -104,8 +104,11 @@
 									<div class="modal-body" id="email-modal">
 										<div>
 											<div>
-												<input type="text" class="form-control" id="formEmail" placeholder="이메일" aria-label="Username" aria-describedby="basic-addon1">
+												<input type="text" class="form-control" id="formEmail" th:value="${session.loginUser.getUid()}" readonly aria-label="Username" aria-describedby="basic-addon1">
 												<button class="btn btn-primary" type="button" id="formEmail-send">인증메일 전송</button>
+											</div>
+											<div id="timer">
+
 											</div>
 											<div>
 												<input type="text" class="form-control" id="formEmail_Number" placeholder="인증번호 입력" aria-label="Username" aria-describedby="basic-addon1">

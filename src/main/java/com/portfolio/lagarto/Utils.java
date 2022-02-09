@@ -45,6 +45,16 @@ public class Utils {
         return encrypted;
     }
 
+    public static String randomIn(){
+        String password = "";
+        for (int i = 0; i<=5;i++){
+            int rNum = (int)(Math.random() * 10);
+            String strNum = Integer.toString(rNum);
+            password += strNum;
+        }
+        return password;
+    }
+
 
     //id 뒷자리 4번째부터 *로치환
     public static String subString(String str) {

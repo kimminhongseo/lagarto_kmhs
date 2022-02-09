@@ -61,7 +61,7 @@
     margin-bottom: 20px;
 }
 #formPhone-send, #formEmail-send{
-    margin-left: 10px;
+    margin-left: 38px;
 }
 #formEmail, formEmail_Number, #formPhone, formPhone_Number{
     width: 300px;
@@ -236,4 +236,10 @@
     padding-right: 950px;
     padding-top: 50px;
     padding-bottom: 20px;
+}
+
+#timer{
+    text-align: end;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

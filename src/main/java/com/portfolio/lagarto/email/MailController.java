@@ -1,17 +1,30 @@
 package com.portfolio.lagarto.email;
 
+import com.portfolio.lagarto.model.UserDto;
+import com.portfolio.lagarto.model.UserEntity;
+import com.portfolio.lagarto.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/ajax")
 public class MailController {
     @Autowired private MailService service;
+
+
     @GetMapping("/mail")
-    public void mail(){
-        service.sendMail();
+    public String mail(@RequestParam String uid){
+        return service.sendMail(uid);
+
     }
+
+    @GetMapping("/authkey")
+    public int authkey(UserEntity entity){
+        return service.authTrue(entity);
+    }
+
 }

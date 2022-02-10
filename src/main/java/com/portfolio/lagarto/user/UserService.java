@@ -10,6 +10,7 @@ import com.portfolio.lagarto.model.UserEntity;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -136,6 +137,11 @@ public class UserService {
             return mapper.passwordUpd(dto);
         }
         return 0;
+    }
+
+    public UserEntity authKey(UserEntity entity){
+        entity.setIuser(utils.getLoginUserPk());
+        return mapper.authKey(entity);
     }
 
 

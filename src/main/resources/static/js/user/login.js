@@ -182,3 +182,32 @@
     naver_id_login.init_naver_id_login();
 
 }
+
+// 구글
+{
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+        const param = {
+            'uid' : profile.getEmail(),
+            'nm' : profile.getName()
+        }
+
+        fetch('/user/apiLogin', {
+            method: 'POST',
+            headers: { "Content-Type" : "application/json" },
+            body: JSON.stringify(param)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.result);
+            })
+    }
+
+
+}
+

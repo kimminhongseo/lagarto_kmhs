@@ -22,15 +22,15 @@
     </select>
 
     <insert id="apiInsUser" useGeneratedKeys="true" keyProperty="iuser">
-        INSERT INTO `lagarto`.`t_user`
-            (`iuser`, `email`, `name`, `upw`)
-        VALUES (#{iuser}, #{email}, #{name}, #{upw})
+        INSERT INTO `lagarto`.`lagarto_user`
+            (`iuser`, `uid`, `nm`, `upw`)
+        VALUES (#{iuser}, #{uid}, #{nm}, #{upw})
     </insert>
 
     <select id="selUser" resultType="UserEntity">
         SELECT *
-        FROM `lagarto`.`t_user`
-        WHERE `email` = #{email}
+        FROM `lagarto`.`lagarto_user`
+        WHERE `uid` = #{uid}
     </select>
 
     <insert id="facebookPk">
@@ -55,4 +55,10 @@
     <update id="passwordUpd">
         update `lagarto`.`lagarto_user` set upw = #{newUpw} where iuser=#{iuser}
     </update>
+
+    <!--auth 값-->
+    <select id="authKey" resultType="UserEntity">
+        SELECT auth FROM `lagarto`.`lagarto_user`
+        WHERE iuser = #{iuser}
+    </select>
 </mapper>

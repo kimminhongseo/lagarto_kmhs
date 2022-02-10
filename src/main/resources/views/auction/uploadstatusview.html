@@ -3,21 +3,21 @@
       >
 <head>
     <meta charset="UTF-8"></meta>
-    <title>insert sadas</title>
+    <title>업로드한것 확인하기</title>
 
     <link th:href="@{/static/css/temp/upload.css}" rel="stylesheet" />
 
 </head>
 
 <th:block layout:fragment="content" >
-    <div th:if="${msg}">
-        <span th:text="${msg}"></span>
-    </div>
+
     <div>
-        <span><a href="/">Upload More</a></span>
+        <span><a href="http://localhost:8090/auction/list/">리스트로 돌아가기</a></span>
     </div>
+    <!--todo:자기가 쓴글 detail로 가도록-->
+
     <div>
-        //////~~~~~여기는 실험하는 디테일 부분 ~~~~~////////
+        작성하신 내용입니다~~~~~~~~~~
         <div class="detail_item" th:with="ins=${ins1}">
             <div>게시판 번호: <span th:text="${ins.iboard}"/> </div>
             <div>제목 :<span th:text="${ins.title}"/> </div>

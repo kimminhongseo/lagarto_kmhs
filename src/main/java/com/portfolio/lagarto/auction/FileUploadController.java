@@ -1,15 +1,12 @@
 package com.portfolio.lagarto.auction;
 
 import com.portfolio.lagarto.MyFileUtils;
-import com.portfolio.lagarto.model.AuctionDto;
 import com.portfolio.lagarto.model.AuctionEntity;
-import com.portfolio.lagarto.model.AuctionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -41,7 +38,7 @@ public class FileUploadController {
 
 
     @PostMapping("/upload")
-    public String uploadProc(@ModelAttribute("auctionEntity") AuctionEntity auctionEntity,  Model model, @RequestParam("files") MultipartFile[] files){
+    public String uploadProc(@ModelAttribute("auctionEntity") AuctionEntity auctionEntity,  @RequestParam("files") MultipartFile[] files){
 
         StringBuilder fileNames = new StringBuilder();
         //게시판번호 + 1 이 이번에 insert 되는것. uploadfile + iboard값 이라고 경로지정
@@ -63,48 +60,6 @@ public class FileUploadController {
         }
 
 
-
-
-/*
-        String[] imageList = new String[5];
-        imageList[0] ="0";
-        imageList[1] ="0";
-        imageList[2] ="0";
-        imageList[3] ="0";
-        imageList[4] ="0";
-
-
-
-        String image1 = images[0];
-        String image2 = images[1];
-        String image3 = images[2];
-        String image4 = images[3];
-        String image5 = images[4];
-
-
-        //index로 값찾아서 수정
-        imageList[0] = image1;
-        imageList[1] = image2;
-        imageList[2] = image3;
-        imageList[3] = image4;
-        imageList[4] = image5;
-
-
-*/
-
-
-   /*
-        //리스트로 만들어 0 >> 5개
-        List<String> imageList = new ArrayList<String>();
-        imageList.add("0");
-        imageList.add("0");
-        imageList.add("0");
-        imageList.add("0");
-        imageList.add("0");
-
-        System.out.println(imageList);
-*/
-
         //만약 images[?] 값이 없으면 ""
         //for문으로 images 이름들그대로 DB에 저장했음.
 
@@ -117,8 +72,6 @@ public class FileUploadController {
         imagesList.add(null);
         imagesList.add(null);
         imagesList.add(null);
-
-
         try{
             for(int i=0; i< files.length; i++) {
                 //값 찍기
@@ -135,48 +88,29 @@ public class FileUploadController {
 
         }
             finally {
-
             auctionEntity.setImage1(imagesList.get(0));
             auctionEntity.setImage2(imagesList.get(1));
             auctionEntity.setImage3(imagesList.get(2));
             auctionEntity.setImage4(imagesList.get(3));
             auctionEntity.setImage5(imagesList.get(4));
-
             service.insAuction(auctionEntity);
             System.out.println(service.insAuctionList(auctionEntity));
-
             System.out.println("입력후 : "+imagesList);
         }
 
 
-        /*
-        auctionEntity.setImage1(images[0]);
-        auctionEntity.setImage2(images[1]);
-        auctionEntity.setImage3(images[2]);
-        auctionEntity.setImage4(images[3]);
-        auctionEntity.setImage5(images[4]);
-        */
-
-
-/*
-         service.insAuction(auctionEntity); //insert.
-        System.out.println(service.insAuctionList(auctionEntity));
-
- */
-        model.addAttribute("msg","얘네들 업로드 성공" + fileNames.toString());
-
-        return "redirect:/uploadstatusview";
+        return "redirect:/auction/uploadstatusview";
     }
 
-    @GetMapping("/uploadstatusview")
+    @GetMapping("/auction/uploadstatusview")
     public String status(AuctionEntity auctionEntity,Model model){
 
 
         model.addAttribute("ins1",service.insAuctionList(auctionEntity));
         System.out.println(service.insAuctionList(auctionEntity));
 
-        
-        return "/uploadstatusview";
+
+        return "/auction/uploadstatusview";
     }
 
 

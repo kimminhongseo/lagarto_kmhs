@@ -9,7 +9,7 @@
                 'contact_third' : certForm['contact_third'].value()
             }
 
-            fetch("/user/certification",
+            fetch("/user/apiCertification",
                 {
                     method : "POST",
                     headers : { "Content-Type" : "application/json" },

@@ -87,7 +87,13 @@ public class UserController {
     }
 
     @GetMapping("/join")
-    public void join(Model model) {}
+    public void join(@ModelAttribute("entity") UserEntity entity, Model model) {
+        model.addAttribute("UID", Const.UID);
+        model.addAttribute("UPW", Const.UPW);
+        model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
+        model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
+        model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
+    }
 
     @PostMapping("/join")
     public String joinProc(UserEntity entity, Model model) {
@@ -101,6 +107,11 @@ public class UserController {
         // TODO : email 전송 기능 구현 후 email 인증 페이지로 이동 후 회원가입 처리
 
         return "redirect:/user/login";
+    }
+
+    @GetMapping("/disc/{cd}")
+    public String disc(@PathVariable String cd) {
+        return "/user/disc/" + cd;
     }
 
     @PostMapping("/apiJoin")
@@ -129,8 +140,14 @@ public class UserController {
     }
 
     @GetMapping("/mypage")
-    public void mypage(Model model) {
-        model.addAttribute("title", "마이페이지");
+    public String mypage(Model model, UserEntity entity) {
+        if (0 != utils.getLoginUserPk()){
+            System.out.println(entity.isAuth());
+            UserEntity db = service.authKey(entity);
+            model.addAttribute("authKey", db.isAuth());
+            return "/user/mypage";
+        }
+        return "redirect:/user/login";
     }
 
     @PostMapping("/passwordCurrent")

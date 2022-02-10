@@ -13,7 +13,10 @@
 	<div class="row">
 		<div class="col-4">
 			<div class="list-group" id="list-tab" role="tablist">
-				<a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">회원 정보 설정</a><a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">비밀번호 변경</a><a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">거래 내역</a><a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">나의 리뷰</a><a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-steamed" role="tab" aria-controls="list-steamed">나의 찜</a>
+				<a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">회원 정보 설정</a>
+				<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">비밀번호 변경</a>
+				<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">거래 내역</a>
+				<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">나의 리뷰</a>
 			</div>
 		</div>
 		<div class="col-8">
@@ -25,7 +28,7 @@
 								<h1>회원 정보 수정</h1>
 							</div>
 							<div>
-								다양한 Lagarto 서비스에서 사용되는 나와 내 환경설정에 관한 정보입니다.
+								다양한 Lagarto 서비스에서 사용되는 나와 내 환경설정에 관한 정보입니다
 							</div>
 						</div>
 						<div id="mypage_container">
@@ -88,12 +91,19 @@
 						<div id="certification_span">
 						<span id="email_span">
 						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="email-button">
-						Email </button>
+							<label th:if="${authKey == false}">
+									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="email-button">
+									Email </button>
+							</label>
+							<label th:if="${authKey == true}">
+									<button type="button" class="btn btn-primary" id="email-true" readonly>
+									Email </button>
+							</label>
 							<!-- Modal -->
 						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
+
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel">Email 인증</h5>
 										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -101,8 +111,11 @@
 									<div class="modal-body" id="email-modal">
 										<div>
 											<div>
-												<input type="text" class="form-control" id="formEmail" placeholder="이메일" aria-label="Username" aria-describedby="basic-addon1">
+												<input type="text" class="form-control" id="formEmail" th:value="${session.loginUser.getUid()}" readonly aria-label="Username" aria-describedby="basic-addon1">
 												<button class="btn btn-primary" type="button" id="formEmail-send">인증메일 전송</button>
+											</div>
+											<div id="timer">
+
 											</div>
 											<div>
 												<input type="text" class="form-control" id="formEmail_Number" placeholder="인증번호 입력" aria-label="Username" aria-describedby="basic-addon1">
@@ -117,7 +130,6 @@
 							</div>
 						</div>
 						</span>
-
 							<span>
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1" id="Phone-button">휴대폰</button>
@@ -130,7 +142,7 @@
 										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body" id="phone-modal">
-                                        <div>
+										<div>
 											<div>
 												<input type="text" class="form-control" id="formPhone" placeholder="휴대폰" aria-label="Username" aria-describedby="basic-addon1">
 												<button class="btn btn-primary" type="button" id="formPhone-send">인증번호 전송</button>
@@ -148,244 +160,254 @@
 							</div>
 						</div>
 						</span>
-
 							<span>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-팔로워</button>
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+						팔로워</button>
 								<!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-scrollable" id="modal-foll">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel2">팔로워</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<table class="table">
-				<thead>
-				<tr>
-					<th scope="col">
-						이름
-					</th>
-					<th scope="col">
-						sangtae
-					</th>
-					<th scope="col">
-						Level
-					</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td>
-						균기
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						gyungi
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						수아
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						sua
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						유영
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						m
-					</td>
-				</tr>
-				<tr>
-					<td>
-						yuyoung
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						1
-					</td>
-				</tr>
-				<tr>
-					<td>
-						대용
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						dyeyoung
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						도흠
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						dohum
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						2
-					</td>
-				</tr>
-				<tr>
-					<td>
-						현민
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						성완
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						동윤
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						check
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						this
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						2
-					</td>
-				</tr>
-				<tr>
-					<td>
-						out
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				<tr>
-					<td>
-						상수
-					</td>
-					<td>
-						follow
-					</td>
-					<td>
-						4
-					</td>
-				</tr>
-				</tbody>
-				</table>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-</span>
-
+						<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-scrollable" id="modal-foll">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel2">팔로워</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<table class="table">
+										<thead>
+										<tr>
+											<th scope="col">
+												 이름
+											</th>
+											<th scope="col">
+												 sangtae
+											</th>
+											<th scope="col">
+												 Level
+											</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td>
+												 균기
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 gyungi
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 수아
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 sua
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 유영
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 m
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 yuyoung
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 1
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 대용
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 dyeyoung
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 도흠
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 dohum
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 2
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 현민
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 성완
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 동윤
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 check
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 this
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 2
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 out
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										<tr>
+											<td>
+												 상수
+											</td>
+											<td>
+												 follow
+											</td>
+											<td>
+												 4
+											</td>
+										</tr>
+										</tbody>
+										</table>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						</span>
 							<span>팔로잉</span>
 						</div>
 						<br>
-						<div id="Precautions">
-							<div id="Precautions-text">
-								<div>* 닉네임은 변경 시점 30일 이후로 변경이 가능합니다.</div>
-								<div>* 다른 문제 발생시 고객센터로 문의 해주십시오.</div>
-								<div>* 이메일 인증, 휴대폰인증을 완료 해주십시오.</div>
-								<div>* 본인 명의 휴대폰으로 인증 해주십시오.</div>
-								<div>* Level을 활성 조건(휴대폰 인증, 이메일 인증)</div>
-								<div>* 담당자 김대용(eodyd0313@gmail.com)</div>
+						<div id="Precautions1">
+							<div id="Precautions-text1">
+								<div>
+									* 닉네임은 변경 시점 30일 이후로 변경이 가능합니다.
+								</div>
+								<div>
+									* 다른 문제 발생시 고객센터로 문의 해주십시오.
+								</div>
+								<div>
+									* 이메일 인증, 휴대폰인증을 완료 해주십시오.
+								</div>
+								<div>
+									* 본인 명의 휴대폰으로 인증 해주십시오.
+								</div>
+								<div>
+									* Level을 활성 조건(휴대폰 인증, 이메일 인증)
+								</div>
+								<div>
+									* 담당자 김대용(eodyd0313@gmail.com)
+								</div>
 							</div>
 						</div>
 					</div>
@@ -403,15 +425,15 @@
 							<div id="password-update">
 								<div>
 									<span id="password-current">현재 비밀번호</span>
-									<span><input type="password" name="upw" size="50" id="password-current-input"></span>
+									<span><input type="password" name="upw" size="50" maxlength="20" id="password-current-input"></span>
 								</div>
 								<div id="paswordUPD">
 									<span id="password-upd">변경 비밀번호</span>
-									<span><input type="password" size="50" id="password-upd-input" name="newUpw"></span>
+									<span><input type="password" size="50" id="password-upd-input" maxlength="20" name="newUpw"></span>
 								</div>
 								<div id="paswordCHk">
 									<span id="password-chk">확인 비밀번호</span>
-									<span><input type="password" size="50" id="password-chk-input" name="confirmupw"></span>
+									<span><input type="password" size="50" id="password-chk-input" maxlength="20" name="confirmupw"></span>
 								</div>
 								<div>
 									<input class="btn btn-primary" id="password-smt" type="submit" value="비밀번호 변경" onsubmit="password()" n>
@@ -419,15 +441,118 @@
 							</div>
 						</div>
 					</div>
+					<div id="Precautions2">
+						<div id="Precautions-text2">
+							<div>
+								* 비밀번호를 주기적으로 변경 해주십시오.
+							</div>
+							<div>
+								* 비밀번호는 숫자, 영어, 특수문자를 합성하여 8자리 이상 입력해주세요.
+							</div>
+							<div>
+								* 로그인할 때 본인 인증에 사용하는 기기
+							</div>
+							<div>
+								* 비밀번호를 재설정하는 데 문제가 발생했거나 계정에 로그인할 수 없는 경우 추가로 도움을 받으세요.
+							</div>
+							<div>
+								* 다른 문제 발생시 고객센터로 문의 해주십시오.
+							</div>
+							<div>
+								* 담당자 김대용(eodyd0313@gmail.com)
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-					ㅋ
+					<div id="header-trade">
+						<div>
+							<h1>거래 내역</h1>
+						</div>
+						<div class="col">
+							<div class="col-2" id="buy-col">
+								<div class="list-group d-flex flex-row bd-highlight" id="list-tab1" role="tablist">
+									<a class="list-group-item list-group-item-action active p-2 bd-highlight" id="list-buy-list" data-bs-toggle="list" href="#list-buy" role="tab" aria-controls="list-buy">구매</a>
+									<a class="list-group-item list-group-item-action p-2 bd-highlight" id="list-sell-list" data-bs-toggle="list" href="#list-sell" role="tab" aria-controls="list-sell">판매</a>
+								</div>
+							</div>
+							<div class="col-1" id="buy-box">
+								<div class="tab-content" id="nav-tabContent1">
+									<div class="tab-pane fade show active" id="list-buy" role="tabpanel" aria-labelledby="list-buy-list">
+										<div id="buy-container">
+											<div>
+												<table class="g_blue_table tb_list" id="buy-table">
+													<tbody id="buy-tbody">
+													<tr id="buy-tr1">
+														<th>카테고리</th>
+														<th>분류</th>
+														<th>제목</th>
+														<th>거래금액</th>
+														<th>등록일</th>
+														<th>구분</th>
+													</tr>
+													<tr id="buy-tr2">
+														<!--															<td colspan="6" class="first">등록된 물품이 없습니다.</td>-->
+														<td>리자드</td>
+														<td>수컷</td>
+														<td>예쁜리자드 팝니다</td>
+														<td>70,000원</td>
+														<td>2022-02-06</td>
+														<td>거래완료</td>
+													</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="list-sell" role="tabpanel" aria-labelledby="list-sell-list">
+										<div id="sell-container">
+											<div>
+												<table class="g_blue_table tb_list" id="sell-table">
+													<tbody id="sell-tbody">
+													<tr id="sell-tr1">
+														<th>카테고리</th>
+														<th>분류</th>
+														<th>제목</th>
+														<th>거래금액</th>
+														<th>등록일</th>
+														<th>구분</th>
+													</tr>
+													<tr id="sell-tr2">
+														<td colspan="6" class="first">등록된 물품이 없습니다.</td>
+													</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+
 				<div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-					...
-				</div>
-				<div class="tab-pane fade" id="list-steamed" role="tabpanel" aria-labelledby="list-steamed-list">
-					ㅋ
+					<form>
+						<div id="header-review">
+							<div>
+								<h1>나의 리뷰</h1>
+							</div>
+							<div id="review-my">내가 쓴 총 리뷰 1개</div>
+							<div id="review-container">
+								<table class="g_blue_table tb_list" id="review-table">
+									<tbody id="review-tbody">
+										<tr id="review-tr2">
+											<td><img id="review-img" src="/img/pro.png" class="img-thumbnail" alt="..."></td>
+											<td>리자드걸</td>
+											<td>예쁜 도마뱀 팝니다</td>
+											<td>★★★★☆</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

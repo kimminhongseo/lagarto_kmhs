@@ -3,8 +3,11 @@ package com.portfolio.lagarto.model;
 
 import com.portfolio.lagarto.enums.JoinResult;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class UserEntity {
     private int iuser;
     private String email;
@@ -26,6 +29,7 @@ public class UserEntity {
     private int level;
     private int level_bar;
     private String rdt;
+    private boolean auth;
 
     private JoinResult result;
 }

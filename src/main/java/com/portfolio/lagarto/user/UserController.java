@@ -25,7 +25,6 @@ public class UserController {
     private Utils utils;
 
 
-
     @GetMapping("/login")
     public String login(Model model) {
         if (0 != utils.getLoginUserPk()){
@@ -94,8 +93,6 @@ public class UserController {
         model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
         model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
         model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
-        model.addAttribute("test", "hi");
-
     }
 
     @PostMapping("/join")
@@ -110,6 +107,11 @@ public class UserController {
         // TODO : email 전송 기능 구현 후 email 인증 페이지로 이동 후 회원가입 처리
 
         return "redirect:/user/login";
+    }
+
+    @GetMapping("/disc/{cd}")
+    public String disc(@PathVariable String cd) {
+        return "/user/disc/" + cd;
     }
 
     @PostMapping("/apiJoin")
@@ -136,7 +138,6 @@ public class UserController {
         result.put("result", service.contactCheck(entity));
         return result;
     }
-
 
     @GetMapping("/mypage")
     public String mypage(Model model, UserEntity entity) {

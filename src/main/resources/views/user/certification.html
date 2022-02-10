@@ -1,0 +1,51 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+
+<head>
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/user/certification.css}">
+    <script defer th:src="@{/js/user/certification.js}"></script>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="wrap">
+        <h1>휴대전화 인증</h1>
+        <div id="certification">
+            <form th:action="@{/user/apiCertification}" method="post" id="cert_form" th:object="${entity}">
+                <div class="form_container">
+                    <div class="input_name">휴대전화</div>
+                    <div class="num_wrap">
+                        <label class="num_box">
+                            <span hidden>휴대전화</span>
+                            <select name="contact_first" th:value="${contact_first}">
+                                <option th:selected="${contact_first}=='010'">010</option>
+                                <option th:selected="${contact_first}=='011'">011</option>
+                                <option th:selected="${contact_first}=='016'">016</option>
+                                <option th:selected="${contact_first}=='017'">017</option>
+                                <option th:selected="${contact_first}=='018'">018</option>
+                                <option th:selected="${contact_first}=='019'">019</option>
+                            </select>
+                        </label>
+                        <label class="num_box">
+                            <span hidden>휴대전화</span>
+                            <input type="number" name="contact_second" maxlength="4"
+                                   th:field="*{contact_second}" th:with="CONTACT_SECOUND=${CONTACT_SECOUND}" th:data-regex="${CONTACT_SECOUND}" required>
+                        </label>
+                        <label class="num_box">
+                            <span hidden>휴대전화</span>
+                            <input type="number" name="contact_third" maxlength="4"
+                                   th:field="*{contact_third}" th:with="CONTACT_THIRD=${CONTACT_THIRD}" th:data-regex="${CONTACT_THIRD}" required>
+                        </label>
+                    </div>
+
+                    <div class="btn_cont">
+                        <input id="cancelBtn" class="object_button prop_light" type="button" value="취소">
+                        <input class="object_button prop_dark" type="submit" value="인증하기">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</th:block>

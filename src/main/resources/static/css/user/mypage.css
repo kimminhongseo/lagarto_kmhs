@@ -61,7 +61,7 @@
     margin-bottom: 20px;
 }
 #formPhone-send, #formEmail-send{
-    margin-left: 10px;
+    margin-left: 38px;
 }
 #formEmail, formEmail_Number, #formPhone, formPhone_Number{
     width: 300px;
@@ -78,6 +78,11 @@
 #email-button, #Phone-button{
     background-color: transparent;
     color: black;
+}
+
+email-true{
+    background-color: #0d6efd;
+    color: #fff;
 }
 #Precautions1{
     margin: 30px;
@@ -123,6 +128,13 @@
     width: 1000px;
     height: 350px;
     border: solid 1px #e7e7e7;
+}
+#review-container{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    float: none;
+    margin: 0 auto;
 }
 
 #password-update{
@@ -233,7 +245,13 @@
 }
 
 #review-my{
-    padding-right: 950px;
+    padding-right: 800px;
     padding-top: 50px;
     padding-bottom: 20px;
+}
+
+#timer{
+    text-align: end;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

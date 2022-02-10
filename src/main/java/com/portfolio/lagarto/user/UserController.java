@@ -21,7 +21,6 @@ import java.util.Map;
 public class UserController {
     @Autowired //필요한 메소드 자동찾기
     private UserService service;
-
     @Autowired
     private Utils utils;
 
@@ -62,23 +61,23 @@ public class UserController {
      }
 
     @GetMapping("/certification")
-    public void certification(@ModelAttribute("entity") UserEntity entity) {
+    public void certification() {
 
     }
 
     @ResponseBody
-    @PostMapping("/apiCertification")
-    public Map<String, Integer> certificationProc(@ModelAttribute("entity") UserEntity entity) {
+    @PostMapping("/certification")
+    public Map<String, Integer> certificationProc(@ModelAttribute("userEntity") UserEntity entity) {
         Map<String, Integer> result = new HashMap<>();
 
         // 중복된 번호
         int contactCheck = 0;
 
         service.contactCheck(entity);
-        JoinResult joinResult = entity.getResult();
+        JoinResult joinRslt = entity.getResult();
 
         // 사용 가능한 번호
-        if (joinResult == JoinResult.AVAILABLE_CONTACT) {
+        if (joinRslt == JoinResult.AVAILABLE_CONTACT) {
             contactCheck = 1;
         }
 
@@ -141,8 +140,14 @@ public class UserController {
     }
 
     @GetMapping("/mypage")
-    public void mypage(Model model) {
-        model.addAttribute("title", "마이페이지");
+    public String mypage(Model model, UserEntity entity) {
+        if (0 != utils.getLoginUserPk()){
+            System.out.println(entity.isAuth());
+            UserEntity db = service.authKey(entity);
+            model.addAttribute("authKey", db.isAuth());
+            return "/user/mypage";
+        }
+        return "redirect:/user/login";
     }
 
     @PostMapping("/passwordCurrent")

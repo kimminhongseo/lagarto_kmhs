@@ -91,12 +91,19 @@
 						<div id="certification_span">
 						<span id="email_span">
 						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="email-button">
-						Email </button>
+							<label th:if="${authKey == false}">
+									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="email-button">
+									Email </button>
+							</label>
+							<label th:if="${authKey == true}">
+									<button type="button" class="btn btn-primary" id="email-true" readonly>
+									Email </button>
+							</label>
 							<!-- Modal -->
 						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
+
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel">Email 인증</h5>
 										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -104,8 +111,11 @@
 									<div class="modal-body" id="email-modal">
 										<div>
 											<div>
-												<input type="text" class="form-control" id="formEmail" placeholder="이메일" aria-label="Username" aria-describedby="basic-addon1">
+												<input type="text" class="form-control" id="formEmail" th:value="${session.loginUser.getUid()}" readonly aria-label="Username" aria-describedby="basic-addon1">
 												<button class="btn btn-primary" type="button" id="formEmail-send">인증메일 전송</button>
+											</div>
+											<div id="timer">
+
 											</div>
 											<div>
 												<input type="text" class="form-control" id="formEmail_Number" placeholder="인증번호 입력" aria-label="Username" aria-describedby="basic-addon1">

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--메퍼 설정 하세요-->
+<mapper namespace="com.portfolio.lagarto.email.MailMapper">
+
+    <update id="authTrue">
+        update `lagarto`.`lagarto_user` set auth = true
+        where iuser = #{iuser}
+    </update>
+
+
+</mapper>

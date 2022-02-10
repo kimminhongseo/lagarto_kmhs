@@ -62,13 +62,13 @@ public class UserController {
      }
 
     @GetMapping("/certification")
-    public void certification() {
+    public void certification(@ModelAttribute("entity") UserEntity entity) {
 
     }
 
     @ResponseBody
-    @PostMapping("/certification")
-    public Map<String, Integer> certificationProc(@ModelAttribute("userEntity") UserEntity entity) {
+    @PostMapping("/apiCertification")
+    public Map<String, Integer> certificationProc(@ModelAttribute("entity") UserEntity entity) {
         Map<String, Integer> result = new HashMap<>();
 
         // 중복된 번호
@@ -94,8 +94,6 @@ public class UserController {
         model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
         model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
         model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
-        model.addAttribute("test", "hi");
-
     }
 
     @PostMapping("/join")
@@ -110,6 +108,11 @@ public class UserController {
         // TODO : email 전송 기능 구현 후 email 인증 페이지로 이동 후 회원가입 처리
 
         return "redirect:/user/login";
+    }
+
+    @GetMapping("/disc/{cd}")
+    public String disc(@PathVariable String cd) {
+        return "/user/disc/" + cd;
     }
 
     @PostMapping("/apiJoin")

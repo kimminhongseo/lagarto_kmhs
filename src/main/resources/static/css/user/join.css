@@ -106,9 +106,12 @@ input[type="checkbox"]:checked ~ label{
     font-size: 1.2rem;
     font-weight: 600;}
 
+.disc:not(:last-child) span {
+    cursor: pointer;
+}
+
 .disc span {
     color: #222;
-    cursor: pointer;
     font-size: 0.95rem;
     font-weight: 400;
     text-decoration: none;
@@ -116,7 +119,7 @@ input[type="checkbox"]:checked ~ label{
     position: relative;
 }
 
-.disc_cont .disc span:after {
+.disc_cont .disc:not(:last-child) span:after {
     content: "";
     width: 1rem;
     height: 1rem;
@@ -243,4 +246,8 @@ span.warning.visible {
     border: 0.0625rem solid #d3d3d3;
     text-align: center;
     padding: 1rem 0.5rem;
+}
+
+#modal .li_style {
+    list-style: none;
 }

@@ -51,10 +51,10 @@
 
 
         // 약관 동의 전체 체크
-        joinForm['disc_agree_all'].addEventListener('change', (e) => {
-            joinForm['disc_agree_a'].checked = e.currentTarget.checked;
-            joinForm['disc_agree_b'].checked = e.currentTarget.checked;
-            joinForm['disc_agree_c'].checked = e.currentTarget.checked;
+        joinForm.disc_agree_all.addEventListener('change', (e) => {
+            joinForm.disc_agree_a.checked = e.currentTarget.checked;
+            joinForm.disc_agree_b.checked = e.currentTarget.checked;
+            joinForm.disc_agree_c.checked = e.currentTarget.checked;
         });
 
 
@@ -84,18 +84,18 @@
                 return false;
             }
 
-            if (joinForm['upw'].value !== joinForm['upw_check'].value) {
+            if (joinForm.upw.value !== joinForm.upw_check.value) {
                 alert('비밀번호가 서로 일치하지 않습니다.');
-                joinForm['upw_check'].focus();
+                joinForm.upw_check.focus();
                 return false;
             }
 
-            if (!joinForm['disc_agree_a'].checked) {
+            if (!joinForm.disc_agree_a.checked) {
                 alert('이용약관을 읽고 동의해 주세요.');
                 return false;
             }
 
-            if (!joinForm['disc_agree_b'].checked) {
+            if (!joinForm.disc_agree_b.checked) {
                 alert('개인정보 수집 및 이용을 읽고 동의해 주세요.');
                 return false;
             }
@@ -103,9 +103,9 @@
 
             // 전화번호 중복 체크
             const param = {
-                'contact_first' : joinForm['contact_first'].value,
-                'contact_second' : joinForm['contact_second'].value,
-                'contact_third' : joinForm['contact_third'].value
+                'contact_first' : joinForm.contact_first.value,
+                'contact_second' : joinForm.contact_second.value,
+                'contact_third' : joinForm.contact_third.value
             }
 
             fetch("/user/contChk",
@@ -134,19 +134,35 @@
         }
 
         // 이용약관
-        const discSpanElem = joinForm.querySelector('.disc > span');
+        const discSpanElem = joinForm.querySelectorAll('.disc_more > span');
+
         const modalElem = document.querySelector('#modal');
         const bodyElem = document.querySelector('body');
 
+        const modalContentElem = modalElem.querySelector('.modal_content');
+
         if (modalElem) {
-            discSpanElem.addEventListener('click', () => {
-                modalElem.style.display = 'flex';
-                bodyElem.style.overflow = 'hidden';
+            discSpanElem.forEach(disc => {
+                disc.addEventListener('click', (e) => {
+                    modalContentElem.innerHTML = null;
+                    modalElem.style.display = 'flex';
+
+                    const cd = e.target.id;
+                    console.log(cd);
+
+                    fetch(`/user/disc/${cd}`)
+                        .then(res => res.text())
+                        .then(data => {
+                            modalContentElem.innerHTML = data;
+                        });
+
+                    bodyElem.style.overflow = 'hidden';
+                });
             });
 
-            const closeBtn = modalElem.querySelector('.close_btn');
+            const btnClose = modalElem.querySelector('.btn_close');
 
-            closeBtn.addEventListener('click', () => {
+            btnClose.addEventListener('click', () => {
                 modalElem.style.display = 'none';
                 bodyElem.style.overflow = 'visible';
             });
@@ -157,10 +173,39 @@
                     modalElem.style.display = 'none';
                     bodyElem.style.overflow = 'visible';
                 }
-            })
-
+            });
         }
-        
+
+        // 비밀번호 보이기
+        const btnShowPw = document.querySelector('.btn_show_pw');
+        const btnShowCheck = document.querySelector('.btn_show_check');
+
+        if (btnShowPw) {
+            btnShowPw.addEventListener('click', () => {
+                if (joinForm.upw.type === 'password') {
+                    joinForm.upw.type = 'text';
+                    btnShowPw.classList.add('hide');
+                } else {
+                    joinForm.upw.type = 'password';
+                    btnShowPw.classList.remove('hide');
+                }
+            });
+        }
+
+        if (btnShowCheck) {
+            btnShowCheck.addEventListener('click', () => {
+                if (joinForm.upw_check.type === 'password') {
+                    joinForm.upw_check.type = 'text';
+                    btnShowCheck.classList.add('hide');
+                } else {
+                    joinForm.upw_check.type = 'password';
+                    btnShowCheck.classList.remove('hide');
+                }
+            });
+        }
+
+
+
     }
 
 

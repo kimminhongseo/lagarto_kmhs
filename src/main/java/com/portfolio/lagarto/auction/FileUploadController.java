@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 public class FileUploadController {
-    public static String first_uploadDirectory = System.getProperty("user.dir") +"\\src\\main\\resources\\uploadfile";
+    public static String first_uploadDirectory = System.getProperty("user.dir") +"\\src\\main\\resources\\static\\uploadfile";
 
     @Autowired
     private AuctionService service;
@@ -112,11 +112,11 @@ public class FileUploadController {
         String image = fileNames.toString();
         String images[] = image.split("/");
         List<String> imagesList = new ArrayList<String>();
-        imagesList.add("0");
-        imagesList.add("0");
-        imagesList.add("0");
-        imagesList.add("0");
-        imagesList.add("0");
+        imagesList.add(null);
+        imagesList.add(null);
+        imagesList.add(null);
+        imagesList.add(null);
+        imagesList.add(null);
 
 
         try{
@@ -135,6 +135,7 @@ public class FileUploadController {
 
         }
             finally {
+
             auctionEntity.setImage1(imagesList.get(0));
             auctionEntity.setImage2(imagesList.get(1));
             auctionEntity.setImage3(imagesList.get(2));
@@ -174,8 +175,7 @@ public class FileUploadController {
         model.addAttribute("ins1",service.insAuctionList(auctionEntity));
         System.out.println(service.insAuctionList(auctionEntity));
 
-
-
+        
         return "/uploadstatusview";
     }
 

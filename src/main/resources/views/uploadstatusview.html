@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      >
 <head>
     <meta charset="UTF-8"></meta>
     <title>insert sadas</title>
+
+    <link th:href="@{/static/css/temp/upload.css}" rel="stylesheet" />
+
 </head>
 
 <th:block layout:fragment="content" >
-
     <div th:if="${msg}">
         <span th:text="${msg}"></span>
     </div>
@@ -22,12 +25,15 @@
             <div>즉시 구매가: <span th:text="${ins.imbuy}"/></span> 원</div>
             <div>현재가 :<span th:text="${ins.buy}"/> 원 </div>
          <!--<img th:src="@{/resources/uploadfile/} + ${ins.iboard} + &#47; + ${ins.image1}">-->
-            <img th:src="@{/uploadfile/} + ${ins.iboard} + ${ins.image1}">
+            <img th:src="@{/static/uploadfile/} + ${ins.iboard} + @{/} + ${ins.image1}" } onerror="this.style.display='none'"/>
+            <img th:src="@{/static/uploadfile/} + ${ins.iboard} + @{/} + ${ins.image2}" } onerror="this.style.display='none'"/>
+            <img th:src="@{/static/uploadfile/} + ${ins.iboard} + @{/} + ${ins.image3}" } onerror="this.style.display='none'"/>
+            <img th:src="@{/static/uploadfile/} + ${ins.iboard} + @{/} + ${ins.image4}" } onerror="this.style.display='none'"/>
+            <img th:src="@{/static/uploadfile/} + ${ins.iboard} + @{/} + ${ins.image5}" } onerror="this.style.display='none'"/>
+
 
         </div>
-
-
-        <!--todo upload/게시판번호/.jpg  들을 뿌려줄거야 여기에-->
+        <!--todo upload/게시판번호/사진.jpg  들을 뿌려줄거야 여기에-->
 
 
 

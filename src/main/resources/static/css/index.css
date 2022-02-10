@@ -106,3 +106,5 @@ input {outline: none;}
     display: block;
     margin-top: 0;
 }
+
+.pointer { cursor: pointer; }

@@ -17,4 +17,5 @@ public interface UserMapper {
     UserEntity loginSel(UserEntity entity);
     UserEntity passwordSel(UserDto dto);
     int passwordUpd(UserDto dto);
+    UserEntity authKey(UserEntity entity);
 }

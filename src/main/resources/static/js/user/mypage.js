@@ -169,29 +169,28 @@
     const formEmailNumber = emailModal.querySelector('#formEmail_Number');
     const formEmailSubmit = emailModal.querySelector('#formEmail_submit');
     const timer = emailModal.querySelector('#timer');
+    let authKey = 0;
     timer.style.color = 'red';
-    const flag2 = true;
-
+    let flag2 = true;
     if (emailModal) {
-        formEmailsend.addEventListener('click', () => {
+        formEmailsend.addEventListener('click', (e) => {
             if (confirm("인증 메일을 보내시겠습니까?")) {
-                let SetTime = 180;      // 최초 설정 시간(기본 : 초)
+                let SetTime = 10;      // 최초 설정 시간(기본 : 초)
                 let min = "";
                 let sec = "";
-
-
+                flag2 = true;
+                alert('인증번호를 발송 했습니다.')
                 let x = setInterval(function() {
                     min = parseInt(SetTime/60);
                     sec = SetTime%60;
-
                     document.getElementById("timer").innerHTML = min + "분" + sec + "초";
                     SetTime--;
-
+                    // formEmailsend.disabled = 'true';
                     //타임아웃 시
                     if (SetTime < 0) {
+                        flag2 = false;
                         clearInterval(x); // 타이머 종료하는 함수
                         document.getElementById("timer").innerHTML = "인증만료";
-                        return flag2 == false;
                     }
                 }, 1000); // 1초마다
 
@@ -200,30 +199,33 @@
                     return res.json();
                 }).then(data => { // data = 메일로 발송된 인증키
                     console.log(data);
-                    formEmailSubmit.addEventListener('click', () => {
-                        if(data != formEmailNumber.value) return;
-                        if(flag2 == false) return;
-                        fetch(`/ajax/authkey`)
-                            .then(res => {
-                                return res.json();
-                            }).then(data => {
-                                emailModal.style.display = 'none';
-                                alert('확인');
-                        })
-                    })
+                        authKey = data;
+                    switch (data){
+                        case 'null':
+                            alert('알 수 없는 오류가 발생했습니다')
+                            break;
+                    }
                 })
             }
         });
 
-    }
-    function msg_time(SetTime) {
-        SetTime = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초"; // 남은 시간 계산
-        var msg = "현재 남은 시간은 <font color='red'>" + SetTime + "</font> 입니다.";
-        document.getElementById('timer').innerHTML = msg;     // div 영역에 보여줌
-        SetTime--;                  // 1초씩 감소
-        if (SetTime < 0) {          // 시간이 종료 되었으면
-            clearInterval(SetTime);     // 타이머 종료 함수
-            alert("종료");
-        }
+        formEmailSubmit.addEventListener('click', (e) => {
+            console.log(flag2)
+            if (!flag2){
+                alert('제한시간 만료');
+                return;
+            }
+            if(authKey != formEmailNumber.value) {
+                alert('인증번호 불일치')
+                return;
+            }
+            fetch(`/ajax/authkey`)
+                .then(res => {
+                    return res.json();
+                }).then(data => {
+                alert('인증번호 일치');
+                location.reload();
+            })
+        })
     }
 }

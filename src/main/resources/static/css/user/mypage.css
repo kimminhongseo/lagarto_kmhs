@@ -79,6 +79,11 @@
     background-color: transparent;
     color: black;
 }
+
+email-true{
+    background-color: #0d6efd;
+    color: #fff;
+}
 #Precautions1{
     margin: 30px;
     border: 1px solid #e7e7e7;
@@ -123,6 +128,13 @@
     width: 1000px;
     height: 350px;
     border: solid 1px #e7e7e7;
+}
+#review-container{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    float: none;
+    margin: 0 auto;
 }
 
 #password-update{
@@ -233,7 +245,7 @@
 }
 
 #review-my{
-    padding-right: 950px;
+    padding-right: 800px;
     padding-top: 50px;
     padding-bottom: 20px;
 }

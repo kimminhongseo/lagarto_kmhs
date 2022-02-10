@@ -25,6 +25,7 @@ public class UserController {
     private Utils utils;
 
 
+
     @GetMapping("/login")
     public String login(Model model) {
         if (0 != utils.getLoginUserPk()){
@@ -138,8 +139,14 @@ public class UserController {
 
 
     @GetMapping("/mypage")
-    public void mypage(Model model) {
-        model.addAttribute("title", "마이페이지");
+    public String mypage(Model model, UserEntity entity) {
+        if (0 != utils.getLoginUserPk()){
+            System.out.println(entity.isAuth());
+            UserEntity db = service.authKey(entity);
+            model.addAttribute("authKey", db.isAuth());
+            return "/user/mypage";
+        }
+        return "redirect:/user/login";
     }
 
     @PostMapping("/passwordCurrent")

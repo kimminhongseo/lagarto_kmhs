@@ -55,4 +55,10 @@
     <update id="passwordUpd">
         update `lagarto`.`lagarto_user` set upw = #{newUpw} where iuser=#{iuser}
     </update>
+
+    <!--auth 값-->
+    <select id="authKey" resultType="UserEntity">
+        SELECT auth FROM `lagarto`.`lagarto_user`
+        WHERE iuser = #{iuser}
+    </select>
 </mapper>

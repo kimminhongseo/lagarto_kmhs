@@ -5,8 +5,8 @@
 
 <head>
     <title>리스트</title>
-    <link rel="stylesheet" th:href="@{/css/auction/list.css}">
-    <script defer th:src="@{/js/auction/list.js}"></script>
+        <link th:href="@{/static/css/auction/list.css}" rel="stylesheet" />
+    <script defer th:src="@{/static/js/auction/list.js}"></script>
 </head>
 
 <th:block layout:fragment="content" >
@@ -20,8 +20,8 @@
         <ul class="auction_list">
             <li class="record"  th:each="data:${List}"><a th:href="@{/auction/detail(iboard=${data.iboard})}">
                 <div hidden>게시판 번호: <span class="iboard" th:text="${data.iboard}"/></div>
-                <div th>
-                    <img th:src="@{/img/Lagarto.PNG}"/>
+                <div >
+                    <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" } onerror="this.style.display='none'"/>
                 </div>
                 <div>작성자 : <span th:text="${data.writernm}"/> </div>
                 <div>조회수 : <span th:text="${data.hits}"/></div>

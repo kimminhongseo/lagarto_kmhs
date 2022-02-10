@@ -5,8 +5,8 @@
 
 <head>
     <title>상세 정보</title>
-    <link rel="stylesheet" th:href="@{/css/auction/detail.css}">
-    <script defer th:src="@{/js/auction/detail.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/auction/detail.css}">
+    <script defer th:src="@{/static/js/auction/detail.js}"></script>
 </head>
 <th:block layout:fragment="content">
 
@@ -19,7 +19,15 @@
     <div>내용 : <span  th:text="${data.ctnt}"/></div>
     <div>즉시 구매가: <span th:text="${data.imbuy}"/> 원</div>
     <div>현재가 :<span th:text="${data.buy}"/> 원 <span><button class="upprice">// 가격올리는 기능 어찌할꼬 //</button></span></div>
-    <div><span th:text="${data.images}"/></div>
+    <div>
+        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" } onerror="this.style.display='none'"/>
+        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image2}" } onerror="this.style.display='none'"/>
+        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image3}" } onerror="this.style.display='none'"/>
+        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image4}" } onerror="this.style.display='none'"/>
+        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image5}" } onerror="this.style.display='none'"/>
+
+    </div>
+
     </div>
 </div>
 

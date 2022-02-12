@@ -58,7 +58,7 @@
 
     <!--auth 값-->
     <select id="authKey" resultType="UserEntity">
-        SELECT auth FROM `lagarto`.`lagarto_user`
+        SELECT * FROM `lagarto`.`lagarto_user`
         WHERE iuser = #{iuser}
     </select>
 </mapper>

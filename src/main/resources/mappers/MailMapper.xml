@@ -8,5 +8,10 @@
         where iuser = #{iuser}
     </update>
 
+    <select id="selUser" resultType="UserEntity">
+        SELECT * FROM `lagarto`.`lagarto_user`
+        WHERE iuser = #{iuser}
+    </select>
+
 
 </mapper>

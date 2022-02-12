@@ -140,11 +140,8 @@ public class UserController {
     }
 
     @GetMapping("/mypage")
-    public String mypage(Model model, UserEntity entity) {
+    public String mypage(HttpSession hs, UserEntity entity) {
         if (0 != utils.getLoginUserPk()){
-            System.out.println(entity.isAuth());
-            UserEntity db = service.authKey(entity);
-            model.addAttribute("authKey", db.isAuth());
             return "/user/mypage";
         }
         return "redirect:/user/login";

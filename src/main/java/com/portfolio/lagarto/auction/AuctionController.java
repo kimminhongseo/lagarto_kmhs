@@ -65,8 +65,12 @@ public class AuctionController {
         //문자배열 개념 값이 추가되면 쭉 이어짐.
         StringBuilder fileNames = new StringBuilder();
         //게시판번호 + 1 이 이번에 insert 되는것. uploadfile + iboard값 이라고 경로지정
-        final String uploadDirectory = first_uploadDirectory + "/" + (service.insAuctionList(auctionEntity).getIboard()+1);
 
+            //todo: insAuctionList  null뜸 해결하기.
+        String uploadDirectory = first_uploadDirectory + "/" + (service.insAuctionList(auctionEntity).getIboard()+1);
+        if(service.insAuctionList(auctionEntity) == null){
+        uploadDirectory = first_uploadDirectory + "/" + "1";
+        }
 
         for(MultipartFile file: files){
             Path fileNameAndPath = Paths.get(uploadDirectory,file.getOriginalFilename());

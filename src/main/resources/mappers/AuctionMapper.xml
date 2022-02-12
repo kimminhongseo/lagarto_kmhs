@@ -12,7 +12,7 @@
     </insert>
 
 
-    <!--총 게시판 번호가져오려고 적음.-->
+    <!--총 게시판 번호가져오려고 적음  rmsep.-->
     <select id="insAuctionList" resultType="AuctionVo">
         select A.iboard, A.title, A.iuser, A.hits, A.image1, A.image2, A.image3, A.image4, A.image5, A.ctnt , A.imbuy, A.buy,
         B.nm as writernm
@@ -60,7 +60,6 @@
             on A.icategory = C.icategory
         where A.isdel = 0
         AND A.iboard = ${iboard}
-
 
     </select>
     

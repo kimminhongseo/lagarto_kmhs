@@ -28,7 +28,9 @@ public class AuctionService {
         return mapper.insAuction(entity);
     }
     public AuctionVo insAuctionList(AuctionEntity entity){
-       return mapper.insAuctionList(entity);
+       if(mapper.insAuctionList(entity) == null){
+           return null;
+       }return mapper.insAuctionList(entity);
     }
 
     public List<AuctionVo> selAuctionList(AuctionDto dto){return  mapper.selAuctionList(dto);}

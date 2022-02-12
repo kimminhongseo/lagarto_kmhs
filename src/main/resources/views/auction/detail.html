@@ -20,11 +20,11 @@
     <div>즉시 구매가: <span th:text="${data.imbuy}"/> 원</div>
     <div>현재가 :<span th:text="${data.buy}"/> 원 <span><button class="upprice">// 가격올리는 기능 어찌할꼬 //</button></span></div>
     <div id="img_item">
-        <img id="image1" th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" }  onerror="this.style.display='none'"/>
-        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image2}" } onerror="this.style.display='none'"/>
-        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image3}" } onerror="this.style.display='none'"/>
-        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image4}" } onerror="this.style.display='none'"/>
-        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image5}" } onerror="this.style.display='none'"/>
+        <img id="image0" onclick="test();" class="click_img" th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" onerror="this.style.display='none'" } />
+        <img id="image1" onclick="test();" class="click_img" th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image2}" onerror="this.style.display='none'" }} />
+        <img id="image2" onclick="test();" class="click_img" th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image3}" onerror="this.style.display='none'" }/>
+        <img id="image3" onclick="test();" class="click_img" th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image4}" onerror="this.style.display='none'" } />
+        <img id="image4" onclick="test();" class="click_img" th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image5}" onerror="this.style.display='none'" } />
     </div>
 
     </div>

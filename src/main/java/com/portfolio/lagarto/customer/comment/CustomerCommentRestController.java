@@ -14,7 +14,7 @@ public class CustomerCommentRestController {
     @Autowired private CustomerCommentService service;
 
     @PostMapping
-    public int insCustomerCmt(@RequestBody CustomerCommentEntity entity) {
+    public int insCustomerCmt(CustomerCommentEntity entity) {
         return service.insCustomerCmt(entity);
     }
 

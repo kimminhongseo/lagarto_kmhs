@@ -4,13 +4,13 @@
     const searchParams = new URL(window.location.href).searchParams;
     const iboard = searchParams.get('iboard');
 
-    const boardDetailElem = document.querySelector('#customer_detail');
+    const boardDetailElem = document.querySelector('#board_detail');
     const commentFormContainerElem = document.querySelector('#comment_form_container');
     const commentListElem = document.querySelector('#comment_list');
 
     //글 디테일 데이터 가져오기
     const getData = () => {
-        fetch(`/board/detail?iboard=${iboard}`)
+        fetch(`/customer/detail_item?iboard=${iboard}`)
             .then(res => res.text())
             .then(data => {
                 console.log(data);
@@ -38,7 +38,6 @@
                 <td>${item.ctnt}</td>
                 <td>${item.nickname}</td>
                 <td>${item.rdt}</td>
-                <td></td>
             `;
             tbodyElem.appendChild(trElem);
         });
@@ -70,4 +69,5 @@
             }, param);
         });
     }
+
 })();

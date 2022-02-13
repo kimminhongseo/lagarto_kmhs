@@ -15,4 +15,5 @@
         WHERE A.iboard = ${iboard}
         ORDER BY icmt
     </select>
+
 </mapper>

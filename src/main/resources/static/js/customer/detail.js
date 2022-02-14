@@ -7,6 +7,7 @@
     const boardDetailElem = document.querySelector('#board_detail');
     const commentFormContainerElem = document.querySelector('#comment_form_container');
     const commentListElem = document.querySelector('#comment_list');
+    const tbodyElem = commentListElem.querySelector('table > tbody');
 
     //글 디테일 데이터 가져오기
     const getData = () => {
@@ -28,8 +29,11 @@
     }
     getCommentList();
 
+    const delCmtList = () => {
+        commentListElem.innerHTML = '';
+    }
+    //리스트 만들기
     const makeCommentRecordList = list => {
-        const tbodyElem = commentListElem.querySelector('table > tbody');
 
         list.forEach(item => {
             const trElem = document.createElement('tr');
@@ -43,10 +47,12 @@
         });
     }
 
+
     //댓글 입력 폼
     if(commentFormContainerElem) {
         const commentSubmitBtnElem = commentFormContainerElem.querySelector('button[name="comment_submit"]');
         const commentCtntInputElem = commentFormContainerElem.querySelector('input[name="ctnt"]');
+
 
         commentSubmitBtnElem.addEventListener('click', e => {
             console.log(commentCtntInputElem.value);
@@ -64,10 +70,11 @@
                         break;
                     case 1:
                         commentCtntInputElem.value = null;
+                        delCmtList();
+                        getCommentList();
                         break;
                 }
             }, param);
         });
     }
-
 })();

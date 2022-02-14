@@ -7,13 +7,22 @@
         VALUES
         (${iboard}, ${iuser}, #{ctnt})
     </insert>
+
     <select id="selCustomerCmtList" resultType="CustomerCommentVo">
         SELECT A.*, B.nickname FROM
         customer_comment A
         LEFT JOIN lagarto_user B
         ON A.iuser = B.iuser
         WHERE A.iboard = ${iboard}
-        ORDER BY icmt
+        ORDER BY A.icmt
     </select>
 
+    <select id="selCustomerCmtOne" resultType="CustomerCommentVo">
+        SELECT A.*, B.nickname FROM
+        customer_comment A
+        LEFT JOIN lagarto_user B
+        ON A.iuser = B.iuser
+        WHERE A.iboard = ${iboard}
+        AND A.icmt = ${icmt}
+    </select>
 </mapper>

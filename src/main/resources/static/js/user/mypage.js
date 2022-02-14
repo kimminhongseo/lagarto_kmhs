@@ -161,7 +161,7 @@
             }
         });
     }
-    console.log(passwordUpwElem);
+    // console.log(passwordUpwElem);
 
     const emailModal = document.querySelector('#email-modal');
     const formEmail = emailModal.querySelector('#formEmail');
@@ -195,11 +195,11 @@
                 }, 1000); // 1초마다
 
                 fetch(`/ajax/mail?uid=${formEmail.value}`)
-                .then(res => {
-                    return res.json();
-                }).then(data => { // data = 메일로 발송된 인증키
+                    .then(res => {
+                        return res.json();
+                    }).then(data => { // data = 메일로 발송된 인증키
                     console.log(data);
-                        authKey = data;
+                    authKey = data;
                     switch (data){
                         case 'null':
                             alert('알 수 없는 오류가 발생했습니다')
@@ -226,6 +226,14 @@
                 alert('인증번호 일치');
                 location.reload();
             })
+        })
+    }
+
+    let information = document.querySelector('#information-button');
+
+    if (information){
+        information.addEventListener('click', () => {
+            location.href = 'http://localhost:8090/user/information';
         })
     }
 }

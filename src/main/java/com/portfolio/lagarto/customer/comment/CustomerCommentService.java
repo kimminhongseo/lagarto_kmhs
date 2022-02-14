@@ -1,8 +1,6 @@
 package com.portfolio.lagarto.customer.comment;
 
 import com.portfolio.lagarto.Utils;
-import com.portfolio.lagarto.customer.comment.model.CustomerCommentEntity;
-import com.portfolio.lagarto.customer.comment.model.CustomerCommentVo;
 import com.portfolio.lagarto.model.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +21,9 @@ public class CustomerCommentService {
 
     public List<CustomerCommentVo> selCustomerCmtList(CustomerCommentEntity entity) {
         return mapper.selCustomerCmtList(entity);
-    };
+    }
+
+    public CustomerCommentVo selOneCustomerCmt(CustomerCommentEntity entity) {
+        return mapper.selOneCustomerCmt(entity);
+    }
 }

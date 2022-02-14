@@ -35,10 +35,6 @@ public class CustomerController {
     }
 
     @GetMapping("/detail")
-//    public String detail(CustomerDto dto, Model model) {
-//        model.addAttribute("data", service.selCustomerDetail(dto));
-//        return "customer/detail";
-//    }
     public void detail() {}
 
     @GetMapping("/detail_item")

@@ -154,6 +154,14 @@ public class AuctionController {
         return "auction/detail";
     }
 
+    @GetMapping("/mod")
+    public String mod(AuctionDto dto,Model model){
+        model.addAttribute(Const.DATA,service.selAuctionDetail(dto));
+
+        return "auction/mod";
+    }
+
+
 
 
 }

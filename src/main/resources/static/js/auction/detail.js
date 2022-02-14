@@ -18,8 +18,27 @@ const img = document.getElementsByClassName("click_img");
 for (let x = 0; x < img.length; x++) {
     img.item(x).onclick=function() {window.open(this.src,'_blank','toolbar=no,location=no,status=no,menubar=no, scrollbars=auto,resizable=no,' +
         'width=500,height=500 top=200 left=300')};
+}
+
+const urlparam = document.location.href.split('?');
+const iboard = urlparam[1]; //iboard=? 형태로 나옴.
+
+const modBtnElem = document.querySelector('#modBtn');
+if(modBtnElem) {
+    modBtnElem.addEventListener('click', ()=> {
+        location.href=`/auction/mod?${iboard}`;
+    });
+}
+
+const dataElem = document.querySelector('.data');
 
 
+const currentPriceElem = document.querySelector('.current_price');
+if(currentPriceElem){
+    currentPriceElem.addEventListener('click',() =>{
+        location.href=`/auction/upprice?${iboard}`;
+
+    });
 }
 
 

@@ -10,15 +10,24 @@
 </head>
 <th:block layout:fragment="content">
 
-<!--todo: 가격올리기 기능-->
-<div>
+<!--todo: 가격올리기 기능,수정, 삭제, 댓글, 좋아요-->
+
+    <!--session.loginUser 를 빼주면 session.loginUser.iuser가 null일때 에러.-->
+<div th:with="data=${Data}">
+    <div id="data" th:with="ibo=${param.iboard}" th:data-iboard="${ibo}">
+    <div th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
+        <button id="modBtn"><a th:href="@{/auction/mod(iboard=${ibo})}">수정</a></button>
+        <button id="delBtn">삭제</button>
+    </div>
+
     ~~~~~여기는 디테일 부분 ~~~~~
-    <div class="detail_item" th:with="data=${Data}"}>
+    <div class="detail_item" }>
+    <div>작성자 : <span th:text="${data.writernm}"/></div>
     <div>카테고리 : <span th:text="${data.categorynm}"/></div>
     <div>제목 :<span  th:text="${data.title}"/> </div>
     <div>내용 : <span  th:text="${data.ctnt}"/></div>
     <div>즉시 구매가: <span th:text="${data.imbuy}"/> 원</div>
-    <div>현재가 :<span th:text="${data.buy}"/> 원 <span><button class="upprice">// 가격올리는 기능 어찌할꼬 //</button></span></div>
+    <div>현재가 :<span th:text="${data.buy}"/> 원 <span><button class="current_price">// 가격올리는 기능 어찌할꼬 //</button></span></div>
     <div id="img_item">
         <img id="image0" onclick="test();" class="click_img" th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" onerror="this.style.display='none'" } />
         <img id="image1" onclick="test();" class="click_img" th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image2}" onerror="this.style.display='none'" }} />

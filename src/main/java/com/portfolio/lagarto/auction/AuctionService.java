@@ -25,12 +25,12 @@ public class AuctionService {
 
 
     public int insAuction(AuctionEntity entity){
+        entity.setIuser(utils.getLoginUserPk());
         return mapper.insAuction(entity);
     }
+
     public AuctionVo insAuctionList(AuctionEntity entity){
-       if(mapper.insAuctionList(entity) == null){
-           return null;
-       }return mapper.insAuctionList(entity);
+      return mapper.insAuctionList(entity);
     }
 
     public List<AuctionVo> selAuctionList(AuctionDto dto){return  mapper.selAuctionList(dto);}

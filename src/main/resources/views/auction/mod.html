@@ -1,0 +1,44 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+
+<head>
+    <title>수정하기</title>
+    <link rel="stylesheet" th:href="@{/css/auction/write.css}">
+    <script defer th:src="@{/js/auction/write.js}"></script>
+
+</head>
+
+
+<th:block layout:fragment="content">
+
+    <div class="container">
+        <h1>경매 수정하기</h1>
+        <div th:each="data:${data}">
+            <form  method="post" th:action="@{/auction/mod}" th:object="${auctionDto}" enctype="multipart/form-data" >
+                <input type="hidden" th:with="icate=${param.icategory}" th:data-icategory="${icate}" th:field="*{icategory}" th:value="${icategory}">
+                <!--icategory value를 안정해서 오류가 났다.-->
+
+                <!--수정이라서 원래값 유지하려고 filed가 아닌 id class -->
+                <div>
+                    <label for="title">제목 : <input id="title" class="title" required type="text"  th:value="${data.title}"></label>
+                </div>
+                <div>
+                    <label for="ctnt">내용 : <input  id="ctnt" class="ctnt" required type="text"  th:value="${data.ctnt}"></label>
+                </div>
+                <div>
+                    <label for="imbuy">즉시구매가: <input  id="imbuy" class="imbuy" required type="number" placeholder="즉시구매가" th:value="${data.imbuy}"></label>
+                    <label for="buy">경매가 :<input  id="buy" class="buy" required type="number" placeholder="경매가" th:value="${data.buy}"></label>
+                </div>
+                <input type="file" name="files" multiple>
+                <input type="submit" value="수정하기">
+            </form>
+        </div>
+
+    </div>
+
+
+</th:block>
+
+</html>

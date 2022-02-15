@@ -4,118 +4,122 @@
       layout:decorate="temp/thymeleaf_layout">
 
 <head>
-  <title>회원가입</title>
-  <link rel="stylesheet" th:href="@{/css/user/join.css}">
-  <script defer th:src="@{/js/user/join.js}"></script>
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/user/join.css}">
+    <script defer th:src="@{/js/user/join.js}"></script>
 </head>
 
 <th:block layout:fragment="content">
-  <div class="wrap">
-    <h1>회원가입</h1>
-    <div id="join">
-      <form id="join_form" th:action="@{/user/join}" method="post" th:object="${entity}">
-        <div class="form_container">
-          <div>
-            <div class="input_name">아이디 (이메일)</div>
-            <label>
-              <span hidden>이메일</span>
-              <input type="text" name="uid" placeholder="예) lagarto@lagarto.com"
-                     th:field="*{uid}" th:with="UID=${UID}" th:data-regex="${UID}" required autofocus>
-              <span class="warning" rel="email-warning"></span>
-            </label>
-          </div>
-          <div>
-            <div class="input_name">비밀번호</div>
-            <label>
-              <span hidden>비밀번호</span>
-              <input type="password" name="upw" placeholder="영문, 숫자, 특수문자 조합 8-16자"
-                     th:field="*{upw}" th:with="UPW=${UPW}" th:data-regex="${UPW}" required>
-              <button class="btn_option btn_show btn_show_pw"></button>
-            </label>
-          </div>
-          <div>
-            <div class="input_name">비밀번호 확인</div>
-            <label>
-              <span hidden>비밀번호 재확인</span>
-              <input type="password" name="upw_check" placeholder="비밀번호 확인" required>
-              <button class="btn_option btn_show btn_show_check"></button>
-            </label>
-          </div>
-          <div>
-            <div class="input_name">휴대전화</div>
-            <div class="num_wrap">
-              <label class="num_box">
-                <span hidden>휴대전화</span>
-                <select name="contact_first" th:value="${contact_first}">
-                  <option th:selected="${contact_first}=='010'">010</option>
-                  <option th:selected="${contact_first}=='011'">011</option>
-                  <option th:selected="${contact_first}=='016'">016</option>
-                  <option th:selected="${contact_first}=='017'">017</option>
-                  <option th:selected="${contact_first}=='018'">018</option>
-                  <option th:selected="${contact_first}=='019'">019</option>
-                </select>
-              </label>
-              <label class="num_box">
-                <span hidden>휴대전화</span>
-                <input type="number" name="contact_second" maxlength="4"
-                       th:field="*{contact_second}" th:with="CONTACT_SECOUND=${CONTACT_SECOUND}" th:data-regex="${CONTACT_SECOUND}" required>
-              </label>
-              <label class="num_box">
-                <span hidden>휴대전화</span>
-                <input type="number" name="contact_third" maxlength="4"
-                       th:field="*{contact_third}" th:with="CONTACT_THIRD=${CONTACT_THIRD}" th:data-regex="${CONTACT_THIRD}" required>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h2 class="hidden">이용약관</h2>
-          <div class="disc_all">
-            <input id="disc_agree_all" name="disc_agree_all" type="checkbox">
-            <label for="disc_agree_all"></label>
-            <span>약관 전체 동의</span>
-          </div>
-          <div class="disc_cont">
-            <div class="disc disc_more">
-              <input id="disc_agree_a" name="disc_agree_a" type="checkbox" value="1" th:field="*{disc_agree_a}">
-              <label for="disc_agree_a"></label>
-              <span id="a">[필수] 이용 약관에 동의합니다.</span>
-            </div>
-            <div class="disc disc_more">
-              <input id="disc_agree_b" name="disc_agree_b" type="checkbox" value="1" th:field="*{disc_agree_b}">
-              <label for="disc_agree_b"></label>
-              <span id="b">[필수] 개인정보 수집 및 이용에 동의합니다.</span>
-            </div>
-            <div class="disc">
-              <input id="disc_agree_c" name="disc_agree_c" type="checkbox" value="1" th:field="*{disc_agree_c}">
-              <label for="disc_agree_c"></label>
-              <span id="c">[선택] 쇼핑정보 수신에 동의합니다.</span>
-            </div>
-          </div>
-        </div>
-        <div class="btn_cont">
-          <input class="object_button prop_light" type="button" value="취소">
-          <input class="object_button prop_dark" type="submit" value="회원가입">
-        </div>
-      </form>
-      <div id="modal" class="modal_overlay">
-        <div class="modal_container">
-          <div class="modal_header">
-            <div class="close_area">
-              <button class="btn_close"></button>
-            </div>
-            <div class="modal_title">
-              <h2>이용약관</h2>
-            </div>
-          </div>
-          <div class="modal_content">
+    <div class="wrap">
+        <h1>회원가입</h1>
+        <div id="join">
+            <form id="join_form" th:action="@{/user/join}" method="post" th:object="${entity}">
+                <div class="form_container">
+                    <div>
+                        <div class="input_name">아이디 (이메일)</div>
+                        <label>
+                            <span hidden>이메일</span>
+                            <input type="text" name="uid" placeholder="예) lagarto@lagarto.com"
+                                   th:field="*{uid}" th:with="UID=${UID}" th:data-regex="${UID}" required autofocus>
+                            <span class="warning" rel="email-warning"></span>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="input_name">비밀번호</div>
+                        <label>
+                            <span hidden>비밀번호</span>
+                            <input type="password" name="upw" placeholder="영문, 숫자, 특수문자 조합 8-16자"
+                                   th:field="*{upw}" th:with="UPW=${UPW}" th:data-regex="${UPW}" required>
+                            <button type="button" class="btn_option btn_show btn_show_pw"></button>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="input_name">비밀번호 확인</div>
+                        <label>
+                            <span hidden>비밀번호 재확인</span>
+                            <input type="password" name="upw_check" placeholder="비밀번호 확인" required>
+                            <button type="button" class="btn_option btn_show btn_show_check"></button>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="input_name">휴대전화</div>
+                        <div class="num_wrap">
+                            <label class="num_box">
+                                <span hidden>휴대전화</span>
+                                <select name="contact_first" th:value="${contact_first}">
+                                    <option th:selected="${contact_first}=='010'">010</option>
+                                    <option th:selected="${contact_first}=='011'">011</option>
+                                    <option th:selected="${contact_first}=='016'">016</option>
+                                    <option th:selected="${contact_first}=='017'">017</option>
+                                    <option th:selected="${contact_first}=='018'">018</option>
+                                    <option th:selected="${contact_first}=='019'">019</option>
+                                </select>
+                            </label>
+                            <label class="num_box">
+                                <span hidden>휴대전화</span>
+                                <input type="number" name="contact_second" maxlength="4"
+                                       th:field="*{contact_second}" th:with="CONTACT_SECOUND=${CONTACT_SECOUND}"
+                                       th:data-regex="${CONTACT_SECOUND}" required>
+                            </label>
+                            <label class="num_box">
+                                <span hidden>휴대전화</span>
+                                <input type="number" name="contact_third" maxlength="4"
+                                       th:field="*{contact_third}" th:with="CONTACT_THIRD=${CONTACT_THIRD}"
+                                       th:data-regex="${CONTACT_THIRD}" required>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="hidden">이용약관</h2>
+                    <div class="disc_all">
+                        <input id="disc_agree_all" name="disc_agree_all" type="checkbox">
+                        <label for="disc_agree_all"></label>
+                        <span>약관 전체 동의</span>
+                    </div>
+                    <div class="disc_cont">
+                        <div class="disc disc_more">
+                            <input id="disc_agree_a" name="disc_agree_a" type="checkbox" value="1"
+                                   th:field="*{disc_agree_a}">
+                            <label for="disc_agree_a"></label>
+                            <span id="a">[필수] 이용 약관에 동의합니다.</span>
+                        </div>
+                        <div class="disc disc_more">
+                            <input id="disc_agree_b" name="disc_agree_b" type="checkbox" value="1"
+                                   th:field="*{disc_agree_b}">
+                            <label for="disc_agree_b"></label>
+                            <span id="b">[필수] 개인정보 수집 및 이용에 동의합니다.</span>
+                        </div>
+                        <div class="disc">
+                            <input id="disc_agree_c" type="checkbox" value="1" th:field="*{disc_agree_c}">
+                            <label for="disc_agree_c"></label>
+                            <span id="c">[선택] 쇼핑정보 수신에 동의합니다.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn_cont">
+                    <input id="cancelBtn" class="object_button prop_light" type="button" value="취소">
+                    <input class="object_button prop_dark" type="submit" value="회원가입">
+                </div>
+            </form>
+            <div id="modal" class="modal_overlay">
+                <div class="modal_container">
+                    <div class="modal_header">
+                        <div class="close_area">
+                            <button class="btn_close"></button>
+                        </div>
+                        <div class="modal_title">
+                            <h2>이용약관</h2>
+                        </div>
+                    </div>
+                    <div class="modal_content">
 
-          </div>
+                    </div>
 
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </th:block>
 
 </html>

@@ -21,8 +21,8 @@
 }
 
 .form_container div.input_name {
-    font-size: 0.8625rem;
-    font-weight: 500;
+    font-size: 0.8125rem;
+    font-weight: 400;
     padding-bottom: 0.5rem;
 }
 
@@ -33,7 +33,7 @@
 
 .form_container label input {
     width: 100%;
-    font-size: 0.9rem;
+    font-size: 0.8625rem;
     padding: 1.25rem 1rem;
     border: 1px solid var(--border-color-default);
 }
@@ -48,7 +48,7 @@
     width: 100%;
     border: 0.0625rem solid var(--border-color-default);
     outline: none;
-    padding: 1.25rem 1rem;
+    padding: 1.15rem 1rem;
 }
 
 .num_box {width: 32% !important;}
@@ -112,7 +112,7 @@ input[type="checkbox"]:checked ~ label{
 
 .disc span {
     color: #222;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 400;
     text-decoration: none;
     padding-right: 1.125rem;

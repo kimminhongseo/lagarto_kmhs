@@ -2,24 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.portfolio.lagarto.customer.CustomerMapper">
     <insert id="insCustomer">
-        INSERT INTO lagarto_customer
+        INSERT INTO lagarto.lagarto_customer
         (board_cd, title, ctnt, ctnt_img, iuser)
         VALUES
         (${board_cd}, #{title}, #{ctnt}, #{ctnt_img}, ${iuser})
     </insert>
 
     <select id="selCustomerList" resultType="CustomerVo">
-        SELECT A.* , B.nickname, C.title AS productTitle, C.iboard FROM lagarto_customer A
-        INNER JOIN lagarto_user B ON A.iuser = B.iuser
-        LEFT JOIN auction C ON A.product_cd = C.iboard
+        SELECT A.* , B.nickname, C.title AS productTitle, C.iboard FROM lagarto.lagarto_customer A
+        INNER JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
+        LEFT JOIN lagarto.auction C ON A.product_cd = C.iboard
         WHERE A.board_cd = ${board_cd}
         ORDER BY A.iboard DESC
     </select>
 
     <select id="selCustomerDetail" resultType="CustomerVo">
-        SELECT A.*, B.nickname, C.board_nm FROM lagarto_customer A
-        LEFT JOIN lagarto_user B ON A.iuser = B.iuser
-        LEFT JOIN customer_board_type C ON A.board_cd = C.board_cd
+        SELECT A.*, B.nickname, C.board_nm FROM lagarto.lagarto_customer A
+        LEFT JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
+        LEFT JOIN lagarto.customer_board_type C ON A.board_cd = C.board_cd
         WHERE A.iboard = ${iboard}
     </select>
 

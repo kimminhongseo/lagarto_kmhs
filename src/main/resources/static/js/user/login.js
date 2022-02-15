@@ -1,6 +1,3 @@
-
-
-
 {
     let btnUserElem = document.querySelector('#btnUser');
     let btnLoginElem = btnUserElem.querySelector('#btnLogin');
@@ -9,18 +6,18 @@
     let formPw = loginElem.querySelector('#formPw');
 
 
-    if (btnLoginElem){
+    if (btnLoginElem) {
         btnLoginElem.disabled = 'disabled';
-        formId.addEventListener('keyup', () =>{
-                formPw.addEventListener('keyup', () =>{
-                    if (formId.value !== '' || formPw.value !== ''){
-                        btnLoginElem.disabled = false;
-                    }
-                });
+        formId.addEventListener('keyup', () => {
+            formPw.addEventListener('keyup', () => {
+                if (formId.value !== '' || formPw.value !== '') {
+                    btnLoginElem.disabled = false;
+                }
+            });
         });
-        formPw.addEventListener('keyup', () =>{
-        formId.addEventListener('keyup', () =>{
-                if (formId.value !== '' || formPw.value !== ''){
+        formPw.addEventListener('keyup', () => {
+            formId.addEventListener('keyup', () => {
+                if (formId.value !== '' || formPw.value !== '') {
                     btnLoginElem.disabled = false;
                 }
             });
@@ -28,8 +25,8 @@
 
     }
 
-    if (btnUserElem){
-        btnLoginElem.addEventListener('click', (e) =>{
+    if (btnUserElem) {
+        btnLoginElem.addEventListener('click', (e) => {
             btnLoginElem.type = 'submit';
         });
     }
@@ -39,7 +36,7 @@
 
     if (btnJoinElem) {
         btnJoinElem.addEventListener('click', () => {
-            location.href='/user/join';
+            location.href = '/user/join';
         })
     }
 
@@ -71,7 +68,7 @@
                     }).then(function (res) {
                         return res.json();
                     }).then(hh => {
-                        switch (hh){
+                        switch (hh) {
                             case 1:
                                 location.href = "http://localhost:8090/user/certification"
                                 break;
@@ -93,121 +90,153 @@
 
     window.fbAsyncInit = function () {
         FB.init({
-            appId      : '612308656721361', // 내 앱 ID를 입력한다.
-            cookie     : true,
-            xfbml      : true,
-            version    : 'v12.0'
+            appId: '612308656721361', // 내 앱 ID를 입력한다.
+            cookie: true,
+            xfbml: true,
+            version: 'v12.0'
         });
         FB.AppEvents.logPageView();
     };
 
 }
-//카카오
-{
-    //카카오 초기화
-    Kakao.init('26fdb40a974d81a0ceaf74ba448073cd');
-    console.log( Kakao.isInitialized() ); // 초기화 판단여부
-
-    //데모버전으로 들어가서 카카오로그인 코드를 확인.
-    function loginWithKakao() {
-        Kakao.Auth.login({
-            success: function (authObj) {
-                console.log(authObj); // access토큰 값
-                Kakao.Auth.setAccessToken(authObj.access_token); // access토큰값 저장
-
-                getInfo();
-            },
-            fail: function (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    //액세스 토큰을 발급받고, 아래 함수를 호출시켜서 사용자 정보를 받아옴.
-    function getInfo() {
-        Kakao.API.request({
-            url: '/v2/user/me',
-            success: function (res) {
-                console.log(res);
-                // 이메일, 닉네임
-                const kakao_user_info = {
-                    uid: res.kakao_account.email,
-                    nm: res.kakao_account.profile.nickname
-                }
-                let url = '/user/apiLogin';
-                console.log(kakao_user_info);
-
-                fetch(url, {
-                    method : 'post',
-                    headers : {'Content-type' : 'application/json'},
-                    body : JSON.stringify(kakao_user_info)
-                }).then(function (res){
-                    return res.json();
-                }).then(hh => {
-                    switch (hh) {
-                        case 1:
-                            location.href = "http://localhost:8090/user/certification"
-                            break;
-                        case 0:
-                            location.href = "http://localhost:8090/page/main"
-                            break;
-                    }
-                })
-            },
-            fail: function (error) {
-                alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error));
-            }
-        });
-    }
-
-    //로그아웃 기능 - 카카오 서버에 접속하는 엑세스 토큰을 만료, 사용자 어플리케이션의 로그아웃은 따로 진행.
-    function kakaoLogout() {
-        if (!Kakao.Auth.getAccessToken()) {
-            alert('Not logged in.');
-            return;
-        }
-        Kakao.Auth.logout(function() {
-            alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
-        });
-    }
 
 
-    //네이버
-    var naver_id_login = new naver_id_login("Olu165BkwTiB1vNvozvn", "http://localhost:8090/user/callback");
-    var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("white", 2,40);
-    naver_id_login.setDomain("http://localhost:8090/user/login");
-    naver_id_login.setState(state);
-    naver_id_login.setPopup();
-    naver_id_login.init_naver_id_login();
+// //카카오
+// {
+//     //카카오 초기화
+//     Kakao.init('26fdb40a974d81a0ceaf74ba448073cd');
+//     console.log( Kakao.isInitialized() ); // 초기화 판단여부
+//
+//     //데모버전으로 들어가서 카카오로그인 코드를 확인.
+//     function loginWithKakao() {
+//         Kakao.Auth.login({
+//             success: function (authObj) {
+//                 console.log(authObj); // access토큰 값
+//                 Kakao.Auth.setAccessToken(authObj.access_token); // access토큰값 저장
+//
+//                 getInfo();
+//             },
+//             fail: function (err) {
+//                 console.log(err);
+//             }
+//         });
+//     }
+//
+//     //액세스 토큰을 발급받고, 아래 함수를 호출시켜서 사용자 정보를 받아옴.
+//     function getInfo() {
+//         Kakao.API.request({
+//             url: '/v2/user/me',
+//             success: function (res) {
+//                 console.log(res);
+//                 // 이메일, 닉네임
+//                 const kakao_user_info = {
+//                     uid: res.kakao_account.email,
+//                     nm: res.kakao_account.profile.nickname
+//                 }
+//                 let url = '/user/apiLogin';
+//                 console.log(kakao_user_info);
+//
+//                 fetch(url, {
+//                     method : 'post',
+//                     headers : {'Content-type' : 'application/json'},
+//                     body : JSON.stringify(kakao_user_info)
+//                 }).then(function (res){
+//                     return res.json();
+//                 }).then(hh => {
+//                     switch (hh) {
+//                         case 1:
+//                             location.href = "http://localhost:8090/user/certification"
+//                             break;
+//                         case 0:
+//                             location.href = "http://localhost:8090/page/main"
+//                             break;
+//                     }
+//                 })
+//             },
+//             fail: function (error) {
+//                 alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error));
+//             }
+//         });
+//     }
+//
+//     //로그아웃 기능 - 카카오 서버에 접속하는 엑세스 토큰을 만료, 사용자 어플리케이션의 로그아웃은 따로 진행.
+//     function kakaoLogout() {
+//         if (!Kakao.Auth.getAccessToken()) {
+//             alert('Not logged in.');
+//             return;
+//         }
+//         Kakao.Auth.logout(function() {
+//             alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
+//         });
+//     }
+//
+//
+//     //네이버
+//     var naver_id_login = new naver_id_login("Olu165BkwTiB1vNvozvn", "http://localhost:8090/user/callback");
+//     var state = naver_id_login.getUniqState();
+//     naver_id_login.setButton("white", 2,40);
+//     naver_id_login.setDomain("http://localhost:8090/user/login");
+//     naver_id_login.setState(state);
+//     naver_id_login.setPopup();
+//     naver_id_login.init_naver_id_login();
+//
+// }
 
-}
 
 // 구글
 {
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    var googleUser = {};
+    var startApp = function() {
+        gapi.load('auth2', function(){
+            // Retrieve the singleton for the GoogleAuth library and set up the client.
+            auth2 = gapi.auth2.init({
+                client_id: '559437244447-ucbou9ltcbr3vkcvl3og41mbi9kglan4.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+                // Request scopes in addition to 'profile' and 'email'
+                //scope: 'additional_scope'
+            });
+            attachSignin(document.getElementById('google'));
+        });
+    };
 
-        const param = {
-            'uid' : profile.getEmail(),
-            'nm' : profile.getName()
-        }
+    function attachSignin(element) {
+        auth2.attachClickHandler(element, {},
+            function(googleUser) {
+                if (googleUser) {
+                    var profile = googleUser.getBasicProfile();
+                    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                    console.log('Name: ' + profile.getName());
+                    console.log('Image URL: ' + profile.getImageUrl());
+                    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-        fetch('/user/apiLogin', {
-            method: 'POST',
-            headers: { "Content-Type" : "application/json" },
-            body: JSON.stringify(param)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data.result);
-            })
+                    const param = {
+                        'uid': profile.getEmail(),
+                        'nm': profile.getName()
+                    }
+
+
+                    fetch('/user/apiLogin', {
+                        method: 'POST',
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify(param)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+
+                            switch (data.result) {
+                                case 0 :
+                                    window.location.href = '/user/certification';
+                                    break;
+                                case 1 :
+                                    window.location.href = '/main';
+                                    break;
+                            }
+                        })
+                }
+            }, function(error) {
+                alert(JSON.stringify(error, undefined, 2));
+            });
     }
-
 
 }
 

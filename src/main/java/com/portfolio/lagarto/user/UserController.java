@@ -47,28 +47,37 @@ public class UserController {
 
     @PostMapping("/apiLogin")
     @ResponseBody
-    public int loginProc(@RequestBody UserEntity entity){
-        UserEntity dbentity = service.selUser(entity);
-        if (dbentity == null){
+    public Map<String, Integer> loginProc(@RequestBody UserEntity entity){
+        UserEntity dbEntity = service.selUser(entity);
+
+        Map<String, Integer> result = new HashMap<>();
+        if (dbEntity == null){
             String pw = Utils.randomPw();
             entity.setUpw(pw);
-            service.apiInsUser(entity);
-            return 1;
+            result.put("result", 0);
+        } else {
+            utils.setLoginUser(dbEntity);
+            System.out.println(utils.getLoginUserPk());
+            result.put("result", 1);
         }
-        utils.setLoginUser(dbentity);
-        System.out.println(utils.getLoginUserPk());
-        return 0;
+        return result;
     }
 
     @GetMapping("/certification")
-    public void certification() {
-
+    public void certification(@ModelAttribute("entity") UserEntity entity, Model model) {
+        model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
+        model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
+        model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
     }
 
     @ResponseBody
-    @PostMapping("/certification")
-    public Map<String, Integer> certificationProc(@ModelAttribute("userEntity") UserEntity entity) {
+    @PostMapping("/apiCertification")
+    public Map<String, Integer> certificationProc(@RequestBody UserEntity entity) {
         Map<String, Integer> result = new HashMap<>();
+        System.out.println(entity);
+
+        String pw = Utils.randomPw();
+        entity.setUpw(pw);
 
         // 중복된 번호
         int contactCheck = 0;
@@ -79,6 +88,7 @@ public class UserController {
         // 사용 가능한 번호
         if (joinRslt == JoinResult.AVAILABLE_CONTACT) {
             contactCheck = 1;
+            service.apiJoin(entity);
         }
 
         result.put("result", contactCheck);
@@ -98,6 +108,8 @@ public class UserController {
     @PostMapping("/join")
     public String joinProc(UserEntity entity, Model model) {
         int result = service.insUser(entity);
+
+        System.out.println(entity);
 
         if (result != 1) {
             model.addAttribute("err", "회원가입에 실패하였습니다.");

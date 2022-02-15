@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.portfolio.lagarto.customer.comment.CustomerCommentMapper">
     <insert id="insCustomerCmt">
-        INSERT INTO customer_comment
+        INSERT INTO lagarto.customer_comment
         (iboard, iuser, ctnt)
         VALUES
         (${iboard}, ${iuser}, #{ctnt})
@@ -10,8 +10,8 @@
 
     <select id="selCustomerCmtList" resultType="CustomerCommentVo">
         SELECT A.*, B.nickname FROM
-        customer_comment A
-        LEFT JOIN lagarto_user B
+        lagarto.customer_comment A
+        LEFT JOIN lagarto.lagarto_user B
         ON A.iuser = B.iuser
         WHERE A.iboard = ${iboard}
         ORDER BY A.icmt

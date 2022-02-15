@@ -47,26 +47,31 @@ public class UserService {
         UserEntity copyEntity = new UserEntity();
         BeanUtils.copyProperties(entity, copyEntity);
 
+
         // 필수 약관동의 체크
         if (!(copyEntity.getDisc_agree_a() == 1 && copyEntity.getDisc_agree_b() == 1)) {
+            System.out.println("약관 error");
             copyEntity.setResult(JoinResult.FAILURE);
             return 0;
         }
 
         // 아이디 정규식 체크
         if (!Const.checkUid(copyEntity.getUid())) {
+            System.out.println("아이디 정규식 error");
             copyEntity.setResult(JoinResult.FAILURE);
             return 0;
         }
 
         // 아이디 중복 체크
         if (mapper.selUidCount(copyEntity) > 0) {
+            System.out.println("중복 error");
             copyEntity.setResult(JoinResult.DUPLICATE_EMAIL);
             return 0;
         }
 
         // 전화번호 중복 체크
         if (mapper.selContactCount(copyEntity) > 0) {
+            System.out.println("번호 error");
             copyEntity.setResult(JoinResult.DUPLICATE_CONTACT);
             return 0;
         }
@@ -78,6 +83,14 @@ public class UserService {
 
         copyEntity.setResult(JoinResult.SUCCESS);
         return mapper.insUser(copyEntity);
+    }
+
+    public int apiJoin(UserEntity entity) {
+        entity.setDisc_agree_b(1);
+        entity.setDisc_agree_b(1);
+        entity.setDisc_agree_c(0);
+        entity.setResult(JoinResult.SUCCESS);
+        return mapper.insUser(entity);
     }
 
     public int contactCheck(UserEntity entity) {
@@ -118,6 +131,11 @@ public class UserService {
             }
         }
         return 2;//로그인 실패
+    }
+
+    public int selUserResult(UserEntity entity){
+        UserEntity result = mapper.selUser(entity);
+        return result == null ? 0 : 1;
     }
 
     public UserEntity selUser(UserEntity entity){

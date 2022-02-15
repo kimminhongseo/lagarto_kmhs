@@ -1,17 +1,19 @@
+.wrap h1 {margin-bottom: 5rem;}
+
 #certification {width: 30%; margin: 0 auto;}
 
 .form_container {
     margin-bottom: 2rem;
 }
 
-.form_container > div {
-    min-height: 8rem;
-}
+/*.form_container > div {*/
+/*    min-height: 8rem;*/
+/*}*/
 
 .form_container div.input_name {
-    font-size: 0.8625rem;
-    font-weight: 500;
-    padding-bottom: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    padding-bottom: 1rem;
 }
 
 .form_container label {
@@ -22,7 +24,7 @@
 .form_container label input {
     width: 100%;
     font-size: 0.9rem;
-    padding: 1.25rem 1rem;
+    padding: 1.15rem 1rem;
     border: 1px solid var(--border-color-default);
 }
 
@@ -36,7 +38,14 @@
     width: 100%;
     border: 0.0625rem solid var(--border-color-default);
     outline: none;
-    padding: 1.25rem 1rem;
+    padding: 1.05rem 1rem;
 }
 
 .num_box {width: 32% !important;}
+
+.btn_cont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 5rem;
+}

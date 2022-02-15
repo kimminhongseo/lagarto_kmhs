@@ -5,9 +5,11 @@ import com.portfolio.lagarto.enums.JoinResult;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class UserEntity {
     private int iuser;
     private String email;

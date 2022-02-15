@@ -43,20 +43,19 @@ if(delBtnElem){
         if(confirm('현재 게시된 글을 삭제하시겠습니까?')){
             location.href=`/auction/del?${iboard}`;
         }
-
-
     });
 }
 
 
 
-
-
-
+function uppricePopup(){
+    window.open("/auction/upprice","_blank","width:400, height=400, left=100, top=100");
+}
+    //url에 ?${iboard}
 const currentPriceElem = document.querySelector('.current_price');
 if(currentPriceElem){
     currentPriceElem.addEventListener('click',() =>{
-        location.href=`/auction/upprice?${iboard}`;
+        uppricePopup();
 
     });
 }

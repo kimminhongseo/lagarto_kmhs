@@ -20,7 +20,7 @@ for (let x = 0; x < img.length; x++) {
         'width=500,height=500 top=200 left=300')};
 }
 
-//ㅁㄴㅇㅁㄴㅇ
+//ㅁㄴㅇㅁㄴㅇsadas
 
 const urlparam = document.location.href.split('?');
 const iboard = urlparam[1]; //iboard=? 형태로 나옴.

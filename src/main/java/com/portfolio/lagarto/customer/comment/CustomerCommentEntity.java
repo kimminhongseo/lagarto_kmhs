@@ -1,4 +1,4 @@
-package com.portfolio.lagarto.customer.comment.model;
+package com.portfolio.lagarto.customer.comment;
 
 import lombok.Getter;
 import lombok.Setter;

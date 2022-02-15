@@ -1,16 +1,30 @@
 (function() {
     'use strict';
-
+    const dataElem = document.querySelector('#data');
     const searchParams = new URL(window.location.href).searchParams;
     const iboard = searchParams.get('iboard');
 
-    const boardDetailElem = document.querySelector('#customer_detail');
+    const boardDetailElem = document.querySelector('#board_detail');
     const commentFormContainerElem = document.querySelector('#comment_form_container');
     const commentListElem = document.querySelector('#comment_list');
+    const tbodyElem = commentListElem.querySelector('table > tbody');
+
+
+    //글 삭제 버튼
+    const delBtnElem = document.querySelector('#delBtn');
+    if(delBtnElem) {
+        delBtnElem.addEventListener('click', ()=> {
+            console.log(iboard);
+
+            if(confirm(msg.fnIsDel(`${iboard}번 글`))) {
+                location.href=`/customer/del?iboard=${iboard}`;
+            }
+        });
+    }
 
     //글 디테일 데이터 가져오기
     const getData = () => {
-        fetch(`/board/detail?iboard=${iboard}`)
+        fetch(`/customer/detail_item?iboard=${iboard}`)
             .then(res => res.text())
             .then(data => {
                 console.log(data);
@@ -28,8 +42,12 @@
     }
     getCommentList();
 
+    function delCmtList () {
+        commentListElem.innerHTML = '';
+    }
+
+    //리스트 만들기
     const makeCommentRecordList = list => {
-        const tbodyElem = commentListElem.querySelector('table > tbody');
 
         list.forEach(item => {
             const trElem = document.createElement('tr');
@@ -38,7 +56,6 @@
                 <td>${item.ctnt}</td>
                 <td>${item.nickname}</td>
                 <td>${item.rdt}</td>
-                <td></td>
             `;
             tbodyElem.appendChild(trElem);
         });
@@ -48,6 +65,7 @@
     if(commentFormContainerElem) {
         const commentSubmitBtnElem = commentFormContainerElem.querySelector('button[name="comment_submit"]');
         const commentCtntInputElem = commentFormContainerElem.querySelector('input[name="ctnt"]');
+
 
         commentSubmitBtnElem.addEventListener('click', e => {
             console.log(commentCtntInputElem.value);
@@ -65,6 +83,9 @@
                         break;
                     case 1:
                         commentCtntInputElem.value = null;
+                        delCmtList();
+                        getCommentList();
+                        location.href=`/customer/detail?iboard=${iboard}`
                         break;
                 }
             }, param);

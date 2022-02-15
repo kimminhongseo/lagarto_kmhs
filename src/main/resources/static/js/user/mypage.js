@@ -161,7 +161,7 @@
             }
         });
     }
-    console.log(passwordUpwElem);
+    // console.log(passwordUpwElem);
 
     const emailModal = document.querySelector('#email-modal');
     const formEmail = emailModal.querySelector('#formEmail');
@@ -190,16 +190,16 @@
                     if (SetTime < 0) {
                         flag2 = false;
                         clearInterval(x); // 타이머 종료하는 함수
-                        document.getElementById("timer").innerHTML = "인증만료";
+                        document.getElemenltById("timer").innerHTML = "인증만료";
                     }
                 }, 1000); // 1초마다
 
                 fetch(`/ajax/mail?uid=${formEmail.value}`)
-                .then(res => {
-                    return res.json();
-                }).then(data => { // data = 메일로 발송된 인증키
+                    .then(res => {
+                        return res.json();
+                    }).then(data => { // data = 메일로 발송된 인증키
                     console.log(data);
-                        authKey = data;
+                    authKey = data;
                     switch (data){
                         case 'null':
                             alert('알 수 없는 오류가 발생했습니다')
@@ -219,13 +219,32 @@
                 alert('인증번호 불일치')
                 return;
             }
-            fetch(`/ajax/authkey`)
+            fetch(`/ajax/authkey?authKey=${authKey}`)
                 .then(res => {
                     return res.json();
                 }).then(data => {
-                alert('인증번호 일치');
-                location.reload();
+                switch (data){
+                    case 0:
+                        alert('인증번호 전송을 해주세요');
+                        break;
+                    case 1:
+                        alert('인증번호 일치');
+                        location.reload();
+                        break;
+                    case 2:
+                        alert("알 수 없는 오류입니다.")
+                        location.href = "/user/logout";
+                        break;
+                }
             })
+        })
+    }
+
+    let information = document.querySelector('#information-button');
+
+    if (information){
+        information.addEventListener('click', () => {
+            location.href = 'http://localhost:8090/user/information';
         })
     }
 }

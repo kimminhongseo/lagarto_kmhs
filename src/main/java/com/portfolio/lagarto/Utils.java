@@ -25,6 +25,7 @@ public class Utils {
         return getLoginUser() == null ? 0 : getLoginUser().getIuser();
     }
 
+
     //    XSS공격 접근제한 메소드
     public static String replaceStr(String str) {
         return str.replace("<", "&lt")

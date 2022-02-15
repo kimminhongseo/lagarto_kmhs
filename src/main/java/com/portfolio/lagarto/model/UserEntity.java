@@ -6,8 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class UserEntity {
     private int iuser;
     private String email;
@@ -32,4 +31,5 @@ public class UserEntity {
     private boolean auth;
 
     private JoinResult result;
+
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--메퍼 설정 하세요-->
+<mapper namespace="com.portfolio.lagarto.follow.FollowMapper">
+    <insert id="follow">
+        insert into lagarto_user_follow(iuserMe, iuserYou) VALUES (#{iuserMe}, #{iuserYou})
+    </insert>
+
+    <delete id="unfollow">
+        delete from lagarto_user_follow where iuserMe = #{iuserMe} AND iuserYou = #{iuserYou}
+    </delete>
+
+    <select id="isFollow" resultType="int">
+        select count(*) from follow where iuserMe=#{iuserMe} and iuserYou = #{iuserYou}
+    </select>
+</mapper>

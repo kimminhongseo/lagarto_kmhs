@@ -4,7 +4,7 @@
       layout:decorate="temp/thymeleaf_layout">
 
 <head>
-    <title>로그인</title>
+    <title>마이페이지</title>
     <link rel="stylesheet" th:href="@{/css/user/mypage.css}">
     <script defer th:src="@{/js/user/mypage.js}"></script>
 </head>
@@ -89,302 +89,273 @@
                         </div>
                         <br>
                         <div id="certification_span">
-						<span id="email_span">
-						<!-- Button trigger modal -->
-							<label th:if="${authKey == false}">
-									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="email-button">
-									Email </button>
-							</label>
-							<label th:if="${authKey == true}">
-									<button type="button" class="btn btn-primary" id="email-true" readonly>
-									Email </button>
-							</label>
-                            <!-- Modal -->
-						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
+                  <span id="email_span">
+                  <!-- Button trigger modal -->
+                     <label th:if="${session.loginUser.isAuth() == false}">
+                           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="email-button">
+                           Email </button>
+                     </label>
+                     <label th:if="${session.loginUser.isAuth() == true}">
+                           <button type="button" class="btn btn-primary" id="email-true" readonly>
+                           Email </button>
+                     </label>
+                      <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
 
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Email 인증</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body" id="email-modal">
-										<div>
-											<div>
-												<input type="text" class="form-control" id="formEmail" th:value="${session.loginUser.getUid()}" readonly aria-label="Username" aria-describedby="basic-addon1">
-												<button class="btn btn-primary" type="button" id="formEmail-send">인증메일 전송</button>
-											</div>
-											<div id="timer">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Email 인증</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                           </div>
+                           <div class="modal-body" id="email-modal">
+                              <div>
+                                 <div>
+                                    <input type="text" class="form-control" id="formEmail" th:value="${session.loginUser.getUid()}" readonly aria-label="Username" aria-describedby="basic-addon1">
+                                    <button class="btn btn-primary" type="button" id="formEmail-send">인증메일 전송</button>
+                                 </div>
+                                 <div id="timer">
 
-											</div>
-											<div>
-												<input type="text" class="form-control" id="formEmail_Number" placeholder="인증번호 입력" aria-label="Username" aria-describedby="basic-addon1">
-												<button class="btn btn-primary" type="button" id="formEmail_submit">확인</button>
-											</div>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						</span>
+                                 </div>
+                                 <div>
+                                    <input type="text" class="form-control" id="formEmail_Number" placeholder="인증번호 입력" aria-label="Username" aria-describedby="basic-addon1">
+                                    <button class="btn btn-primary" type="button" id="formEmail_submit">확인</button>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                     </span>
+                            <span><button type="button" class="btn btn-primary" id="information-button">정보수정</button></span>
                             <span>
-						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1" id="Phone-button">휴대폰</button>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                  팔로워</button>
                                 <!-- Modal -->
-						<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel1">휴대폰 인증</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body" id="phone-modal">
-										<div>
-											<div>
-												<input type="text" class="form-control" id="formPhone" placeholder="휴대폰" aria-label="Username" aria-describedby="basic-addon1">
-												<button class="btn btn-primary" type="button" id="formPhone-send">인증번호 전송</button>
-											</div>
-											<div>
-												<input type="text" class="form-control" id="formPhone_Number" placeholder="인증번호 입력" aria-label="Username" aria-describedby="basic-addon1">
-												<button class="btn btn-primary" type="button" id="formPhone_submit">확인</button>
-											</div>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						</span>
-                            <span>
-						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-						팔로워</button>
-                                <!-- Modal -->
-						<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-scrollable" id="modal-foll">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel2">팔로워</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-										<table class="table">
-										<thead>
-										<tr>
-											<th scope="col">
-												 이름
-											</th>
-											<th scope="col">
-												 sangtae
-											</th>
-											<th scope="col">
-												 Level
-											</th>
-										</tr>
-										</thead>
-										<tbody>
-										<tr>
-											<td>
-												 균기
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 gyungi
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 수아
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 sua
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 유영
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 m
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 yuyoung
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 1
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 대용
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 dyeyoung
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 도흠
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 dohum
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 2
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 현민
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 성완
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 동윤
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 check
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 this
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 2
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 out
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 상수
-											</td>
-											<td>
-												 follow
-											</td>
-											<td>
-												 4
-											</td>
-										</tr>
-										</tbody>
-										</table>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						</span>
+                  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-dialog-scrollable" id="modal-foll">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel2">팔로워</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                           </div>
+                           <div class="modal-body">
+                              <table class="table">
+                              <thead>
+                              <tr>
+                                 <th scope="col">
+                                     이름
+                                 </th>
+                                 <th scope="col">
+                                     sangtae
+                                 </th>
+                                 <th scope="col">
+                                     Level
+                                 </th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                 <td>
+                                     균기
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     gyungi
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     수아
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     sua
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     유영
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     m
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     yuyoung
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     1
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     대용
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     dyeyoung
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     도흠
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     dohum
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     2
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     현민
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     성완
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     동윤
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     check
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     this
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     2
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     out
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                     상수
+                                 </td>
+                                 <td>
+                                     follow
+                                 </td>
+                                 <td>
+                                     4
+                                 </td>
+                              </tr>
+                              </tbody>
+                              </table>
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  </span>
                             <span>팔로잉</span>
                         </div>
                         <br>
@@ -492,7 +463,7 @@
                                                         <th>구분</th>
                                                     </tr>
                                                     <tr id="buy-tr2">
-                                                        <!--															<td colspan="6" class="first">등록된 물품이 없습니다.</td>-->
+                                                        <!--                                             <td colspan="6" class="first">등록된 물품이 없습니다.</td>-->
                                                         <td>리자드</td>
                                                         <td>수컷</td>
                                                         <td>예쁜리자드 팝니다</td>

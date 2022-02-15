@@ -190,7 +190,7 @@
                     if (SetTime < 0) {
                         flag2 = false;
                         clearInterval(x); // 타이머 종료하는 함수
-                        document.getElementById("timer").innerHTML = "인증만료";
+                        document.getElemenltById("timer").innerHTML = "인증만료";
                     }
                 }, 1000); // 1초마다
 
@@ -219,12 +219,23 @@
                 alert('인증번호 불일치')
                 return;
             }
-            fetch(`/ajax/authkey`)
+            fetch(`/ajax/authkey?authKey=${authKey}`)
                 .then(res => {
                     return res.json();
                 }).then(data => {
-                alert('인증번호 일치');
-                location.reload();
+                switch (data){
+                    case 0:
+                        alert('인증번호 전송을 해주세요');
+                        break;
+                    case 1:
+                        alert('인증번호 일치');
+                        location.reload();
+                        break;
+                    case 2:
+                        alert("알 수 없는 오류입니다.")
+                        location.href = "/user/logout";
+                        break;
+                }
             })
         })
     }

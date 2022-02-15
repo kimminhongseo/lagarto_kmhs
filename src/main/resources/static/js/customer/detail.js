@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-
+    const dataElem = document.querySelector('#data');
     const searchParams = new URL(window.location.href).searchParams;
     const iboard = searchParams.get('iboard');
 
@@ -8,6 +8,19 @@
     const commentFormContainerElem = document.querySelector('#comment_form_container');
     const commentListElem = document.querySelector('#comment_list');
     const tbodyElem = commentListElem.querySelector('table > tbody');
+
+
+    //글 삭제 버튼
+    const delBtnElem = document.querySelector('#delBtn');
+    if(delBtnElem) {
+        delBtnElem.addEventListener('click', ()=> {
+            console.log(iboard);
+
+            if(confirm(msg.fnIsDel(`${iboard}번 글`))) {
+                location.href=`/customer/del?iboard=${iboard}`;
+            }
+        });
+    }
 
     //글 디테일 데이터 가져오기
     const getData = () => {
@@ -29,9 +42,10 @@
     }
     getCommentList();
 
-    const delCmtList = () => {
+    function delCmtList () {
         commentListElem.innerHTML = '';
     }
+
     //리스트 만들기
     const makeCommentRecordList = list => {
 
@@ -46,7 +60,6 @@
             tbodyElem.appendChild(trElem);
         });
     }
-
 
     //댓글 입력 폼
     if(commentFormContainerElem) {
@@ -72,6 +85,7 @@
                         commentCtntInputElem.value = null;
                         delCmtList();
                         getCommentList();
+                        location.href=`/customer/detail?iboard=${iboard}`
                         break;
                 }
             }, param);

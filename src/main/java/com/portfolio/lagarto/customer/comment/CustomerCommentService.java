@@ -23,7 +23,4 @@ public class CustomerCommentService {
         return mapper.selCustomerCmtList(entity);
     }
 
-    public CustomerCommentVo selOneCustomerCmt(CustomerCommentEntity entity) {
-        return mapper.selOneCustomerCmt(entity);
-    }
 }

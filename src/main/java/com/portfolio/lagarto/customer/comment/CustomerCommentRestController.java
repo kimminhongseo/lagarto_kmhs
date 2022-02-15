@@ -22,8 +22,4 @@ public class CustomerCommentRestController {
         return service.selCustomerCmtList(entity);
     }
 
-//    @GetMapping
-//    public CustomerCommentVo selOneCustomerCmt(CustomerCommentEntity entity) {
-//        return service.selOneCustomerCmt(entity);
-//    }
 }

@@ -3,14 +3,14 @@
 <!--메퍼 설정 하세요-->
 <mapper namespace="com.portfolio.lagarto.follow.FollowMapper">
     <insert id="follow">
-        insert into lagarto_user_follow(iuserMe, iuserYou) VALUES (#{iuserMe}, #{iuserYou})
+        insert into `lagarto`.`lagarto_user_follow`(iuserMe, iuserYou) VALUES (#{iuserMe}, #{iuserYou})
     </insert>
 
     <delete id="unfollow">
-        delete from lagarto_user_follow where iuserMe = #{iuserMe} AND iuserYou = #{iuserYou}
+        delete from `lagarto`.`lagarto_user_follow` where iuserMe = #{iuserMe} AND iuserYou = #{iuserYou}
     </delete>
 
     <select id="isFollow" resultType="int">
-        select count(*) from follow where iuserMe=#{iuserMe} and iuserYou = #{iuserYou}
+        select count(*) from `lagarto`.`lagarto_user` where iuserMe=#{iuserMe} and iuserYou = #{iuserYou}
     </select>
 </mapper>

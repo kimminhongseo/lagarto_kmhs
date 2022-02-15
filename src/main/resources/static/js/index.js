@@ -24,50 +24,35 @@ const regex = {
         return (target && val) ? !this[target].test(val) : true;
     }
 };
+const followElem = document.querySelector('#follow')
+const followBtnElem = followElem.querySelector('#follow-Btn');
+const unfollowElem = document.querySelector('#unfollow')
+const unfollowBtnElem = unfollowElem.querySelector('#unfollow-Btn');
+const dataIuserElem = document.querySelector('#dataIuser');
+unfollowBtnElem.style.display = 'none';
+followBtnElem.addEventListener('click', () => {
+        followBtnElem.style.display = 'none';
+        unfollowBtnElem.style.display = 'block';
+        console.log(dataIuserElem.dataset.iuser);
+        fetch(`/follow/${dataIuserElem.dataset.iuser}`, {
+            method : 'post',
+            headers: {'Content-type': 'application/json'}
+        }).then(res => {
+            return res.json();
+        }).then(data => {
 
-$('#follow-btn').on('click', function() {
-    follow(true);
-});
+        })
+})
 
-$('#unfollow-btn').on('click', function() {
-    follow(false);
-});
+unfollowBtnElem.addEventListener('click', () => {
+    followBtnElem.style.display = 'block';
+    unfollowBtnElem.style.display = 'none';
+    fetch(`/unfollow/${dataIuserElem.dataset.iuser}`,{
+        method : 'DELETE',
+    }).then(res => res.json()).then(data => {
 
-function follow(check) {
-    if(check) {
-        $.ajax({
-            type: "POST",
-            url: `/follow/${user.uid}`,
-            headers: {
-                "Content-Type": "application/json",
-                "X-HTTP-Method-Override": "POST"
-            },
-            success: function(result) {
-                console.log("result : " + result);
-                if(result === "FollowOK"){
-                    $(".follow").html('<button class="followBtn" id="unfollow-btn">언팔로우</button>');
-                    location.href="/myapp/post/${user.id}";
-                }
-            }
-        });
-    } else {
-        $.ajax({
-            type: "POST",
-            url: `/unfollow/${user.id}`,
-            headers: {
-                "Content-Type": "application/json",
-                "X-HTTP-Method-Override": "POST"
-            },
-            success: function(result) {
-                console.log("result : " + result);
-                if(result === "UnFollowOK"){
-                    $(".follow").html('<button class="followBtn" id="follow-btn">팔로우</button>');
-                    location.href="/myapp/post/${user.id}";
-                }
-            }
-        });
-    }
-}
+    })
+})
 
 const myFetch = {
     send: function(fetchObj, cb) {

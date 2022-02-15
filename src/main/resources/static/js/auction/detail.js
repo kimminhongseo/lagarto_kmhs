@@ -20,9 +20,13 @@ for (let x = 0; x < img.length; x++) {
         'width=500,height=500 top=200 left=300')};
 }
 
+
+
 const urlparam = document.location.href.split('?');
 const iboard = urlparam[1]; //iboard=? 형태로 나옴.
+const num = iboard.split('=')
 
+//MOD 기능  >> 잘됨.
 const modBtnElem = document.querySelector('#modBtn');
 if(modBtnElem) {
     modBtnElem.addEventListener('click', ()=> {
@@ -30,7 +34,23 @@ if(modBtnElem) {
     });
 }
 
-const dataElem = document.querySelector('.data');
+
+//DEL 기능  >> msg 왜 안됨???
+
+const delBtnElem = document.querySelector('#delBtn');
+if(delBtnElem){
+    delBtnElem.addEventListener('click',() =>{
+        if(confirm('현재 게시된 글을 삭제하시겠습니까?')){
+            location.href=`/auction/del?${iboard}`;
+        }
+
+
+    });
+}
+
+
+
+
 
 
 const currentPriceElem = document.querySelector('.current_price');
@@ -40,6 +60,8 @@ if(currentPriceElem){
 
     });
 }
+
+
 
 
 

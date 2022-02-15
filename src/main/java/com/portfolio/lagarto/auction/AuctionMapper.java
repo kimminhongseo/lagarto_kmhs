@@ -19,5 +19,6 @@ public interface AuctionMapper {
     List<AuctionCategoryEntity> selAuctionCategoryList();
 
     int updAuction(AuctionEntity entity);
+    int delAuction(AuctionEntity entity);
 
 }

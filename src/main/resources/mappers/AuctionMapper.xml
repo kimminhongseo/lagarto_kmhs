@@ -66,7 +66,7 @@
 
     <update id="updAuction">
         UPDATE auction
-        SET
+        set
         title=#{title},
         ctnt=#{ctnt},
         imbuy = #{imbuy},
@@ -78,7 +78,14 @@
         image5 = #{image5}
         WHERE iboard = ${iboard}
         and iuser = ${iuser}
+    </update>
 
+
+    <update id="delAuction">
+        UPDATE auction
+        set
+        isdel = #{isdel}
+        where iboard = ${iboard}
     </update>
 
 

@@ -16,10 +16,10 @@
 <div th:with="data=${Data}">
     <div id="data" th:with="ibo=${param.iboard}" th:data-iboard="${ibo}">
     <div th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
-        <button id="modBtn"><a th:href="@{/auction/mod(iboard=${ibo})}">수정</a></button>
+        <button id="modBtn">수정</button>
         <button id="delBtn">삭제</button>
     </div>
-
+        <!--<a th:href="@{/auction/del(iboard=${ibo})}">삭제</a>-->
     ~~~~~여기는 디테일 부분 ~~~~~
     <div class="detail_item" }>
     <div>작성자 : <span th:text="${data.writernm}"/></div> <!--옆에 프로필사진-->

@@ -168,14 +168,13 @@ public class AuctionController {
        String moduploadDirectory = first_uploadDirectory + "/" + entity.getIboard();
         //mod경로에 파일이나존재하면 삭제.
         File f = new File(moduploadDirectory);
-//        if(f.isFile()){
-//            fileUtils.delFile(moduploadDirectory);
-//        }
+
+        //만약 객체가 폴더다? yes! 그럼 안에있는 파일 지움
         if(f.isDirectory()){
             fileUtils.delFolderFiles(moduploadDirectory,true);
         }
 
-
+        //여기서 폴더 존재하면 그 폴더에 파일저장.
        for(MultipartFile file1: files){
             Path modfileNameAndPath = Paths.get(moduploadDirectory,file1.getOriginalFilename());
             //폴더 만들어준다
@@ -228,6 +227,12 @@ public class AuctionController {
         }
 
         return "redirect:/auction/detail?iboard=" + entity.getIboard();
+    }
+
+    @GetMapping("/del")
+    public String delProc(AuctionEntity entity){
+        int result = service.delAuction(entity);
+        return "redirect:/auction/list/";
     }
 
 

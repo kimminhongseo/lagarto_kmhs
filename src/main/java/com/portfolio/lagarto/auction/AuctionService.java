@@ -44,12 +44,14 @@ public class AuctionService {
             return mapper.updAuction(entity);
         }catch (Exception e){
             e.printStackTrace();
-            return 0; // update안되면 0
+            return 2; // update안되면 0
         }
     }
 
-
-
+    public int delAuction(AuctionEntity entity){
+        entity.setIsdel(1);
+        return mapper.delAuction(entity);
+    }
 
     public List<AuctionCategoryEntity> auctionMenuList(){return  mapper.selAuctionCategoryList();}
 

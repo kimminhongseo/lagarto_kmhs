@@ -24,3 +24,47 @@ const regex = {
         return (target && val) ? !this[target].test(val) : true;
     }
 };
+
+$('#follow-btn').on('click', function() {
+    follow(true);
+});
+
+$('#unfollow-btn').on('click', function() {
+    follow(false);
+});
+
+function follow(check) {
+    if(check) {
+        $.ajax({
+            type: "POST",
+            url: `/follow/${user.uid}`,
+            headers: {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST"
+            },
+            success: function(result) {
+                console.log("result : " + result);
+                if(result === "FollowOK"){
+                    $(".follow").html('<button class="followBtn" id="unfollow-btn">언팔로우</button>');
+                    location.href="/myapp/post/${user.id}";
+                }
+            }
+        });
+    } else {
+        $.ajax({
+            type: "POST",
+            url: `/unfollow/${user.id}`,
+            headers: {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST"
+            },
+            success: function(result) {
+                console.log("result : " + result);
+                if(result === "UnFollowOK"){
+                    $(".follow").html('<button class="followBtn" id="follow-btn">팔로우</button>');
+                    location.href="/myapp/post/${user.id}";
+                }
+            }
+        });
+    }
+}

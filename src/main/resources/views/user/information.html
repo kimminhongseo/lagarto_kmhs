@@ -1,0 +1,37 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+
+<head>
+  <title>회원가입</title>
+  <link rel="stylesheet" th:href="@{/css/user/information.css}">
+  <script defer th:src="@{/js/user/information.js}"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+
+<th:block layout:fragment="content">
+  <form action="/user/information" method="post" id="information-frm">
+    <div id="information-container">
+      <div>
+        <input type="text" placeholder="성명" name="nm" id="information-nm">
+      </div>
+      <div>
+        <input type="text" placeholder="닉네임" name="nickname" id="information-nickname">
+        <input type="button" class="btn btn-secondary btn-sm" value="중복확인" id="information-nickname-btn" >
+      </div>
+      <div>
+        <input type="text" id="sample6_postcode" placeholder="우편번호" name="address_post" >
+        <input type="button" class="btn btn-secondary btn-sm" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
+        <input type="text" id="sample6_address" size="40" placeholder="주소" name="address_primary"><br>
+        <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="address_secondary">
+        <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+      </div>
+      <div>
+        <button type="submit" class="btn btn-outline-success" id="information-upd">정보변경</button>
+      </div>
+    </div>
+  </form>
+</th:block>
+
+</html>

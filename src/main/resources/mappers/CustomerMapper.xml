@@ -12,7 +12,7 @@
         SELECT A.* , B.nickname, C.title AS productTitle, C.iboard FROM lagarto.lagarto_customer A
         INNER JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
         LEFT JOIN lagarto.auction C ON A.product_cd = C.iboard
-        WHERE A.board_cd = ${board_cd}
+        WHERE A.board_cd = ${board_cd} AND A.isdel = 0
         ORDER BY A.iboard DESC
     </select>
 
@@ -23,7 +23,10 @@
         WHERE A.iboard = ${iboard}
     </select>
 
-    <delete id="delCustomer">
-        DELETE FROM lagarto_customer WHERE iboard = ${iboard}
-    </delete>
+    <update id="delCustomer">
+        UPDATE lagarto.lagarto_customer
+        SET
+            isdel = #{isdel}
+        WHERE iboard = ${iboard}
+    </update>
 </mapper>

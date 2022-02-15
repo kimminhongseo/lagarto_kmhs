@@ -18,4 +18,5 @@ public class CustomerEntity {
     private String rdt;
     private String mdt;
     private int hits;
+    private int isdel;
 }

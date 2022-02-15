@@ -25,13 +25,13 @@ const regex = {
     }
 };
 
-$('#follow-btn').on('click', function() {
-    follow(true);
-});
-
-$('#unfollow-btn').on('click', function() {
-    follow(false);
-});
+// $('#follow-btn').on('click', function() {
+//     follow(true);
+// });
+//
+// $('#unfollow-btn').on('click', function() {
+//     follow(false);
+// });
 
 function follow(check) {
     if(check) {

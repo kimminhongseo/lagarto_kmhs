@@ -1,5 +1,6 @@
 package com.portfolio.lagarto.customer;
 
+import com.portfolio.lagarto.model.AuctionEntity;
 import com.portfolio.lagarto.model.CustomerDto;
 import com.portfolio.lagarto.model.CustomerEntity;
 import com.portfolio.lagarto.model.CustomerVo;
@@ -45,11 +46,9 @@ public class CustomerController {
     }
 
     @GetMapping("/del")
-    public String delCustomer(CustomerEntity entity) {
+    public String delProc(CustomerEntity entity){
         int result = service.delCustomer(entity);
-        if(result == 1) {
-            return "redirect:/customer/list/" + entity.getBoard_cd();
-        }
-        return "redirect:/customer/list/1";
+        return "redirect:/customer/list/" + entity.getBoard_cd();
+
     }
 }

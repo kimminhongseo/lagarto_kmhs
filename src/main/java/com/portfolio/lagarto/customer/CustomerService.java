@@ -30,4 +30,8 @@ public class CustomerService {
     public CustomerVo selCustomerDetail(CustomerDto dto) {
         return mapper.selCustomerDetail(dto);
     }
+
+    public int delCustomer(CustomerEntity entity) {
+        return mapper.delCustomer(entity);
+    }
 }

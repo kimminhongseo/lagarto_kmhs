@@ -161,7 +161,7 @@
             }
         });
     }
-    console.log(passwordUpwElem);
+    // console.log(passwordUpwElem);
 
     const emailModal = document.querySelector('#email-modal');
     const formEmail = emailModal.querySelector('#formEmail');

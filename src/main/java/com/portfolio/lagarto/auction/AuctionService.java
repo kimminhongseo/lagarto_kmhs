@@ -38,6 +38,19 @@ public class AuctionService {
 
     public AuctionVo selAuctionDetail (AuctionDto dto){return mapper.selAuctionDetail(dto);}
 
+    public int updAuction(AuctionEntity entity){
+        try{
+            entity.setIuser(utils.getLoginUserPk());
+            return mapper.updAuction(entity);
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0; // update안되면 0
+        }
+    }
+
+
+
+
     public List<AuctionCategoryEntity> auctionMenuList(){return  mapper.selAuctionCategoryList();}
 
 

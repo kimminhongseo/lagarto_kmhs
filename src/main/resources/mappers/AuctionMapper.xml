@@ -64,6 +64,24 @@
 
     <!--삭제부분 update로 삭제 수정 같이-->
 
+    <update id="updAuction">
+        UPDATE auction
+        SET
+        title=#{title},
+        ctnt=#{ctnt},
+        imbuy = #{imbuy},
+        buy = #{buy},
+        image1 = #{image1},
+        image2 = #{image2},
+        image3 = #{image3},
+        image4 = #{image4},
+        image5 = #{image5}
+        WHERE iboard = ${iboard}
+        and iuser = ${iuser}
+
+    </update>
+
+
 
     
     

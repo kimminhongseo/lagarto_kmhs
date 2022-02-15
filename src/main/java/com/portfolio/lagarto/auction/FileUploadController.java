@@ -54,7 +54,7 @@ public class FileUploadController {
             //오리지널 이름을 추가해라 "/" 로 구분 할거임
             fileNames.append(file.getOriginalFilename()+"/");
             try {
-                //todo:게시판 번호로 하지말고 파일이름 같으면 파일추가하지 말고  다르면 파일을 추가해라.
+
                 Files.write(fileNameAndPath,file.getBytes());
             }catch (IOException e){
                 e.printStackTrace();

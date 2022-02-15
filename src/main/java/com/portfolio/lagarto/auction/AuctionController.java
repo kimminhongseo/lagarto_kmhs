@@ -161,7 +161,74 @@ public class AuctionController {
         return "auction/mod";
     }
 
+    @PostMapping("/mod")
+    public String modProc(@ModelAttribute("auctionEntity") AuctionEntity entity,@RequestParam("files") MultipartFile[] files){
+        StringBuilder fileNames = new StringBuilder();
 
+       String moduploadDirectory = first_uploadDirectory + "/" + entity.getIboard();
+        //mod경로에 파일이나존재하면 삭제.
+        File f = new File(moduploadDirectory);
+//        if(f.isFile()){
+//            fileUtils.delFile(moduploadDirectory);
+//        }
+        if(f.isDirectory()){
+            fileUtils.delFolderFiles(moduploadDirectory,true);
+        }
+
+
+       for(MultipartFile file1: files){
+            Path modfileNameAndPath = Paths.get(moduploadDirectory,file1.getOriginalFilename());
+            //폴더 만들어준다
+            fileUtils.makeFolders(moduploadDirectory);
+            //파일 더한다.
+            fileNames.append(file1.getOriginalFilename()+"/");
+            try{
+                Files.write(modfileNameAndPath,file1.getBytes());
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+       }
+
+        //파일명 뽑아오기  "/" 기준으로 잘라오기
+        String image = fileNames.toString();
+        String images[] = image.split("/");
+        //null을 5개줌
+        List<String> imagesList = new ArrayList<String>();
+        imagesList.add(null);
+        imagesList.add(null);
+        imagesList.add(null);
+        imagesList.add(null);
+        imagesList.add(null);
+        try{
+            for(int i=0; i< files.length; i++) {
+                //값 찍기
+                //값을 세팅해줌
+                System.out.println("images[" + i + "] : " + images[i]);
+                imagesList.set(0,images[0]);
+                imagesList.set(1,images[1]);
+                imagesList.set(2,images[2]);
+                imagesList.set(3,images[3]);
+                imagesList.set(4,images[4]);
+            }
+        }catch (IndexOutOfBoundsException e){
+            //index관련 예외처리할때. 중요! 이거안쓰면 안먹혔음,,,ㅜㅜ
+            System.out.println(e);
+
+        }
+        finally {
+            //어차피 for문에서 files.length가 짧았다면 나머지 뒤는 null임
+            entity.setImage1(imagesList.get(0));
+            entity.setImage2(imagesList.get(1));
+            entity.setImage3(imagesList.get(2));
+            entity.setImage4(imagesList.get(3));
+            entity.setImage5(imagesList.get(4));
+            service.updAuction(entity); //update
+            System.out.println(service.updAuction(entity));
+            System.out.println("입력후 : "+imagesList);
+        }
+
+        return "redirect:/auction/detail?iboard=" + entity.getIboard();
+    }
 
 
 }

@@ -1,0 +1,34 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+
+<head>
+    <title>상세 정보</title>
+    <link rel="stylesheet" th:href="@{/static/css/auction/detail.css}">
+    <script defer th:src="@{/static/js/auction/detail.js}"></script>
+</head>
+<th:block layout:fragment="content">
+
+<!--todo: 가격올리기 기능-->
+<div>
+    ~~~~~여기는 디테일 부분 ~~~~~
+    <div class="detail_item" th:with="data=${Data}"}>
+    <div>카테고리 : <span th:text="${data.categorynm}"/></div>
+    <div>제목 :<span  th:text="${data.title}"/> </div>
+    <div>내용 : <span  th:text="${data.ctnt}"/></div>
+    <div>즉시 구매가: <span th:text="${data.imbuy}"/> 원</div>
+    <div>현재가 :<span th:text="${data.buy}"/> 원 <span><button class="upprice">// 가격올리는 기능 어찌할꼬 //</button></span></div>
+    <div id="img_item">
+        <img id="image1" th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" }  onerror="this.style.display='none'"/>
+        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image2}" } onerror="this.style.display='none'"/>
+        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image3}" } onerror="this.style.display='none'"/>
+        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image4}" } onerror="this.style.display='none'"/>
+        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image5}" } onerror="this.style.display='none'"/>
+    </div>
+
+    </div>
+</div>
+
+</th:block>
+</html>

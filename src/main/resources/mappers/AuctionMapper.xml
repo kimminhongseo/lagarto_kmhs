@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--메퍼 설정 하세요-->
-<mapper namespace="com.portfolio.lagarto.user.UserMapper">
+<mapper namespace="com.portfolio.lagarto.auction.AuctionMapper">
 
     <insert id="insAuction">
         insert into auction
-        (icategory, title, ctnt, iuser, buy, imbuy)
+        (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5)
         values
-        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy})
+        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5})
 
     </insert>
+
+
+    <!--총 게시판 번호가져오려고 적음.-->
+    <select id="insAuctionList" resultType="AuctionVo">
+        select A.iboard, A.title, A.iuser, A.hits, A.image1, A.image2, A.image3, A.image4, A.image5, A.ctnt , A.imbuy, A.buy,
+        B.nm as writernm
+        From auction A
+        Left join lagarto_user B
+        ON A.iuser = B.iuser
+        where A.isdel = 0
+        Order by A.iboard DESC
+        LIMIT 1
+
+    </select>
 
     <!--전체 sel 하는거 하나 만들어야할듯-->
 
     <select id="selAuctionList" resultType="AuctionVo">
-        select A.iboard, A.title, A.iuser, A.hits, A.images, A.ctnt , A.imbuy, A.buy,
+        select A.iboard,A.icategory, A.title, A.iuser, A.hits,A.image1, A.image2, A.image3, A.image4, A.image5, A.ctnt , A.imbuy, A.buy,
         B.nm as writernm
         From auction A
         Left join lagarto_user B
@@ -26,7 +40,7 @@
     </select>
 
     <select id="selAuctionListAll" resultType="AuctionVo">
-        select A.iboard, A.title, A.iuser, A.hits, A.images, A.ctnt , A.imbuy, A.buy,
+        select A.iboard, A.icategory, A.title, A.iuser, A.hits, A.image1, A.image2, A.image3, A.image4, A.image5, A.ctnt , A.imbuy, A.buy,
         B.nm as writernm
         from auction A
         left join lagarto_user B
@@ -37,11 +51,13 @@
 
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">
-        select A.iboard, A.title,A.icategory ,A.iuser, A.hits, A.images, A.ctnt , A.imbuy, A.buy,
-        B.nm as writernm, B.profile_img
+        select A.iboard, A.title,A.icategory ,A.iuser, A.hits, A.image1, A.image2, A.image3, A.image4, A.image5, A.ctnt , A.imbuy, A.buy,
+        B.nm as writernm, B.profile_img , C.nm as categorynm
         from auction A
-        left join lagarto_user B
-        on A.iuser = B.iuser
+            left join lagarto_user B
+            on A.iuser = B.iuser
+            left join auction_category C
+            on A.icategory = C.icategory
         where A.isdel = 0
         AND A.iboard = ${iboard}
 

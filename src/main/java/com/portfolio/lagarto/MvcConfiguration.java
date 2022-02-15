@@ -11,7 +11,4 @@ public class MvcConfiguration implements WebMvcConfigurer {
     //                .addResourceLocations("classpath:/static/","classpath:/uploadfile/","classpath:/views/");
     //    }
 
-
-
-
 }

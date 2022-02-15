@@ -11,11 +11,12 @@
 
 <th:block layout:fragment="content">
     <div class="wrap">
-        <h1>휴대전화 인증</h1>
+        <h1>회원가입</h1>
         <div id="certification">
             <form th:action="@{/user/apiCertification}" method="post" id="cert_form" th:object="${entity}">
                 <div class="form_container">
-                    <div class="input_name">휴대전화</div>
+                    <div id="googleLogin" class="hidden g-signin2" data-onsuccess="onSignIn"></div>
+                    <div class="input_name">휴대전화 인증</div>
                     <div class="num_wrap">
                         <label class="num_box">
                             <span hidden>휴대전화</span>
@@ -31,12 +32,14 @@
                         <label class="num_box">
                             <span hidden>휴대전화</span>
                             <input type="number" name="contact_second" maxlength="4"
-                                   th:field="*{contact_second}" th:with="CONTACT_SECOUND=${CONTACT_SECOUND}" th:data-regex="${CONTACT_SECOUND}" required>
+                                   th:field="*{contact_second}" th:with="CONTACT_SECOUND=${CONTACT_SECOND}"
+                                   th:data-regex="${CONTACT_SECOND}" required>
                         </label>
                         <label class="num_box">
                             <span hidden>휴대전화</span>
                             <input type="number" name="contact_third" maxlength="4"
-                                   th:field="*{contact_third}" th:with="CONTACT_THIRD=${CONTACT_THIRD}" th:data-regex="${CONTACT_THIRD}" required>
+                                   th:field="*{contact_third}" th:with="CONTACT_THIRD=${CONTACT_THIRD}"
+                                   th:data-regex="${CONTACT_THIRD}" required>
                         </label>
                     </div>
 

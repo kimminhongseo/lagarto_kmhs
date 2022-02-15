@@ -4,6 +4,12 @@
 
 
     if (joinForm) {
+        const cancelBtn = document.querySelector('#cancelBtn');
+
+        cancelBtn.addEventListener('click', () => {
+            window.history.back();
+        })
+
         const setUidChkMsg = (data) => {
             const emailWarning = joinForm.querySelector('[rel="email-warning"]');
             idChkState = data.result;
@@ -19,18 +25,26 @@
         }
 
         // email 중복 체크
-        joinForm['uid'].addEventListener('focusout', (e) => {
+        joinForm.uid.addEventListener('focusout', (e) => {
             e.preventDefault();
 
-            const uidRegex = joinForm['uid'].dataset.regex;
-            const uidVal = joinForm['uid'].value
+            const uidRegex = joinForm.uid.dataset.regex;
+            const uidVal = joinForm.uid.value;
             const emailWarning = joinForm.querySelector('[rel="email-warning"]');
             if (uidRegex !== undefined) {
                 let regex = new RegExp(uidRegex);
+
+                if (uidVal === '') {
+                    emailWarning.innerText = '';
+                    return false;
+                }
+
                 if (!regex.test(uidVal)) {
                     emailWarning.innerText = '이메일을 다시 확인해 주세요.';
                     return false;
                 }
+
+
             }
 
             const param = {
@@ -100,6 +114,11 @@
                 return false;
             }
 
+            if (!joinForm.disc_agree_c.checked) {
+                joinForm.disc_agree_c.value = 0;
+                console.log("check_c : " + joinForm.disc_agree_c.value);
+                joinForm.disc_agree_c.checked = true;
+            }
 
             // 전화번호 중복 체크
             const param = {

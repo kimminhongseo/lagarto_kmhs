@@ -26,8 +26,8 @@ public class FileUploadController {
     private MyFileUtils fileUtils;
 
     @GetMapping("/")
-    public String UploadPage(Model model, AuctionEntity auctionEntity){
-        return "uploadview";
+    public String UploadPage(){
+        return "main";
     }
 
     @GetMapping("/upload")
@@ -42,6 +42,7 @@ public class FileUploadController {
 
         StringBuilder fileNames = new StringBuilder();
         //게시판번호 + 1 이 이번에 insert 되는것. uploadfile + iboard값 이라고 경로지정
+        // todo:ifnull(max(iboard),1) 사용하면 가능하려나???
         final String uploadDirectory = first_uploadDirectory + "/" + (service.insAuctionList(auctionEntity).getIboard()+1);
 
 
@@ -53,7 +54,7 @@ public class FileUploadController {
             //오리지널 이름을 추가해라 "/" 로 구분 할거임
             fileNames.append(file.getOriginalFilename()+"/");
             try {
-                //todo:게시판 번호로 하지말고 파일이름 같으면 파일추가하지 말고  다르면 파일을 추가해라.
+
                 Files.write(fileNameAndPath,file.getBytes());
             }catch (IOException e){
                 e.printStackTrace();

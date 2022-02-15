@@ -12,9 +12,16 @@
 <th:block layout:fragment="content" >
     <div id="data" th:with="icate=${param.icategory}" th:data-icategory="${icate}">
     <div>
+        <div th:if="${session.loginUser != null}">
         <div th:if="${icategory ge 1}"><a th:href="@{/auction/write(icategory=${icategory})}">글쓰기</a></div>
+        <div><a href="/user/logout">로그아웃</a></div>
+        </div>         <!--th:unless를 사용하려고 했지만 어차피 로그인 페이지로만 이동하는거라 안씀-->
+        <div th:if="${session.loginUser == null}">
+            <div>로그인하시면 글작성이 가능합니다. &emsp;<input type="button" value="로그인 하러가기" th:onclick="|location.href='@{/user/login}'|"></div>
+        </div>
+
     </div>
-    </div>
+
 
 <!--a태그로 이동하는 이벤트 했음. -->
     <div class="auction_container">

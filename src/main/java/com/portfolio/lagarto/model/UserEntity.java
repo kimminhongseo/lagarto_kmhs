@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
+@Data
 @ToString
 public class UserEntity {
     private int iuser;
@@ -34,4 +33,5 @@ public class UserEntity {
     private boolean auth;
 
     private JoinResult result;
+
 }

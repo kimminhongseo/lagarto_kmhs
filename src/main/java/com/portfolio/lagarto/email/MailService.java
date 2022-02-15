@@ -46,4 +46,9 @@ public class MailService {
         entity.setIuser(utils.getLoginUserPk());
         return mapper.authTrue(entity);
     }
+
+    public UserEntity selUser(UserEntity entity){
+        entity.setIuser(utils.getLoginUserPk());
+        return mapper.selUser(entity);
+    }
 }

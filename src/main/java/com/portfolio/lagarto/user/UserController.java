@@ -152,11 +152,8 @@ public class UserController {
     }
 
     @GetMapping("/mypage")
-    public String mypage(Model model, UserEntity entity) {
+    public String mypage(HttpSession hs, UserEntity entity) {
         if (0 != utils.getLoginUserPk()){
-            System.out.println(entity.isAuth());
-            UserEntity db = service.authKey(entity);
-            model.addAttribute("authKey", db.isAuth());
             return "/user/mypage";
         }
         return "redirect:/user/login";
@@ -184,5 +181,28 @@ public class UserController {
         session.invalidate();
         return "redirect:/main";
     }
-}
 
+    @GetMapping("/information")
+    public void information(HttpSession hs){
+
+    }
+
+    @GetMapping("/nicknameCheck")
+    @ResponseBody
+    public int nicknameCheck(@RequestParam String nickname){
+        int result = service.nicknameCheck(nickname);
+        return result;
+    }
+
+    @PostMapping("/information")
+    public String information(@RequestParam String nickname,@RequestParam String nm,@RequestParam String address_post,@RequestParam String address_primary,@RequestParam String address_secondary,HttpSession hs){
+        UserEntity hsentity = (UserEntity) hs.getAttribute(Const.LOGIN_USER);
+        hsentity.setNickname(nickname);
+        hsentity.setNm(nm);
+        hsentity.setAddress_post(address_post);
+        hsentity.setAddress_primary(address_primary);
+        hsentity.setAddress_secondary(address_secondary);
+        service.informationUpd(hsentity);
+        return "/user/mypage";
+    }
+}

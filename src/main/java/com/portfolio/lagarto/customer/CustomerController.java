@@ -35,8 +35,21 @@ public class CustomerController {
     }
 
     @GetMapping("/detail")
-    public String detail(CustomerDto dto, Model model) {
+    public void detail(Model model, CustomerDto dto) {
         model.addAttribute("data", service.selCustomerDetail(dto));
-        return "customer/detail";
+    }
+
+    @GetMapping("/detail_item")
+    public void selCustomerDetail(Model model, CustomerDto dto) {
+        model.addAttribute("data", service.selCustomerDetail(dto));
+    }
+
+    @GetMapping("/del")
+    public String delCustomer(CustomerEntity entity) {
+        int result = service.delCustomer(entity);
+        if(result == 1) {
+            return "redirect:/customer/list/" + entity.getBoard_cd();
+        }
+        return "redirect:/customer/list/1";
     }
 }

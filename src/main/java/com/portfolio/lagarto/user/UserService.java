@@ -120,7 +120,7 @@ public class UserService {
         try {
             dbUser = mapper.loginSel(entity);
         } catch (Exception e) {
-        e.printStackTrace();
+            e.printStackTrace();
             return 0; //알 수 없는 에러
         }
         if(dbUser != null) {
@@ -162,5 +162,14 @@ public class UserService {
         return mapper.authKey(entity);
     }
 
+    public int nicknameCheck(String nickname){
+        int result = mapper.nicknameCheck(nickname);
+        return result;
+    }
+
+    public void informationUpd(UserEntity entity){
+        entity.setIuser(utils.getLoginUserPk());
+        mapper.informationUpd(entity);
+    }
 
 }

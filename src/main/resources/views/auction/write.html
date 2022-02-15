@@ -13,10 +13,12 @@
 
 <th:block layout:fragment="content">
 
+
+
     <div class="container">
         <h1>경매 글쓰기</h1>
         <div>
-            <!--todo:이미지업로드-->
+
             <form  method="post" th:action="@{/auction/write}" th:object="${auctionEntity}" enctype="multipart/form-data" >
 
                 <input type="hidden" th:with="icate=${param.icategory}" th:data-icategory="${icate}" th:field="*{icategory}" th:value="${icategory}">
@@ -31,9 +33,7 @@
                     <label for="imbuy">즉시구매가: <input  id="imbuy" required type="number" placeholder="즉시구매가" th:field="*{imbuy}"></label>
                     <label for="buy">경매가 :<input  id="buy" required type="number" placeholder="경매가" th:field="*{buy}"></label>
                 </div>
-
                 <input type="file" name="files" multiple>
-
                 <input type="submit" value="등록하기">
 
             </form>

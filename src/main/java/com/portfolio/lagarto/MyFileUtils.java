@@ -17,7 +17,7 @@ public class MyFileUtils {
         }
     }
 
-    //폴더 삭제 >>안씀
+    //폴더 삭제
     public void delFolderFiles(String path,boolean isDelFolder){
         //isDirectory 객체가 폴더다? >> true   아니다?>>  false
         //isFile 객체가 파일이다? true   아니다?>>  false
@@ -36,7 +36,7 @@ public class MyFileUtils {
         if(isDelFolder){file.delete();}
     }
 
-    //파일 존재하면 삭제 >> 안씀
+    //파일 존재하면 삭제
     public void delFile(String path){
         File f = new File(path);
         if(f.exists()){

@@ -16,6 +16,9 @@ public interface AuctionMapper {
     AuctionVo selAuctionDetail(AuctionDto dto); //writernm때문에
     List<AuctionVo> selAuctionList(AuctionDto dto);
     List<AuctionVo> selAuctionListAll(AuctionDto dto);
-
     List<AuctionCategoryEntity> selAuctionCategoryList();
+
+    int updAuction(AuctionEntity entity);
+    int delAuction(AuctionEntity entity);
+
 }

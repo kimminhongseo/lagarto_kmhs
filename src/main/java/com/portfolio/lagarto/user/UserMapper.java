@@ -18,4 +18,6 @@ public interface UserMapper {
     UserEntity passwordSel(UserDto dto);
     int passwordUpd(UserDto dto);
     UserEntity authKey(UserEntity entity);
+    int nicknameCheck(String nickname);
+    void informationUpd(UserEntity entity);
 }

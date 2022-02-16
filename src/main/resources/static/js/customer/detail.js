@@ -14,7 +14,6 @@
     const delBtnElem = document.querySelector('#delBtn');
     if(delBtnElem) {
         delBtnElem.addEventListener('click', e  => {
-            console.log(iboard);
             if(confirm(msg.fnIsDel(`${iboard}번 글`)) == true) {
                 location.href=`/customer/del?iboard=${iboard}`;
             } else {
@@ -23,6 +22,15 @@
             }
         });
     }
+
+    //글 수정 버튼
+    const modBtnElem = document.querySelector('#modBtn');
+    if(modBtnElem) {
+        modBtnElem.addEventListener('click', ()=> {
+            location.href=`/customer/mod?iboard=${iboard}`;
+        });
+    }
+
 
     //글 디테일 데이터 가져오기
     const getData = () => {
@@ -122,7 +130,7 @@
         }
     }
 
-    if(sessionStorage.getItem('iuser') != null) {
+    if(favIconElem) {
         isFav();
         favIconElem.addEventListener('click', () => {
             if(favIconElem.classList.contains('fa-regular')) { //no 좋아요

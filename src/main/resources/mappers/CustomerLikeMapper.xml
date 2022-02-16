@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.portfolio.lagarto.customer.like.CustomerLikeMapper">
+    <insert id="insCustomerLike">
+        INSERT INTO lagarto.customer_like (iboard, iuser)
+        VALUES (${iboard}, ${iuser})
+    </insert>
 
+    <select id="selCustomerLike" resultType="CustomerLikeEntity">
+        SELECT iboard, iuser, rdt
+        FROM lagarto.customer_like
+        WHERE iboard = ${iboard}
+          AND iuser = ${iuser}
+    </select>
+
+    <delete id="delCustomerLike">
+        DELETE FROM lagarto.customer_like
+        WHERE iboard = ${iboard}
+          AND iuser = ${iuser}
+    </delete>
 </mapper>

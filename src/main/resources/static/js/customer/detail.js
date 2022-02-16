@@ -91,4 +91,65 @@
             }, param);
         });
     }
+    //좋아요 ------------------------------------------------------------ [start] --
+    const favIconElem = document.querySelector('#fav_icon');
+
+    const isFav = () => {
+        myFetch.get(`/customer/like/${iboard}`, (data) => {
+            console.log(data.result);
+            switch(data.result) {
+                case 0:
+                    disableFav();
+                    break;
+                case 1:
+                    enableFav();
+                    break;
+            }
+        });
+    }
+
+    const disableFav = () => {
+        if(favIconElem) {
+            favIconElem.classList.remove('fa-solid');
+            favIconElem.classList.add('fa-regular');
+        }
+    }
+
+    const enableFav = () => {
+        if(favIconElem) {
+            favIconElem.classList.remove('fa-regular');
+            favIconElem.classList.add('fa-solid');
+        }
+    }
+
+    if(sessionStorage.getItem('iuser') != null) {
+        isFav();
+        favIconElem.addEventListener('click', () => {
+            if(favIconElem.classList.contains('fa-regular')) { //no 좋아요
+                const param = { iboard };
+                myFetch.post(`/customer/like`, data => {
+                    switch (data.result) {
+                        case 0:
+                            alert('좋아요 처리에 실패하였습니다.');
+                            break;
+                        case 1:
+                            enableFav();
+                            break;
+                    }
+                }, param);
+            } else { //yes 좋아요
+                myFetch.delete(`/customer/like/${iboard}`, data => {
+                    switch (data.result) {
+                        case 0:
+                            alert('좋아요 처리에 실패하였습니다.');
+                            break;
+                        case 1:
+                            disableFav();
+                            break;
+                    }
+                });
+            }
+        });
+    }
+    //좋아요 ------------------------------------------------------------ [end] --
 })();

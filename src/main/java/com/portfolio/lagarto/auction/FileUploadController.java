@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 public class FileUploadController {
-    public static String first_uploadDirectory = System.getProperty("user.dir") +"\\src\\main\\resources\\static\\uploadfile";
+    public static String first_uploadDirectory = System.getProperty("user.dir") +"\\src\\main\\resources\\static\\uploadfile\\";
 
     @Autowired
     private AuctionService service;
@@ -35,7 +35,6 @@ public class FileUploadController {
         service.insAuctionList(auctionEntity);
         System.out.println(service.insAuctionList(auctionEntity));
     }
-
 
     @PostMapping("/upload")
     public String uploadProc(@ModelAttribute("auctionEntity") AuctionEntity auctionEntity,  @RequestParam("files") MultipartFile[] files){
@@ -60,7 +59,6 @@ public class FileUploadController {
                 e.printStackTrace();
             }
         }
-
 
         //만약 images[?] 값이 없으면 ""
         //for문으로 images 이름들그대로 DB에 저장했음.

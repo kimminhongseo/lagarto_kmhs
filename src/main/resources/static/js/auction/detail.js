@@ -48,18 +48,21 @@ if(delBtnElem){
 
 
 
+
+// const currentPriceElem = document.querySelector('.current_price');
+// if(currentPriceElem){
+//     currentPriceElem.addEventListener('click',() =>{
+//         uppricePopup();
+//
+//     });
+// }
+
 function uppricePopup(){
-    window.open("/auction/upprice","_blank","width:400, height=400, left=100, top=100");
+    var value = parseInt(document.getElementById('buy').value,10);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('buy').value=value;
 }
-    //url에 ?${iboard}
-const currentPriceElem = document.querySelector('.current_price');
-if(currentPriceElem){
-    currentPriceElem.addEventListener('click',() =>{
-        uppricePopup();
-
-    });
-}
-
 
 
 

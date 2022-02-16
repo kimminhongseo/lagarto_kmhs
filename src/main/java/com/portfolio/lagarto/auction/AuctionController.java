@@ -30,11 +30,18 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+
+
+
+
+
+
+
 @Controller
 @RequestMapping("/auction")
 public class AuctionController {
     //저장할 경로 (게시판번호,파일명 제외한 상위 폴더
-    public static String first_uploadDirectory = System.getProperty("user.dir") +"\\src\\main\\resources\\static\\uploadfile";
+    public static String first_uploadDirectory = System.getProperty("user.dir") +"/src/main/resources/static/uploadfile/";
 
 
     @Autowired
@@ -127,6 +134,17 @@ public class AuctionController {
         //업로드한 상태 보여주는 창 >> 여기서 리스트로 가거나 자기가 쓴글로 가도록 만들자
         return "redirect:/auction/uploadstatusview"; //경매등록 눌렀을때 가는곳
 
+    }
+
+    @GetMapping("/uploadstatusview")
+    public String status(AuctionEntity auctionEntity,Model model){
+
+
+        model.addAttribute("inslist",service.insAuctionList(auctionEntity));
+        System.out.println(service.insAuctionList(auctionEntity));
+
+
+        return "/auction/uploadstatusview";
     }
 
 

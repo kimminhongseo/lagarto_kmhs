@@ -31,7 +31,8 @@ public class CustomerService {
         return mapper.selCustomerDetail(dto);
     }
 
-    public int delCustomer(CustomerEntity entity) {
+    public int delCustomer(CustomerEntity entity){
+        entity.setIsdel(1);
         return mapper.delCustomer(entity);
     }
 }

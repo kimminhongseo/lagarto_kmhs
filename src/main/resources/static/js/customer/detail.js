@@ -13,11 +13,13 @@
     //글 삭제 버튼
     const delBtnElem = document.querySelector('#delBtn');
     if(delBtnElem) {
-        delBtnElem.addEventListener('click', ()=> {
+        delBtnElem.addEventListener('click', e  => {
             console.log(iboard);
-
-            if(confirm(msg.fnIsDel(`${iboard}번 글`))) {
+            if(confirm(msg.fnIsDel(`${iboard}번 글`)) == true) {
                 location.href=`/customer/del?iboard=${iboard}`;
+            } else {
+                e.preventDefault();
+                return;
             }
         });
     }
@@ -83,8 +85,6 @@
                         break;
                     case 1:
                         commentCtntInputElem.value = null;
-                        delCmtList();
-                        getCommentList();
                         location.href=`/customer/detail?iboard=${iboard}`
                         break;
                 }

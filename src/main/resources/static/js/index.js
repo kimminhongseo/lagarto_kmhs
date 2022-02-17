@@ -4,7 +4,7 @@ const msg = {
         return `${target}을(를) ` + this.isDel;
     }
 };
-
+// ---------------------------------------------------------------------------------------------
 //정규식 테스트 사이트
 //https://www.regextester.com/
 
@@ -24,9 +24,49 @@ const regex = {
         return (target && val) ? !this[target].test(val) : true;
     }
 };
+// ---------------------------------------------------------------------------------------------
 
 const dataIuserElem = document.querySelector('#dataIuser');
 const isfollowElem = document.querySelector('#isfollow');
+
+// ---------------------------------------------------------------------------------------------
+
+const myFetch = {
+    send: function(fetchObj, cb) {
+        return fetchObj
+            .then(res => res.json())
+            .then(cb)
+            .catch(e => { console.log(e) });
+    },
+    get: function(url, cb, param) {
+        if(param) {
+            const queryString = '?' + Object.keys(param).map(key => `${key}=${param[key]}`).join('&');
+            url += queryString;
+        }
+        return this.send(fetch(url), cb);
+    },
+    post: function(url, cb, param) {
+        return this.send(fetch(url, {
+            'method': 'post',
+            'headers': { 'Content-Type': 'application/json' },
+            'body': JSON.stringify(param)
+        }), cb);
+    },
+    put: function(url, cb, param) {
+        return this.send(fetch(url, {
+            'method': 'put',
+            'headers': { 'Content-Type': 'application/json' },
+            'body': JSON.stringify(param)
+        }), cb)
+    },
+    delete: function(url, cb) {
+        return this.send(fetch(url, {
+            'method': 'delete',
+            'headers': { 'Content-Type': 'application/json' },
+        }), cb);
+    }
+}
+// ---------------------------------------------------------------------------------------------
 
 
 let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res => {
@@ -84,41 +124,4 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
     }
 })
 isfollow();
-
-
-
-const myFetch = {
-    send: function(fetchObj, cb) {
-        return fetchObj
-            .then(res => res.json())
-            .then(cb)
-            .catch(e => { console.log(e) });
-    },
-    get: function(url, cb, param) {
-        if(param) {
-            const queryString = '?' + Object.keys(param).map(key => `${key}=${param[key]}`).join('&');
-            url += queryString;
-        }
-        return this.send(fetch(url), cb);
-    },
-    post: function(url, cb, param) {
-        return this.send(fetch(url, {
-            'method': 'post',
-            'headers': { 'Content-Type': 'application/json' },
-            'body': JSON.stringify(param)
-        }), cb);
-    },
-    put: function(url, cb, param) {
-        return this.send(fetch(url, {
-            'method': 'put',
-            'headers': { 'Content-Type': 'application/json' },
-            'body': JSON.stringify(param)
-        }), cb)
-    },
-    delete: function(url, cb) {
-        return this.send(fetch(url, {
-            'method': 'delete',
-            'headers': { 'Content-Type': 'application/json' },
-        }), cb);
-    }
-}
+// ---------------------------------------------------------------------------------------------

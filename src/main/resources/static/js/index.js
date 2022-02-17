@@ -1,12 +1,10 @@
-
-
 const msg = {
     isDel: '삭제하시겠습니까?',
     fnIsDel : function(target) {
         return `${target}을(를) ` + this.isDel;
     }
 };
-
+// ---------------------------------------------------------------------------------------------
 //정규식 테스트 사이트
 //https://www.regextester.com/
 
@@ -26,6 +24,12 @@ const regex = {
         return (target && val) ? !this[target].test(val) : true;
     }
 };
+// ---------------------------------------------------------------------------------------------
+
+const dataIuserElem = document.querySelector('#dataIuser');
+const isfollowElem = document.querySelector('#isfollow');
+
+// ---------------------------------------------------------------------------------------------
 
 const myFetch = {
     send: function(fetchObj, cb) {
@@ -62,9 +66,7 @@ const myFetch = {
         }), cb);
     }
 }
-
-const dataIuserElem = document.querySelector('#dataIuser');
-const isfollowElem = document.querySelector('#isfollow');
+// ---------------------------------------------------------------------------------------------
 
 
 let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res => {
@@ -122,3 +124,4 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
     }
 })
 isfollow();
+// ---------------------------------------------------------------------------------------------

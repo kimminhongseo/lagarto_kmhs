@@ -1,9 +1,6 @@
 package com.portfolio.lagarto.auction;
 
-import com.portfolio.lagarto.model.AuctionCategoryEntity;
-import com.portfolio.lagarto.model.AuctionDto;
-import com.portfolio.lagarto.model.AuctionEntity;
-import com.portfolio.lagarto.model.AuctionVo;
+import com.portfolio.lagarto.model.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,5 +17,8 @@ public interface AuctionMapper {
 
     int updAuction(AuctionEntity entity);
     int delAuction(AuctionEntity entity);
+
+    AuctionBidVo insBid(AuctionBidEntity entity);
+    AuctionBidVo BidList(AuctionBidEntity entity);
 
 }

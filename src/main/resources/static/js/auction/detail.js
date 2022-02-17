@@ -48,17 +48,39 @@ if(delBtnElem){
 
 
 
-function uppricePopup(){
-    window.open("/auction/upprice","_blank","width:400, height=400, left=100, top=100");
-}
-    //url에 ?${iboard}
-const currentPriceElem = document.querySelector('.current_price');
-if(currentPriceElem){
-    currentPriceElem.addEventListener('click',() =>{
-        uppricePopup();
 
-    });
+// const currentPriceElem = document.querySelector('.current_price');
+// if(currentPriceElem){
+//     currentPriceElem.addEventListener('click',() =>{
+//         uppricePopup();
+//
+//     });
+// }
+
+
+const checkbuyElem = document.querySelector('#checkbuy').innerHTML;
+let checkbuy = parseInt(checkbuyElem);
+
+const checkwriternmElem =  document.querySelector('#checkwriternm').innerHTML;
+
+function check(){
+    manwonup(); //10000원씩 추가
+
 }
+function manwonup(){
+    let manwon = checkbuy + 10000;
+    checkbuy = manwon;
+    console.log(checkbuy);
+}
+
+const bidmodal = document.querySelector('#bid-modal');
+const formImbuy = document.querySelector('#formimbuy');
+const formBuy = document.querySelector('#formbuy');
+const formBid = document.querySelector('#formbid');
+const formBidBtn = document.querySelector('#formbidbtn');
+const formImbuyBtn = document.querySelector('#formimbuybtn');
+
+
 
 
 

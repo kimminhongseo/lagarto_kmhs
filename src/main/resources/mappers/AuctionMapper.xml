@@ -90,6 +90,26 @@
 
 
 
+    <!--입찰가 삽입-->
+    <insert id="insBid">
+        insert into lagarto.auction_bidtest
+        (iboard, iuser, buy)
+        values
+        (#{iboard}, #{iuser}, #{buy})
+    </insert>
+
+    <!--입찰가 가장 높은 1명.-->
+    <select id="BidList" resultType="AuctionBidVo">
+        SELECT *,B.nm AS writernm
+        FROM  lagarto.auction_bidtest A
+        Left join lagarto.lagarto_user B
+        ON A.iuser = B.iuser
+        where A.iboard = #{iboard}
+        order by buy DESC
+        LIMIT 1;
+
+    </select>
+
 
     
     

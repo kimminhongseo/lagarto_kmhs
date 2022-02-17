@@ -4,6 +4,11 @@ import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.MyFileUtils;
 import com.portfolio.lagarto.follow.FollowService;
 import com.portfolio.lagarto.model.*;
+import com.portfolio.lagarto.Utils;
+import com.portfolio.lagarto.model.AuctionBidEntity;
+import com.portfolio.lagarto.model.AuctionBidVo;
+import com.portfolio.lagarto.model.AuctionDto;
+import com.portfolio.lagarto.model.AuctionEntity;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +36,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+
+
 @Controller
 @RequestMapping("/auction")
 public class AuctionController {
@@ -46,6 +53,9 @@ public class AuctionController {
 
     @Autowired
     private FollowService fservice;
+
+    @Autowired
+    private Utils utils;
 
     //다중 파일 업로드를 위한 bean
     @Bean
@@ -133,9 +143,21 @@ public class AuctionController {
 
     }
 
+    @GetMapping("/uploadstatusview")
+    public String status(AuctionEntity auctionEntity,Model model){
+
+
+        model.addAttribute("inslist",service.insAuctionList(auctionEntity));
+        System.out.println(service.insAuctionList(auctionEntity));
+
+
+        return "/auction/uploadstatusview";
+    }
+
 
     @GetMapping("/list")
     public String list(AuctionDto dto, Model model) {
+
         model.addAttribute("List", service.selAuctionListAll(dto));
         System.out.println(service.selAuctionListAll(dto));
         return "auction/list";
@@ -151,11 +173,24 @@ public class AuctionController {
 
     }
 
+
+
     @GetMapping("/detail")
-    public String detail(AuctionDto dto, Model model, HttpSession hs) {
+    public String detail(AuctionBidEntity entity ,AuctionDto dto, Model model) {
         model.addAttribute("Data", service.selAuctionDetail(dto));
+        //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
+        entity.setIboard(dto.getIboard());
+        model.addAttribute("BidList",service.bidList(entity));
         return "auction/detail";
     }
+
+    @PostMapping("/detail")
+    public String detailproc(@ModelAttribute("auctionBidEntity") AuctionBidEntity entity,AuctionDto dto){
+        entity.setIboard(dto.getIboard());
+
+        return "auction/detail?iboard="+entity.getIboard();
+    }
+
 
     @GetMapping("/mod")
     public String mod(AuctionDto dto,Model model){

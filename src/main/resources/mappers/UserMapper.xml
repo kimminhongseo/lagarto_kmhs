@@ -30,7 +30,7 @@
     <select id="selUser" resultType="UserEntity">
         SELECT *
         FROM `lagarto`.`lagarto_user`
-        WHERE `uid` = #{uid}
+        WHERE `iuser` = #{iuser}
     </select>
 
     <insert id="facebookPk">

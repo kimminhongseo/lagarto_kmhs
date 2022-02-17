@@ -19,6 +19,7 @@
         From lagarto.auction A
         Left join lagarto.lagarto_user B
         ON A.iuser = B.iuser
+        where A.isdel = 0
         Order by A.iboard DESC
         LIMIT 1
 
@@ -27,7 +28,6 @@
     <!--전체 sel 하는거 하나 만들어야할듯-->
 
     <select id="selAuctionList" resultType="AuctionVo">
-
         select *,
         B.nm  as writernm
         From lagarto.auction A
@@ -51,7 +51,6 @@
 
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">
-
         select *,
         B.nm as writernm , B.profile_img , C.nm as categorynm
         from lagarto.auction A
@@ -81,6 +80,7 @@
         and iuser = ${iuser}
     </update>
 
+
     <update id="delAuction">
         UPDATE lagarto.auction
         set
@@ -90,6 +90,29 @@
 
 
 
+    <!--입찰가 삽입-->
+    <insert id="insBid">
+        insert into lagarto.auction_bidtest
+        (iboard, iuser, buy)
+        values
+        (#{iboard}, #{iuser}, #{buy})
+    </insert>
+
+    <!--입찰가 가장 높은 1명.-->
+    <select id="BidList" resultType="AuctionBidVo">
+        SELECT *,B.nm AS writernm
+        FROM  lagarto.auction_bidtest A
+        Left join lagarto.lagarto_user B
+        ON A.iuser = B.iuser
+        where A.iboard = #{iboard}
+        order by buy DESC
+        LIMIT 1;
+
+    </select>
+
+
+    
+    
     
     
 </mapper>

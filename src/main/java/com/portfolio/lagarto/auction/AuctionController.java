@@ -2,6 +2,11 @@ package com.portfolio.lagarto.auction;
 
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.MyFileUtils;
+import com.portfolio.lagarto.follow.FollowService;
+import com.portfolio.lagarto.model.*;
+import com.portfolio.lagarto.Utils;
+import com.portfolio.lagarto.model.AuctionBidEntity;
+import com.portfolio.lagarto.model.AuctionBidVo;
 import com.portfolio.lagarto.model.AuctionDto;
 import com.portfolio.lagarto.model.AuctionEntity;
 import org.apache.commons.io.FileUtils;
@@ -18,6 +23,7 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+
+
 
 @Controller
 @RequestMapping("/auction")
@@ -42,6 +50,12 @@ public class AuctionController {
 
     @Autowired
     private MyFileUtils fileUtils;
+
+    @Autowired
+    private FollowService fservice;
+
+    @Autowired
+    private Utils utils;
 
     //다중 파일 업로드를 위한 bean
     @Bean
@@ -129,6 +143,17 @@ public class AuctionController {
 
     }
 
+    @GetMapping("/uploadstatusview")
+    public String status(AuctionEntity auctionEntity,Model model){
+
+
+        model.addAttribute("inslist",service.insAuctionList(auctionEntity));
+        System.out.println(service.insAuctionList(auctionEntity));
+
+
+        return "/auction/uploadstatusview";
+    }
+
 
     @GetMapping("/list")
     public String list(AuctionDto dto, Model model) {
@@ -148,11 +173,24 @@ public class AuctionController {
 
     }
 
+
+
     @GetMapping("/detail")
-    public String detail(AuctionDto dto, Model model) {
+    public String detail(AuctionBidEntity entity ,AuctionDto dto, Model model) {
         model.addAttribute("Data", service.selAuctionDetail(dto));
+        //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
+        entity.setIboard(dto.getIboard());
+        model.addAttribute("BidList",service.bidList(entity));
         return "auction/detail";
     }
+
+    @PostMapping("/detail")
+    public String detailproc(@ModelAttribute("auctionBidEntity") AuctionBidEntity entity,AuctionDto dto){
+        entity.setIboard(dto.getIboard());
+
+        return "auction/detail?iboard="+entity.getIboard();
+    }
+
 
     @GetMapping("/mod")
     public String mod(AuctionDto dto,Model model){

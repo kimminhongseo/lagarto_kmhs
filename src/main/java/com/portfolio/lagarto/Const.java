@@ -12,6 +12,8 @@ public class Const {
     public static final String CONTACT_FIRST = "^(010|011|016|017|018|019)$";
     public static final String CONTACT_SECOND = "^([0-9]{4})$";
     public static final String CONTACT_THIRD = "^([0-9]{4})$";
+    public static final String Follower = "follower";
+    public static final String Following = "following";
 
     public static boolean checkUid(String email) {
         return email.matches(UID);

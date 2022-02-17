@@ -5,16 +5,14 @@ import com.portfolio.lagarto.model.FollowEntity;
 import com.portfolio.lagarto.model.UserEntity;
 import com.portfolio.lagarto.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping
 public class FollowController {
 
@@ -26,37 +24,56 @@ public class FollowController {
     @GetMapping("/profile")
     public void profile(){};
 
-    @PostMapping("/follow/{uid}")
-    public String follow(@PathVariable String uid, HttpSession hs, Model model){
+    @PostMapping("/follow/{iuser}")
+    public int follow(@PathVariable int iuser, HttpSession hs, Model model){
         UserEntity entity = new UserEntity();
-        entity.setUid(uid);
+        entity.setIuser(iuser);
         Object object = hs.getAttribute(Const.LOGIN_USER);
-        UserEntity iuserMe = (UserEntity)object;
-        UserEntity iuserYou = uservice.selUser(entity);
-
+        UserEntity iuserMe = uservice.selUser(entity);
+        UserEntity iuserYou = (UserEntity)object;
+        if (object == null){
+            return 0;
+        }
         FollowEntity followEntity = new FollowEntity();
         followEntity.setIuserMe(iuserMe.getIuser());
         followEntity.setIuserYou(iuserYou.getIuser());
 
+        if (followEntity.getIuserYou() == followEntity.getIuserMe()){
+            return 2;
+        }
         fservice.follow(followEntity);
-        return "FollowOk";
+        return 1;
     }
 
-    @GetMapping("/unfollow/{uid}")
-    public String unfollow(@PathVariable String uid, HttpSession hs, Model model){
+    @DeleteMapping("/unfollow/{iuser}")
+    public void unfollow(@PathVariable int iuser, HttpSession hs, Model model){
         UserEntity entity = new UserEntity();
-        entity.setUid(uid);
+        entity.setIuser(iuser);
         Object object = hs.getAttribute(Const.LOGIN_USER);
-        UserEntity iuserMe = (UserEntity)object;
-        UserEntity iuserYou = uservice.selUser(entity);
+        UserEntity iuserMe = uservice.selUser(entity);
+        UserEntity iuserYou = (UserEntity)object;
 
         FollowEntity followEntity = new FollowEntity();
         followEntity.setIuserMe(iuserMe.getIuser());
         followEntity.setIuserYou(iuserYou.getIuser());
 
         fservice.unfollow(followEntity);
-        return "unFollowOK";
     }
 
+    @GetMapping("/isfollow/{iuser}")
+    public int isFollow(@PathVariable int iuser, HttpSession hs){
+        UserEntity entity = new UserEntity();
+        entity.setIuser(iuser);
+        Object object = hs.getAttribute(Const.LOGIN_USER);
+        UserEntity iuserMe = uservice.selUser(entity);
+        UserEntity iuserYou = (UserEntity)object;
 
+        FollowEntity followEntity = new FollowEntity();
+        followEntity.setIuserMe(iuserMe.getIuser());
+        followEntity.setIuserYou(iuserYou.getIuser());
+        if (followEntity.getIuserMe() == followEntity.getIuserYou()){
+            return 2;
+        }
+        return fservice.isFollow(followEntity);
+    }
 }

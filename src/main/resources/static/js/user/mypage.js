@@ -137,11 +137,11 @@
 
             if (confirm('비밀번호를 변경 하시겠습니까?')) {
                 fetch('/user/passwordCurrent', {
-                    method : 'post',
+                    method: 'post',
                     headers: {'Content-type': 'application/json'},
-                    body   : JSON.stringify({
-                        'iuser' : dataElem.dataset.iuser,
-                        'upw'   : passwordUpwElem.value,
+                    body: JSON.stringify({
+                        'iuser': dataElem.dataset.iuser,
+                        'upw': passwordUpwElem.value,
                         'newUpw': passwordNewUpwElem.value
                     })
                 }).then(res => {
@@ -180,9 +180,9 @@
                 let sec = "";
                 flag2 = true;
                 alert('인증번호를 발송 했습니다.')
-                let x = setInterval(function() {
-                    min = parseInt(SetTime/60);
-                    sec = SetTime%60;
+                let x = setInterval(function () {
+                    min = parseInt(SetTime / 60);
+                    sec = SetTime % 60;
                     document.getElementById("timer").innerHTML = min + "분" + sec + "초";
                     SetTime--;
                     // formEmailsend.disabled = 'true';
@@ -200,7 +200,7 @@
                     }).then(data => { // data = 메일로 발송된 인증키
                     console.log(data);
                     authKey = data;
-                    switch (data){
+                    switch (data) {
                         case 'null':
                             alert('알 수 없는 오류가 발생했습니다')
                             break;
@@ -211,11 +211,11 @@
 
         formEmailSubmit.addEventListener('click', (e) => {
             console.log(flag2)
-            if (!flag2){
+            if (!flag2) {
                 alert('제한시간 만료');
                 return;
             }
-            if(authKey != formEmailNumber.value) {
+            if (authKey != formEmailNumber.value) {
                 alert('인증번호 불일치')
                 return;
             }
@@ -223,7 +223,7 @@
                 .then(res => {
                     return res.json();
                 }).then(data => {
-                switch (data){
+                switch (data) {
                     case 0:
                         alert('인증번호 전송을 해주세요');
                         break;
@@ -242,9 +242,31 @@
 
     let information = document.querySelector('#information-button');
 
-    if (information){
+    if (information) {
         information.addEventListener('click', () => {
             location.href = 'http://localhost:8090/user/information';
         })
     }
 }
+
+
+const unfollowBtnElem = document.querySelectorAll('.unfollow-Btn');
+    if (unfollowBtnElem){
+        unfollowBtnElem.forEach(item => {
+            console.log(item.value);
+            item.addEventListener('click', () => {
+                const myFElem = document.querySelector('.myF');
+                fetch(`/unfollow/${item.value}`,{
+                    method : 'DELETE'
+                }).then(res => {
+                    return res.text();
+                }).then(data => {
+                    console.log(data);
+                    myFElem.remove();
+                })
+            });
+        })
+    }
+
+
+

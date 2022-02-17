@@ -4,6 +4,8 @@ package com.portfolio.lagarto.user;
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.enums.JoinResult;
+import com.portfolio.lagarto.follow.FollowService;
+import com.portfolio.lagarto.model.FollowEntity;
 import com.portfolio.lagarto.model.UserDto;
 import com.portfolio.lagarto.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -21,6 +24,8 @@ import java.util.Map;
 public class UserController {
     @Autowired //필요한 메소드 자동찾기
     private UserService service;
+    @Autowired
+    private FollowService fservice;
     @Autowired
     private Utils utils;
 
@@ -152,7 +157,9 @@ public class UserController {
     }
 
     @GetMapping("/mypage")
-    public String mypage(HttpSession hs, UserEntity entity) {
+    public String mypage(Model model) {
+        model.addAttribute(Const.Follower, fservice.FollowList());
+        model.addAttribute(Const.Following, fservice.FollowingList());
         if (0 != utils.getLoginUserPk()){
             return "/user/mypage";
         }

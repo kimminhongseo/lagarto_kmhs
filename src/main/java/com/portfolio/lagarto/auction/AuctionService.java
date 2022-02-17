@@ -1,10 +1,7 @@
 package com.portfolio.lagarto.auction;
 
 import com.portfolio.lagarto.Utils;
-import com.portfolio.lagarto.model.AuctionCategoryEntity;
-import com.portfolio.lagarto.model.AuctionDto;
-import com.portfolio.lagarto.model.AuctionEntity;
-import com.portfolio.lagarto.model.AuctionVo;
+import com.portfolio.lagarto.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,6 +51,17 @@ public class AuctionService {
     }
 
     public List<AuctionCategoryEntity> auctionMenuList(){return  mapper.selAuctionCategoryList();}
+
+
+    public AuctionBidVo insBid(AuctionBidEntity entity){
+        return mapper.insBid(entity);
+    }
+
+    public AuctionBidVo bidList(AuctionBidEntity entity){
+        return mapper.BidList(entity);
+    }
+
+
 
 
 

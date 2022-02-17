@@ -210,6 +210,6 @@ public class UserController {
         hsentity.setAddress_primary(address_primary);
         hsentity.setAddress_secondary(address_secondary);
         service.informationUpd(hsentity);
-        return "/user/mypage";
+        return "redirect:/user/mypage";
     }
 }

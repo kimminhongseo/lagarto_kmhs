@@ -251,19 +251,22 @@
 
 
 const unfollowBtnElem = document.querySelectorAll('.unfollow-Btn');
-    unfollowBtnElem.forEach(item => {
-        console.log(item.value);
-        item.addEventListener('click', () => {
-            const myFElem = document.querySelector('.myF');
-            fetch(`/unfollow/${item.value}`,{
-                method : 'DELETE'
-            }).then(res => {
-                return res.text();
-            }).then(data => {
-                console.log(data);
-                myFElem.remove();
-            })
-        });
-    })
+    if (unfollowBtnElem){
+        unfollowBtnElem.forEach(item => {
+            console.log(item.value);
+            item.addEventListener('click', () => {
+                const myFElem = document.querySelector('.myF');
+                fetch(`/unfollow/${item.value}`,{
+                    method : 'DELETE'
+                }).then(res => {
+                    return res.text();
+                }).then(data => {
+                    console.log(data);
+                    myFElem.remove();
+                })
+            });
+        })
+    }
+
 
 

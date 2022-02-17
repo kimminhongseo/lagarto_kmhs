@@ -19,4 +19,5 @@ public class CustomerEntity {
     private String mdt;
     private int hits;
     private int isdel;
+    private int rating;
 }

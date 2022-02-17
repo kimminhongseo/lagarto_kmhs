@@ -13,14 +13,14 @@
     //글 삭제 버튼
     const delBtnElem = document.querySelector('#delBtn');
     if(delBtnElem) {
-        delBtnElem.addEventListener('click', e  => {
-            if(confirm(msg.fnIsDel(`${iboard}번 글`)) == true) {
-                location.href=`/customer/del?iboard=${iboard}`;
-            } else {
-                e.preventDefault();
-                return;
-            }
-        });
+            delBtnElem.addEventListener('click', e => {
+                if (confirm(msg.fnIsDel(`${iboard}번 글`)) == true) {
+                    location.href = `/customer/del?iboard=${iboard}`;
+                } else {
+                    e.preventDefault();
+                    return;
+                }
+            });
     }
 
     //글 수정 버튼
@@ -46,7 +46,6 @@
     //댓글 리스트
     const getCommentList = () => {
         myFetch.get('/ajax/customerCmt', list => {
-            console.log(list);
             makeCommentRecordList(list);
         }, { iboard });
     }
@@ -93,7 +92,8 @@
                         break;
                     case 1:
                         commentCtntInputElem.value = null;
-                        location.href=`/customer/detail?iboard=${iboard}`
+                        //댓글 쓴 후 새로고침
+                        location.reload();
                         break;
                 }
             }, param);
@@ -160,4 +160,6 @@
         });
     }
     //좋아요 ------------------------------------------------------------ [end] --
+    // 별점 주기
+
 })();

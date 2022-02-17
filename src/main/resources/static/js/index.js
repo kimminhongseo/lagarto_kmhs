@@ -24,14 +24,7 @@ const regex = {
         return (target && val) ? !this[target].test(val) : true;
     }
 };
-//
-// $('#follow-btn').on('click', function() {
-//     follow(true);
-// });
-//
-// $('#unfollow-btn').on('click', function() {
-//     follow(false);
-// });
+
 
 function follow(check) {
     if(check) {

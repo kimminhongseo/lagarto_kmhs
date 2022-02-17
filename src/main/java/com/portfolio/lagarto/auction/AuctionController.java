@@ -2,6 +2,8 @@ package com.portfolio.lagarto.auction;
 
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.MyFileUtils;
+import com.portfolio.lagarto.follow.FollowService;
+import com.portfolio.lagarto.model.*;
 import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.model.AuctionBidEntity;
 import com.portfolio.lagarto.model.AuctionBidVo;
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +42,7 @@ import java.util.UUID;
 @RequestMapping("/auction")
 public class AuctionController {
     //저장할 경로 (게시판번호,파일명 제외한 상위 폴더
-    public static String first_uploadDirectory = System.getProperty("user.dir") +"/src/main/resources/static/uploadfile/";
+    public static String first_uploadDirectory = System.getProperty("user.dir") +"\\src\\main\\resources\\static\\uploadfile";
 
 
     @Autowired
@@ -47,6 +50,9 @@ public class AuctionController {
 
     @Autowired
     private MyFileUtils fileUtils;
+
+    @Autowired
+    private FollowService fservice;
 
     @Autowired
     private Utils utils;
@@ -68,7 +74,7 @@ public class AuctionController {
     }
 
     @PostMapping("/write")
-    public String writeProc(@ModelAttribute("auctionEntity") AuctionEntity auctionEntity,AuctionBidEntity entity, @RequestParam("files") MultipartFile[] files){
+    public String writeProc(@ModelAttribute("auctionEntity") AuctionEntity auctionEntity,@RequestParam("files") MultipartFile[] files){
 
         //문자배열 개념 값이 추가되면 쭉 이어짐.
         StringBuilder fileNames = new StringBuilder();
@@ -128,8 +134,8 @@ public class AuctionController {
             auctionEntity.setImage4(imagesList.get(3));
             auctionEntity.setImage5(imagesList.get(4));
             service.insAuction(auctionEntity);
-
-
+            System.out.println(service.insAuctionList(auctionEntity));
+            System.out.println("입력후 : "+imagesList);
         }
 
         //업로드한 상태 보여주는 창 >> 여기서 리스트로 가거나 자기가 쓴글로 가도록 만들자
@@ -267,9 +273,8 @@ public class AuctionController {
         return "redirect:/auction/list/";
     }
 
-
-
-
+    @GetMapping("/upprice")
+    public void upprice(){};
 
 
 }

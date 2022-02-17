@@ -3,14 +3,22 @@
 <!--메퍼 설정 하세요-->
 <mapper namespace="com.portfolio.lagarto.follow.FollowMapper">
     <insert id="follow">
-        insert into lagarto_user_follow(iuserMe, iuserYou) VALUES (#{iuserMe}, #{iuserYou})
+        insert into `lagarto`.`lagarto_user_follow`(iuserMe, iuserYou) VALUES (#{iuserMe}, #{iuserYou})
     </insert>
 
     <delete id="unfollow">
-        delete from lagarto_user_follow where iuserMe = #{iuserMe} AND iuserYou = #{iuserYou}
+        delete from `lagarto`.`lagarto_user_follow` where iuserMe = #{iuserMe} AND iuserYou = #{iuserYou}
     </delete>
 
     <select id="isFollow" resultType="int">
-        select count(*) from follow where iuserMe=#{iuserMe} and iuserYou = #{iuserYou}
+        select count(*) from `lagarto`.`lagarto_user_follow` where iuserMe=#{iuserMe} and iuserYou = #{iuserYou}
+    </select>
+    
+    <select id="FollowList" resultType="FollowEntity">
+        select F.iuserMe, F.iuserYou, U.nickname, U.level FROM `lagarto`.`lagarto_user_follow` F LEFT OUTER JOIN `lagarto`.`lagarto_user` U ON (F.iuserYou =  U.iuser) WHERE F.iuserMe = #{iuserMe};
+    </select>
+
+    <select id="FollowingList" resultType="FollowEntity">
+        select F.iuserMe, F.iuserYou, U.nickname, U.`level` FROM `lagarto`.`lagarto_user_follow` F LEFT OUTER JOIN `lagarto`.`lagarto_user` U ON (F.iuserMe =  U.iuser) WHERE F.iuserYou = #{iuserYou};
     </select>
 </mapper>

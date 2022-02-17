@@ -57,12 +57,31 @@ if(delBtnElem){
 //     });
 // }
 
-function uppricePopup(){
-    var value = parseInt(document.getElementById('buy').value,10);
-    value = isNaN(value) ? 0 : value;
-    value++;
-    document.getElementById('buy').value=value;
+
+const checkbuyElem = document.querySelector('#checkbuy').innerHTML;
+let checkbuy = parseInt(checkbuyElem);
+
+const checkwriternmElem =  document.querySelector('#checkwriternm').innerHTML;
+
+function check(){
+    manwonup(); //10000원씩 추가
+
 }
+function manwonup(){
+    let manwon = checkbuy + 10000;
+    checkbuy = manwon;
+    console.log(checkbuy);
+}
+
+const bidmodal = document.querySelector('#bid-modal');
+const formImbuy = document.querySelector('#formimbuy');
+const formBuy = document.querySelector('#formbuy');
+const formBid = document.querySelector('#formbid');
+const formBidBtn = document.querySelector('#formbidbtn');
+const formImbuyBtn = document.querySelector('#formimbuybtn');
+
+
+
 
 
 

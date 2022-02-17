@@ -33,6 +33,7 @@ public class MailController {
         }catch (Exception e){
             return null;
         }
+
     }
 
     @GetMapping("/authkey")

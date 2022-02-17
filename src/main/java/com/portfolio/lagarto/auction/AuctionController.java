@@ -2,6 +2,9 @@ package com.portfolio.lagarto.auction;
 
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.MyFileUtils;
+import com.portfolio.lagarto.Utils;
+import com.portfolio.lagarto.model.AuctionBidEntity;
+import com.portfolio.lagarto.model.AuctionBidVo;
 import com.portfolio.lagarto.model.AuctionDto;
 import com.portfolio.lagarto.model.AuctionEntity;
 import org.apache.commons.io.FileUtils;
@@ -32,11 +35,6 @@ import java.util.UUID;
 
 
 
-
-
-
-
-
 @Controller
 @RequestMapping("/auction")
 public class AuctionController {
@@ -49,6 +47,9 @@ public class AuctionController {
 
     @Autowired
     private MyFileUtils fileUtils;
+
+    @Autowired
+    private Utils utils;
 
     //다중 파일 업로드를 위한 bean
     @Bean
@@ -67,7 +68,7 @@ public class AuctionController {
     }
 
     @PostMapping("/write")
-    public String writeProc(@ModelAttribute("auctionEntity") AuctionEntity auctionEntity,@RequestParam("files") MultipartFile[] files){
+    public String writeProc(@ModelAttribute("auctionEntity") AuctionEntity auctionEntity,AuctionBidEntity entity, @RequestParam("files") MultipartFile[] files){
 
         //문자배열 개념 값이 추가되면 쭉 이어짐.
         StringBuilder fileNames = new StringBuilder();
@@ -127,8 +128,8 @@ public class AuctionController {
             auctionEntity.setImage4(imagesList.get(3));
             auctionEntity.setImage5(imagesList.get(4));
             service.insAuction(auctionEntity);
-            System.out.println(service.insAuctionList(auctionEntity));
-            System.out.println("입력후 : "+imagesList);
+
+
         }
 
         //업로드한 상태 보여주는 창 >> 여기서 리스트로 가거나 자기가 쓴글로 가도록 만들자
@@ -166,11 +167,24 @@ public class AuctionController {
 
     }
 
+
+
     @GetMapping("/detail")
-    public String detail(AuctionDto dto, Model model) {
+    public String detail(AuctionBidEntity entity ,AuctionDto dto, Model model) {
         model.addAttribute("Data", service.selAuctionDetail(dto));
+        //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
+        entity.setIboard(dto.getIboard());
+        model.addAttribute("BidList",service.bidList(entity));
         return "auction/detail";
     }
+
+    @PostMapping("/detail")
+    public String detailproc(@ModelAttribute("auctionBidEntity") AuctionBidEntity entity,AuctionDto dto){
+        entity.setIboard(dto.getIboard());
+
+        return "auction/detail?iboard="+entity.getIboard();
+    }
+
 
     @GetMapping("/mod")
     public String mod(AuctionDto dto,Model model){
@@ -253,8 +267,9 @@ public class AuctionController {
         return "redirect:/auction/list/";
     }
 
-    @GetMapping("/upprice")
-    public void upprice(){};
+
+
+
 
 
 }

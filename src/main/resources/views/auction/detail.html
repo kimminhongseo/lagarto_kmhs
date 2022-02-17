@@ -9,7 +9,6 @@
     <script defer th:src="@{/static/js/auction/detail.js}"></script>
 </head>
 <th:block layout:fragment="content">
-
 <!--todo: 가격올리기 기능,수정, 삭제, 댓글, 좋아요-->
 
     <!--session.loginUser 를 빼주면 session.loginUser.iuser가 null일때 에러.-->
@@ -21,8 +20,7 @@
     </div>
         <!--<a th:href="@{/auction/del(iboard=${ibo})}">삭제</a>-->
     ~~~~~여기는 디테일 부분 ~~~~~
-        <div id="follow"><button id="follow-Btn">팔로우</button></div>
-        <div id="unfollow"><button id="unfollow-Btn">언팔로우</button></div>
+        <div id="isfollow" onsubmit="return isfollow();"></div>
     <div class="detail_item" }>
     <div>작성자 : <span th:text="${data.writernm}"/></div> <!--옆에 프로필사진-->
     <div>카테고리 : <span th:text="${data.categorynm}"/></div>

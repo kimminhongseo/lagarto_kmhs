@@ -11,6 +11,14 @@
     </delete>
 
     <select id="isFollow" resultType="int">
-        select count(*) from `lagarto`.`lagarto_user` where iuserMe=#{iuserMe} and iuserYou = #{iuserYou}
+        select count(*) from `lagarto`.`lagarto_user_follow` where iuserMe=#{iuserMe} and iuserYou = #{iuserYou}
+    </select>
+    
+    <select id="FollowList" resultType="FollowEntity">
+        select F.iuserMe, F.iuserYou, U.nickname, U.level FROM `lagarto`.`lagarto_user_follow` F LEFT OUTER JOIN `lagarto`.`lagarto_user` U ON (F.iuserYou =  U.iuser) WHERE F.iuserMe = #{iuserMe};
+    </select>
+
+    <select id="FollowingList" resultType="FollowEntity">
+        select F.iuserMe, F.iuserYou, U.nickname, U.`level` FROM `lagarto`.`lagarto_user_follow` F LEFT OUTER JOIN `lagarto`.`lagarto_user` U ON (F.iuserMe =  U.iuser) WHERE F.iuserYou = #{iuserYou};
     </select>
 </mapper>

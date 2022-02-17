@@ -24,35 +24,68 @@ const regex = {
         return (target && val) ? !this[target].test(val) : true;
     }
 };
-const followElem = document.querySelector('#follow')
-const followBtnElem = followElem.querySelector('#follow-Btn');
-const unfollowElem = document.querySelector('#unfollow')
-const unfollowBtnElem = unfollowElem.querySelector('#unfollow-Btn');
+
 const dataIuserElem = document.querySelector('#dataIuser');
-unfollowBtnElem.style.display = 'none';
-followBtnElem.addEventListener('click', () => {
-        followBtnElem.style.display = 'none';
-        unfollowBtnElem.style.display = 'block';
-        console.log(dataIuserElem.dataset.iuser);
-        fetch(`/follow/${dataIuserElem.dataset.iuser}`, {
-            method : 'post',
-            headers: {'Content-type': 'application/json'}
-        }).then(res => {
-            return res.json();
-        }).then(data => {
+const isfollowElem = document.querySelector('#isfollow');
 
+
+let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res => {
+    return res.json();
+}).then(data => {
+    switch (data) {
+        case 0:
+            isfollowElem.innerHTML = `<button id="follow-Btn">팔로우</button>`;
+            break;
+        case 1:
+            isfollowElem.innerHTML = `<button id="unfollow-Btn">언팔로우</button>`;
+            break;
+        case 2:
+            break;
+    }
+    const followBtnElem = isfollowElem.querySelector('#follow-Btn');
+    if (followBtnElem){
+        followBtnElem.addEventListener('click', () => {
+            console.log(dataIuserElem.dataset.iuser);
+            fetch(`/follow/${dataIuserElem.dataset.iuser}`, {
+                method : 'post',
+                headers: {'Content-type': 'application/json'}
+            }).then(res => {
+                return res.json();
+            }).then(data => {
+                switch (data){
+                    case 0:
+                        location.href='http://localhost:8090/user/login';
+                        break;
+                    case 2:
+                        alert('자신에게 팔로우는 불가능 합니다');
+                        break;
+                    case 1:
+                        followBtnElem.remove();
+                        isfollow();
+                        break;
+                }
+            })
         })
-})
+    }
+    const unfollowBtnElem = isfollowElem.querySelector('#unfollow-Btn');
+    if (unfollowBtnElem){
+        unfollowBtnElem.addEventListener('click', () => {
+            fetch(`/unfollow/${dataIuserElem.dataset.iuser}`,{
+                method : 'DELETE'
+            }).then(res => {
+                return res.text();
+            }).then(data => {
+                console.log(data);
+                unfollowBtnElem.remove();
+                isfollow();
 
-unfollowBtnElem.addEventListener('click', () => {
-    followBtnElem.style.display = 'block';
-    unfollowBtnElem.style.display = 'none';
-    fetch(`/unfollow/${dataIuserElem.dataset.iuser}`,{
-        method : 'DELETE',
-    }).then(res => res.json()).then(data => {
-
-    })
+            })
+        })
+    }
 })
+isfollow();
+
+
 
 const myFetch = {
     send: function(fetchObj, cb) {
@@ -89,3 +122,4 @@ const myFetch = {
         }), cb);
     }
 }
+

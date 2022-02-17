@@ -2,8 +2,8 @@ package com.portfolio.lagarto.auction;
 
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.MyFileUtils;
-import com.portfolio.lagarto.model.AuctionDto;
-import com.portfolio.lagarto.model.AuctionEntity;
+import com.portfolio.lagarto.follow.FollowService;
+import com.portfolio.lagarto.model.*;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +18,7 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +43,9 @@ public class AuctionController {
 
     @Autowired
     private MyFileUtils fileUtils;
+
+    @Autowired
+    private FollowService fservice;
 
     //다중 파일 업로드를 위한 bean
     @Bean
@@ -132,7 +136,6 @@ public class AuctionController {
 
     @GetMapping("/list")
     public String list(AuctionDto dto, Model model) {
-
         model.addAttribute("List", service.selAuctionListAll(dto));
         System.out.println(service.selAuctionListAll(dto));
         return "auction/list";
@@ -149,7 +152,7 @@ public class AuctionController {
     }
 
     @GetMapping("/detail")
-    public String detail(AuctionDto dto, Model model) {
+    public String detail(AuctionDto dto, Model model, HttpSession hs) {
         model.addAttribute("Data", service.selAuctionDetail(dto));
         return "auction/detail";
     }

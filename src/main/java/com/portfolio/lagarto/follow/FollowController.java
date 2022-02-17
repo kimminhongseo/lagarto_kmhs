@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping
@@ -23,24 +25,28 @@ public class FollowController {
     public void profile(){};
 
     @PostMapping("/follow/{iuser}")
-    public String follow(@PathVariable int iuser, HttpSession hs, Model model){
-        System.out.println(iuser);
+    public int follow(@PathVariable int iuser, HttpSession hs, Model model){
         UserEntity entity = new UserEntity();
         entity.setIuser(iuser);
         Object object = hs.getAttribute(Const.LOGIN_USER);
         UserEntity iuserMe = uservice.selUser(entity);
         UserEntity iuserYou = (UserEntity)object;
-
+        if (object == null){
+            return 0;
+        }
         FollowEntity followEntity = new FollowEntity();
         followEntity.setIuserMe(iuserMe.getIuser());
         followEntity.setIuserYou(iuserYou.getIuser());
 
+        if (followEntity.getIuserYou() == followEntity.getIuserMe()){
+            return 2;
+        }
         fservice.follow(followEntity);
-        return "FollowOk";
+        return 1;
     }
 
     @DeleteMapping("/unfollow/{iuser}")
-    public String unfollow(@PathVariable int iuser, HttpSession hs, Model model){
+    public void unfollow(@PathVariable int iuser, HttpSession hs, Model model){
         UserEntity entity = new UserEntity();
         entity.setIuser(iuser);
         Object object = hs.getAttribute(Const.LOGIN_USER);
@@ -52,8 +58,22 @@ public class FollowController {
         followEntity.setIuserYou(iuserYou.getIuser());
 
         fservice.unfollow(followEntity);
-        return "unFollowOK";
     }
 
+    @GetMapping("/isfollow/{iuser}")
+    public int isFollow(@PathVariable int iuser, HttpSession hs){
+        UserEntity entity = new UserEntity();
+        entity.setIuser(iuser);
+        Object object = hs.getAttribute(Const.LOGIN_USER);
+        UserEntity iuserMe = uservice.selUser(entity);
+        UserEntity iuserYou = (UserEntity)object;
 
+        FollowEntity followEntity = new FollowEntity();
+        followEntity.setIuserMe(iuserMe.getIuser());
+        followEntity.setIuserYou(iuserYou.getIuser());
+        if (followEntity.getIuserMe() == followEntity.getIuserYou()){
+            return 2;
+        }
+        return fservice.isFollow(followEntity);
+    }
 }

@@ -19,10 +19,18 @@
 
     <select id="selCustomerCmtOne" resultType="CustomerCommentVo">
         SELECT A.*, B.nickname FROM
-        customer_comment A
-        LEFT JOIN lagarto_user B
+        lagarto.customer_comment A
+        LEFT JOIN lagarto.lagarto_user B
         ON A.iuser = B.iuser
         WHERE A.iboard = ${iboard}
         AND A.icmt = ${icmt}
     </select>
+
+    <delete id="delCustomerCmt">
+        DELETE FROM lagarto.customer_comment WHERE icmt = ${icmt} AND iboard = ${iboard}
+    </delete>
+
+    <delete id="delCustomerCmtAll">
+        DELETE FROM lagarto.customer_comment WHERE iboard = ${iboard}
+    </delete>
 </mapper>

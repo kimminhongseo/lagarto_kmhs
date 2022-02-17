@@ -23,4 +23,16 @@ public class CustomerCommentService {
         return mapper.selCustomerCmtList(entity);
     }
 
+    public int delCustomerCmt(int icmt) {
+        CustomerCommentEntity entity = new CustomerCommentEntity();
+        entity.setIcmt(icmt);
+        entity.setIuser(utils.getLoginUserPk());
+        return mapper.delCustomerCmt(entity);
+    }
+
+    public int delCustomerCmtAll(int iboard) {
+        CustomerCommentEntity entity = new CustomerCommentEntity();
+        entity.setIboard(iboard);
+        return mapper.delCustomerCmtAll(entity);
+    }
 }

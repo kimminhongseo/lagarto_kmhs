@@ -31,7 +31,7 @@ public class Const {
         public static final int GENERAL = 1;
         public static final int NAVER = 2;
         public static final int KAKAO = 3;
-        public static final int FACEBOOK = 4;
-        public static final int GOOGLE = 5;
+        public static final int GOOGLE = 4;
+        // TODO : FACEBOOK 삭제, GOOGLE 4번 변경 (DB user_platform_type 컬럼 수정 해야 됨)
     }
 }

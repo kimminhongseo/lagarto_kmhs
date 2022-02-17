@@ -42,7 +42,7 @@ import java.util.UUID;
 @RequestMapping("/auction")
 public class AuctionController {
     //저장할 경로 (게시판번호,파일명 제외한 상위 폴더
-    public static String first_uploadDirectory = System.getProperty("user.dir") +"\\src\\main\\resources\\static\\uploadfile";
+    public static String first_uploadDirectory = System.getProperty("user.dir") +"/src/main/resources/static/uploadfile/";
 
 
     @Autowired

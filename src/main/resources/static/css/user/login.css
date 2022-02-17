@@ -1,3 +1,7 @@
+.main {
+    width: 100%;
+}
+
 .logoMain{
     display: flex;
     justify-content: center;
@@ -94,7 +98,7 @@
     color: #444;
     width: 20%;
     border-radius: 5px;
-    border: thin solid #ebebeb;
+    border: thin solid var(--border-color-default);
     white-space: nowrap;
     margin: 0 auto;
 }
@@ -140,7 +144,7 @@ span.buttonText {
     vertical-align: middle;
     margin: 0 auto;
     font-size: 0.825rem;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 #generalLogin {
@@ -148,60 +152,3 @@ span.buttonText {
 }
 
 
-/* 로그인 버튼 */
-#apiLogin > div {margin-bottom: 0.5rem;}
-
-.apiLoginBtn {
-    display: block;
-    background: #fff;
-    color: #444;
-    width: 20%;
-    border-radius: 5px;
-    border: thin solid #ebebeb;
-    white-space: nowrap;
-    margin: 0 auto;
-}
-.apiLoginBtn:hover {
-    cursor: pointer;
-}
-
-.apiLoginBtn > div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0 1rem;
-}
-
-span.label {
-    font-family: serif;
-    font-weight: normal;
-}
-
-span.icon {
-    display: inline-block;
-    vertical-align: middle;
-    width: 42px;
-    height: 42px;
-}
-
-#naver span.icon {
-    background: url('/static/img/naver_logo.png') transparent no-repeat center / 1.3rem 1.3rem;
-}
-
-#kakao span.icon {
-    background: url('/static/img/kakao_logo.png') transparent no-repeat center / 1.3rem 1.3rem;
-}
-
-#google span.icon {
-    background: url('/static/img/google_logo.svg') transparent no-repeat center / 1.3rem 1.3rem;
-}
-
-span.buttonText {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    vertical-align: middle;
-    margin: 0 auto;
-    font-size: 0.825rem;
-    font-weight: bold;
-}

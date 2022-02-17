@@ -159,6 +159,8 @@
         const bodyElem = document.querySelector('body');
 
         const modalContentElem = modalElem.querySelector('.modal_content');
+        const discDataElem = document.querySelector('.disc_data');
+        let discArea;
 
         if (modalElem) {
             discSpanElem.forEach(disc => {
@@ -172,7 +174,9 @@
                     fetch(`/user/disc/${cd}`)
                         .then(res => res.text())
                         .then(data => {
-                            modalContentElem.innerHTML = data;
+                            discDataElem.innerHTML = data;
+                            discArea = discDataElem.querySelector('.disc_area').outerHTML;
+                            modalContentElem.innerHTML = discArea;
                         });
 
                     bodyElem.style.overflow = 'hidden';

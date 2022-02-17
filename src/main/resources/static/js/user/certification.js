@@ -44,7 +44,7 @@
                 'contact_first': certForm.contact_first.value,
                 'contact_second': certForm.contact_second.value,
                 'contact_third': certForm.contact_third.value,
-                'platform_cd' : 5
+                'platform_cd' : 4
             }
 
             fetch('/user/apiCertification',

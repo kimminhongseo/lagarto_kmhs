@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 public class FileUploadController {
-    public static String first_uploadDirectory = System.getProperty("user.dir") +"\\src\\main\\resources\\static\\uploadfile\\";
+    public static String first_uploadDirectory = System.getProperty("user.dir") +"/src/main/resources/static/uploadfile/";
 
     @Autowired
     private AuctionService service;

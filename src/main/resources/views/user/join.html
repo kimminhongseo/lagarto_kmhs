@@ -10,7 +10,7 @@
 </head>
 
 <th:block layout:fragment="content">
-    <div class="wrap">
+    <div class="join_main">
         <h1>회원가입</h1>
         <div id="join">
             <form id="join_form" th:action="@{/user/join}" method="post" th:object="${entity}">
@@ -102,6 +102,7 @@
                     <input class="object_button prop_dark" type="submit" value="회원가입">
                 </div>
             </form>
+            <div class="disc_data hidden"></div>
             <div id="modal" class="modal_overlay">
                 <div class="modal_container">
                     <div class="modal_header">

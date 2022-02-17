@@ -5,97 +5,89 @@
 
 <head>
     <title>리스트</title>
-        <link th:href="@{/static/css/auction/list.css}" rel="stylesheet" />
+    <link th:href="@{/static/css/auction/list.css}" rel="stylesheet"/>
     <script defer th:src="@{/static/js/auction/list.js}"></script>
 </head>
 
-<th:block layout:fragment="content" >
-    <div id="data" th:with="icate=${param.icategory}" th:data-icategory="${icate}">
-    <div>
-        <div th:if="${session.loginUser != null}">
-        <div th:if="${icategory ge 1}"><a th:href="@{/auction/write(icategory=${icategory})}">글쓰기</a></div>
-        <div><a href="/user/logout">로그아웃</a></div>
-        </div>         <!--th:unless를 사용하려고 했지만 어차피 로그인 페이지로만 이동하는거라 안씀-->
-        <div th:if="${session.loginUser == null}">
-            <div>로그인하시면 글작성이 가능합니다. &emsp;<input type="button" value="로그인 하러가기" th:onclick="|location.href='@{/user/login}'|"></div>
+<th:block layout:fragment="content">
+    <div class="main">
+        <div id="data" th:with="icate=${param.icategory}" th:data-icategory="${icate}"></div>
+        <div>
+            <div th:if="${session.loginUser != null}">
+                <div th:if="${icategory ge 1}"><a th:href="@{/auction/write(icategory=${icategory})}">글쓰기</a></div>
+                <div><a href="/user/logout">로그아웃</a></div>
+            </div>         <!--th:unless를 사용하려고 했지만 어차피 로그인 페이지로만 이동하는거라 안씀-->
+            <div th:if="${session.loginUser == null}">
+                <div>로그인하시면 글작성이 가능합니다. &emsp;<input type="button" value="로그인 하러가기"
+                                                     th:onclick="|location.href='@{/user/login}'|"></div>
+            </div>
+
         </div>
 
+
+        <!--a태그로 이동하는 이벤트 했음. -->
+        <div class="auction_container">
+            <ul class="auction_list">
+                <li class="record" th:each="data:${List}"><a th:href="@{/auction/detail(iboard=${data.iboard})}">
+                    <div hidden>게시판 번호: <span class="iboard" th:text="${data.iboard}"/></div>
+                    <div>
+                        <!--이미지1 없으면 pro.png 파일이 기본파일로-->
+                        <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" }
+                             onerror="this.src='/static/img/pro.png'"/>
+                    </div>
+                    <div>작성자 : <span th:text="${data.writernm}"/></div>
+                    <div>조회수 : <span th:text="${data.hits}"/></div>
+
+                    <div class="auction_info">
+                        <div>제목 :<span th:text="${data.title}"/></div>
+                        <div>내용 : <span th:text="${data.ctnt}"/></div>
+                    </div>
+                    <div>
+                        <div>즉시구매가 : <span th:text="${data.imbuy}"/> 원</div>
+                        <div>경매가 : <span th:text="${data.buy}"/> 원</div>
+                    </div>
+                </a>
+                </li>
+
+            </ul>
+
+        </div>
     </div>
 
 
-<!--a태그로 이동하는 이벤트 했음. -->
-    <div class="auction_container">
-        <ul class="auction_list">
-            <li class="record"  th:each="data:${List}"><a th:href="@{/auction/detail(iboard=${data.iboard})}">
-                <div hidden>게시판 번호: <span class="iboard" th:text="${data.iboard}"/></div>
-                <div >
-                    <!--이미지1 없으면 pro.png 파일이 기본파일로-->
-                    <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" } onerror="this.src='/static/img/pro.png'"/>
-                </div>
-                <div>작성자 : <span th:text="${data.writernm}"/> </div>
-                <div>조회수 : <span th:text="${data.hits}"/></div>
+    <!--    <div class="auction_container">-->
+    <!--        <ul class="auction_list">-->
+    <!--            <li>-->
 
-                <div class="auction_info">
-                    <div>제목 :<span th:text="${data.title}"/></div>
-                    <div>내용 : <span th:text="${data.ctnt}"/></div>
-                </div>
-                <div>
-                    <div>즉시구매가 : <span th:text="${data.imbuy}"/> 원</div>
-                    <div>경매가 : <span th:text="${data.buy}"/> 원</div>
-                </div>
-            </a>
-            </li>
-
-        </ul>
-
-    </div>
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
 
 
+    <!--<div class="auction_container">-->
+    <!--    <ul class="auction_list">-->
+    <!--        <c:forEach items="${requestScope.list}" var="item">-->
+    <!--            <li class="record" data-iboard="${item.iboard}">-->
+    <!--                <div>-->
+    <!--                    <img src="/res/img/Lagarto.PNG">-->
+    <!--                </div>-->
+    <!--                <div>조회수 : ${item.hits}</div>-->
+    <!--               -->
 
+    <!--                <div class="auction_info">-->
+    <!--                    <div>제목 : ${item.title}</div>-->
+    <!--                    <div>내용 : ${item.ctnt}</div>-->
+    <!--                </div>-->
+    <!--                <div>-->
+    <!--                    <div>즉시구매가 : ${item.imbuy} 원</div>-->
+    <!--                    <div>경매가 : ${item.buy} 원</div>-->
+    <!--                </div>-->
+    <!--            </li>-->
+    <!--        </c:forEach>-->
 
-<!--    <div class="auction_container">-->
-<!--        <ul class="auction_list">-->
-<!--            <li>-->
-
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-
-
-
-
-
-
-
-<!--<div class="auction_container">-->
-<!--    <ul class="auction_list">-->
-<!--        <c:forEach items="${requestScope.list}" var="item">-->
-<!--            <li class="record" data-iboard="${item.iboard}">-->
-<!--                <div>-->
-<!--                    <img src="/res/img/Lagarto.PNG">-->
-<!--                </div>-->
-<!--                <div>조회수 : ${item.hits}</div>-->
-<!--               -->
-
-<!--                <div class="auction_info">-->
-<!--                    <div>제목 : ${item.title}</div>-->
-<!--                    <div>내용 : ${item.ctnt}</div>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <div>즉시구매가 : ${item.imbuy} 원</div>-->
-<!--                    <div>경매가 : ${item.buy} 원</div>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--        </c:forEach>-->
-
-<!--    </ul>-->
+    <!--    </ul>-->
 
 </th:block>
-
-</div>
-
-
-
 
 
 </html>

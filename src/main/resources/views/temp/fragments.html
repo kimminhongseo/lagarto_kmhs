@@ -3,54 +3,54 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="header">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/main"><img th:src="@{/static/img/lagarto_logo.svg}" alt="" width="100" height="24"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="/auction/list" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">도마뱀</a>
-                            <ul class="lnb dropdown-menu">
-                                <li><a class="dropdown-item" href="/auction/list/"> 도마뱀 전체보기</a></li>
-                                <li><a class="dropdown-item" href="/auction/list/1">리자드/모니터</a></li>
-                                <li><a class="dropdown-item" href="/auction/list/2">게코/스킨크</a></li>
-                                <li><a class="dropdown-item" href="/auction/list/3">레오파드 게코</a></li>
-                                <li><a class="dropdown-item" href="/auction/list/4">크레스티드 게코</a></li>
-                                <li><a class="dropdown-item" href="/auction/list/5">카멜레온</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="">용품</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/customer/list/1">리뷰</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/customer/list/2">커뮤니티</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/customer/list/3">고객센터</a>
-                        </li>
-                        <li class="nav-item" th:if="${session.loginUser == null}">
-                            <a class="nav-link active" href="/user/login">로그인</a>
-                        </li>
-                        <li class="nav-item" th:if="${session.loginUser != null}">
-                            <a class="nav-link active" href="/user/mypage">마이페이지</a>
-                        </li>
-                        <li class="nav-item" th:if="${session.loginUser != null}">
-                            <a class="nav-link active" href="/user/logout">로그아웃</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/main"><img th:src="@{/static/img/lagarto_logo.svg}" alt="" width="100" height="24"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/auction/list" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">도마뱀</a>
+                        <ul class="lnb dropdown-menu">
+                            <li><a class="dropdown-item" href="/auction/list/"> 도마뱀 전체보기</a></li>
+                            <li><a class="dropdown-item" href="/auction/list/1">리자드/모니터</a></li>
+                            <li><a class="dropdown-item" href="/auction/list/2">게코/스킨크</a></li>
+                            <li><a class="dropdown-item" href="/auction/list/3">레오파드 게코</a></li>
+                            <li><a class="dropdown-item" href="/auction/list/4">크레스티드 게코</a></li>
+                            <li><a class="dropdown-item" href="/auction/list/5">카멜레온</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">용품</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/customer/list/1">리뷰</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/customer/list/2">커뮤니티</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/customer/list/3">고객센터</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.loginUser == null}">
+                        <a class="nav-link active" href="/user/login">로그인</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.loginUser != null}">
+                        <a class="nav-link active" href="/user/mypage">마이페이지</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.loginUser != null}">
+                        <a class="nav-link active" href="/user/logout">로그아웃</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
             </div>
-        </nav>
+        </div>
+    </nav>
 </th:block>
 
     <th:block th:fragment="content">
@@ -59,7 +59,85 @@
 
 
 <th:block th:fragment="footer">
-
+    <div class="footer_container">
+        <div class="footer_content">
+            <div class="footer_area">
+                <div class="footer_logo">
+                    <a href="/">
+                        <img src="/static/img/lagarto_logo.svg" alt="logo">
+                    </a>
+                </div>
+                <div class="stretch"></div>
+                <div class="footer_menu">
+                    <ul>
+                        <li>
+                            <a href="#">회사소개</a>
+                        </li>
+                        <li>
+                            <a href="#">입점 및 제휴문의</a>
+                        </li>
+                        <li>
+                            <a href="/customer/list/3">고객센터</a>
+                        </li>
+                        <li>
+                            <a href="/user/disc/a">이용약관</a>
+                        </li>
+                        <li>
+                            <a href="/user/disc/b">개인정보처리방침</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer_area">
+                <div class="copyright">
+                    <P>ⓒ 2022. LAGARTO. ALL RIGHTS RESERVED.</P>
+                </div>
+                <div class="stretch"></div>
+                <div class="sns">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-solid fa-comment"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer_list">
+            <address>
+                <strong>(주)LAGARTO</strong><br>
+                <p>대표 김대용</p>
+                <p>대구광역시 중구 중앙대로 366 9층 10층</p>
+                <p>통신판매업 신고번호 제2022-대구중-00000호</p>
+                <p>사업자등록번호 000-00-00000</p>
+                <p>개인정보관리책임자 홍수아</p>
+            </address>
+            <div class="customer_info">
+                <strong>고객센터</strong>
+                <div>
+                    <dl>
+                        <dt>대표전화&nbsp;</dt>
+                        <dd>1234-5678</dd>
+                    </dl>
+                    <dl>
+                        <dt>운영시간&nbsp;</dt>
+                        <dd>AM 10:00 ~ PM 06:00 (월-금)</dd>
+                    </dl>
+                    <dl>
+                        <dt>점심시간&nbsp;</dt>
+                        <dd>PM 12:00 ~ PM 01:00 (주말 및 공휴일 휴무)</dd>
+                    </dl>
+                    <dl>
+                        <dt>이메일&nbsp;</dt>
+                        <dd><a href="mailto:eodyd0313@gmail.com">eodyd0313@gmail.com</a></dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="notice_area">
+                <strong>구매안전 서비스</strong>
+                <p>고객님은 안전거래를 위해 현금등으로 결제 시 저희 쇼핑몰에 가입한 토스페이먼츠 구매안전서비스를 이용 하실 수 있습니다</p>
+                <p>(주)LAGARTO는 통신판매 중개자로서 통신판매의 당사자가 아니므로 개별 판매자가 등록한 상품정보에 대해서 책임을 지지 않습니다.</p>
+                <p>단, 거래과정에서 검수하고 보증하는 내용에 대한 책임은 당사에 있습니다.</p>
+            </div>
+        </div>
+    </div>
 </th:block>
 
 </html>

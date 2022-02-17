@@ -10,27 +10,30 @@
 </head>
 
 <th:block layout:fragment="content">
-    <div class="container">
-        <h1>글쓰기</h1>
-        <div>
-            <form th:action="@{/customer/write}" th:object="${entity}" method="post">
-                <input type="hidden" id="board_cd" th:field="*{board_cd}" th:value="${param.board_cd}">
-                <div class="form-floating mb-3">
-                    <input type="text" id="title" class="form-control" placeholder="title" th:field="*{title}">
-                    <label class="form-label" for="title">제목</label>
-                </div>
-                <div class="mb-3">
-                    <label for="ctnt" class="form-label">내용</label>
-                    <textarea class="form-control" id="ctnt" th:field="*{ctnt}" rows="3"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="ctnt_img" class="form-label"></label>
-                    <input class="form-control form-control-sm" id="ctnt_img" th:field="*{ctnt_img}" type="file" multiple="multiple">
-                </div>
-                <div>
-                    <button class="btn btn-primary" type="submit">저장</button>
-                </div>
-            </form>
+    <div class="main">
+        <div class="container">
+            <h1>글쓰기</h1>
+            <div>
+                <form th:action="@{/customer/write}" th:object="${entity}" method="post">
+                    <input type="hidden" id="board_cd" th:field="*{board_cd}" th:value="${param.board_cd}">
+                    <div class="form-floating mb-3">
+                        <input type="text" id="title" class="form-control" placeholder="title" th:field="*{title}">
+                        <label class="form-label" for="title">제목</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ctnt" class="form-label">내용</label>
+                        <textarea class="form-control" id="ctnt" th:field="*{ctnt}" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ctnt_img" class="form-label"></label>
+                        <input class="form-control form-control-sm" id="ctnt_img" th:field="*{ctnt_img}" type="file"
+                               multiple="multiple">
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit">저장</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </th:block>

@@ -13,8 +13,8 @@ public interface FollowMapper {
     int isFollow(FollowEntity entity);
 
     //팔로우 리스트 조회
-    List<FollowEntity> selectActiveUserList(int iuserMe);
+    List<FollowEntity> FollowList(FollowEntity entity);
 
     //팔로워 리스트 조회
-    List<FollowEntity> selectPassiveUserList(int iuserYou);
+    List<FollowEntity> FollowingList(FollowEntity entity);
 }

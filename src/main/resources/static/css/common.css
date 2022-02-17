@@ -1,0 +1,96 @@
+:root {
+    --background-default : #ffffff;
+    --border-color-default: #eaeaea;
+    --forecolor-default: #00050a;
+
+    --font-style-default: 'Noto Sans KR', sans-serif;;
+    --font-style-nanum: 'Nanum Gothic', sans-serif;
+
+    --width-max: 70%;
+    --board-width-max: 80rem;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    font-family: var(--font-style-default);
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+input {outline: none;}
+
+
+
+
+.object_button {
+    border: none;
+    border-radius: 100rem;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    padding: 0.8625rem 0;
+    user-select: none;
+}
+
+.object_button.prop_dark {
+    background-color: #000000;
+    border: 0.0625rem solid #000000;
+    color: #ffffff;
+}
+
+.object_button.prop_light {
+    background-color: #ffffff;
+    border: 0.0625rem solid var(--border-color-default);
+}
+
+.object_check {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    user-select: none;
+}
+
+.object_check > input[type=checkbox] {
+    margin: 0 0.25rem 0 0;
+}
+
+.object_text {
+    border: 0.0625rem solid var(--border-color-default);
+    font-family: inherit;
+    outline: none;
+    padding: 0.75rem 1rem;
+}
+
+.hidden {overflow: hidden; width: 0; height: 0;}
+
+.btn_option {
+    border: 0; border-radius: 0; background-color: transparent; cursor: pointer;
+    position: absolute; top: 50%; right: 0; transform: translateY(-50%); padding: 0 1rem;}
+.btn_show {font-size: 1rem;}
+.btn_show:before {content: "\f06e"; color: #b8b8b9; font-family: "Font Awesome 5 Free"; font-weight: 900;}
+
+.btn_show_pw.hide:before, .btn_show_check.hide:before {content: "\f070"; color: #b8b8b9; font-family: "Font Awesome 5 Free"; font-weight: 900;}
+
+.btnBox {border-radius: 100rem; padding: 0.8625rem 0 ;}
+.btnBlack {background-color: #000; color: #fff;}
+.btnWhite {background-color: #fff; border: 1px solid #373737;}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+.pointer { cursor: pointer; }

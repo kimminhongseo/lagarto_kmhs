@@ -26,5 +26,5 @@
 
 .star-rating label:hover,
 .star-rating label:hover ~ label {
-    -webkit-text-fill-color: #faf8a8;
+    -webkit-text-fill-color: #fff58c;
 }

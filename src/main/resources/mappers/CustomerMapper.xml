@@ -3,9 +3,9 @@
 <mapper namespace="com.portfolio.lagarto.customer.CustomerMapper">
     <insert id="insCustomer">
         INSERT INTO lagarto.customer
-        (board_cd, title, ctnt, ctnt_img, iuser)
+        (board_cd, title, ctnt, ctnt_img, iuser, rating)
         VALUES
-        (${board_cd}, #{title}, #{ctnt}, #{ctnt_img}, ${iuser})
+        (${board_cd}, #{title}, #{ctnt}, #{ctnt_img}, ${iuser}, ${rating})
     </insert>
 
     <select id="selCustomerList" resultType="CustomerVo">

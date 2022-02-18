@@ -20,7 +20,7 @@
                         <input type="text" id="title" class="form-control" placeholder="title" th:field="*{title}">
                         <label class="form-label" for="title">제목</label>
                     </div>
-                    <div class="star-rating space-x-4 mx-auto">
+                    <div class="star-rating space-x-4 mx-auto" th:if="*{board_cd == 1}">
                         <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
                         <label for="5-stars" class="star pr-4">★</label>
                         <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>

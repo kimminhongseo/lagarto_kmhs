@@ -30,10 +30,10 @@ public class AuctionService {
       return mapper.insAuctionList(entity);
     }
 
-    public List<AuctionVo> selAuctionList(AuctionDto dto){return  mapper.selAuctionList(dto);}
-    public List<AuctionVo> selAuctionListAll(AuctionDto dto){return  mapper.selAuctionListAll(dto);}
+    public List<AuctionVo> selAuctionList(AuctionVo dto){return  mapper.selAuctionList(dto);}
+    public List<AuctionVo> selAuctionListAll(AuctionVo dto){return  mapper.selAuctionListAll(dto);}
 
-    public AuctionVo selAuctionDetail (AuctionDto dto){return mapper.selAuctionDetail(dto);}
+    public AuctionVo selAuctionDetail (AuctionVo dto){return mapper.selAuctionDetail(dto);}
 
     public int updAuction(AuctionEntity entity){
         try{

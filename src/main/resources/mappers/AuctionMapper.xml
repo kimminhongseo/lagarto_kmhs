@@ -29,7 +29,7 @@
 
     <select id="selAuctionList" resultType="AuctionVo">
         select *,
-        B.nm  as writernm
+        B.nm  as writernm, B.nickname as nicknm
         From lagarto.auction A
         Left join lagarto.lagarto_user B
         ON A.iuser = B.iuser
@@ -41,7 +41,7 @@
 
     <select id="selAuctionListAll" resultType="AuctionVo">
         select *,
-        B.nm as writernm
+        B.nm as writernm, B.nickname as nicknm
         from lagarto.auction A
         left join lagarto.lagarto_user B
         on A.iuser = B.iuser
@@ -52,7 +52,7 @@
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">
         select *,
-        B.nm as writernm , B.profile_img , C.nm as categorynm
+        B.nm as writernm , B.profile_img,B.nickname as nicknm , C.nm as categorynm
         from lagarto.auction A
             left join lagarto.lagarto_user B
             on A.iuser = B.iuser

@@ -10,9 +10,9 @@ public interface AuctionMapper {
     int insAuction(AuctionEntity entity);
     AuctionVo insAuctionList(AuctionEntity entity);
 
-    AuctionVo selAuctionDetail(AuctionDto dto); //writernm때문에
-    List<AuctionVo> selAuctionList(AuctionDto dto);
-    List<AuctionVo> selAuctionListAll(AuctionDto dto);
+    AuctionVo selAuctionDetail(AuctionVo dto); //writernm때문에
+    List<AuctionVo> selAuctionList(AuctionVo dto);
+    List<AuctionVo> selAuctionListAll(AuctionVo dto);
     List<AuctionCategoryEntity> selAuctionCategoryList();
 
     int updAuction(AuctionEntity entity);

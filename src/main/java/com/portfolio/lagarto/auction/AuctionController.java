@@ -156,7 +156,7 @@ public class AuctionController {
 
 
     @GetMapping("/list")
-    public String list(AuctionDto dto, Model model) {
+    public String list(AuctionVo dto, Model model) {
 
         model.addAttribute("List", service.selAuctionListAll(dto));
         System.out.println(service.selAuctionListAll(dto));
@@ -165,7 +165,7 @@ public class AuctionController {
 
 
     @GetMapping("/list/{icategory}")
-    public String list(@PathVariable int icategory, AuctionDto dto, Model model) {
+    public String list(@PathVariable int icategory, AuctionVo dto, Model model) {
         model.addAttribute("icategory");
         model.addAttribute("List", service.selAuctionList(dto));
         dto.setIcategory(icategory);
@@ -176,24 +176,19 @@ public class AuctionController {
 
 
     @GetMapping("/detail")
-    public String detail(AuctionBidEntity entity ,AuctionDto dto, Model model) {
+    public String detail(AuctionBidEntity entity ,AuctionVo dto, Model model) {
         model.addAttribute("Data", service.selAuctionDetail(dto));
         //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
         entity.setIboard(dto.getIboard());
-        model.addAttribute("BidList",service.bidList(entity));
+
         return "auction/detail";
     }
 
-    @PostMapping("/detail")
-    public String detailproc(@ModelAttribute("auctionBidEntity") AuctionBidEntity entity,AuctionDto dto){
-        entity.setIboard(dto.getIboard());
 
-        return "auction/detail?iboard="+entity.getIboard();
-    }
 
 
     @GetMapping("/mod")
-    public String mod(AuctionDto dto,Model model){
+    public String mod(AuctionVo dto,Model model){
         model.addAttribute(Const.DATA,service.selAuctionDetail(dto));
 
         return "auction/mod";

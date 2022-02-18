@@ -24,13 +24,13 @@
                 ~~~~~여기는 디테일 부분 ~~~~~
                 <div id="isfollow" onsubmit="return isfollow();"></div>
                 <div class="detail_item" }>
-                    <div>작성자 : <span th:text="${data.writernm}"/></div> <!--옆에 프로필사진-->
+                    <div>작성자 : <span th:text="${data.nicknm}"/></div> <!--옆에 프로필사진-->
                     <div>카테고리 : <span th:text="${data.categorynm}"/></div>
                     <div>제목 :<span th:text="${data.title}"/></div>
                     <div>내용 : <span th:text="${data.ctnt}"/></div>
                     <div>즉시 구매가: <span th:text="${data.imbuy}"/> 원</div>
                     <div>시작가격 :<span id="buy" name="buy" th:text="${data.buy}"/> 원
-                        <span th:with="bid=${BidList}" th:if="${session.loginUser != null}">
+                        <span  th:if="${session.loginUser != null}">
 
 <!--            <input type="button" onclick="check();" id="upprice" name="upprice" value="경매가 올리기" >-->
                             <!--            <div th:with="bid=${BidList}">-->

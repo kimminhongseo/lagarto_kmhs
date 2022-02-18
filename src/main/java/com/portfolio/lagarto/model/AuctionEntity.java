@@ -4,7 +4,7 @@ package com.portfolio.lagarto.model;
 import lombok.Data;
 
 @Data
-public class AuctionEntity {
+public class AuctionEntity  {
     private int iboard;
     private int icategory;
     private String title;

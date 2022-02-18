@@ -9,4 +9,5 @@ public class AuctionVo extends AuctionEntity {
     private String writernm;
     private String profile_img;
     private String categorynm;
+    private String nicknm;
 }

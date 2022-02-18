@@ -17,9 +17,10 @@
     </select>
 
     <select id="selCustomerDetail" resultType="CustomerVo">
-        SELECT A.*, B.nickname, C.board_nm FROM lagarto.customer A
+        SELECT A.*, B.nickname, C.board_nm, D.title AS productTitle FROM lagarto.customer A
         LEFT JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
         LEFT JOIN lagarto.customer_board_type C ON A.board_cd = C.board_cd
+        LEFT JOIN lagarto.auction D ON A.product_cd = D.iboard
         WHERE A.iboard = ${iboard}
     </select>
 

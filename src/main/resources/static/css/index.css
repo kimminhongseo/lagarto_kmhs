@@ -180,3 +180,10 @@
 .footer_container .footer_list .notice_area {
     width: 35%;
 }
+
+#unfollow-Btn, #follow-Btn{
+    cursor:pointer;
+    color: #0437F2;
+    background: transparent;
+    border: transparent;
+}

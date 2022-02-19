@@ -72,6 +72,8 @@ function manwonup(){
     checkbuy = manwon;
     console.log(checkbuy);
 }
+//인덱스삭제 팔로우 사용하고 싶은곳 추가
+isfollow();
 
 const bidmodal = document.querySelector('#bid-modal');
 const formImbuy = document.querySelector('#formimbuy');

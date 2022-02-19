@@ -150,7 +150,7 @@
 											<td th:text="${item.nickname}">
 											</td>
 											<td>
-                                                팔로우
+                                                <i class="fa-solid fa-user-group"></i>
 											</td>
 											<td th:text="${item.level}">
 											</td>
@@ -192,13 +192,13 @@
 										</tr>
 										</thead>
 										<tbody>
-										<tr th:each="item : ${following}" class="myF">
+										<tr th:each="item : ${following}" id="myF">
 											<td th:text="${item.nickname}">
 											</td>
 											<td class="myFollowBtns">
-                                                <button class="unfollow-Btn" th:value="${item.iuserMe}">언팔로우</button>
+                                                <button id="unfollow-Btn" th:value="${item.iuserMe}" ><i class="fa-solid fa-user-minus"></i></button>
                                             </td>
-											<td th:text="${item.level}">
+											<td th:text="${item.level}" >
 											</td>
 										</tr>
 										</tbody>

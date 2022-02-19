@@ -31,7 +31,8 @@ public class Utils {
         return str.replace("<", "&lt")
                 .replace(">", "&gt")
                 .replace(".", "&#46")
-                .replace("'", "&#39");
+                .replace("'", "&#39")
+                .replace("#", "&#35");
     }
     
         //랜덤으로 비밀번호 주기

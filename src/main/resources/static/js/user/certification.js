@@ -21,7 +21,7 @@
 
         }
 
-        certForm.addEventListener('submit', (e) => {
+        certForm.onsubmit = () => {
             let inputs = certForm.querySelectorAll('input');
             for (let i = 0; i < inputs.length; i++) {
                 let input = inputs[i];
@@ -33,7 +33,7 @@
                         console.log(name);
                         alert(`${name}를 다시 확인해 주세요.`);
                         input.focus();
-                        e.preventDefault();
+                        return false;
                     }
                 }
             }
@@ -68,9 +68,9 @@
                     }
                 })
                 .catch(err => { console.log(err) })
-            e.preventDefault();
+            return false;
 
-        })
+        }
 
     }
 

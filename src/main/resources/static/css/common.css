@@ -94,3 +94,5 @@ input {outline: none;}
 }
 
 .pointer { cursor: pointer; }
+
+.stretch {flex: 1;}

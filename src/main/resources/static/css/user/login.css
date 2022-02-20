@@ -151,4 +151,10 @@ span.buttonText {
     margin-bottom: 3rem;
 }
 
+#recaptcha{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+
+}
 

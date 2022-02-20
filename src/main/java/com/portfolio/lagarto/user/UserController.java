@@ -41,6 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
+    @ResponseBody
     public String loginproc(UserEntity entity, Model model) {
         int result = service.loginSel(entity);
         if (result == 1) {//로그인성공

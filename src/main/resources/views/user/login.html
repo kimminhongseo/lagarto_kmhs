@@ -7,6 +7,7 @@
     <title>로그인</title>
     <link rel="stylesheet" th:href="@{/css/user/login.css}">
     <script defer th:src="@{/js/user/login.js}"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <th:block layout:fragment="content">
@@ -16,7 +17,7 @@
         <form id="login" action="/user/login" method="post">
             <div id="generalLogin">
                 <div>
-                    <div class="my-3"><input type="text" class="form-control" id="formId" placeholder="아이디"
+                    <div id="pId" class="my-3"><input type="text" class="form-control" id="formId" placeholder="아이디"
                                              aria-label="Username"
                                              aria-describedby="basic-addon1" name="uid"></div>
                 </div>
@@ -25,8 +26,9 @@
                                              aria-label="Username" aria-describedby="basic-addon1" name="upw"></div>
                 </div>
                 <div>
+                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6Ldq34seAAAAACoxUgs451Cl7FcrboIERxJs9_FM" data-callback="recaptchaCallback"></div>
                     <div class="my-4" id="btnUser">
-                        <button type="button" class="btn btn-outline-success" id="btnLogin">로그인</button>
+                        <button type="button" class="btn btn-outline-success" id="btnLogin" onclick="return dologin()">로그인</button>
                         <button type="button" class="btn btn-outline-success" id="btnJoin">회원가입</button>
                     </div>
                 </div>

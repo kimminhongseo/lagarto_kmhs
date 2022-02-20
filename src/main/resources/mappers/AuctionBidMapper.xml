@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--메퍼 설정 하세요-->
+<mapper namespace="com.portfolio.lagarto.auction.AuctionBidMapper">
+
+
+
+    <insert id="insBid">
+        INSERT INTO auction_bid(iboard,buyer,buy,imbuy)
+        VALUES (#{iboard},#{buyer},#{buy},(SELECT imbuy FROM auction WHERE iboard=#{iboard}));
+    </insert>
+
+    <update id="updBid">
+        UPDATE auction
+        SET buy = (SELECT buy FROM auction_bid WHERE iboard = #{iboard}) ,
+        buyer = (SELECT buyer FROM auction_bid WHERE iboard = #{iboard})
+        WHERE iboard = #{iboard};
+
+    </update>
+
+
+
+
+</mapper>

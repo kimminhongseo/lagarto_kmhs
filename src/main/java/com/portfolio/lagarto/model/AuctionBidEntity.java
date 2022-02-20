@@ -4,10 +4,11 @@ import lombok.Data;
 
 @Data
 public class AuctionBidEntity {
-
     private int iboard;
-    private int iuser;
+    private int buyer;
     private int buy;
+    private int imbuy;
+
     private String rdt;
 
 }

@@ -12,7 +12,7 @@
 //magnificPopup 이기능은 jQuery를 사용하여 클릭하면
 // 모달창 뜨면서 좌우로 넘길수 있음.
 
-
+{
 // 이미지 클릭하면 상세기되는거(팝업으로 근데 새창임)  window.open(_self) 해주면 현재 페이지에서 열림.
 const img = document.getElementsByClassName("click_img");
 for (let x = 0; x < img.length; x++) {
@@ -74,16 +74,46 @@ function manwonup(){
 }
 
 const bidmodal = document.querySelector('#bid-modal');
+
 const formImbuy = document.querySelector('#formimbuy');
 const formBuy = document.querySelector('#formbuy');
 const formBid = document.querySelector('#formbid');
-const formBidBtn = document.querySelector('#formbidbtn');
+
+const formbuybtn = document.querySelector('#formbuybtn');
 const formImbuyBtn = document.querySelector('#formimbuybtn');
 
 
 
+if(bidmodal){
+    formbuybtn.addEventListener('click',()=>{
+        if(confirm("경매가를 수정하시겠습니까?")){
+            console.log(formBid.value);
+           fetch(`/ajax/auctionBid?buy=${formBid.value}`,{
+           }).then(res => {
+                   return res.json();
+               }).then(data =>{
+                   console.log(data);
+                   switch (data){
+                       case 0:
+                           alert("에러발생");
+                            break;
+                   }
+           })
 
 
+
+        }
+    });
+}
+
+
+
+
+
+
+
+
+}
 
 
 

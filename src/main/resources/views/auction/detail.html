@@ -14,7 +14,9 @@
 
     <!--session.loginUser 를 빼주면 session.loginUser.iuser가 null일때 에러.-->
     <div class="main">
+        <!--Elem=docu q ~. dataIuser   Elem.dataset.iuser  하면 Data.iuser값이 js로 온다. -->
         <div id="dataIuser" th:with="data=${Data}" th:data-iuser="${Data.iuser}">
+            <!--param은 바로넣으면 안되면 우회해야함.-->
             <div id="data" th:with="ibo=${param.iboard}" th:data-iboard="${ibo}">
                 <div th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
                     <button id="modBtn">수정</button>
@@ -39,7 +41,7 @@
                             <!--            </div>-->
 
             <div> 현재 가격은 : (<span id="checkbuy" th:text="${data.buy}" th:value="${data.buy}"/>) 원 입니다.</div>
-            <div> ↑↑↑↑현재 입찰자는 (<span id="checkwriternm" th:text="${data.writernm}" th:value="${data.writernm}"/>) 님 입니다↑↑↑↑ </div>
+            <div> ↑↑↑↑현재 입찰자는 (<span id="checkwriternm" th:text="${data.nicknm}" th:value="${data.nicknm}"/>) 님 입니다↑↑↑↑ </div>
 
 
                             <!-- Button trigger modal -->
@@ -54,13 +56,13 @@
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" id="bid-modal">
+      <form class="modal-body" id="bid-modal">
            <div> 즉시구매가: <input type="text" id="formimbuy" th:value="${data.imbuy}" readonly></div>
            <div> 현재가: <input type="text" id="formbuy" th:value="${data.buy}" readonly></div>
-           <div> 경매가: <input type="text" id="formbid"></div>
-          <button type="button" id="formbidbtn" class="btn btn-primary">경매가 등록</button>
-          <button type="button" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
-      </div>
+           <div> 경매가: <input type="text" name="formbid"></div>
+          <button type="submit"  id="formbuybtn" class="btn btn-primary" >경매가 등록</button>
+          <button type="submit" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
+      </form>
       <div class="modal-footer">
              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
       </div>

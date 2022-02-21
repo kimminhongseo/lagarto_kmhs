@@ -10,6 +10,7 @@ import com.portfolio.lagarto.model.UserDto;
 import com.portfolio.lagarto.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -215,7 +216,7 @@ public class UserController {
         if (hsentity == null) {
             return "/user/login";
         }
-        if (!nickNamesB && !nmsB) {
+        if (nickNamesB && nmsB) {
             if (nickNames.length() > 0 && nms.length() > 0) {
                 hsentity.setNickname(nickNames);
                 hsentity.setNm(nms);
@@ -229,4 +230,19 @@ public class UserController {
         model.addAttribute(Const.MSG, "공백,특수문자 없이 입력 하십시오.");
         return "/user/information";
     }
+
+    @GetMapping("/charge")
+    public void charge(){};
+
+
+    @PostMapping("/charge")
+    public void charge(@RequestParam int money){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setIuser(utils.getLoginUserPk());
+        userEntity.setMoney(money);
+        System.out.println(money);
+        service.moneyCharge(userEntity);
+    }
+
 }
+

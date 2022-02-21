@@ -173,4 +173,8 @@ public class UserService {
         mapper.informationUpd(entity);
     }
 
+    public void moneyCharge(UserEntity entity) {
+        mapper.moneyCharge(entity);
+    }
+
 }

@@ -86,4 +86,10 @@
             address_secondary = #{address_secondary}
         WHERE iuser = #{iuser}
     </update>
+    
+    <update id="moneyCharge">
+        UPDATE `lagarto`.`lagarto_user`
+        SET money = #{money}
+        WHERE iuser = #{iuser};
+    </update>
 </mapper>

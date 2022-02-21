@@ -23,6 +23,29 @@
     div2.style.paddingTop = '30px';
     div2.style.paddingBottom = '30px';
 
+    if (btnUserElem) {
+        btnLoginElem.addEventListener('click', (e) => {
+            btnLoginElem.type = 'submit';
+        });
+    }
+
+    // 휴대전화 인증 페이지 (/user/certification) 이동
+    let btnJoinElem = document.querySelector('#btnJoin');
+
+    if (btnJoinElem) {
+        btnJoinElem.addEventListener('click', () => {
+            location.href = '/user/join';
+        })
+    }
+
+    function openJoinWin() {
+        window.open(
+            "/user/certification",
+            "_blank",
+            "width=800, height=700, location=no, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
+    }
+
+
     let isRecaptchachecked = false;
 
     $('#formId').on('keyup', (k) => {

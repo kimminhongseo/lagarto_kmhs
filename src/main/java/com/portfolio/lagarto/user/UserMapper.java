@@ -20,4 +20,5 @@ public interface UserMapper {
     UserEntity authKey(UserEntity entity);
     int nicknameCheck(String nickname);
     void informationUpd(UserEntity entity);
+    void moneyCharge(UserEntity entity);
 }

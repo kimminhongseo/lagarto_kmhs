@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.portfolio.lagarto.customer.CustomerMapper">
-    <insert id="insCustomer">
+    <insert id="insCustomer" parameterType="CustomerDto" useGeneratedKeys="true" keyProperty="">
         INSERT INTO lagarto.customer
-        (board_cd, title, ctnt, ctnt_img, iuser, rating)
+        (iboard, board_cd, title, ctnt, iuser, rating)
         VALUES
-        (${board_cd}, #{title}, #{ctnt}, #{ctnt_img}, ${iuser}, ${rating})
+        (${iboard}, ${board_cd}, #{title}, #{ctnt}, ${iuser}, ${rating})
     </insert>
 
     <select id="selCustomerList" resultType="CustomerVo">

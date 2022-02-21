@@ -42,13 +42,8 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public String loginproc(UserEntity entity, Model model) {
-        int result = service.loginSel(entity);
-        if (result == 1) {//로그인성공
-            return "redirect:/main";
-        }
-        model.addAttribute(Const.MSG, Const.ERR_Login);
-        return "user/login";
+    public int loginproc(UserEntity entity) {
+        return service.loginSel(entity);
     }
 
     @PostMapping("/apiLogin")

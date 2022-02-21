@@ -12,6 +12,17 @@
     div.style.paddingTop = '15px';
     div.style.color = 'red';
 
+    let div2 = document.createElement('div');
+    div2.innerHTML = '로그인 실패';
+    div2.style.display = 'flex';
+    div2.style.justifyContent = 'center';
+    div2.style.justifyItems = 'center';
+    div2.style.textAlign = 'center';
+    div2.style.color = 'red';
+    div2.style.backgroundColor = 'rgba(255,0,0,0.1)';
+    div2.style.paddingTop = '30px';
+    div2.style.paddingBottom = '30px';
+
     let isRecaptchachecked = false;
 
     $('#formId').on('keyup', (k) => {
@@ -83,8 +94,16 @@
                                 uid : $('#formId').val(),
                                 upw : $('#formPw').val()
                             },
-                            success: () => {
-                                location.href = '/main';
+                            success: (num) => {
+                                switch (num){
+                                    case 1:
+                                        location.href = '/main';
+                                        break;
+                                    case 2:
+                                        let msg = $('#msg-login');
+                                        msg.append(div2);
+                                        break;
+                                }
                             }
                         });
                         break;

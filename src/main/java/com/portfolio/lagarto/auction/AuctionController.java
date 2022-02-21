@@ -134,7 +134,6 @@ public class AuctionController {
             auctionEntity.setImage4(imagesList.get(3));
             auctionEntity.setImage5(imagesList.get(4));
             service.insAuction(auctionEntity);
-            System.out.println(service.insAuctionList(auctionEntity));
             System.out.println("입력후 : "+imagesList);
         }
 
@@ -178,6 +177,7 @@ public class AuctionController {
     public String detail(AuctionBidEntity entity ,AuctionVo vo, Model model) {
         model.addAttribute("Data", service.selAuctionDetail(vo));
         //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
+        System.out.println("확인이이이이이이"+vo);
         entity.setIboard(vo.getIboard());
 
         return "auction/detail";

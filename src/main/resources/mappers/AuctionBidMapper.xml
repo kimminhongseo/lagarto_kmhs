@@ -11,7 +11,7 @@
     </insert>
 
     <update id="updBid">
-        UPDATE auction SET buy = #{buy}, buyer = #{buyer}
+        UPDATE auction SET buy = #{buy}, buyer = #{buyer} ,mdt = now()
         WHERE iboard = #{iboard};
     </update>
 

@@ -9,5 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AuctionBidMapper {
 
     int insAuction(AuctionBidVo vo);
-    void updBid(AuctionBidVo vo);
+    int updBid(AuctionBidVo vo);
 }

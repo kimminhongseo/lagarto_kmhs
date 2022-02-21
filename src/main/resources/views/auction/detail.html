@@ -24,6 +24,7 @@
                 </div>
                 <!--<a th:href="@{/auction/del(iboard=${ibo})}">삭제</a>-->
                 ~~~~~여기는 디테일 부분 ~~~~~
+
                 <div id="isfollow" onsubmit="return isfollow();"></div>
                 <div class="detail_item" }>
                     <div>작성자 : <span th:text="${data.nicknm}"/></div> <!--옆에 프로필사진-->
@@ -31,7 +32,6 @@
                     <div>제목 :<span th:text="${data.title}"/></div>
                     <div>내용 : <span th:text="${data.ctnt}"/></div>
                     <div>즉시 구매가: <span th:text="${data.imbuy}"/> 원</div>
-                    <div id="startbuy">시작가격 :<span id="buy" name="buy" th:text="${data.buy}"/> 원
                         <span  th:if="${session.loginUser != null}">
 
 <!--            <input type="button" onclick="check();" id="upprice" name="upprice" value="경매가 올리기" >-->
@@ -41,7 +41,7 @@
                             <!--            </div>-->
 
             <div> 현재 가격은 : (<span id="checkbuy" th:text="${data.buy}" th:value="${data.buy}"/>) 원 입니다.</div>
-            <div> ↑↑↑↑현재 입찰자는 (<span id="checkwriternm" th:text="${data.nicknm}" th:value="${data.nicknm}"/>) 님 입니다↑↑↑↑ </div>
+            <div> ↑↑↑↑현재 입찰자는 (<span id="checkwriternm" th:text="${data.buyernickname}" th:value="${data.buyernickname}"/>) 님 입니다↑↑↑↑ </div>
 
 
                             <!-- Button trigger modal -->
@@ -56,7 +56,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form class="modal-body" id="bid-modal" th:action="@{/ajax/auctionBid/buy}" method="post">
+      <form class="modal-body" id="bid-modal">
            <div> 즉시구매가: <input type="text" id="formimbuy" th:value="${data.imbuy}" readonly></div>
            <div> 현재가: <input type="text" id="formbuy" th:value="${data.buy}" readonly></div>
            <div> 경매가: <input type="text" id="formbid"></div>

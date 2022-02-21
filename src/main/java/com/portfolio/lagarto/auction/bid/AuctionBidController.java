@@ -31,16 +31,18 @@ public class AuctionBidController {
 
 
     @PostMapping("/buy")
-    public String bid(@RequestParam("formbid") int formbid, @RequestParam("iboard") int iboard) {
-        System.out.println(formbid);
-        System.out.println(iboard);
+    public int bid(@RequestParam("formbid") int formbid, @RequestParam("iboard") int iboard,
+                      @RequestParam("formimbuy") int formimbuy, @RequestParam("formbuy") int formbuy) {
         AuctionBidVo vo = new AuctionBidVo();
-        vo.setBuy(formbid);
+        vo.setPrebuy(formbuy); //현재
+        vo.setBuy(formbid); //적은값
+        vo.setImbuy(formimbuy); //즉시구매
         vo.setIboard(iboard);
         vo.setBuyer(utils.getLoginUserPk());
-        service.updBid(vo);
 
-        return "true";
+        return service.updBid(vo);
+
+
     }
 
 

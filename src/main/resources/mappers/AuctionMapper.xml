@@ -5,9 +5,9 @@
 
     <insert id="insAuction">
         insert into lagarto.auction
-        (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5)
+        (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5,buyer)
         values
-        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5})
+        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},0)
 
     </insert>
 
@@ -51,14 +51,16 @@
 
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">
-        select *,
-        B.nm as writernm , B.profile_img,B.nickname as nicknm , C.nm as categorynm
+        SELECT *,
+        B.nm as writernm , B.profile_img,B.nickname as nicknm , C.nm as categorynm, D.nickname AS buyernickname
         from lagarto.auction A
-            left join lagarto.lagarto_user B
-            on A.iuser = B.iuser
-            left join lagarto.auction_category C
-            on A.icategory = C.icategory
-        where A.iboard = ${iboard}
+        left join lagarto.lagarto_user B
+        on A.iuser = B.iuser
+        LEFT JOIN lagarto.lagarto_user D
+        ON A.buyer = D.nickname
+        left join lagarto.auction_category C
+        on A.icategory = C.icategory
+        where A.iboard = #{iboard}
 
     </select>
 

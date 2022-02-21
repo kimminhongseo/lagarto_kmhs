@@ -18,4 +18,8 @@ public class AuctionBidService {
         vo.setBuyer(utils.getLoginUserPk());
         return mapper.insAuction(vo);
     }
+
+    public void updBid(AuctionBidVo vo){
+        mapper.updBid(vo);
+    }
 }

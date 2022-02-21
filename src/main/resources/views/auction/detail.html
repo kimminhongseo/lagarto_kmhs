@@ -31,7 +31,7 @@
                     <div>제목 :<span th:text="${data.title}"/></div>
                     <div>내용 : <span th:text="${data.ctnt}"/></div>
                     <div>즉시 구매가: <span th:text="${data.imbuy}"/> 원</div>
-                    <div>시작가격 :<span id="buy" name="buy" th:text="${data.buy}"/> 원
+                    <div id="startbuy">시작가격 :<span id="buy" name="buy" th:text="${data.buy}"/> 원
                         <span  th:if="${session.loginUser != null}">
 
 <!--            <input type="button" onclick="check();" id="upprice" name="upprice" value="경매가 올리기" >-->
@@ -56,12 +56,12 @@
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form class="modal-body" id="bid-modal">
+      <form class="modal-body" id="bid-modal" th:action="@{/ajax/auctionBid/buy}" method="post">
            <div> 즉시구매가: <input type="text" id="formimbuy" th:value="${data.imbuy}" readonly></div>
            <div> 현재가: <input type="text" id="formbuy" th:value="${data.buy}" readonly></div>
-           <div> 경매가: <input type="text" name="formbid"></div>
-          <button type="submit"  id="formbuybtn" class="btn btn-primary" >경매가 등록</button>
-          <button type="submit" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
+           <div> 경매가: <input type="text" id="formbid"></div>
+          <button type="button"  id="formbuybtn" class="btn btn-primary" >경매가 등록</button>
+          <button type="button" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
       </form>
       <div class="modal-footer">
              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

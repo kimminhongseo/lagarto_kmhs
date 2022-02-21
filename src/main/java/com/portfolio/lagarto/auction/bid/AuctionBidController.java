@@ -31,15 +31,16 @@ public class AuctionBidController {
 
 
     @PostMapping("/buy")
-    public int bid(@RequestParam int formbid ) {
+    public String bid(@RequestParam("formbid") int formbid, @RequestParam("iboard") int iboard) {
+        System.out.println(formbid);
+        System.out.println(iboard);
         AuctionBidVo vo = new AuctionBidVo();
-        vo.setBuyer(utils.getLoginUserPk());
         vo.setBuy(formbid);
-        try {
-            return service.insAuction(vo);
-        } catch (Exception e) {
-            return 0;
-        }
+        vo.setIboard(iboard);
+        vo.setBuyer(utils.getLoginUserPk());
+        service.updBid(vo);
+
+        return "true";
     }
 
 

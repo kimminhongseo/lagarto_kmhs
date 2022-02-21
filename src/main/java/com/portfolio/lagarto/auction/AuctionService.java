@@ -30,24 +30,24 @@ public class AuctionService {
       return mapper.insAuctionList(entity);
     }
 
-    public List<AuctionVo> selAuctionList(AuctionVo dto){return  mapper.selAuctionList(dto);}
-    public List<AuctionVo> selAuctionListAll(AuctionVo dto){return  mapper.selAuctionListAll(dto);}
+    public List<AuctionVo> selAuctionList(AuctionVo vo){return  mapper.selAuctionList(vo);}
+    public List<AuctionVo> selAuctionListAll(AuctionVo vo){return  mapper.selAuctionListAll(vo);}
 
-    public AuctionVo selAuctionDetail (AuctionVo dto){return mapper.selAuctionDetail(dto);}
+    public AuctionVo selAuctionDetail (AuctionVo vo){return mapper.selAuctionDetail(vo);}
 
-    public int updAuction(AuctionEntity entity){
+    public int updAuction(AuctionVo vo){
         try{
-            entity.setIuser(utils.getLoginUserPk());
-            return mapper.updAuction(entity);
+            vo.setIuser(utils.getLoginUserPk());
+            return mapper.updAuction(vo);
         }catch (Exception e){
             e.printStackTrace();
             return 2; // update안되면 0
         }
     }
 
-    public int delAuction(AuctionEntity entity){
-        entity.setIsdel(1);
-        return mapper.delAuction(entity);
+    public int delAuction(AuctionVo vo){
+        vo.setIsdel(1);
+        return mapper.delAuction(vo);
     }
 
     public List<AuctionCategoryEntity> auctionMenuList(){return  mapper.selAuctionCategoryList();}

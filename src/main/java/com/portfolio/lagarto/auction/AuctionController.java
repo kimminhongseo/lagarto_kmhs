@@ -156,34 +156,38 @@ public class AuctionController {
 
 
     @GetMapping("/list")
-    public String list(AuctionVo dto, Model model) {
+    public String list(AuctionVo vo, Model model) {
 
-        model.addAttribute("List", service.selAuctionListAll(dto));
-        System.out.println(service.selAuctionListAll(dto));
+        model.addAttribute("List", service.selAuctionListAll(vo));
+        System.out.println(service.selAuctionListAll(vo));
         return "auction/list";
     }
 
 
     @GetMapping("/list/{icategory}")
-    public String list(@PathVariable int icategory, AuctionVo dto, Model model) {
+    public String list(@PathVariable int icategory, AuctionVo vo, Model model) {
         model.addAttribute("icategory");
-        model.addAttribute("List", service.selAuctionList(dto));
-        dto.setIcategory(icategory);
+        model.addAttribute("List", service.selAuctionList(vo));
+        vo.setIcategory(icategory);
         return "auction/list";
 
     }
 
 
-
     @GetMapping("/detail")
-    public String detail(AuctionBidEntity entity ,AuctionVo dto, Model model) {
-        model.addAttribute("Data", service.selAuctionDetail(dto));
+    public String detail(AuctionBidEntity entity ,AuctionVo vo, Model model) {
+        model.addAttribute("Data", service.selAuctionDetail(vo));
         //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
-        entity.setIboard(dto.getIboard());
+        entity.setIboard(vo.getIboard());
 
         return "auction/detail";
     }
 
+    //js처리 위해
+    @GetMapping("/detail_item")
+    public void selAuctionDetail(Model model, AuctionVo vo){
+        model.addAttribute("data",service.selAuctionDetail(vo));
+    }
 
 
 
@@ -195,10 +199,10 @@ public class AuctionController {
     }
 
     @PostMapping("/mod")
-    public String modProc(@ModelAttribute("auctionEntity") AuctionEntity entity,@RequestParam("files") MultipartFile[] files){
+    public String modProc(@ModelAttribute("auctionVo") AuctionVo vo,@RequestParam("files") MultipartFile[] files){
         StringBuilder fileNames = new StringBuilder();
 
-       String moduploadDirectory = first_uploadDirectory + "/" + entity.getIboard();
+       String moduploadDirectory = first_uploadDirectory + "/" + vo.getIboard();
         //mod경로에 파일이나존재하면 삭제.
         File f = new File(moduploadDirectory);
 
@@ -249,22 +253,21 @@ public class AuctionController {
         }
         finally {
             //어차피 for문에서 files.length가 짧았다면 나머지 뒤는 null임
-            entity.setImage1(imagesList.get(0));
-            entity.setImage2(imagesList.get(1));
-            entity.setImage3(imagesList.get(2));
-            entity.setImage4(imagesList.get(3));
-            entity.setImage5(imagesList.get(4));
-            service.updAuction(entity); //update
-            System.out.println(service.updAuction(entity));
-            System.out.println("입력후 : "+imagesList);
+            vo.setImage1(imagesList.get(0));
+            vo.setImage2(imagesList.get(1));
+            vo.setImage3(imagesList.get(2));
+            vo.setImage4(imagesList.get(3));
+            vo.setImage5(imagesList.get(4));
+            service.updAuction(vo); //update
+
         }
 
-        return "redirect:/auction/detail?iboard=" + entity.getIboard();
+        return "redirect:/auction/detail?iboard=" + vo.getIboard();
     }
 
     @GetMapping("/del")
-    public String delProc(AuctionEntity entity){
-        int result = service.delAuction(entity);
+    public String delProc(AuctionVo vo){
+        int result = service.delAuction(vo);
         return "redirect:/auction/list/";
     }
 

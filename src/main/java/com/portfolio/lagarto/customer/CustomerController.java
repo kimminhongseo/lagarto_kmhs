@@ -54,6 +54,6 @@ public class CustomerController {
         if(result == 1) {
             return "redirect:/customer/list/" + entity.getBoard_cd();
         }
-        return "customer/list/1";
+        return "customer/list";
     }
 }

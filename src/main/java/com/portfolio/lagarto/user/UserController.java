@@ -240,7 +240,6 @@ public class UserController {
         UserEntity userEntity = new UserEntity();
         userEntity.setIuser(utils.getLoginUserPk());
         userEntity.setMoney(money);
-        System.out.println(money);
         service.moneyCharge(userEntity);
     }
 

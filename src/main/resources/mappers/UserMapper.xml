@@ -89,7 +89,7 @@
     
     <update id="moneyCharge">
         UPDATE `lagarto`.`lagarto_user`
-        SET money = #{money}
+        SET money = money + #{money}
         WHERE iuser = #{iuser};
     </update>
 </mapper>

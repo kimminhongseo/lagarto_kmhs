@@ -33,6 +33,6 @@ $('#charge_kakao').click(function () {
             msg += '에러내용 : ' + rsp.error_msg;
         }
         alert(msg);
-        document.location.href="/main"; //alert창 확인 후 이동할 url 설정
+        document.location.href="/user/charge"; //alert창 확인 후 이동할 url 설정
     });
 });

@@ -36,7 +36,6 @@ input {outline: none;}
 
 .object_button {
     border: none;
-    border-radius: 100rem;
     cursor: pointer;
     display: inline-block;
     text-align: center;

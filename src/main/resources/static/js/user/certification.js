@@ -4,7 +4,7 @@
     let profile;
 
     if (certForm) {
-        const cancelBtn = document.querySelector('#cancelBtn');
+        const cancelBtn = document.querySelector('#cancel_btn');
 
         cancelBtn.addEventListener('click', () => {
             window.history.back();

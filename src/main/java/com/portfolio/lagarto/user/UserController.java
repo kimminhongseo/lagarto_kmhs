@@ -31,7 +31,7 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login(Model model, @ModelAttribute("entity") UserEntity entity) {
         if (0 != utils.getLoginUserPk()){
             return "redirect:/main";
         }
@@ -212,4 +212,18 @@ public class UserController {
         service.informationUpd(hsentity);
         return "redirect:/user/mypage";
     }
+
+    @GetMapping("/forgotId")
+    public void forgotId(@ModelAttribute("entity") UserEntity entity, Model model) {
+        model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
+        model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
+        model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
+    }
+
+    @PostMapping("/forgotId")
+    public String forgotIdProc(UserEntity entity) {
+        return "";
+    }
+
+    // TODO : 로그인 form 정규식 체크 / 로그인 실패 시 오류 alert 처리
 }

@@ -4,19 +4,18 @@
       layout:decorate="temp/thymeleaf_layout">
 
 <head>
-    <title>회원가입</title>
-    <link rel="stylesheet" th:href="@{/css/user/certification.css}">
-    <script defer th:src="@{/js/user/certification.js}"></script>
+    <title>아이디 찾기</title>
+    <link rel="stylesheet" th:href="@{/css/user/forgot.css}">
+    <script defer th:src="@{/js/user/forgotEamil.js}"></script>
 </head>
 
 <th:block layout:fragment="content">
-    <div class="cert_main">
-        <h1>회원가입</h1>
-        <div id="certification">
-            <form th:action="@{/user/apiCertification}" method="post" id="cert_form" th:object="${entity}">
+    <div class="forgot_main">
+        <h1>아이디 찾기</h1>
+        <div id="forgotInfo">
+            <form th:action="@{/user/forgotId}" method="post" id="forgot_id_form" th:object="${entity}">
                 <div class="form_container">
-                    <div id="googleLogin" class="hidden g-signin2" data-onsuccess="onSignIn"></div>
-                    <div class="input_name">휴대전화 인증</div>
+                    <div class="input_name">휴대전화로 찾기</div>
                     <div class="num_wrap">
                         <label class="num_box">
                             <span hidden>휴대전화</span>
@@ -45,7 +44,7 @@
 
                     <div class="btn_cont">
                         <input id="cancel_btn" class="object_button prop_light" type="button" value="취소">
-                        <input class="object_button prop_dark" type="submit" value="인증하기">
+                        <input class="object_button prop_dark" type="submit" value="아이디 찾기">
                     </div>
                 </div>
             </form>

@@ -86,4 +86,13 @@
             address_secondary = #{address_secondary}
         WHERE iuser = #{iuser}
     </update>
+
+    <!-- 아이디 찾기 -->
+    <select id="selUserId" resultType="UserEntity">
+        SELECT `uid`
+        FROM `lagarto`.`lagarto_user`
+        WHERE `contact_first` = #{contact_first}
+          AND `contact_second` = #{contact_second}
+          AND `contact_third` = #{contact_third}
+    </select>
 </mapper>

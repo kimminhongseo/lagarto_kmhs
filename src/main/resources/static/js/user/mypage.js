@@ -255,20 +255,20 @@
 
 
 const unfollowBtnElem = document.querySelectorAll('#unfollow-Btn');
-    if (unfollowBtnElem){
-        unfollowBtnElem.forEach(item => {
-            item.addEventListener('click', () => {
-                fetch(`/unfollow/${item.value}`,{
-                    method : 'DELETE'
-                }).then(res => {
-                    return res.text();
-                }).then(data => {
-                    console.log(item.parentNode.parentNode);
-                    item.parentNode.parentNode.remove();
-                })
-            });
-        })
-    }
+if (unfollowBtnElem){
+    unfollowBtnElem.forEach(item => {
+        item.addEventListener('click', () => {
+            fetch(`/unfollow/${item.value}`,{
+                method : 'DELETE'
+            }).then(res => {
+                return res.text();
+            }).then(data => {
+                console.log(item.parentNode.parentNode);
+                item.parentNode.parentNode.remove();
+            })
+        });
+    })
+}
 
 
 

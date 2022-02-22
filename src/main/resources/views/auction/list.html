@@ -35,7 +35,7 @@
                         <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" }
                              onerror="this.src='/static/img/pro.png'"/>
                     </div>
-                    <div>작성자 : <span th:text="${data.writernm}"/></div>
+                    <div>작성자 : <span th:text="${data.nicknm}"/></div>
                     <div>조회수 : <span th:text="${data.hits}"/></div>
 
                     <div class="auction_info">

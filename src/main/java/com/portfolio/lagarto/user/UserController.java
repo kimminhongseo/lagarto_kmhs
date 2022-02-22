@@ -3,8 +3,10 @@ package com.portfolio.lagarto.user;
 
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.Utils;
+import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.JoinResult;
 import com.portfolio.lagarto.follow.FollowService;
+import com.portfolio.lagarto.model.ForgotIdVo;
 import com.portfolio.lagarto.model.FollowEntity;
 import com.portfolio.lagarto.model.UserDto;
 import com.portfolio.lagarto.model.UserEntity;
@@ -34,10 +36,11 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public String login(Model model) {
-        if (0 != utils.getLoginUserPk()) {
+    public String login(Model model, @ModelAttribute("entity") UserEntity entity) {
+        if (0 != utils.getLoginUserPk()){
             return "redirect:/main";
         }
+        model.addAttribute("title", "로그인");
         return "user/login";
     }
 
@@ -49,11 +52,11 @@ public class UserController {
 
     @PostMapping("/apiLogin")
     @ResponseBody
-    public Map<String, Integer> loginProc(@RequestBody UserEntity entity) {
+    public Map<String, Integer> loginProc(@RequestBody UserEntity entity){
         UserEntity dbEntity = service.selUser(entity);
 
         Map<String, Integer> result = new HashMap<>();
-        if (dbEntity == null) {
+        if (dbEntity == null){
             String pw = Utils.randomPw();
             entity.setUpw(pw);
             result.put("result", 0);
@@ -184,7 +187,6 @@ public class UserController {
         result.put("result", 0);
         return result;
     }
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
@@ -250,5 +252,33 @@ public class UserController {
         service.moneyCharge(userEntity);
     }
 
-}
+    @GetMapping("/forgotId")
+    public void forgotId(@ModelAttribute("entity") UserEntity entity, Model model) {
+        model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
+        model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
+        model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
+    }
 
+    @PostMapping("/forgotId")
+    public String forgotIdProc(UserEntity entity, Model model) {
+        UserEntity user = utils.getLoginUser();
+        if (user != null) {
+            return "/main";
+        }
+
+        ForgotIdVo vo = service.forgotId(entity);
+        if (vo.getForgotIdResult() == ForgotIdResult.FAILURE) {
+            return "/user/forgotId";
+        }
+        model.addAttribute("user", vo);
+        System.out.println(vo.getUid());
+        return "/user/forgotId.success";
+    }
+
+    @GetMapping("/forgotId.success")
+    public String forgotIdSuccess() {
+        return "/user/forgotId.success";
+    }
+
+
+}

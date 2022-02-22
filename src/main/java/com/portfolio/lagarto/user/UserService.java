@@ -4,7 +4,9 @@ package com.portfolio.lagarto.user;
 
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.Utils;
+import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.JoinResult;
+import com.portfolio.lagarto.model.ForgotIdVo;
 import com.portfolio.lagarto.model.UserDto;
 import com.portfolio.lagarto.model.UserEntity;
 import org.mindrot.jbcrypt.BCrypt;
@@ -175,6 +177,20 @@ public class UserService {
 
     public void moneyCharge(UserEntity entity) {
         mapper.moneyCharge(entity);
+    }
+
+    public ForgotIdVo forgotId(UserEntity entity) {
+        ForgotIdVo forgotIdVo = mapper.selUserId(entity);
+
+        if (forgotIdVo == null) {
+            forgotIdVo.setForgotIdResult(ForgotIdResult.FAILURE);
+            return forgotIdVo;
+        }
+
+        forgotIdVo.setForgotIdResult(ForgotIdResult.SUCCESS);
+        System.out.println(forgotIdVo);
+
+        return forgotIdVo;
     }
 
 }

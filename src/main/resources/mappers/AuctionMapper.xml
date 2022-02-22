@@ -5,9 +5,9 @@
 
     <insert id="insAuction">
         insert into lagarto.auction
-        (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5)
+        (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5,buyer)
         values
-        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5})
+        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},0)
 
     </insert>
 
@@ -29,7 +29,7 @@
 
     <select id="selAuctionList" resultType="AuctionVo">
         select *,
-        B.nm  as writernm
+        B.nm  as writernm, B.nickname as nicknm
         From lagarto.auction A
         Left join lagarto.lagarto_user B
         ON A.iuser = B.iuser
@@ -41,7 +41,7 @@
 
     <select id="selAuctionListAll" resultType="AuctionVo">
         select *,
-        B.nm as writernm
+        B.nm as writernm, B.nickname as nicknm
         from lagarto.auction A
         left join lagarto.lagarto_user B
         on A.iuser = B.iuser
@@ -51,14 +51,16 @@
 
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">
-        select *,
-        B.nm as writernm , B.profile_img , C.nm as categorynm
+        SELECT *,
+        B.nm as writernm , B.profile_img,B.nickname as nicknm , C.nm as categorynm, D.nickname AS buyernickname
         from lagarto.auction A
-            left join lagarto.lagarto_user B
-            on A.iuser = B.iuser
-            left join lagarto.auction_category C
-            on A.icategory = C.icategory
-        where A.iboard = ${iboard}
+        left join lagarto.lagarto_user B
+        on A.iuser = B.iuser
+        LEFT JOIN lagarto.lagarto_user D
+        ON A.buyer = D.iuser
+        left join lagarto.auction_category C
+        on A.icategory = C.icategory
+        where A.iboard = #{iboard}
 
     </select>
 
@@ -90,25 +92,6 @@
 
 
 
-    <!--입찰가 삽입-->
-    <insert id="insBid">
-        insert into lagarto.auction_bidtest
-        (iboard, iuser, buy)
-        values
-        (#{iboard}, #{iuser}, #{buy})
-    </insert>
-
-    <!--입찰가 가장 높은 1명.-->
-    <select id="BidList" resultType="AuctionBidVo">
-        SELECT *,B.nm AS writernm
-        FROM  lagarto.auction_bidtest A
-        Left join lagarto.lagarto_user B
-        ON A.iuser = B.iuser
-        where A.iboard = #{iboard}
-        order by buy DESC
-        LIMIT 1;
-
-    </select>
 
 
     

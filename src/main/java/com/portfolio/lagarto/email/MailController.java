@@ -26,7 +26,7 @@ public class MailController {
     @Autowired //필요한 메소드 자동찾기
     private UserService service1;
 
-    @GetMapping("/mail")
+    @PostMapping("/mail")
     public String mail(@RequestParam String uid){
         try {
             return service.sendMail(uid);

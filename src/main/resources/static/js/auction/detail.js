@@ -14,17 +14,15 @@
 
 
 // 이미지 클릭하면 상세기되는거(팝업으로 근데 새창임)  window.open(_self) 해주면 현재 페이지에서 열림.
+const searchParams = new URL(window.location.href).searchParams;
+const iboard = searchParams.get('iboard')
 const img = document.getElementsByClassName("click_img");
 for (let x = 0; x < img.length; x++) {
     img.item(x).onclick=function() {window.open(this.src,'_blank','toolbar=no,location=no,status=no,menubar=no, scrollbars=auto,resizable=no,' +
         'width=500,height=500 top=200 left=300')};
 }
 
-//ㅁㄴㅇㅁㄴㅇsadas
 
-const urlparam = document.location.href.split('?');
-const iboard = urlparam[1]; //iboard=? 형태로 나옴.
-const num = iboard.split('=')
 
 //MOD 기능  >> 잘됨.
 const modBtnElem = document.querySelector('#modBtn');
@@ -35,7 +33,7 @@ if(modBtnElem) {
 }
 
 
-//DEL 기능  >> msg 왜 안됨???
+
 
 const delBtnElem = document.querySelector('#delBtn');
 if(delBtnElem){
@@ -47,40 +45,68 @@ if(delBtnElem){
 }
 
 
+    const bidmodal = document.querySelector('#bid-modal');
+
+    const formImbuy = document.querySelector('#formimbuy');
+    const formBuy = document.querySelector('#formbuy');
+    const formBid = document.querySelector('#formbid');
+
+    const formbuybtn = document.querySelector('#formbuybtn');
+    const formImbuyBtn = document.querySelector('#formimbuybtn');
 
 
-// const currentPriceElem = document.querySelector('.current_price');
-// if(currentPriceElem){
-//     currentPriceElem.addEventListener('click',() =>{
-//         uppricePopup();
-//
-//     });
-// }
+    const startbuyElem = document.querySelector('#startbuy');
+
+    //글 디테일 가져오기
+
+    //여기서 경매가 등록하면 바뀌도롞?
+
+    if (formbuybtn) {
+        formbuybtn.addEventListener('click', () => {
+            if(confirm("경매가를 수정 하시겠습니까?")){
+                console.log(formbid.value);
+                console.log(formimbuy.value);
+                console.log(parseInt(iboard));
+                console.log(prebuyer.value);
+                console.log(formbuy.value);
+
+                fetch(`/ajax/auctionBid/buy?formbid=${formbid.value}&iboard=${parseInt(iboard)}&formimbuy=${formimbuy.value}
+            &formbuy=${formbuy.value}&prebuyer=${prebuyer.value}`, {
+                    method: 'post',
+                    headers: {'Content-type': 'application/json'}
+                }).then(res => {
+                    return res.json();
+                }).then(data => {
+
+                    switch (data){
+                        case 1: //fetch 로 전에있던값을 넣어줘라. 그 전 사람에게. case: 1일떄 일어나겠네.
+
+                            window.close();
+                            location.reload();
+                            break;
+                        case 0:
+                            alert("즉시구매가보다 낮은 금액을 입력하세요");
+                            return false;
+                            break;
+                        case 2:
+                            alert("현재가보다 높은 금액을 입력하세요");
+                            return false;
+                            break;
+                    }
 
 
-const checkbuyElem = document.querySelector('#checkbuy').innerHTML;
-let checkbuy = parseInt(checkbuyElem);
+                })
+            }
 
-const checkwriternmElem =  document.querySelector('#checkwriternm').innerHTML;
+        })
+    }
 
-function check(){
-    manwonup(); //10000원씩 추가
+    function returnmoney(){
 
-}
-function manwonup(){
-    let manwon = checkbuy + 10000;
-    checkbuy = manwon;
-    console.log(checkbuy);
-}
-//인덱스삭제 팔로우 사용하고 싶은곳 추가
-isfollow();
+    }
 
-const bidmodal = document.querySelector('#bid-modal');
-const formImbuy = document.querySelector('#formimbuy');
-const formBuy = document.querySelector('#formbuy');
-const formBid = document.querySelector('#formbid');
-const formBidBtn = document.querySelector('#formbidbtn');
-const formImbuyBtn = document.querySelector('#formimbuybtn');
+
+
 
 
 

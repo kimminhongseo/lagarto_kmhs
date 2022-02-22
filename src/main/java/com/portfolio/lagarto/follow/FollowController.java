@@ -76,4 +76,5 @@ public class FollowController {
         }
         return fservice.isFollow(followEntity);
     }
+
 }

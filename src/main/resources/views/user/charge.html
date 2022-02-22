@@ -1,0 +1,62 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+
+<head>
+    <title>충전</title>
+    <link rel="stylesheet" th:href="@{/css/user/charge.css}">
+    <script defer th:src="@{/js/user/charge.js}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+</head>
+
+<th:block layout:fragment="content">
+    <div>
+        <div id="moneys">
+            현재금액 : <label  th:text="${#numbers.formatInteger(session.loginUser.money, 0, 'COMMA') + '원'}"></label>
+        </div>
+    </div>
+<div id="container">
+    <div class="second" align="center">
+        <img class="card-img-top" width="100" height="220" src="/static/img/kakao.png" />
+        <p style="font-weight: bold">카카오페이 현재 사용가능</p>
+        <div class="form-check">
+            <label><input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>직접입력 <input id="direct" type="text"></label>
+        </div>
+        <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원 이며</br>최대 충전금액은 1,000,000만원입니다.</p>
+        <button type="button" class="btn btn-outline-dark" id="charge_kakao">충 전 하 기</button>
+    </div>
+</div>
+    <div id="bottoms">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</th:block>

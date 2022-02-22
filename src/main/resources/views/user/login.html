@@ -7,72 +7,64 @@
     <title>로그인</title>
     <link rel="stylesheet" th:href="@{/css/user/login.css}">
     <script defer th:src="@{/js/user/login.js}"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <th:block layout:fragment="content">
+    <div id="msg-login"></div>
     <div class="main">
-        <div class="logoMain"><img class="logo" th:src="@{/img/lagarto_logo.svg}"></div>
-
-        <div class="loginWrap">
-            <form id="login" th:action="@{/user/login}" method="post" th:object="${entity}">
-                <div id="generalLogin">
-                    <div class="loginArea">
-                        <span hidden>아이디</span>
-                        <label>
-                            <input type="text" class="form-control" id="formId" placeholder="아이디"
-                                                  name="uid" th:field="*{uid}">
-                        </label>
+        <div class="logoMain"><img class="logo" src="/img/lagarto_logo.svg"></div>
+        <form id="login" action="/user/login" method="post">
+            <div id="generalLogin">
+                <div>
+                    <div id="pId"><input type="text" id="formId" placeholder="아이디" name="uid"></div>
+                </div>
+                <div>
+                    <div><input type="password" id="formPw" placeholder="비밀번호" name="upw"></div>
+                </div>
+                <div class="findInfo">
+                    <div class="isSave">
+                        <input id="saveId" type="checkbox" value="1">
+                        <label for="saveId"></label>
+                        <span>아이디 저장</span>
                     </div>
-                    <div class="loginArea">
-                        <span hidden>비밀번호</span>
-                        <label>
-                            <input type="password" class="form-control" id="formPw" placeholder="비밀번호"
-                                                  name="upw" th:field="*{upw}">
-                        </label>
-                    </div>
-                    <div class="findInfo">
-                        <div class="isSave">
-                            <input id="saveId" type="checkbox" value="1">
-                            <label for="saveId"></label>
-                            <span>아이디 저장</span>
-                        </div>
-                        <div class="stretch"></div>
-                        <div>
-                            <a href="/user/forgotId">아이디 찾기</a>
-                            <span class="bar"></span>
-                            <a href="/user/forgotPw">비밀번호 찾기</a>
-                        </div>
-                    </div>
+                    <div class="stretch"></div>
                     <div>
-                        <div id="btnUser">
-                            <button type="button" class="btn btn-outline-success" id="btnLogin">로그인</button>
-                            <button type="button" class="btn btn-outline-success" id="btnJoin">회원가입</button>
-                        </div>
+                        <a href="/user/forgotId">아이디 찾기</a>
+                        <span class="bar"></span>
+                        <a href="/user/forgotPw">비밀번호 찾기</a>
                     </div>
                 </div>
-
-                <div id="apiLogin">
-                    <div id="naver" class="apiLoginBtn">
-                        <div>
-                            <span class="icon"></span>
-                            <span class="buttonText">네이버 로그인</span>
-                        </div>
-                    </div>
-                    <div id="kakao" class="apiLoginBtn">
-                        <div>
-                            <span class="icon"></span>
-                            <span class="buttonText">카카오 로그인</span>
-                        </div>
-                    </div>
-                    <div id="google" onclick="onSignIn()" class="apiLoginBtn customGPlusSignIn">
-                        <div>
-                            <span class="icon"></span>
-                            <span class="buttonText">구글 로그인</span>
-                        </div>
+                <div>
+                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6Ldq34seAAAAACoxUgs451Cl7FcrboIERxJs9_FM" data-callback="recaptchaCallback"></div>
+                    <div id="btnUser">
+                        <button type="button" class="btn btn-outline-success" id="btnLogin" onclick="return dologin()">로그인</button>
+                        <button type="button" class="btn btn-outline-success" id="btnJoin">회원가입</button>
                     </div>
                 </div>
+            </div>
 
-            </form>
-        </div>
+            <div id="apiLogin">
+                <div id="naver" class="apiLoginBtn">
+                    <div>
+                        <span class="icon"></span>
+                        <span class="buttonText">네이버 로그인</span>
+                    </div>
+                </div>
+                <div id="kakao" class="apiLoginBtn">
+                    <div>
+                        <span class="icon"></span>
+                        <span class="buttonText">카카오 로그인</span>
+                    </div>
+                </div>
+                <div id="google" onclick="onSignIn()" class="apiLoginBtn customGPlusSignIn">
+                    <div>
+                        <span class="icon"></span>
+                        <span class="buttonText">구글 로그인</span>
+                    </div>
+                </div>
+            </div>
+
+        </form>
     </div>
 </th:block>

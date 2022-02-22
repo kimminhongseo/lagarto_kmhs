@@ -62,10 +62,17 @@ informaionNickName.addEventListener('keyup', () => {
     }
 })
 informationNicknameBtn.addEventListener('click', () => {
-    fetch(`/user/nicknameCheck?nickname=${informaionNickName.value}`)
-        .then(res => {
+    console.log(informaionNickName.value)
+    fetch('/user/nicknameCheck', {
+        method : 'POST',
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify({
+            nickname : informaionNickName.value
+        })
+    }).then(res => {
             return res.json();
         }).then(data => {
+        console.log(data)
         console.log(informaionNickName.value)
         if (informaionNickName.value.length === 0){
             alert('닉네임 입력하는게 어때?');
@@ -76,13 +83,19 @@ informationNicknameBtn.addEventListener('click', () => {
             case 1:
                 alert('중복된 닉네임 입니다.')
                 break;
+            case 2:
+                alert('닉네임을 다시 확인 해주십시오.')
+                break;
             case 0:
                 alert('사용 할수 있는 닉네임 입니다.')
-                informationNicknameBtn.disabled = true
+                informationNicknameBtn.disabled = true;
                 flag3 = true;
                 break;
         }
     })
+})
+informaionNickName.addEventListener('keyup', () => {
+    informationNicknameBtn.disabled = false;
 })
 
 informationUpdBtn.addEventListener('click', (e) =>{
@@ -97,4 +110,9 @@ informationUpdBtn.addEventListener('click', (e) =>{
         e.preventDefault();
         return;
     }
+})
+
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
 })

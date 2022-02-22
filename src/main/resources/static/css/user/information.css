@@ -12,7 +12,7 @@
     border: 1px solid #e7e7e7;
 }
 
-input{
+.main input{
     margin: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -25,4 +25,12 @@ input{
     justify-content: center;
     float: none;
     margin: 0 auto;
+}
+
+#msg{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    padding-bottom: 5px;
+    color: red;
 }

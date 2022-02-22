@@ -7,16 +7,21 @@ import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.JoinResult;
 import com.portfolio.lagarto.follow.FollowService;
 import com.portfolio.lagarto.model.ForgotIdVo;
+import com.portfolio.lagarto.model.FollowEntity;
 import com.portfolio.lagarto.model.UserDto;
 import com.portfolio.lagarto.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 
 @Controller
@@ -40,14 +45,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginproc(UserEntity entity, Model model) {
-        int result =service.loginSel(entity);
-        if (result == 1){//로그인성공
-            return "redirect:/main";
-        }
-        model.addAttribute("title", "로그인");
-        model.addAttribute(Const.MSG, Const.ERR_Login);
-        return "user/login";
+    @ResponseBody
+    public int loginproc(UserEntity entity) {
+        return service.loginSel(entity);
     }
 
     @PostMapping("/apiLogin")
@@ -160,7 +160,7 @@ public class UserController {
     public String mypage(Model model) {
         model.addAttribute(Const.Follower, fservice.FollowList());
         model.addAttribute(Const.Following, fservice.FollowingList());
-        if (0 != utils.getLoginUserPk()){
+        if (0 != utils.getLoginUserPk()) {
             return "/user/mypage";
         }
         return "redirect:/user/login";
@@ -168,49 +168,88 @@ public class UserController {
 
     @PostMapping("/passwordCurrent")
     @ResponseBody
-    public Map<String, Integer> passwordSel(@RequestBody UserDto dto){
+    public Map<String, Integer> passwordSel(@RequestBody UserDto dto) {
         System.out.println(dto.getIuser());
         System.out.println(dto.getUpw());
         System.out.println(dto.getNewUpw());
+        Boolean NewUpw = Pattern.matches(Const.PassWordCurrent, dto.getNewUpw());
         int userEntity = service.passwordSel(dto);
 
         Map<String, Integer> result = new HashMap<>();
-        if(userEntity != 0){
+        if (!NewUpw) {
+            result.put("result", 2);
+            return result;
+        }
+        if (userEntity != 0) {
             result.put("result", 1);
             return result;
         }
         result.put("result", 0);
         return result;
     }
-
     @GetMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/main";
     }
 
     @GetMapping("/information")
-    public void information(HttpSession hs){
+    public void information(HttpSession hs) {
 
     }
 
-    @GetMapping("/nicknameCheck")
+    @PostMapping("/nicknameCheck")
     @ResponseBody
-    public int nicknameCheck(@RequestParam String nickname){
-        int result = service.nicknameCheck(nickname);
+    public int nicknameCheck(@RequestBody UserDto userDto) {
+        if (!Const.checkNick(userDto.getNickname())) {
+            return 2;
+        }
+        int result = service.nicknameCheck(userDto.getNickname());
         return result;
     }
 
     @PostMapping("/information")
-    public String information(@RequestParam String nickname,@RequestParam String nm,@RequestParam String address_post,@RequestParam String address_primary,@RequestParam String address_secondary,HttpSession hs){
+    public String information(@RequestParam String nickname, @RequestParam String nm, @RequestParam String address_post, @RequestParam String address_primary, @RequestParam String address_secondary, HttpSession hs, Model model) {
+        String nickNames = nickname.trim();
+        String nms = nm.trim();
+        boolean nickNamesB = Pattern.matches(Const.KoreanEngle, nickNames);
+        boolean nmsB = Pattern.matches(Const.KoreanEngle, nms);
         UserEntity hsentity = (UserEntity) hs.getAttribute(Const.LOGIN_USER);
-        hsentity.setNickname(nickname);
-        hsentity.setNm(nm);
-        hsentity.setAddress_post(address_post);
-        hsentity.setAddress_primary(address_primary);
-        hsentity.setAddress_secondary(address_secondary);
-        service.informationUpd(hsentity);
-        return "redirect:/user/mypage";
+        if (hsentity == null) {
+            return "/user/login";
+        }
+        if (nickNamesB && nmsB) {
+            if (nickNames.length() > 0 && nms.length() > 0) {
+                hsentity.setNickname(nickNames);
+                hsentity.setNm(nms);
+                hsentity.setAddress_post(address_post);
+                hsentity.setAddress_primary(address_primary.trim());
+                hsentity.setAddress_secondary(address_secondary.trim());
+                service.informationUpd(hsentity);
+                return "redirect:/user/mypage";
+            }
+        }
+        model.addAttribute(Const.MSG, "공백,특수문자 없이 입력 하십시오.");
+        return "/user/information";
+    }
+
+    @GetMapping("/charge")
+    public String charge(){
+        if (utils.getLoginUserPk() > 0){
+            return "/user/charge";
+        }
+        return "/user/login";
+    };
+
+
+    @PostMapping("/charge")
+    public void charge(@RequestParam int money, HttpSession hs){
+        UserEntity entity = (UserEntity) hs.getAttribute(Const.LOGIN_USER);
+        entity.setMoney(entity.getMoney()+money);
+        UserEntity userEntity = new UserEntity();
+        userEntity.setIuser(utils.getLoginUserPk());
+        userEntity.setMoney(money);
+        service.moneyCharge(userEntity);
     }
 
     @GetMapping("/forgotId")
@@ -241,5 +280,5 @@ public class UserController {
         return "/user/forgotId.success";
     }
 
-    // TODO : 로그인 form 정규식 체크 / 로그인 실패 시 오류 alert 처리
+
 }

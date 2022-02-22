@@ -12,7 +12,9 @@ import com.portfolio.lagarto.model.UserEntity;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 
@@ -171,6 +173,10 @@ public class UserService {
     public void informationUpd(UserEntity entity){
         entity.setIuser(utils.getLoginUserPk());
         mapper.informationUpd(entity);
+    }
+
+    public void moneyCharge(UserEntity entity) {
+        mapper.moneyCharge(entity);
     }
 
     public ForgotIdVo forgotId(UserEntity entity) {

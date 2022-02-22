@@ -14,44 +14,35 @@
 
 
 // 이미지 클릭하면 상세기되는거(팝업으로 근데 새창임)  window.open(_self) 해주면 현재 페이지에서 열림.
+const searchParams = new URL(window.location.href).searchParams;
+const iboard = searchParams.get('iboard')
+const img = document.getElementsByClassName("click_img");
+for (let x = 0; x < img.length; x++) {
+    img.item(x).onclick=function() {window.open(this.src,'_blank','toolbar=no,location=no,status=no,menubar=no, scrollbars=auto,resizable=no,' +
+        'width=500,height=500 top=200 left=300')};
+}
 
-
-
-
-    const searchParams = new URL(window.location.href).searchParams;
-    const iboard = searchParams.get('iboard');
-
-
-    const img = document.getElementsByClassName("click_img");
-    for (let x = 0; x < img.length; x++) {
-        img.item(x).onclick = function () {
-            window.open(this.src, '_blank', 'toolbar=no,location=no,status=no,menubar=no, scrollbars=auto,resizable=no,' +
-                'width=500,height=500 top=200 left=300')
-        };
-    }
-
-//ㅁㄴㅇㅁㄴㅇsadas
 
 
 //MOD 기능  >> 잘됨.
-    const modBtnElem = document.querySelector('#modBtn');
-    if (modBtnElem) {
-        modBtnElem.addEventListener('click', () => {
-            location.href = `/auction/mod?iboard=${iboard}`;
-        });
-    }
+const modBtnElem = document.querySelector('#modBtn');
+if(modBtnElem) {
+    modBtnElem.addEventListener('click', ()=> {
+        location.href=`/auction/mod?${iboard}`;
+    });
+}
 
 
-//DEL 기능  >> 잘됨
 
-    const delBtnElem = document.querySelector('#delBtn');
-    if (delBtnElem) {
-        delBtnElem.addEventListener('click', () => {
-            if (confirm('현재 게시된 글을 삭제하시겠습니까?')) {
-                location.href = `/auction/del?iboard=${iboard}`;
-            }
-        });
-    }
+
+const delBtnElem = document.querySelector('#delBtn');
+if(delBtnElem){
+    delBtnElem.addEventListener('click',() =>{
+        if(confirm('현재 게시된 글을 삭제하시겠습니까?')){
+            location.href=`/auction/del?${iboard}`;
+        }
+    });
+}
 
 
     const bidmodal = document.querySelector('#bid-modal');

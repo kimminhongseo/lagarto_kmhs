@@ -87,6 +87,12 @@
         WHERE iuser = #{iuser}
     </update>
 
+    <update id="moneyCharge">
+        UPDATE `lagarto`.`lagarto_user`
+        SET money = money + #{money}
+        WHERE iuser = #{iuser};
+    </update>
+
     <!-- 아이디 찾기 -->
     <select id="selUserId" resultType="ForgotIdVo">
         SELECT *

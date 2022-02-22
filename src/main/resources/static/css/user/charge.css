@@ -1,0 +1,20 @@
+#container{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    border: 2px solid coral;
+}
+
+#moneys{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#bottoms{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+}

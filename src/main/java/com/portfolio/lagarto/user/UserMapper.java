@@ -22,4 +22,5 @@ public interface UserMapper {
     int nicknameCheck(String nickname);
     void informationUpd(UserEntity entity);
     ForgotIdVo selUserId(UserEntity entity);
+    void moneyCharge(UserEntity entity);
 }

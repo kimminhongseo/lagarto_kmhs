@@ -101,4 +101,15 @@
           AND `contact_second` = #{contact_second}
           AND `contact_third` = #{contact_third}
     </select>
+
+    <!--금액츙전 내역-->
+    <insert id="insMoney">
+        INSERT INTO `lagarto`.`user_add_money`(`iuser`, `money`)
+        VALUES
+            (#{iuser}, #{money})
+    </insert>
+
+    <select id="selMoney" resultType="UserEntity">
+        SELECT * FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser};
+    </select>
 </mapper>

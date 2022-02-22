@@ -1,8 +1,9 @@
-#container{
-    display: flex;
-    justify-items: center;
-    justify-content: center;
-    border: 2px solid coral;
+#containers{
+    width: 340px;
+    border: 2px solid #2b2a29;
+    float: none;
+    margin: 0 auto;
+    padding-bottom: 5px;
 }
 
 #moneys{
@@ -17,4 +18,17 @@
     display: flex;
     justify-items: center;
     justify-content: center;
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#money-page{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+}
+
+#money-contain{
+    background-image: url("/static/img/kakaoBack.jpg");
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -47,6 +48,15 @@ public class CustomerService {
     public List<CustomerVo> selCustomerList(CustomerDto dto) {
         return mapper.selCustomerList(dto);
     }
+
+    public List<AttachDTO> getAttachFileList(Long iboard) {
+
+
+        int fileTotalCount = attachMapper.selectAttachTotalCount(iboard);
+        if (fileTotalCount < 1) {
+            return Collections.emptyList();
+        }
+        return attachMapper.selectAttachList(iboard);}
 
     public CustomerVo selCustomerDetail(CustomerDto dto) {
         return mapper.selCustomerDetail(dto);

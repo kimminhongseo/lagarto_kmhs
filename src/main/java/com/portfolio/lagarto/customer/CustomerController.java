@@ -39,18 +39,8 @@ public class CustomerController {
     @PostMapping("/write")
     public String writeProc(CustomerEntity entity, MultipartFile[] files, Model model) {
 
-//        try {
-            boolean isRegistered = this.service.insCustomer(entity, files);
-//            if (!isRegistered) {
-//                return this.showMessageWithRedirect("게시글 등록에 실패하였습니다.", "/board/list.do", Method.GET, pagingParams, model);
-//            }
-//        } catch (DataAccessException var6) {
-//            return this.showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/board/list.do", Method.GET, pagingParams, model);
-//        } catch (Exception var7) {
-//            return this.showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/board/list.do", Method.GET, pagingParams, model);
-//        }
-
-        return "redirect:/customer/list" + entity.getBoard_cd();
+        boolean isRegistered = this.service.insCustomer(entity, files);
+        return "redirect:/customer/list/" + entity.getBoard_cd();
     }
 
     @GetMapping("/detail")

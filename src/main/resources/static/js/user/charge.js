@@ -1,11 +1,19 @@
+
+
 $('#charge_kakao').click(function () {
     // getter
     var IMP = window.IMP;
     IMP.init('imp03043248');
-    var money = $('input[name="cp_item"]:checked').val();
-    money = $('#direct').val();
+    var money = $('#direct').val();
     console.log(money);
-
+    if (money > 1000000){
+        alert('충전금액은 최대 100만원입니다.')
+        return false;
+    }
+    if (money < 5000){
+        alert('충전금액은 최소 5천원입니다.')
+        return false;
+    }
     IMP.request_pay({
         pg: 'kakao',
         merchant_uid: 'merchant_' + new Date().getTime(),

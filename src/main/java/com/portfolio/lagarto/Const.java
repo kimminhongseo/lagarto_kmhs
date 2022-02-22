@@ -18,7 +18,7 @@ public class Const {
     public static final String PassWordCurrent = "^(?=.*[a-zA-Z])(?=.*\\\\d)(?=.*\\\\W).{8,2,}$";
     public static final String Follower = "follower";
     public static final String Following = "following";
-
+    public static final String Money = "money";
     public static boolean checkUid(String email) {
         return email.matches(UID);
     }

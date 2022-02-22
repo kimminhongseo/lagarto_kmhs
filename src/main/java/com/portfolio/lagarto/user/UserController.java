@@ -232,11 +232,18 @@ public class UserController {
     }
 
     @GetMapping("/charge")
-    public void charge(){};
+    public String charge(){
+        if (utils.getLoginUserPk() > 0){
+            return "/user/charge";
+        }
+        return "/user/login";
+    };
 
 
     @PostMapping("/charge")
-    public void charge(@RequestParam int money){
+    public void charge(@RequestParam int money, HttpSession hs){
+        UserEntity entity = (UserEntity) hs.getAttribute(Const.LOGIN_USER);
+        entity.setMoney(entity.getMoney()+money);
         UserEntity userEntity = new UserEntity();
         userEntity.setIuser(utils.getLoginUserPk());
         userEntity.setMoney(money);

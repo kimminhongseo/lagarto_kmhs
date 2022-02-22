@@ -14,7 +14,7 @@
 <th:block layout:fragment="content">
 <div id="container">
     <div class="second" align="center">
-        <img class="card-img-top" width="700" height="300" src="/static/img/kakao.png" />
+        <img class="card-img-top" width="20" height="300" src="/static/img/kakao.png" />
         <p style="font-weight: bold">카카오페이 현재 사용가능</p>
         <label class="box-radio-input"><input type="radio" name="cp_item" value="5000"><span>5,000원</span></label>
         <label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span>10,000원</span></label>
@@ -24,8 +24,9 @@
         <label class="box-radio-input"><input type="radio" name="cp_item" value="30000"><span>30,000원</span></label><br/>
         <label class="box-radio-input"><input type="radio" name="cp_item" value="35000"><span>35,000원</span></label>
         <label class="box-radio-input"><input type="radio" name="cp_item" value="40000"><span>40,000원</span></label>
-        <label class="box-radio-input"><input type="radio" name="cp_item" value="50000"><span>50,000원</span></label>
-        <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원이며 <br/>최대 충전금액은 50,000원 입니다.</p>
+        <label class="box-radio-input"><input type="radio" name="cp_item" value="50000"><span>50,000원</span></label><br/>
+        <label class="box-radio-input"><input type="radio" name="cp_item" >직접입력 <input id="direct" type="text"></label>
+        <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원 입니다.</p>
         <button type="button" class="btn btn-outline-dark" id="charge_kakao">충 전 하 기</button>
     </div>
 </div>

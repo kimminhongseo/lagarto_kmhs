@@ -3,6 +3,7 @@ $('#charge_kakao').click(function () {
     var IMP = window.IMP;
     IMP.init('imp03043248');
     var money = $('input[name="cp_item"]:checked').val();
+    money = $('#direct').val();
     console.log(money);
 
     IMP.request_pay({
@@ -10,18 +11,10 @@ $('#charge_kakao').click(function () {
         merchant_uid: 'merchant_' + new Date().getTime(),
 
         name: 'Lagarto 머니충전',
-        amount: money,
-        buyer_email: 'iamport@siot.do',
-        buyer_name: '구매자이름',
-        buyer_tel: '010-1234-5678',
-        buyer_addr: '인천광역시 부평구',
-        buyer_postcode: '123-456'
+        amount: money
     }, function (rsp) {
-        console.log(money);
         if (rsp.success) {
             var msg = '결제가 완료되었습니다.';
-            msg += '고유ID : ' + rsp.imp_uid;
-            msg += '상점 거래ID : ' + rsp.merchant_uid;
             fetch(`/user/charge?money=${money}`,{
                 method : 'post',
                 headers: {'Content-type': 'application/json'}

@@ -15,7 +15,7 @@
     <div id="money-contain">
         <div>
             <div id="moneys">
-                현재금액 : <label  th:text="${#numbers.formatInteger(session.loginUser.money, 0, 'COMMA') + '원'}"></label>
+                나의머니:<label  th:text="${#numbers.formatInteger(session.loginUser.money, 0, 'COMMA') + '원'}"></label>
             </div>
         </div>
         <div id="containers">
@@ -32,9 +32,9 @@
         <div>
             <table class="table" id="bottoms">
                 <tbody>
-                <tr th:each="item : ${money}">
+                <tr th:each="item : ${money}" id="font-money">
                     <th scope="row" th:text="${itemStat.count}"></th>
-                    <td th:text="${item.money+'원'}"></td>
+                    <td th:text="${#numbers.formatInteger(item.money, 0, 'COMMA') +'원'}"></td>
                     <td th:text="충전완료"></td>
                     <td th:text="${item.rdt}"></td>
                 </tr>

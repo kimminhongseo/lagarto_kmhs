@@ -4,6 +4,7 @@
     float: none;
     margin: 0 auto;
     padding-bottom: 5px;
+    background: white;
 }
 
 #moneys{
@@ -30,5 +31,12 @@
 }
 
 #money-contain{
-    background-image: url("/static/img/kakaoBack.jpg");
+    height: 120vh;
+    background-image: url("/static/img/kakakback.png");
+    background-repeat : no-repeat;
+    background-size : cover;
+}
+
+#font-money{
+    font-weight: bold;
 }

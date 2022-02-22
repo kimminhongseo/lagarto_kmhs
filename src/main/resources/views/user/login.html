@@ -11,48 +11,68 @@
 
 <th:block layout:fragment="content">
     <div class="main">
-        <div class="logoMain"><img class="logo" src="/img/lagarto_logo.svg"></div>
+        <div class="logoMain"><img class="logo" th:src="@{/img/lagarto_logo.svg}"></div>
 
-        <form id="login" action="/user/login" method="post">
-            <div id="generalLogin">
-                <div>
-                    <div class="my-3"><input type="text" class="form-control" id="formId" placeholder="아이디"
-                                             aria-label="Username"
-                                             aria-describedby="basic-addon1" name="uid"></div>
-                </div>
-                <div>
-                    <div class="my-3"><input type="password" class="form-control" id="formPw" placeholder="비밀번호"
-                                             aria-label="Username" aria-describedby="basic-addon1" name="upw"></div>
-                </div>
-                <div>
-                    <div class="my-4" id="btnUser">
-                        <button type="button" class="btn btn-outline-success" id="btnLogin">로그인</button>
-                        <button type="button" class="btn btn-outline-success" id="btnJoin">회원가입</button>
+        <div class="loginWrap">
+            <form id="login" th:action="@{/user/login}" method="post" th:object="${entity}">
+                <div id="generalLogin">
+                    <div class="loginArea">
+                        <span hidden>아이디</span>
+                        <label>
+                            <input type="text" class="form-control" id="formId" placeholder="아이디"
+                                                  name="uid" th:field="*{uid}">
+                        </label>
+                    </div>
+                    <div class="loginArea">
+                        <span hidden>비밀번호</span>
+                        <label>
+                            <input type="password" class="form-control" id="formPw" placeholder="비밀번호"
+                                                  name="upw" th:field="*{upw}">
+                        </label>
+                    </div>
+                    <div class="findInfo">
+                        <div class="isSave">
+                            <input id="saveId" type="checkbox" value="1">
+                            <label for="saveId"></label>
+                            <span>아이디 저장</span>
+                        </div>
+                        <div class="stretch"></div>
+                        <div>
+                            <a href="/user/forgotId">아이디 찾기</a>
+                            <span class="bar"></span>
+                            <a href="/user/forgotPw">비밀번호 찾기</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="btnUser">
+                            <button type="button" class="btn btn-outline-success" id="btnLogin">로그인</button>
+                            <button type="button" class="btn btn-outline-success" id="btnJoin">회원가입</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="apiLogin">
-                <div id="naver" class="apiLoginBtn">
-                    <div>
-                        <span class="icon"></span>
-                        <span class="buttonText">네이버 로그인</span>
+                <div id="apiLogin">
+                    <div id="naver" class="apiLoginBtn">
+                        <div>
+                            <span class="icon"></span>
+                            <span class="buttonText">네이버 로그인</span>
+                        </div>
+                    </div>
+                    <div id="kakao" class="apiLoginBtn">
+                        <div>
+                            <span class="icon"></span>
+                            <span class="buttonText">카카오 로그인</span>
+                        </div>
+                    </div>
+                    <div id="google" onclick="onSignIn()" class="apiLoginBtn customGPlusSignIn">
+                        <div>
+                            <span class="icon"></span>
+                            <span class="buttonText">구글 로그인</span>
+                        </div>
                     </div>
                 </div>
-                <div id="kakao" class="apiLoginBtn">
-                    <div>
-                        <span class="icon"></span>
-                        <span class="buttonText">카카오 로그인</span>
-                    </div>
-                </div>
-                <div id="google" onclick="onSignIn()" class="apiLoginBtn customGPlusSignIn">
-                    <div>
-                        <span class="icon"></span>
-                        <span class="buttonText">구글 로그인</span>
-                    </div>
-                </div>
-            </div>
 
-        </form>
+            </form>
+        </div>
     </div>
 </th:block>

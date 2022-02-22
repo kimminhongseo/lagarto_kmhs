@@ -1,6 +1,7 @@
 package com.portfolio.lagarto.user;
 
 
+import com.portfolio.lagarto.model.ForgotIdVo;
 import com.portfolio.lagarto.model.UserDto;
 import com.portfolio.lagarto.model.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,5 +21,5 @@ public interface UserMapper {
     UserEntity authKey(UserEntity entity);
     int nicknameCheck(String nickname);
     void informationUpd(UserEntity entity);
-    UserEntity selUserId(UserEntity entity);
+    ForgotIdVo selUserId(UserEntity entity);
 }

@@ -3,9 +3,10 @@ package com.portfolio.lagarto.user;
 
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.Utils;
+import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.JoinResult;
 import com.portfolio.lagarto.follow.FollowService;
-import com.portfolio.lagarto.model.FollowEntity;
+import com.portfolio.lagarto.model.ForgotIdVo;
 import com.portfolio.lagarto.model.UserDto;
 import com.portfolio.lagarto.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -221,8 +221,24 @@ public class UserController {
     }
 
     @PostMapping("/forgotId")
-    public String forgotIdProc(UserEntity entity) {
-        return "";
+    public String forgotIdProc(UserEntity entity, Model model) {
+        UserEntity user = utils.getLoginUser();
+        if (user != null) {
+            return "/main";
+        }
+
+        ForgotIdVo vo = service.forgotId(entity);
+        if (vo.getForgotIdResult() == ForgotIdResult.FAILURE) {
+            return "/user/forgotId";
+        }
+        model.addAttribute("user", vo);
+        System.out.println(vo.getUid());
+        return "/user/forgotId.success";
+    }
+
+    @GetMapping("/forgotId.success")
+    public String forgotIdSuccess() {
+        return "/user/forgotId.success";
     }
 
     // TODO : 로그인 form 정규식 체크 / 로그인 실패 시 오류 alert 처리

@@ -25,21 +25,24 @@
                 }
             }
 
-            const param = {
-                'contact_first' : forgotIdForm.contact_first.value,
-                'contact_second' : forgotIdForm.contact_second.value,
-                'contact_third' : forgotIdForm.contact_third.value
-            }
+            // const param = {
+            //     'contact_first' : forgotIdForm.contact_first.value,
+            //     'contact_second' : forgotIdForm.contact_second.value,
+            //     'contact_third' : forgotIdForm.contact_third.value
+            // }
+            //
+            // fetch('/user/forgotId', {
+            //     method : 'POST',
+            //     headers : { 'Content-Type' : 'application/json' },
+            //     body : JSON.stringify(param)
+            // })
+            //     .then(res => res.json())
+            //     .then((data) => {
+            //         console.log(data);
+            //     })
 
-            fetch('/user/forgotId', {
-                method : 'POST',
-                headers : { 'Content-Type' : 'application/json' },
-                body : JSON.stringify(param)
-            })
-                .then(res => res.json())
-                .then((data) => {
-                    console.log(data);
-                })
+
+            return true;
 
 
         }

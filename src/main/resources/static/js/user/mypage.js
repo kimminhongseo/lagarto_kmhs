@@ -196,7 +196,7 @@
 
                 fetch(`/ajax/mail?uid=${formEmail.value}`)
                     .then(res => {
-                        return res.json();
+                        // return res.json();
                     }).then(data => { // data = 메일로 발송된 인증키
                     console.log(data);
                     authKey = data;
@@ -251,22 +251,20 @@
 
 
 const unfollowBtnElem = document.querySelectorAll('.unfollow-Btn');
-    if (unfollowBtnElem){
-        unfollowBtnElem.forEach(item => {
-            console.log(item.value);
-            item.addEventListener('click', () => {
-                const myFElem = document.querySelector('.myF');
-                fetch(`/unfollow/${item.value}`,{
-                    method : 'DELETE'
-                }).then(res => {
-                    return res.text();
-                }).then(data => {
-                    console.log(data);
-                    myFElem.remove();
-                })
-            });
-        })
-    }
-
-
+if (unfollowBtnElem){
+    unfollowBtnElem.forEach(item => {
+        console.log(item.value);
+        item.addEventListener('click', () => {
+            const myFElem = document.querySelector('.myF');
+            fetch(`/unfollow/${item.value}`,{
+                method : 'DELETE'
+            }).then(res => {
+                return res.text();
+            }).then(data => {
+                console.log(data);
+                myFElem.remove();
+            })
+        });
+    })
+}
 

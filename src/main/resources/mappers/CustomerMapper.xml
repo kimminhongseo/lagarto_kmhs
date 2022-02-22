@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.portfolio.lagarto.customer.CustomerMapper">
-    <insert id="insCustomer">
+    <insert id="insCustomer" parameterType="CustomerDto" useGeneratedKeys="true" keyProperty="iboard">
         INSERT INTO lagarto.customer
-        (board_cd, title, ctnt, ctnt_img, iuser)
+        (iboard, board_cd, title, ctnt, iuser, rating)
         VALUES
-        (${board_cd}, #{title}, #{ctnt}, #{ctnt_img}, ${iuser})
+        (${iboard}, ${board_cd}, #{title}, #{ctnt}, ${iuser}, ${rating})
     </insert>
 
     <select id="selCustomerList" resultType="CustomerVo">
@@ -17,9 +17,10 @@
     </select>
 
     <select id="selCustomerDetail" resultType="CustomerVo">
-        SELECT A.*, B.nickname, C.board_nm FROM lagarto.customer A
+        SELECT A.*, B.nickname, C.board_nm, D.title AS productTitle FROM lagarto.customer A
         LEFT JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
         LEFT JOIN lagarto.customer_board_type C ON A.board_cd = C.board_cd
+        LEFT JOIN lagarto.auction D ON A.product_cd = D.iboard
         WHERE A.iboard = ${iboard}
     </select>
 

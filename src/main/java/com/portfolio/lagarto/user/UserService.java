@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Service
@@ -193,4 +194,13 @@ public class UserService {
         return forgotIdVo;
     }
 
+    public void insMoney(UserEntity entity){
+        mapper.insMoney(entity);
+    }
+
+    public List<UserEntity> selMoney(){
+        UserEntity entity = new UserEntity();
+        entity.setIuser(utils.getLoginUserPk());
+        return mapper.selMoney(entity);
+    }
 }

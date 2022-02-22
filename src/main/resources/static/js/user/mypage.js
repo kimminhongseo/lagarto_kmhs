@@ -182,7 +182,6 @@
                 let SetTime = 10;      // 최초 설정 시간(기본 : 초)
                 let min = "";
                 let sec = "";
-                //flag2 = true;
                 alert('인증번호를 발송 했습니다.')
                 let x = setInterval(function () {
                     min = parseInt(SetTime / 60);
@@ -269,7 +268,6 @@ if (unfollowBtnElem){
         });
     })
 }
-
 
 
 

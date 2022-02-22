@@ -105,6 +105,7 @@ if(delBtnElem){
 
     }
 
+    isfollow();
 
 
 

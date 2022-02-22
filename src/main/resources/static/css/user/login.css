@@ -226,17 +226,3 @@ span.buttonText {
     font-size: 0.825rem;
     font-weight: 500;
 }
-
-
-
-
-
-
-
-#recaptcha{
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-
-}
-

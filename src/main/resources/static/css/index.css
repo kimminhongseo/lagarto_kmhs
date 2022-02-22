@@ -118,7 +118,6 @@
 .header_container nav .header_content .main_menu:hover a {
     color: #212529;
 }
-
 .header_container nav .header_content .main_menu .sub_list {
     pointer-events: none;
     width: 8rem;
@@ -131,6 +130,7 @@
     position: absolute;
     transform: translate(0, 0.725rem);
     transition: opacity 200ms ease-in-out, transform 200ms ease-in, visibility 200ms ease-in;
+    z-index: 999;
 }
 
 .header_container nav .header_content .main_menu:hover .sub_list {

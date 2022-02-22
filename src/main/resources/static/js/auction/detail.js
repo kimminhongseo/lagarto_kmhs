@@ -72,45 +72,46 @@
 
     if (formbuybtn) {
         formbuybtn.addEventListener('click', () => {
-            console.log(formbid.value);
-            console.log(formimbuy.value);
-            console.log(parseInt(iboard));
+            if(confirm("경매가를 수정 하시겠습니까?")){
+                console.log(formbid.value);
+                console.log(formimbuy.value);
+                console.log(parseInt(iboard));
+                console.log(prebuyer.value);
+                console.log(formbuy.value);
 
-            fetch(`/ajax/auctionBid/buy?formbid=${formbid.value}&iboard=${parseInt(iboard)}&formimbuy=${formimbuy.value}
-            &formbuy=${formbuy.value}`, {
-                method: 'post',
-                headers: {'Content-type': 'application/json'}
-            }).then(res => {
-                return res.json();
-            }).then(data => {
-              /*  if(data == 1){
-                    window.close();
-                    location.reload();
-                }else{
-                    alert("즉시구매가보다 낮은 금액을 입력하세요");
-                }*/
-                console.log(data);
-               switch (data){
-                   case 1: //fetch 로 전에있던값을 넣어줘라. 그 전 사람에게.
-                       window.close();
-                        location.reload();
-                        break;
-                    case 0:
-                        alert("즉시구매가보다 낮은 금액을 입력하세요");
-                        return false;
-                        break;
-                    case 2:
-                        alert("현재가보다 높은 금액을 입력하세요");
-                        return false;
-                        break;
-                }
+                fetch(`/ajax/auctionBid/buy?formbid=${formbid.value}&iboard=${parseInt(iboard)}&formimbuy=${formimbuy.value}
+            &formbuy=${formbuy.value}&prebuyer=${prebuyer.value}`, {
+                    method: 'post',
+                    headers: {'Content-type': 'application/json'}
+                }).then(res => {
+                    return res.json();
+                }).then(data => {
+
+                    switch (data){
+                        case 1: //fetch 로 전에있던값을 넣어줘라. 그 전 사람에게. case: 1일떄 일어나겠네.
+
+                            window.close();
+                            location.reload();
+                            break;
+                        case 0:
+                            alert("즉시구매가보다 낮은 금액을 입력하세요");
+                            return false;
+                            break;
+                        case 2:
+                            alert("현재가보다 높은 금액을 입력하세요");
+                            return false;
+                            break;
+                    }
 
 
+                })
+            }
 
-
-
-            })
         })
+    }
+
+    function returnmoney(){
+
     }
 
 

@@ -9,7 +9,7 @@ public class AuctionEntity  {
     private int icategory;
     private String title;
     private String ctnt;
-    private int iuser;
+    private int iuser; //글쓴이
     private String image1;
     private String image2;
     private String image3;
@@ -21,4 +21,6 @@ public class AuctionEntity  {
     private int imbuy;
     private String rdt;
     private String mdt;
+    private int buyer; //현재 입찰자
+    private int prebuyer; //바로 전 입찰자
 }

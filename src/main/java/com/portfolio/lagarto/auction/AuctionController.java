@@ -5,37 +5,23 @@ import com.portfolio.lagarto.MyFileUtils;
 import com.portfolio.lagarto.follow.FollowService;
 import com.portfolio.lagarto.model.*;
 import com.portfolio.lagarto.Utils;
-import com.portfolio.lagarto.model.AuctionBidEntity;
-import com.portfolio.lagarto.model.AuctionBidVo;
-import com.portfolio.lagarto.model.AuctionDto;
+
 import com.portfolio.lagarto.model.AuctionEntity;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.UUID;
-
 
 
 @Controller
@@ -174,11 +160,11 @@ public class AuctionController {
 
 
     @GetMapping("/detail")
-    public String detail(AuctionBidEntity entity ,AuctionVo vo, Model model) {
+    public String detail(AuctionVo vo, Model model) {
         model.addAttribute("Data", service.selAuctionDetail(vo));
         //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
         System.out.println("확인이이이이이이"+vo);
-        entity.setIboard(vo.getIboard());
+
 
         return "auction/detail";
     }

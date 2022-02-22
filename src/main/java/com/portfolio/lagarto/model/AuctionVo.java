@@ -12,4 +12,8 @@ public class AuctionVo extends AuctionEntity {
     private String nicknm;
     private String buyernickname;
 
+    private int prebuy; //입력전 현재 입찰가
+
+
+
 }

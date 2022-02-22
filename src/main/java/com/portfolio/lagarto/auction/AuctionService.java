@@ -53,14 +53,6 @@ public class AuctionService {
     public List<AuctionCategoryEntity> auctionMenuList(){return  mapper.selAuctionCategoryList();}
 
 
-    public AuctionBidVo insBid(AuctionBidEntity entity){
-        return mapper.insBid(entity);
-    }
-
-    public AuctionBidVo bidList(AuctionBidEntity entity){
-        return mapper.BidList(entity);
-    }
-
 
 
 

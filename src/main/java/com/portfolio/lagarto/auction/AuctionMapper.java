@@ -18,7 +18,4 @@ public interface AuctionMapper {
     int updAuction(AuctionVo vo);
     int delAuction(AuctionVo vo);
 
-    AuctionBidVo insBid(AuctionBidEntity entity);
-    AuctionBidVo BidList(AuctionBidEntity entity);
-
 }

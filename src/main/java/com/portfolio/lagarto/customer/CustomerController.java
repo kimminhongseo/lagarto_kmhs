@@ -6,9 +6,13 @@ import com.portfolio.lagarto.model.CustomerDto;
 import com.portfolio.lagarto.model.CustomerEntity;
 import com.portfolio.lagarto.model.CustomerVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.lang.reflect.Method;
 
 @Controller
 @RequestMapping("/customer")
@@ -33,8 +37,9 @@ public class CustomerController {
     }
 
     @PostMapping("/write")
-    public String writeProc(CustomerEntity entity) {
-        int result = service.insCustomer(entity);
+    public String writeProc(CustomerEntity entity, MultipartFile[] files, Model model) {
+
+        boolean isRegistered = this.service.insCustomer(entity, files);
         return "redirect:/customer/list/" + entity.getBoard_cd();
     }
 
@@ -48,12 +53,14 @@ public class CustomerController {
         model.addAttribute("data", service.selCustomerDetail(dto));
     }
 
+
+
     @GetMapping("/del")
     public String delProc(CustomerEntity entity){
         int result = service.delCustomer(entity);
         if(result == 1) {
             return "redirect:/customer/list/" + entity.getBoard_cd();
         }
-        return "customer/list/1";
+        return "customer/list";
     }
 }

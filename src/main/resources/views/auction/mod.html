@@ -17,7 +17,7 @@
             <h1>경매 수정하기</h1>
             <div th:each="data:${data}">
                 <!--th:object를 auctionEntity로 하면 오류가 난다. why??-->
-                <form method="post" th:action="@{/auction/mod}" th:object="${auctionDto}" enctype="multipart/form-data">
+                <form method="post" th:action="@{/auction/mod}" th:object="${auctionVo}" enctype="multipart/form-data">
                     <input type="hidden" th:with="icate=${param.icategory}" th:data-icategory="${icate}"
                            th:field="*{icategory}" th:value="${icategory}">
                     <!--icategory value를 안정해서 오류가 났다.-->

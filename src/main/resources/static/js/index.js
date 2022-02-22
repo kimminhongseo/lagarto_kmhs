@@ -68,7 +68,6 @@ const myFetch = {
 }
 // ---------------------------------------------------------------------------------------------
 
-
 let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res => {
     return res.json();
 }).then(data => {

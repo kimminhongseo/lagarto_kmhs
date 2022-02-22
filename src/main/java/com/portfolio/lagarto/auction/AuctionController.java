@@ -5,37 +5,23 @@ import com.portfolio.lagarto.MyFileUtils;
 import com.portfolio.lagarto.follow.FollowService;
 import com.portfolio.lagarto.model.*;
 import com.portfolio.lagarto.Utils;
-import com.portfolio.lagarto.model.AuctionBidEntity;
-import com.portfolio.lagarto.model.AuctionBidVo;
-import com.portfolio.lagarto.model.AuctionDto;
+
 import com.portfolio.lagarto.model.AuctionEntity;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.UUID;
-
 
 
 @Controller
@@ -134,7 +120,6 @@ public class AuctionController {
             auctionEntity.setImage4(imagesList.get(3));
             auctionEntity.setImage5(imagesList.get(4));
             service.insAuction(auctionEntity);
-            System.out.println(service.insAuctionList(auctionEntity));
             System.out.println("입력후 : "+imagesList);
         }
 
@@ -156,54 +141,54 @@ public class AuctionController {
 
 
     @GetMapping("/list")
-    public String list(AuctionDto dto, Model model) {
+    public String list(AuctionVo vo, Model model) {
 
-        model.addAttribute("List", service.selAuctionListAll(dto));
-        System.out.println(service.selAuctionListAll(dto));
+        model.addAttribute("List", service.selAuctionListAll(vo));
+        System.out.println(service.selAuctionListAll(vo));
         return "auction/list";
     }
 
 
     @GetMapping("/list/{icategory}")
-    public String list(@PathVariable int icategory, AuctionDto dto, Model model) {
+    public String list(@PathVariable int icategory, AuctionVo vo, Model model) {
         model.addAttribute("icategory");
-        model.addAttribute("List", service.selAuctionList(dto));
-        dto.setIcategory(icategory);
+        model.addAttribute("List", service.selAuctionList(vo));
+        vo.setIcategory(icategory);
         return "auction/list";
 
     }
 
 
-
     @GetMapping("/detail")
-    public String detail(AuctionBidEntity entity ,AuctionDto dto, Model model) {
-        model.addAttribute("Data", service.selAuctionDetail(dto));
+    public String detail(AuctionVo vo, Model model) {
+        model.addAttribute("Data", service.selAuctionDetail(vo));
         //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
-        entity.setIboard(dto.getIboard());
-        model.addAttribute("BidList",service.bidList(entity));
+        System.out.println("확인이이이이이이"+vo);
+
+
         return "auction/detail";
     }
 
-    @PostMapping("/detail")
-    public String detailproc(@ModelAttribute("auctionBidEntity") AuctionBidEntity entity,AuctionDto dto){
-        entity.setIboard(dto.getIboard());
-
-        return "auction/detail?iboard="+entity.getIboard();
+    //js처리 위해
+    @GetMapping("/detail_item")
+    public void selAuctionDetail(Model model, AuctionVo vo){
+        model.addAttribute("data",service.selAuctionDetail(vo));
     }
 
 
+
     @GetMapping("/mod")
-    public String mod(AuctionDto dto,Model model){
+    public String mod(AuctionVo dto,Model model){
         model.addAttribute(Const.DATA,service.selAuctionDetail(dto));
 
         return "auction/mod";
     }
 
     @PostMapping("/mod")
-    public String modProc(@ModelAttribute("auctionEntity") AuctionEntity entity,@RequestParam("files") MultipartFile[] files){
+    public String modProc(@ModelAttribute("auctionVo") AuctionVo vo,@RequestParam("files") MultipartFile[] files){
         StringBuilder fileNames = new StringBuilder();
 
-       String moduploadDirectory = first_uploadDirectory + "/" + entity.getIboard();
+       String moduploadDirectory = first_uploadDirectory + "/" + vo.getIboard();
         //mod경로에 파일이나존재하면 삭제.
         File f = new File(moduploadDirectory);
 
@@ -254,22 +239,21 @@ public class AuctionController {
         }
         finally {
             //어차피 for문에서 files.length가 짧았다면 나머지 뒤는 null임
-            entity.setImage1(imagesList.get(0));
-            entity.setImage2(imagesList.get(1));
-            entity.setImage3(imagesList.get(2));
-            entity.setImage4(imagesList.get(3));
-            entity.setImage5(imagesList.get(4));
-            service.updAuction(entity); //update
-            System.out.println(service.updAuction(entity));
-            System.out.println("입력후 : "+imagesList);
+            vo.setImage1(imagesList.get(0));
+            vo.setImage2(imagesList.get(1));
+            vo.setImage3(imagesList.get(2));
+            vo.setImage4(imagesList.get(3));
+            vo.setImage5(imagesList.get(4));
+            service.updAuction(vo); //update
+
         }
 
-        return "redirect:/auction/detail?iboard=" + entity.getIboard();
+        return "redirect:/auction/detail?iboard=" + vo.getIboard();
     }
 
     @GetMapping("/del")
-    public String delProc(AuctionEntity entity){
-        int result = service.delAuction(entity);
+    public String delProc(AuctionVo vo){
+        int result = service.delAuction(vo);
         return "redirect:/auction/list/";
     }
 

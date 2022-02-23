@@ -1,6 +1,8 @@
 package com.portfolio.lagarto.customer;
 
 import com.portfolio.lagarto.customer.comment.CustomerCommentService;
+import com.portfolio.lagarto.customer.files.AttachDTO;
+import com.portfolio.lagarto.customer.files.AttachFileException;
 import com.portfolio.lagarto.model.AuctionEntity;
 import com.portfolio.lagarto.model.CustomerDto;
 import com.portfolio.lagarto.model.CustomerEntity;
@@ -13,14 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 
-    @Autowired
-    public CustomerService service;
-
+    @Autowired public CustomerService service;
     @Autowired public CustomerCommentService cmtService;
 
     @GetMapping("/list/{board_cd}")
@@ -38,18 +39,20 @@ public class CustomerController {
 
     @PostMapping("/write")
     public String writeProc(CustomerEntity entity, MultipartFile[] files, Model model) {
-
         boolean isRegistered = this.service.insCustomer(entity, files);
         return "redirect:/customer/list/" + entity.getBoard_cd();
     }
 
     @GetMapping("/detail")
-    public void detail(Model model, CustomerDto dto) {
+    public void detail(Model model, CustomerDto dto, Long iboard) {
         model.addAttribute("data", service.selCustomerDetail(dto));
+
     }
 
     @GetMapping("/detail_item")
-    public void selCustomerDetail(Model model, CustomerDto dto) {
+    public void selCustomerDetail(Model model, CustomerDto dto, Long iboard) {
+        List<AttachDTO> fileList = service.getAttachFileList(iboard);
+        model.addAttribute("fileList", fileList);
         model.addAttribute("data", service.selCustomerDetail(dto));
     }
 

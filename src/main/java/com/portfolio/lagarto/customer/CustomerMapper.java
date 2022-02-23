@@ -1,6 +1,5 @@
 package com.portfolio.lagarto.customer;
 
-import com.portfolio.lagarto.model.AuctionEntity;
 import com.portfolio.lagarto.model.CustomerDto;
 import com.portfolio.lagarto.model.CustomerEntity;
 import com.portfolio.lagarto.model.CustomerVo;

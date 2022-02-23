@@ -51,7 +51,6 @@ public class CustomerService {
 
     public List<AttachDTO> getAttachFileList(Long iboard) {
 
-
         int fileTotalCount = attachMapper.selectAttachTotalCount(iboard);
         if (fileTotalCount < 1) {
             return Collections.emptyList();

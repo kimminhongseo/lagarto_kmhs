@@ -89,9 +89,8 @@ public class MyFileUtils {
 // ----------------------------------------------------------------------------------------
     /** 오늘 날짜 */
     private final String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
-
     /** 업로드 경로 */
-    private final String uploadPath = Paths.get("C:", "lagarto", "upload", today).toString();
+    private final String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/uploadfile/customer/";
 
     /**
      * 서버에 생성할 파일명을 처리할 랜덤 문자열 반환
@@ -118,7 +117,7 @@ public class MyFileUtils {
         List<AttachDTO> attachList = new ArrayList<>();
 
         /* uploadPath에 해당하는 디렉터리가 존재하지 않으면, 부모 디렉터리를 포함한 모든 디렉터리를 생성 */
-        File dir = new File(uploadPath);
+        File dir = new File(uploadPath + "/" + iboard);
         if (dir.exists() == false) {
             dir.mkdirs();
         }
@@ -132,7 +131,7 @@ public class MyFileUtils {
                 final String saveName = getRandomString() + "." + extension;
 
                 /* 업로드 경로에 saveName과 동일한 이름을 가진 파일 생성 */
-                File target = new File(uploadPath, saveName);
+                File target = new File(uploadPath + "/" + iboard, saveName);
                 file.transferTo(target);
 
                 /* 파일 정보 저장 */

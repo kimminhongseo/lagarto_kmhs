@@ -202,8 +202,7 @@ public class UserService {
         mapper.insMoney(entity);
     }
 
-    public List<UserEntity> selMoney(){
-        UserEntity entity = new UserEntity();
+    public List<UserEntity> selMoney(UserEntity entity){
         entity.setIuser(utils.getLoginUserPk());
         return mapper.selMoney(entity);
     }

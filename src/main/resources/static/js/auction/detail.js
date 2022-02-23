@@ -89,7 +89,6 @@
 
                     switch (data){
                         case 1: //fetch 로 전에있던값을 넣어줘라. 그 전 사람에게. case: 1일떄 일어나겠네.
-
                             window.close();
                             location.reload();
                             break;
@@ -99,6 +98,10 @@
                             break;
                         case 2:
                             alert("현재가보다 높은 금액을 입력하세요");
+                            return false;
+                            break;
+                        case 3:
+                            alert("잔액이 부족합니다. 충전후 경매를 이용해 주세요.")
                             return false;
                             break;
                     }

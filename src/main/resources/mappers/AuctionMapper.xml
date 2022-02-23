@@ -52,7 +52,8 @@
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">
         SELECT *,
-        B.nm as writernm , B.profile_img,B.nickname as nicknm , C.nm as categorynm, D.nickname AS buyernickname
+        B.nm as writernm , B.profile_img,B.nickname as nicknm , B.money,
+        C.nm as categorynm, D.nickname AS buyernickname
         from lagarto.auction A
         left join lagarto.lagarto_user B
         on A.iuser = B.iuser

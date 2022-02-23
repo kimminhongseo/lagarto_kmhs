@@ -26,6 +26,7 @@
                 ~~~~~여기는 디테일 부분 ~~~~~
 
                 <div id="isfollow" onsubmit="return isfollow();"></div>
+
                 <div class="detail_item" }>
                     <div>작성자 : <span th:text="${data.nicknm}"/></div> <!--옆에 프로필사진-->
                     <div>카테고리 : <span th:text="${data.categorynm}"/></div>
@@ -45,10 +46,16 @@
 
 
                             <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  경매가 등록하기
-</button>
+
                             <!-- Modal -->
+                            <!--글쓴이나, 이전에 입찰했던사람 경매 막기 기능. 성공!-->
+<div th:if="${ data.iuser != session.loginUser.iuser && data.buyer != session.loginUser.iuser}">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    경매가 등록하기
+</button>
+</div>
+
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -119,15 +126,9 @@
         </table>
     </div>
 
-
-
-
-
         </span></div>
 
-
                     <!--이건 나중에 auction_bid와 엮어야함함-->
-
 
                 </div>
             </div>

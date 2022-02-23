@@ -8,19 +8,24 @@
     <update id="updBid">
         UPDATE auction SET buy = #{buy}, buyer = #{buyer} ,
         prebuyer = #{prebuyer} , prebuy=#{prebuy}, mdt = now()
-        WHERE iboard = #{iboard};
+        WHERE iboard = #{iboard}
     </update>
 
 
     <update id="returnmoney">
         UPDATE lagarto_user SET money = money + #{prebuy}
-        WHERE iuser = #{prebuyer};
+        WHERE iuser = #{prebuyer}
     </update>
     
     <update id="removemoney">
         UPDATE lagarto_user SET money = money - #{buy}
-        WHERE iuser = #{buyer};
+        WHERE iuser = #{buyer}
     </update>
+
+    <select id="findmoney" resultType="int">
+        SELECT money FROM lagarto_user
+        WHERE iuser = #{buyer}
+    </select>
 
 
 

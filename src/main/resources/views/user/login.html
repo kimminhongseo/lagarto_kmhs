@@ -7,26 +7,38 @@
     <title>로그인</title>
     <link rel="stylesheet" th:href="@{/css/user/login.css}">
     <script defer th:src="@{/js/user/login.js}"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <th:block layout:fragment="content">
+    <div id="msg-login"></div>
     <div class="main">
         <div class="logoMain"><img class="logo" src="/img/lagarto_logo.svg"></div>
-
         <form id="login" action="/user/login" method="post">
             <div id="generalLogin">
                 <div>
-                    <div class="my-3"><input type="text" class="form-control" id="formId" placeholder="아이디"
-                                             aria-label="Username"
-                                             aria-describedby="basic-addon1" name="uid"></div>
+                    <div id="pId"><input type="text" id="formId" placeholder="아이디" name="uid"></div>
                 </div>
                 <div>
-                    <div class="my-3"><input type="password" class="form-control" id="formPw" placeholder="비밀번호"
-                                             aria-label="Username" aria-describedby="basic-addon1" name="upw"></div>
+                    <div><input type="password" id="formPw" placeholder="비밀번호" name="upw"></div>
+                </div>
+                <div class="findInfo">
+                    <div class="isSave">
+                        <input id="saveId" type="checkbox" value="1">
+                        <label for="saveId"></label>
+                        <span>아이디 저장</span>
+                    </div>
+                    <div class="stretch"></div>
+                    <div>
+                        <a href="/user/forgotId">아이디 찾기</a>
+                        <span class="bar"></span>
+                        <a href="/user/forgotPw">비밀번호 찾기</a>
+                    </div>
                 </div>
                 <div>
-                    <div class="my-4" id="btnUser">
-                        <button type="button" class="btn btn-outline-success" id="btnLogin">로그인</button>
+                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6Ldq34seAAAAACoxUgs451Cl7FcrboIERxJs9_FM" data-callback="recaptchaCallback"></div>
+                    <div id="btnUser">
+                        <button type="button" class="btn btn-outline-success" id="btnLogin" onclick="return dologin()">로그인</button>
                         <button type="button" class="btn btn-outline-success" id="btnJoin">회원가입</button>
                     </div>
                 </div>

@@ -4,26 +4,24 @@
     let loginElem = document.querySelector('#login');
     let formId = loginElem.querySelector('#formId');
     let formPw = loginElem.querySelector('#formPw');
+    let div = document.createElement('div');
+    div.innerHTML = '올바른 이메일 형식을 적어주세요.';
+    div.style.display = 'flex';
+    div.style.justifyContent = 'center';
+    div.style.justifyItems = 'center';
+    div.style.paddingTop = '15px';
+    div.style.color = 'red';
 
-
-    if (btnLoginElem) {
-        btnLoginElem.disabled = 'disabled';
-        formId.addEventListener('keyup', () => {
-            formPw.addEventListener('keyup', () => {
-                if (formId.value !== '' || formPw.value !== '') {
-                    btnLoginElem.disabled = false;
-                }
-            });
-        });
-        formPw.addEventListener('keyup', () => {
-            formId.addEventListener('keyup', () => {
-                if (formId.value !== '' || formPw.value !== '') {
-                    btnLoginElem.disabled = false;
-                }
-            });
-        });
-
-    }
+    let div2 = document.createElement('div');
+    div2.innerHTML = '로그인 실패';
+    div2.style.display = 'flex';
+    div2.style.justifyContent = 'center';
+    div2.style.justifyItems = 'center';
+    div2.style.textAlign = 'center';
+    div2.style.color = 'red';
+    div2.style.backgroundColor = 'rgba(255,0,0,0.1)';
+    div2.style.paddingTop = '30px';
+    div2.style.paddingBottom = '30px';
 
     if (btnUserElem) {
         btnLoginElem.addEventListener('click', (e) => {
@@ -48,57 +46,162 @@
     }
 
 
-    //기존 로그인 상태를 가져오기 위해 Facebook에 대한 호출
-    function statusChangeCallback(res) {
-        statusChangeCallback(response);
-    }
+    let isRecaptchachecked = false;
 
+    $('#formId').on('keyup', (k) => {
+        if (k.keyCode == 13){
+            dologin();
+        }
+    })
 
-    function fnFbCustomLogin() {
-        FB.login(function (response) {
-            if (response.status === 'connected') {
-                FB.api('/me', 'get', {fields: 'name,email'}, function (r) {
-                    let url = '/user/apiLogin';
-                    console.log(r);
+    $('#formPw').on('keyup', (k) => {
+        if (k.keyCode == 13){
+            dologin();
+        }
+    })
 
-                    fetch(url, {
-                        method: 'post',
-                        headers: {'Content-type': 'application/json'},
-                        body: JSON.stringify(r)
-                    }).then(function (res) {
-                        return res.json();
-                    }).then(hh => {
-                        switch (hh) {
-                            case 1:
-                                location.href = "http://localhost:8090/user/certification"
-                                break;
-                            case 0:
-                                location.href = "http://localhost:8090/page/main"
-                                break;
-                        }
-                    });
-                })
-            } else if (response.status === 'not_authorized') {
-                // 사람은 Facebook에 로그인했지만 앱에는 로그인하지 않았습니다.
-                alert('앱에 로그인해야 이용가능한 기능입니다.');
-            } else {
-                // 그 사람은 Facebook에 로그인하지 않았으므로이 앱에 로그인했는지 여부는 확실하지 않습니다.
-                alert('페이스북에 로그인해야 이용가능한 기능입니다.');
+    function dologin() {
+        let id = $('#formId');
+        let pw = $('#formPw');
+        const pid = $('#pId');
+        // <input type="asd" />
+        if (id.val().indexOf('@') < 1 || id.val().indexOf('.') < 1) {
+            pid.append(div);
+            id.focus();
+            if (id.val() == 0) {
+                div.remove();
             }
-        }, {scope: 'public_profile,email'});
+            return false;
+        } else {
+            div.remove();
+        }
+        if (id.val().trim() == '') {
+            alert('아이디 입력하세요.');
+            id.focus();
+            return false;
+        }
+        if (pw.val().trim() == '') {
+            alert('비밀번호를 입력하세요.')
+            pw.focus();
+            return false;
+        }
+        if (!isRecaptchachecked) {
+            alert('인증 체크를 해주세요.');
+            $("#recaptcha").focus();
+            return false;
+        }
+        return doVaildRecaptcha();
     }
 
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '612308656721361', // 내 앱 ID를 입력한다.
-            cookie: true,
-            xfbml: true,
-            version: 'v12.0'
-        });
-        FB.AppEvents.logPageView();
-    };
+    function recaptchaCallback(){// 리캡챠 체크 박스 클릭시 isRecaptchachecked 값이 true로 변경
+        isRecaptchachecked = true;
+    }
 
-}
+    function doVaildRecaptcha() {
+        let captcha = 1;
+        $.ajax({
+            url: '/valid-recaptcha',
+            type: 'post',
+            data: {
+                recaptcha: $("#g-recaptcha-response").val()
+            },
+            success: function (data) {
+                switch (data) {
+                    case 0:
+                        console.log(data);
+                        captcha = 0;
+                        $.ajax({
+                            url: '/user/login',
+                            type: 'post',
+                            data: {
+                                uid : $('#formId').val(),
+                                upw : $('#formPw').val()
+                            },
+                            success: (num) => {
+                                switch (num){
+                                    case 1:
+                                        location.href = '/main';
+                                        break;
+                                    case 2:
+                                        let msg = $('#msg-login');
+                                        msg.append(div2);
+                                        break;
+                                }
+                            }
+                        });
+                        break;
+                    case 1:
+                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
+                        break;
+                    default:
+                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
+                        break;
+                }
+            }
+        });
+        if (captcha != 0) {
+            return false;
+        }
+
+        function openJoinWin() {
+            window.open(
+                "/user/certification",
+                "_blank",
+                "width=800, height=700, location=no, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
+        }
+
+
+        //기존 로그인 상태를 가져오기 위해 Facebook에 대한 호출
+        function statusChangeCallback(res) {
+            statusChangeCallback(response);
+        }
+
+
+        function fnFbCustomLogin() {
+            FB.login(function (response) {
+                if (response.status === 'connected') {
+                    FB.api('/me', 'get', {fields: 'name,email'}, function (r) {
+                        let url = '/user/apiLogin';
+                        console.log(r);
+
+                        fetch(url, {
+                            method: 'post',
+                            headers: {'Content-type': 'application/json'},
+                            body: JSON.stringify(r)
+                        }).then(function (res) {
+                            return res.json();
+                        }).then(hh => {
+                            switch (hh) {
+                                case 1:
+                                    location.href = "http://localhost:8090/user/certification"
+                                    break;
+                                case 0:
+                                    location.href = "http://localhost:8090/page/main"
+                                    break;
+                            }
+                        });
+                    })
+                } else if (response.status === 'not_authorized') {
+                    // 사람은 Facebook에 로그인했지만 앱에는 로그인하지 않았습니다.
+                    alert('앱에 로그인해야 이용가능한 기능입니다.');
+                } else {
+                    // 그 사람은 Facebook에 로그인하지 않았으므로이 앱에 로그인했는지 여부는 확실하지 않습니다.
+                    alert('페이스북에 로그인해야 이용가능한 기능입니다.');
+                }
+            }, {scope: 'public_profile,email'});
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '612308656721361', // 내 앱 ID를 입력한다.
+                cookie: true,
+                xfbml: true,
+                version: 'v12.0'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+    }
 
 
 // //카카오
@@ -184,59 +287,62 @@
 
 
 // 구글
-{
-    var googleUser = {};
-    var startApp = function() {
-        gapi.load('auth2', function(){
-            // Retrieve the singleton for the GoogleAuth library and set up the client.
-            auth2 = gapi.auth2.init({
-                client_id: '559437244447-ucbou9ltcbr3vkcvl3og41mbi9kglan4.apps.googleusercontent.com',
-                cookiepolicy: 'single_host_origin',
-                // Request scopes in addition to 'profile' and 'email'
-                //scope: 'additional_scope'
+    {
+        var googleUser = {};
+        var startApp = function () {
+            gapi.load('auth2', function () {
+                // Retrieve the singleton for the GoogleAuth library and set up the client.
+                auth2 = gapi.auth2.init({
+                    client_id: '559437244447-ucbou9ltcbr3vkcvl3og41mbi9kglan4.apps.googleusercontent.com',
+                    cookiepolicy: 'single_host_origin',
+                    // Request scopes in addition to 'profile' and 'email'
+                    //scope: 'additional_scope'
+                });
+                attachSignin(document.getElementById('google'));
             });
-            attachSignin(document.getElementById('google'));
-        });
-    };
+        };
 
-    function attachSignin(element) {
-        auth2.attachClickHandler(element, {},
-            function(googleUser) {
-                if (googleUser) {
-                    var profile = googleUser.getBasicProfile();
-                    console.log('ID: ' + profile.getId());
-                    console.log('Name: ' + profile.getName());
-                    console.log('Image URL: ' + profile.getImageUrl());
-                    console.log('Email: ' + profile.getEmail());
+        function attachSignin(element) {
+            auth2.attachClickHandler(element, {},
+                function (googleUser) {
+                    if (googleUser) {
+                        var profile = googleUser.getBasicProfile();
+                        console.log('ID: ' + profile.getId());
+                        console.log('Name: ' + profile.getName());
+                        console.log('Image URL: ' + profile.getImageUrl());
+                        console.log('Email: ' + profile.getEmail());
 
-                    const param = {
-                        'uid': profile.getEmail(),
-                        'nm': profile.getName()
-                    }
+                        const param = {
+                            'uid': profile.getEmail(),
+                            'nm': profile.getName()
+                        }
 
 
-                    fetch('/user/apiLogin', {
-                        method: 'POST',
-                        headers: {"Content-Type": "application/json"},
-                        body: JSON.stringify(param)
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-
-                            switch (data.result) {
-                                case 0 :
-                                    window.location.href = '/user/certification';
-                                    break;
-                                case 1 :
-                                    window.location.href = '/main';
-                                    break;
-                            }
+                        fetch('/user/apiLogin', {
+                            method: 'POST',
+                            headers: {"Content-Type": "application/json"},
+                            body: JSON.stringify(param)
                         })
-                }
-            }, function(error) {
+                            .then(res => res.json())
+                            .then(data => {
 
-            });
+                                switch (data.result) {
+                                    case 0 :
+                                        window.location.href = '/user/certification';
+                                        break;
+                                    case 1 :
+                                        window.location.href = '/main';
+                                        break;
+                                }
+                            })
+                    }
+                }, function (error) {
+
+                });
+        }
+
     }
-
 }
+
+
 

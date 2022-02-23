@@ -26,8 +26,7 @@ const regex = {
 };
 // ---------------------------------------------------------------------------------------------
 
-const dataIuserElem = document.querySelector('#dataIuser');
-const isfollowElem = document.querySelector('#isfollow');
+
 
 // ---------------------------------------------------------------------------------------------
 
@@ -68,19 +67,23 @@ const myFetch = {
 }
 // ---------------------------------------------------------------------------------------------
 
+const dataIuserElem = document.querySelector('#dataIuser');
+const isfollowElem = document.querySelector('#isfollow');
 let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res => {
     return res.json();
 }).then(data => {
     switch (data) {
         case 0:
-            isfollowElem.innerHTML = `<button id="follow-Btn">팔로우</button>`;
+            isfollowElem.innerHTML = `<label id="follow-Btn"><i class="fa-solid fa-user-plus"></i></label>`;
             break;
         case 1:
-            isfollowElem.innerHTML = `<button id="unfollow-Btn">언팔로우</button>`;
+            isfollowElem.innerHTML = `<label id="unfollow-Btn"><i class="fa-solid fa-user-minus"></i></label>`;
             break;
         case 2:
+            console.log('dda')
             break;
     }
+
     const followBtnElem = isfollowElem.querySelector('#follow-Btn');
     if (followBtnElem){
         followBtnElem.addEventListener('click', () => {
@@ -117,10 +120,10 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
                 console.log(data);
                 unfollowBtnElem.remove();
                 isfollow();
-
             })
         })
     }
 })
-isfollow();
+
+
 // ---------------------------------------------------------------------------------------------

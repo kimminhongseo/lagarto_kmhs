@@ -13,12 +13,12 @@
 <th:block layout:fragment="content">
   <div class="main">
   <form action="/user/information" method="post" id="information-frm">
-    <div id="information-container">
+    <div id="information-container" >
       <div>
-        <input type="text" placeholder="성명" name="nm" id="information-nm">
+        <input type="text" placeholder="성명" name="nm" id="information-nm" data-bs-toggle="tooltip" data-bs-placement="top" title="공백, 특수문자 제외">
       </div>
       <div>
-        <input type="text" placeholder="닉네임" name="nickname" id="information-nickname">
+        <input type="text" placeholder="닉네임" name="nickname" id="information-nickname" data-bs-toggle="tooltip" data-bs-placement="top" title="공백, 특수문자 제외">
         <input type="button" class="btn btn-secondary btn-sm" value="중복확인" id="information-nickname-btn" >
       </div>
       <div>
@@ -29,6 +29,9 @@
         <input type="text" id="sample6_extraAddress" placeholder="참고항목">
       </div>
       <div>
+        <th:block th:if="${msg != null}">
+          <div id="msg" th:text="${msg}"></div>
+        </th:block>
         <button type="submit" class="btn btn-outline-success" id="information-upd">정보변경</button>
       </div>
     </div>

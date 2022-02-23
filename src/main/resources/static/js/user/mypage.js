@@ -156,6 +156,10 @@
                         case 1:
                             alert('변경완료');
                             location.href = "/user/logout";
+                        case 2:
+                            alert('영문, 숫자, 특수문자 조합하여 8자리 이상 입력 해주십시오');
+                            e.preventDefault()
+                            break;
                     }
                 })
             }
@@ -178,7 +182,6 @@
                 let SetTime = 10;      // 최초 설정 시간(기본 : 초)
                 let min = "";
                 let sec = "";
-                flag2 = true;
                 alert('인증번호를 발송 했습니다.')
                 let x = setInterval(function () {
                     min = parseInt(SetTime / 60);
@@ -196,7 +199,7 @@
 
                 fetch(`/ajax/mail?uid=${formEmail.value}`)
                     .then(res => {
-                        // return res.json();
+                        return res.json();
                     }).then(data => { // data = 메일로 발송된 인증키
                     console.log(data);
                     authKey = data;
@@ -212,7 +215,7 @@
         formEmailSubmit.addEventListener('click', (e) => {
             console.log(flag2)
             if (!flag2) {
-                alert('제한시간 만료');
+                alert('제한 시간 만료');
                 return;
             }
             if (authKey != formEmailNumber.value) {
@@ -250,21 +253,21 @@
 }
 
 
-const unfollowBtnElem = document.querySelectorAll('.unfollow-Btn');
+const unfollowBtnElem = document.querySelectorAll('#unfollow-Btn');
 if (unfollowBtnElem){
     unfollowBtnElem.forEach(item => {
-        console.log(item.value);
         item.addEventListener('click', () => {
-            const myFElem = document.querySelector('.myF');
             fetch(`/unfollow/${item.value}`,{
                 method : 'DELETE'
             }).then(res => {
                 return res.text();
             }).then(data => {
-                console.log(data);
-                myFElem.remove();
+                console.log(item.parentNode.parentNode);
+                item.parentNode.parentNode.remove();
             })
         });
     })
 }
+
+
 

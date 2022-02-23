@@ -4,7 +4,9 @@ package com.portfolio.lagarto.user;
 
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.Utils;
+import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.JoinResult;
+import com.portfolio.lagarto.model.ForgotIdVo;
 import com.portfolio.lagarto.model.UserDto;
 import com.portfolio.lagarto.model.UserEntity;
 import org.mindrot.jbcrypt.BCrypt;
@@ -12,8 +14,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Service
@@ -172,4 +176,31 @@ public class UserService {
         mapper.informationUpd(entity);
     }
 
+    public void moneyCharge(UserEntity entity) {
+        mapper.moneyCharge(entity);
+    }
+
+    public ForgotIdVo forgotId(UserEntity entity) {
+        ForgotIdVo forgotIdVo = mapper.selUserId(entity);
+
+        if (forgotIdVo == null) {
+            forgotIdVo.setForgotIdResult(ForgotIdResult.FAILURE);
+            return forgotIdVo;
+        }
+
+        forgotIdVo.setForgotIdResult(ForgotIdResult.SUCCESS);
+        System.out.println(forgotIdVo);
+
+        return forgotIdVo;
+    }
+
+    public void insMoney(UserEntity entity){
+        mapper.insMoney(entity);
+    }
+
+    public List<UserEntity> selMoney(){
+        UserEntity entity = new UserEntity();
+        entity.setIuser(utils.getLoginUserPk());
+        return mapper.selMoney(entity);
+    }
 }

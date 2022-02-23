@@ -86,4 +86,30 @@
             address_secondary = #{address_secondary}
         WHERE iuser = #{iuser}
     </update>
+
+    <update id="moneyCharge">
+        UPDATE `lagarto`.`lagarto_user`
+        SET money = money + #{money}
+        WHERE iuser = #{iuser};
+    </update>
+
+    <!-- 아이디 찾기 -->
+    <select id="selUserId" resultType="ForgotIdVo">
+        SELECT *
+        FROM `lagarto`.`lagarto_user`
+        WHERE `contact_first` = #{contact_first}
+          AND `contact_second` = #{contact_second}
+          AND `contact_third` = #{contact_third}
+    </select>
+
+    <!--금액츙전 내역-->
+    <insert id="insMoney">
+        INSERT INTO `lagarto`.`user_add_money`(`iuser`, `money`)
+        VALUES
+            (#{iuser}, #{money})
+    </insert>
+
+    <select id="selMoney" resultType="UserEntity">
+        SELECT * FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser};
+    </select>
 </mapper>

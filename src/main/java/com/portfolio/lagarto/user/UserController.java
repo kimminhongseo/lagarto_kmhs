@@ -53,7 +53,7 @@ public class UserController {
     @PostMapping("/apiLogin")
     @ResponseBody
     public Map<String, Integer> loginProc(@RequestBody UserEntity entity){
-        UserEntity dbEntity = service.selUser(entity);
+        UserEntity dbEntity = service.selApiUser(entity);
 
         Map<String, Integer> result = new HashMap<>();
         if (dbEntity == null){

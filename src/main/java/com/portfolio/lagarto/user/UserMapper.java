@@ -16,6 +16,7 @@ public interface UserMapper {
     int selUidCount(UserEntity entity);
     int isDesc(UserEntity entity);
     UserEntity selUser(UserEntity entity);
+    UserEntity selApiUser(UserEntity entity);
     UserEntity facebookPk(UserEntity entity);
     UserEntity loginSel(UserEntity entity);
     UserEntity passwordSel(UserDto dto);

@@ -6,19 +6,19 @@
 
 
     <update id="updBid">
-        UPDATE auction SET buy = #{buy}, buyer = #{buyer} ,
+        UPDATE lagarto.auction SET buy = #{buy}, buyer = #{buyer} ,
         prebuyer = #{prebuyer} , prebuy=#{prebuy}, mdt = now()
         WHERE iboard = #{iboard};
     </update>
 
 
     <update id="returnmoney">
-        UPDATE lagarto_user SET money = money + #{prebuy}
+        UPDATE lagarto.lagarto_user SET money = money + #{prebuy}
         WHERE iuser = #{prebuyer};
     </update>
     
     <update id="removemoney">
-        UPDATE lagarto_user SET money = money - #{buy}
+        UPDATE lagarto.lagarto_user SET money = money - #{buy}
         WHERE iuser = #{buyer};
     </update>
 

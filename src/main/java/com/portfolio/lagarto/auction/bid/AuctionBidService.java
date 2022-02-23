@@ -15,10 +15,9 @@ public class AuctionBidService {
 
     public int updBid(AuctionVo vo){
 
-            if(vo.getBuy() > mapper.findmoney(vo)){
+            if(vo.getBuy() > mapper.findmoney(vo)){ //잔액부족일때.
                 return 3;
             }
-
 
             if(vo.getPrebuy()>vo.getBuy()){
                 return 2; //현재 경매가보다 낮은 금액을 입력할 경우

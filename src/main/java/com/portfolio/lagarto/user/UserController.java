@@ -53,7 +53,7 @@ public class UserController {
     @PostMapping("/apiLogin")
     @ResponseBody
     public Map<String, Integer> loginProc(@RequestBody UserEntity entity){
-        UserEntity dbEntity = service.selUser(entity);
+        UserEntity dbEntity = service.selApiUser(entity);
 
         Map<String, Integer> result = new HashMap<>();
         if (dbEntity == null){
@@ -235,12 +235,12 @@ public class UserController {
 
     @GetMapping("/charge")
     public String charge(UserEntity entity, Model model){
-        if (utils.getLoginUserPk() > 0){
-            model.addAttribute(Const.Money, service.selMoney());
+        if (utils.getLoginUserPk() != 0){
+            model.addAttribute(Const.Money, service.selMoney(entity));
             return "/user/charge";
         }
-        return "/user/login";
-    };
+        return "redirect:/user/login";
+    }
 
 
     @PostMapping("/charge")

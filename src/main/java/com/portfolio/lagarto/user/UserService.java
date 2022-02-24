@@ -146,6 +146,10 @@ public class UserService {
         return mapper.selUser(entity);
     }
 
+    public UserEntity selApiUser(UserEntity entity) {
+        return mapper.selApiUser(entity);
+    }
+
     public UserEntity facebookIns(UserEntity entity){
         entity.setIuser(utils.getLoginUserPk());
         return mapper.facebookPk(entity);
@@ -198,8 +202,7 @@ public class UserService {
         mapper.insMoney(entity);
     }
 
-    public List<UserEntity> selMoney(){
-        UserEntity entity = new UserEntity();
+    public List<UserEntity> selMoney(UserEntity entity){
         entity.setIuser(utils.getLoginUserPk());
         return mapper.selMoney(entity);
     }

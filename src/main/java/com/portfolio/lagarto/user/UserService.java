@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Service
@@ -145,6 +146,10 @@ public class UserService {
         return mapper.selUser(entity);
     }
 
+    public UserEntity selApiUser(UserEntity entity) {
+        return mapper.selApiUser(entity);
+    }
+
     public UserEntity facebookIns(UserEntity entity){
         entity.setIuser(utils.getLoginUserPk());
         return mapper.facebookPk(entity);
@@ -193,4 +198,12 @@ public class UserService {
         return forgotIdVo;
     }
 
+    public void insMoney(UserEntity entity){
+        mapper.insMoney(entity);
+    }
+
+    public List<UserEntity> selMoney(UserEntity entity){
+        entity.setIuser(utils.getLoginUserPk());
+        return mapper.selMoney(entity);
+    }
 }

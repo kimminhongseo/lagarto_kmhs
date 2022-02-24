@@ -14,7 +14,7 @@
 
     <!--총 게시판 번호가져오려고 적음.-->
     <select id="insAuctionList" resultType="AuctionVo">
-        select *,
+        select A.*,
         B.nm as writernm
         From lagarto.auction A
         Left join lagarto.lagarto_user B
@@ -28,7 +28,7 @@
     <!--전체 sel 하는거 하나 만들어야할듯-->
 
     <select id="selAuctionList" resultType="AuctionVo">
-        select *,
+        select A.*,
         B.nm  as writernm, B.nickname as nicknm
         From lagarto.auction A
         Left join lagarto.lagarto_user B
@@ -40,7 +40,7 @@
     </select>
 
     <select id="selAuctionListAll" resultType="AuctionVo">
-        select *,
+        select A.*,
         B.nm as writernm, B.nickname as nicknm
         from lagarto.auction A
         left join lagarto.lagarto_user B
@@ -51,8 +51,9 @@
 
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">
-        SELECT *,
-        B.nm as writernm , B.profile_img,B.nickname as nicknm , C.nm as categorynm, D.nickname AS buyernickname
+        SELECT A.*,
+        B.nm as writernm , B.profile_img,B.nickname as nicknm , B.money,
+        C.nm as categorynm, D.nickname AS buyernickname
         from lagarto.auction A
         left join lagarto.lagarto_user B
         on A.iuser = B.iuser

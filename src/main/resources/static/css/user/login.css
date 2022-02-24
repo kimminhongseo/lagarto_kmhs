@@ -226,3 +226,49 @@ span.buttonText {
     font-size: 0.825rem;
     font-weight: 500;
 }
+
+
+
+/* recaptcha 사이즈 조절 */
+
+.g-recaptcha-wrapper {
+    position: relative;
+    border: 1px solid #ededed;
+    background: #f9f9f9;
+    border-radius: 4px;
+    padding: 0;
+    margin: 1.5rem 0 1rem 0;
+}
+
+#topHider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px !important;
+    width: 100%;
+    background-color: #f9f9f9;
+}
+#rightHider {
+    position: absolute;
+    top: 0;
+    left: 295px;
+    height: 100% !important;
+    width: 15px;
+    background-color: #f9f9f9;
+}
+#leftHider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100% !important;
+    width: 2px;
+    background-color: #f9f9f9;
+}
+#bottomHider {
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+    height: 2px !important;
+    width: 100%;
+    background-color: #f9f9f9;
+}

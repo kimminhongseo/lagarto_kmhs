@@ -6,6 +6,8 @@ import com.portfolio.lagarto.model.UserDto;
 import com.portfolio.lagarto.model.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
     int apiInsUser(UserEntity entity);
@@ -14,6 +16,7 @@ public interface UserMapper {
     int selUidCount(UserEntity entity);
     int isDesc(UserEntity entity);
     UserEntity selUser(UserEntity entity);
+    UserEntity selApiUser(UserEntity entity);
     UserEntity facebookPk(UserEntity entity);
     UserEntity loginSel(UserEntity entity);
     UserEntity passwordSel(UserDto dto);
@@ -23,4 +26,6 @@ public interface UserMapper {
     void informationUpd(UserEntity entity);
     ForgotIdVo selUserId(UserEntity entity);
     void moneyCharge(UserEntity entity);
+    void insMoney(UserEntity entity);
+    List<UserEntity> selMoney(UserEntity entity);
 }

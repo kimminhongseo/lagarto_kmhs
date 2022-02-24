@@ -26,8 +26,7 @@ const regex = {
 };
 // ---------------------------------------------------------------------------------------------
 
-const dataIuserElem = document.querySelector('#dataIuser');
-const isfollowElem = document.querySelector('#isfollow');
+
 
 // ---------------------------------------------------------------------------------------------
 
@@ -68,6 +67,8 @@ const myFetch = {
 }
 // ---------------------------------------------------------------------------------------------
 
+const dataIuserElem = document.querySelector('#dataIuser');
+const isfollowElem = document.querySelector('#isfollow');
 let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res => {
     return res.json();
 }).then(data => {
@@ -79,6 +80,7 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
             isfollowElem.innerHTML = `<label id="unfollow-Btn"><i class="fa-solid fa-user-minus"></i></label>`;
             break;
         case 2:
+            console.log('dda')
             break;
     }
 
@@ -118,9 +120,10 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
                 console.log(data);
                 unfollowBtnElem.remove();
                 isfollow();
-
             })
         })
     }
 })
+
+
 // ---------------------------------------------------------------------------------------------

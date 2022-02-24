@@ -24,7 +24,7 @@
     text-align: center;
 }
 
-#money-page{
+#money-page, #mBn{
     display: flex;
     justify-items: center;
     justify-content: center;
@@ -40,3 +40,10 @@
 #font-money{
     font-weight: bold;
 }
+
+.moneyCountBtn{
+    background: transparent;
+    border: transparent;
+    margin: 5px;
+}
+

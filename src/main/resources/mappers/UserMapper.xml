@@ -33,7 +33,7 @@
         SELECT *
         FROM `lagarto`.`lagarto_user`
         WHERE `iuser` = #{iuser}
-           OR `uid` = #{uid}
+           OR `uid` = #{uid} OR `nickname` = #{nickname}
     </select>
 
     <select id="selApiUser" resultType="UserEntity">
@@ -115,7 +115,12 @@
             (#{iuser}, #{money})
     </insert>
 
-    <select id="selMoney" resultType="UserEntity">
-        SELECT * FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser};
+<!--    limit줄때 2페이지면 5,10 3/10,15-->
+    <select id="selMoney" parameterType="PageVo" resultType="UserEntity">
+        SELECT * FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser} LIMIT #{currentPage}, #{recordCount};
+    </select>
+
+    <select id="selMoneyCount" resultType="int">
+        SELECT CEIL(COUNT(*)/5) FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser};
     </select>
 </mapper>

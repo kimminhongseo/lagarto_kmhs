@@ -6,10 +6,7 @@ import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.JoinResult;
 import com.portfolio.lagarto.follow.FollowService;
-import com.portfolio.lagarto.model.ForgotIdVo;
-import com.portfolio.lagarto.model.FollowEntity;
-import com.portfolio.lagarto.model.UserDto;
-import com.portfolio.lagarto.model.UserEntity;
+import com.portfolio.lagarto.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -234,14 +231,19 @@ public class UserController {
     }
 
     @GetMapping("/charge")
-    public String charge(UserEntity entity, Model model){
+    public String charge(@RequestParam int pageNum, UserEntity entity,PageVo vo, Model model){ //page num = 2
+        System.out.println(pageNum);
         if (utils.getLoginUserPk() != 0){
-            model.addAttribute(Const.Money, service.selMoney(entity));
+            int result = service.selMoneyCount(entity);
+            model.addAttribute(Const.Count, result);
+            vo.setCurrentPage((pageNum -1) * vo.getRecordCount());
+            vo.setRecordCount(vo.getRecordCount());
+            vo.setIuser(utils.getLoginUserPk());
+            model.addAttribute(Const.Money, service.selMoney(vo));
             return "/user/charge";
         }
         return "redirect:/user/login";
     }
-
 
     @PostMapping("/charge")
     public void charge(@RequestParam int money, HttpSession hs){

@@ -22,8 +22,8 @@
             (
             #{item.idx}
             , #{item.iboard}
-            , #{item.originalName}
-            , #{item.saveName}
+            , #{item.original_name}
+            , #{item.save_name}
             , #{item.size}
             , 'N'
             , NOW()
@@ -32,7 +32,7 @@
         </foreach>
     </insert>
 
-    <select id="selectAttachDetail" parameterType="long" resultType="AttachDTO">
+    <select id="selectAttachDetail" parameterType="int" resultType="AttachDTO">
         SELECT
         <include refid="attachColumns" />
         FROM
@@ -52,18 +52,19 @@
             iboard = #{iboard}
     </update>
 
-    <select id="selectAttachList" parameterType="long" resultType="AttachDTO">
+    <select id="selectAttachList" resultType="AttachDTO">
         SELECT
-        <include refid="attachColumns" />
+        *
         FROM
         lagarto.tb_attach
         WHERE
         delete_yn = 'N'
         AND
-        iboard = #{iboard}
+        iboard = ${iboard}
+        ORDER BY idx
     </select>
 
-    <select id="selectAttachTotalCount" parameterType="long" resultType="int">
+    <select id="selectAttachTotalCount" parameterType="int" resultType="int">
         SELECT
             COUNT(*)
         FROM
@@ -71,7 +72,7 @@
         WHERE
             delete_yn = 'N'
           AND
-            iboard = #{iboard}
+            iboard = ${iboard}
     </select>
 
 </mapper>

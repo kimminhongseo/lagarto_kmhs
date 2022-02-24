@@ -1,24 +1,24 @@
 package com.portfolio.lagarto.customer.files;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class AttachDTO {
+
     /** 파일 번호 (PK) */
-    private Long idx;
+    private int idx;
 
     /** 게시글 번호 (FK) */
-    private Long iboard;
+    private int iboard;
 
     /** 원본 파일명 */
-    private String originalName;
+    private String original_name;
 
     /** 저장 파일명 */
-    private String saveName;
+    private String save_name;
 
     /** 파일 크기 */
-    private long size;
+    private int size;
 
+    private String insertTime;
 }

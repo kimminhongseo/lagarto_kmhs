@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--메퍼 설정 하세요-->
+<mapper namespace="com.portfolio.lagarto.auction.comment.AuctionCommentMapper">
+
+    <insert id="insAuctionCmt">
+        INSERT INTO lagarto.auction_comment
+        (iboard, iuser, ctnt)
+        VALUES
+        (${iboard}, ${iuser}, #{ctnt})
+    </insert>
+
+    <select id="selAuctionCmtList" resultType="AuctionCommentVo">
+        SELECT A.*, B.nickname FROM
+        lagarto.auction_comment A
+        LEFT JOIN lagarto.lagarto_user B
+        ON A.iuser = B.iuser
+        WHERE A.iboard = ${iboard}
+        ORDER BY A.icmt
+    </select>
+
+<!--        요건 왜있찌
+            <select id="selAuctionCmtOne" resultType="AuctionCommentVo">-->
+<!--        SELECT A.*, B.nickname FROM-->
+<!--        lagarto.auction_comment A-->
+<!--        LEFT JOIN lagarto.lagarto_user B-->
+<!--        ON A.iuser = B.iuser-->
+<!--        WHERE A.iboard = ${iboard}-->
+<!--        AND A.icmt = ${icmt}-->
+<!--    </select>-->
+
+
+    <!--useGeneratedKeys="true" keyProperty="icmt"-->
+
+    <insert id="modBoardCmt" >
+        insert into lagarto.auction_comment (iboard, iuser, ctnt)
+        values (${iboard},${iuser},#{ctnt})
+
+    </insert>
+
+    <delete id="delAuctionCmt">
+        DELETE FROM lagarto.auction_comment WHERE icmt = ${icmt} AND iboard = ${iboard}
+    </delete>
+
+    <delete id="delAuctionCmtAll">
+        DELETE FROM lagarto.auction_comment WHERE iboard = ${iboard}
+    </delete>
+
+
+
+
+
+</mapper>

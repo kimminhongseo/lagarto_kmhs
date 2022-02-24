@@ -37,7 +37,6 @@ public class AuctionBidService {
                     mapper.removemoney(vo);
                 }
 
-
                 return mapper.updBid(vo); //성공시 1
             }
             else{

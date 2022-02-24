@@ -80,7 +80,6 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
             isfollowElem.innerHTML = `<label id="unfollow-Btn"><i class="fa-solid fa-user-minus"></i></label>`;
             break;
         case 2:
-            console.log('dda')
             break;
     }
 
@@ -124,6 +123,7 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
         })
     }
 })
+
 
 
 // ---------------------------------------------------------------------------------------------

@@ -33,7 +33,7 @@
         SELECT *
         FROM `lagarto`.`lagarto_user`
         WHERE `iuser` = #{iuser}
-           OR `uid` = #{uid}
+           OR `uid` = #{uid} OR `nickname` = #{nickname}
     </select>
 
     <select id="selApiUser" resultType="UserEntity">

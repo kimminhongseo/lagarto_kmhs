@@ -20,6 +20,8 @@ public class Const {
     public static final String Following = "following";
     public static final String Money = "money";
     public static final String Count = "count";
+    public static final String User = "user";
+
     public static boolean checkUid(String email) {
         return email.matches(UID);
     }

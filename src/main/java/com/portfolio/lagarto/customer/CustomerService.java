@@ -33,7 +33,7 @@ public class CustomerService {
         if (!this.insCustomer(entity)) {
             return false;
         } else {
-            List<AttachDTO> fileList = this.myFileUtils.uploadFiles(files, (long) entity.getIboard());
+            List<AttachDTO> fileList = this.myFileUtils.uploadFiles(files, entity.getIboard());
             if (!CollectionUtils.isEmpty(fileList)) {
                 queryResult = this.attachMapper.insertAttach(fileList);
                 if (queryResult < 1) {
@@ -49,8 +49,7 @@ public class CustomerService {
         return mapper.selCustomerList(dto);
     }
 
-    public List<AttachDTO> getAttachFileList(Long iboard) {
-
+    public List<AttachDTO> getAttachFileList(int iboard) {
 
         int fileTotalCount = attachMapper.selectAttachTotalCount(iboard);
         if (fileTotalCount < 1) {

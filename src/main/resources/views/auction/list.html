@@ -25,10 +25,12 @@
         </div>
 
 
-        <!--a태그로 이동하는 이벤트 했음. -->
+
         <div class="auction_container">
-            <ul class="auction_list">
-                <li class="record" th:each="data:${List}"><a th:href="@{/auction/detail(iboard=${data.iboard})}">
+            <ul class="auction_list" >
+
+                <li class="record" th:each="data:${List}" >
+                    <a  th:href="@{/auction/detail(iboard=${data.iboard})}">
                     <div hidden>게시판 번호: <span class="iboard" th:text="${data.iboard}"/></div>
                     <div>
                         <!--이미지1 없으면 pro.png 파일이 기본파일로-->
@@ -37,7 +39,6 @@
                     </div>
                     <div>작성자 : <span th:text="${data.nicknm}"/></div>
                     <div>조회수 : <span th:text="${data.hits}"/></div>
-
                     <div class="auction_info">
                         <div>제목 :<span th:text="${data.title}"/></div>
                         <div>내용 : <span th:text="${data.ctnt}"/></div>
@@ -46,7 +47,24 @@
                         <div>즉시구매가 : <span th:text="${data.imbuy}"/> 원</div>
                         <div>경매가 : <span th:text="${data.buy}"/> 원</div>
                     </div>
-                </a>
+                    </a>
+
+                        <!--로그인 안되어 있을때 즉시구매가랑 경매가만 숨기고 로그인하도록 유도-->
+<!--                    <a id="loginlink" th:if="${session.loginUser == null}">-->
+<!--                        <div>-->
+<!--                            <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" }-->
+<!--                                 onerror="this.src='/static/img/pro.png'"/>-->
+<!--                        </div>-->
+
+<!--                        <div>작성자 : <span th:text="${data.nicknm}"/></div>-->
+<!--                        <div>조회수 : <span th:text="${data.hits}"/></div>-->
+<!--                        <div class="auction_info">-->
+<!--                            <div>제목 :<span th:text="${data.title}"/></div>-->
+<!--                            <div>내용 : <span th:text="${data.ctnt}"/></div>-->
+<!--                        </div>-->
+<!--                    </a>-->
+
+
                 </li>
 
             </ul>

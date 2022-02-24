@@ -8,7 +8,7 @@
     <update id="updBid">
         UPDATE lagarto.auction SET buy = #{buy}, buyer = #{buyer} ,
         prebuyer = #{prebuyer} , prebuy=#{prebuy}, mdt = now()
-        WHERE iboard = #{iboard};
+        WHERE iboard = #{iboard}
     </update>
 
 
@@ -21,6 +21,11 @@
         UPDATE lagarto.lagarto_user SET money = money - #{buy}
         WHERE iuser = #{buyer};
     </update>
+
+    <select id="findmoney" resultType="int">
+        SELECT money FROM lagarto_user
+        WHERE iuser = #{buyer}
+    </select>
 
 
 

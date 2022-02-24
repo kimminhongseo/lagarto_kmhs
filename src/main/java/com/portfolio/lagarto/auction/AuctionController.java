@@ -133,7 +133,7 @@ public class AuctionController {
 
 
         model.addAttribute("inslist",service.insAuctionList(auctionEntity));
-        System.out.println(service.insAuctionList(auctionEntity));
+
 
 
         return "/auction/uploadstatusview";
@@ -144,7 +144,7 @@ public class AuctionController {
     public String list(AuctionVo vo, Model model) {
 
         model.addAttribute("List", service.selAuctionListAll(vo));
-        System.out.println(service.selAuctionListAll(vo));
+
         return "auction/list";
     }
 
@@ -160,19 +160,16 @@ public class AuctionController {
 
 
     @GetMapping("/detail")
-    public String detail(AuctionVo vo, Model model) {
+    public void detail(AuctionVo vo, Model model) {
         model.addAttribute("Data", service.selAuctionDetail(vo));
         //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
-        System.out.println("확인이이이이이이"+vo);
 
-
-        return "auction/detail";
     }
 
-    //js처리 위해
-    @GetMapping("/detail_item")
+    //js처리 위해, 값불러오는거
+    @GetMapping("/detail_data")
     public void selAuctionDetail(Model model, AuctionVo vo){
-        model.addAttribute("data",service.selAuctionDetail(vo));
+        model.addAttribute("Data",service.selAuctionDetail(vo));
     }
 
 

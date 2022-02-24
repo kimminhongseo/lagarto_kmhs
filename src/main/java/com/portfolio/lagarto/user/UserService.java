@@ -7,6 +7,7 @@ import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.JoinResult;
 import com.portfolio.lagarto.model.ForgotIdVo;
+import com.portfolio.lagarto.model.PageVo;
 import com.portfolio.lagarto.model.UserDto;
 import com.portfolio.lagarto.model.UserEntity;
 import org.mindrot.jbcrypt.BCrypt;
@@ -202,8 +203,12 @@ public class UserService {
         mapper.insMoney(entity);
     }
 
-    public List<UserEntity> selMoney(UserEntity entity){
+    public List<UserEntity> selMoney(PageVo vo){
+        return mapper.selMoney(vo);
+    }
+
+    public int selMoneyCount(UserEntity entity){
         entity.setIuser(utils.getLoginUserPk());
-        return mapper.selMoney(entity);
+        return mapper.selMoneyCount(entity);
     }
 }

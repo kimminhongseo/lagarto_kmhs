@@ -1,3 +1,14 @@
+function asd(pageNum) {
+    console.log(pageNum);
+    fetch(`/user/charge?pageNum=${pageNum}`,{
+        method : 'get'
+    }).then(res => {
+        return res.json();
+    }).then(data => {
+
+    })
+}
+
 
 
 $('#charge_kakao').click(function () {
@@ -37,3 +48,4 @@ $('#charge_kakao').click(function () {
         document.location.href="/user/charge"; //alert창 확인 후 이동할 url 설정
     });
 });
+

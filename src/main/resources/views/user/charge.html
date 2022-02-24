@@ -33,7 +33,6 @@
             <table class="table" id="bottoms">
                 <tbody>
                 <tr th:each="item : ${money}" id="font-money">
-                    <th scope="row" th:text="${itemStat.count}"></th>
                     <td th:text="${#numbers.formatInteger(item.money, 0, 'COMMA') +'원'}"></td>
                     <td th:text="충전완료"></td>
                     <td th:text="${item.rdt}"></td>
@@ -41,9 +40,14 @@
                 </tbody>
             </table>
         </div>
-        <div style="display: block; text-align: center;">
 
+        <div id="mBn">
+            <label th:each="num : ${#numbers.sequence(1, count)}">
+                <a th:href="@{/user/charge(pageNum=${numStat.count})}"><button class="moneyCountBtn"  th:value="${numStat.count}" th:text="${numStat.count}" th:onclick="|javascript:asd('${numStat.count}')|"></button></a>
+            </label>
         </div>
+
+
     </div>
 
 </th:block>

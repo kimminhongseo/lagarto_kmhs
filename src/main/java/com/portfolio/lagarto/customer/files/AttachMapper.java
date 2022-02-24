@@ -10,9 +10,9 @@ public interface AttachMapper {
 
     AttachDTO selectAttachDetail(int idx);
 
-    int deleteAttach(Long boardIdx);
+    int deleteAttach(int boardIdx);
 
-    List<AttachDTO> selectAttachList(Long iboard);
+    List<AttachDTO> selectAttachList(int iboard);
 
-    int selectAttachTotalCount(Long iboard);
+    int selectAttachTotalCount(int iboard);
 }

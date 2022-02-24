@@ -44,15 +44,14 @@ public class CustomerController {
     }
 
     @GetMapping("/detail")
-    public void detail(Model model, CustomerDto dto, Long iboard) {
+    public void detail(Model model, CustomerDto dto) {
         model.addAttribute("data", service.selCustomerDetail(dto));
 
     }
 
     @GetMapping("/detail_item")
-    public void selCustomerDetail(Model model, CustomerDto dto, Long iboard) {
-        List<AttachDTO> fileList = service.getAttachFileList(iboard);
-        model.addAttribute("fileList", fileList);
+    public void selCustomerDetail(Model model, CustomerDto dto, int iboard) {
+        model.addAttribute("fileList", service.getAttachFileList(iboard));
         model.addAttribute("data", service.selCustomerDetail(dto));
     }
 

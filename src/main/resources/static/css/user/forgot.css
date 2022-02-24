@@ -26,6 +26,10 @@
     border: 1px solid var(--border-color-default);
 }
 
+.uid_wrap {
+    margin-bottom: 3rem;
+}
+
 .num_wrap {
     display: flex;
     flex-direction: row;
@@ -48,9 +52,3 @@
     margin-top: 5rem;
 }
 
-.btn_cont {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-    margin-top: 5rem;
-}

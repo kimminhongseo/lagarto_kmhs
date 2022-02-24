@@ -4,18 +4,27 @@
       layout:decorate="temp/thymeleaf_layout">
 
 <head>
-    <title>아이디 찾기</title>
+    <title>비밀번호 찾기</title>
     <link rel="stylesheet" th:href="@{/css/user/forgot.css}">
     <script defer th:src="@{/js/user/forgot.js}"></script>
 </head>
 
 <th:block layout:fragment="content">
     <div class="forgot_main">
-        <h1>아이디 찾기</h1>
+        <h1>비밀번호 찾기</h1>
         <div id="forgotInfo">
             <form th:action="@{/user/forgotId}" method="post" id="forgot_id_form" th:object="${entity}">
                 <div class="form_container">
-                    <div class="input_name">휴대전화로 찾기</div>
+                    <div class="input_name">아이디 (이메일)</div>
+                    <div class="uid_wrap">
+                        <label>
+                            <span hidden>이메일</span>
+                            <input type="text" name="uid" placeholder="예) lagarto@lagarto.com"
+                                   th:field="*{uid}" th:with="UID=${UID}" th:data-regex="${UID}" required autofocus>
+                            <span class="warning" rel="email-warning"></span>
+                        </label>
+                    </div>
+                    <div class="input_name">휴대전화</div>
                     <div class="num_wrap">
                         <label class="num_box">
                             <span hidden>휴대전화</span>

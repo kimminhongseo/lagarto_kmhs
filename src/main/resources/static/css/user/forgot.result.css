@@ -1,0 +1,52 @@
+.text_wrap {
+    text-align: center;
+}
+
+.text_wrap p {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.text_wrap > div {
+    width: 40%;
+    border: 0.0625rem solid var(--border-color-default);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto 0;
+    padding: 1rem 2.5rem;
+}
+
+.text_wrap div .platform_type {
+    width: 7rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.text_wrap div .platform_type img {
+    height: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.text_wrap > div > p {
+    color: #000;
+    font-size: 1.1rem;
+    margin: 0 auto;
+}
+
+.btn_cont {
+    margin-top: 3rem;
+}
+
+.btn_cont a {
+    text-decoration: none;
+}
+
+.btn_cont input {
+    width: 40%;
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 2.5rem;
+}

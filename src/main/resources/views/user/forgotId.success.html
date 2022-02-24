@@ -5,8 +5,8 @@
 
 <head>
     <title>아이디 찾기 완료</title>
-    <link rel="stylesheet" th:href="@{/css/user/forgot.success.css}">
-    <script defer th:src="@{/js/user/forgot.success.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/user/forgot.result.css}">
+    <script defer th:src="@{/js/user/forgot.result.js}"></script>
 </head>
 
 <th:block layout:fragment="content">
@@ -16,8 +16,15 @@
             <p>입력하신 정보와 일치하는 결과 입니다.</p>
             <p>개인정보 보호를 위해 아이디(이메일)의 일부만 제공합니다.</p>
             <div>
+                <div class="platform_type" th:if="${user.platform_cd == 1}"><img src="/static/img/lagarto_platform_logo.png" alt="lagarto"><p>일반회원</p></div>
+                <div class="platform_type" th:if="${user.platform_cd == 2}"><img src="/static/img/naver_logo.png" alt="네이버"><p>네이버</p></div>
+                <div class="platform_type" th:if="${user.platform_cd == 3}"><img src="/static/img/kakao_logo.png" alt="카카오"><p>카카오</p></div>
+                <div class="platform_type" th:if="${user.platform_cd == 4}"><img src="/static/img/google_logo.svg" alt="구글"><p>구글</p></div>
                 <p th:text="${user.uid}"></p>
             </div>
         </div>
+        <div class="btn_cont">
+            <a href="/user/login"><input class="object_button prop_dark" type="button" value="로그인"></a>
+        </div>
     </div>
-</th:block>>
+</th:block>

@@ -188,12 +188,15 @@ public class UserService {
         ForgotIdVo forgotIdVo = mapper.selUserId(entity);
 
         if (forgotIdVo == null) {
+            forgotIdVo = new ForgotIdVo();
             forgotIdVo.setForgotIdResult(ForgotIdResult.FAILURE);
             return forgotIdVo;
         }
 
         forgotIdVo.setForgotIdResult(ForgotIdResult.SUCCESS);
-        System.out.println(forgotIdVo);
+
+        String hid = Utils.hideEmail(forgotIdVo.getUid(), forgotIdVo.getPlatform_cd());
+        forgotIdVo.setUid(hid);
 
         return forgotIdVo;
     }

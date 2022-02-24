@@ -62,4 +62,21 @@ public class Utils {
     public static String subString(String str) {
         return str.substring(0, 4) + str.substring(4).replaceAll("\\S", "*");
     }
+
+    public static String hideEmail(String str, int platform_cd) {
+        int index = str.indexOf("@");
+        String id;
+        String domain;
+
+        id = str.substring(0, index);
+        domain = str.substring(index + 1);
+
+        String hideId = subString(id);
+
+        if (platform_cd == 1) {
+            return hideId + "@" + domain;
+        } else {
+            return hideId;
+        }
+    }
 }

@@ -272,7 +272,7 @@ public class UserController {
 
         ForgotIdVo vo = service.forgotId(entity);
         if (vo.getForgotIdResult() == ForgotIdResult.FAILURE) {
-            return "/user/forgotId";
+            return "/user/forgotId.failure";
         }
         model.addAttribute("user", vo);
         System.out.println(vo.getUid());
@@ -282,6 +282,18 @@ public class UserController {
     @GetMapping("/forgotId.success")
     public String forgotIdSuccess() {
         return "/user/forgotId.success";
+    }
+
+    @GetMapping("/forgotId.failure")
+    public String forgotIdFailure() {
+        return "/user/forgotId.failure";
+    }
+
+    @GetMapping("/forgotPw")
+    public void forgotPw(@ModelAttribute("entity") UserEntity entity, Model model) {
+        model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
+        model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
+        model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
     }
 
 

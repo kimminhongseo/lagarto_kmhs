@@ -38,9 +38,11 @@ public class AuctionBidController {
         vo.setBuy(formbid); //경매희망값
         vo.setImbuy(formimbuy); //즉시구매
         vo.setIboard(iboard);
-        vo.setPrebuy(formbuy); //현재 등록된값
 
-        vo.setPrebuyer(prebuyer); //현재가 올린 그 사람.
+        vo.setPrebuy(formbuy); //현재 등록된값
+        vo.setPrebuyer(prebuyer); //현재가 올린 그 사람. = 예전사람
+
+        vo.setBuyer(utils.getLoginUserPk()); // 현재 로그인한 사람
 
         return service.updBid(vo);
 

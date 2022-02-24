@@ -38,54 +38,54 @@ if(delBtnElem){
         }
     });
 }
-    const formbuybtn = document.querySelector('#formbuybtn');
+const formbuybtn = document.querySelector('#formbuybtn');
 
-    //여기서 경매가 등록하면 바뀌도롞?
+//여기서 경매가 등록하면 바뀌도롞?
 
-    if (formbuybtn) {
-        formbuybtn.addEventListener('click', () => {
-            if(confirm("경매가를 수정 하시겠습니까?")){
-                console.log(formbid.value);
-                console.log(formimbuy.value);
-                console.log(parseInt(iboard));
-                console.log(prebuyer.value);
-                console.log(formbuy.value);
+if (formbuybtn) {
+    formbuybtn.addEventListener('click', () => {
+        if(confirm("경매가를 수정 하시겠습니까?")){
+            console.log(formbid.value);
+            console.log(formimbuy.value);
+            console.log(parseInt(iboard));
+            console.log(prebuyer.value);
+            console.log(formbuy.value);
 
-                fetch(`/ajax/auctionBid/buy?formbid=${formbid.value}&iboard=${parseInt(iboard)}&formimbuy=${formimbuy.value}
+            fetch(`/ajax/auctionBid/buy?formbid=${formbid.value}&iboard=${parseInt(iboard)}&formimbuy=${formimbuy.value}
             &formbuy=${formbuy.value}&prebuyer=${prebuyer.value}`, {
-                    method: 'post',
-                    headers: {'Content-type': 'application/json'}
-                }).then(res => {
-                    return res.json();
-                }).then(data => {
+                method: 'post',
+                headers: {'Content-type': 'application/json'}
+            }).then(res => {
+                return res.json();
+            }).then(data => {
 
-                    switch (data){
-                        case 1: //fetch 로 전에있던값을 넣어줘라. 그 전 사람에게. case: 1일떄 일어나겠네.
-                            window.close();
-                            location.reload();
-                            break;
-                        case 0:
-                            alert("즉시구매가보다 낮은 금액을 입력하세요");
-                            return false;
-                            break;
-                        case 2:
-                            alert("현재가보다 높은 금액을 입력하세요");
-                            return false;
-                            break;
-                        case 3:
-                            alert("잔액이 부족합니다. 충전후 경매를 이용해 주세요.")
-                            return false;
-                            break;
-                    }
+                switch (data){
+                    case 1: //fetch 로 전에있던값을 넣어줘라. 그 전 사람에게. case: 1일떄 일어나겠네.
+                        window.close();
+                        location.reload();
+                        break;
+                    case 0:
+                        alert("즉시구매가보다 낮은 금액을 입력하세요");
+                        return false;
+                        break;
+                    case 2:
+                        alert("현재가보다 높은 금액을 입력하세요");
+                        return false;
+                        break;
+                    case 3:
+                        alert("잔액이 부족합니다. 충전후 경매를 이용해 주세요.")
+                        return false;
+                        break;
+                }
 
 
-                })
-            }
+            })
+        }
 
-        })
-    }
+    })
+}
 
-    //댓글
+//댓글
 
 //댓글 리스트
 const getCommentList = () => {
@@ -113,45 +113,44 @@ const makeCommentRecordList = list => {
 }
 //-----------------댓글 수정삭제 (시작)
 
-ㅇ
+
 //-----------------댓글 수정삭제 (끝)
 
 //댓글 입력 폼
 
-        if (commentFormContainerElem) {
-            const commentSubmitBtnElem = commentFormContainerElem.querySelector('button[name="comment_submit"]');
-            const commentCtntInputElem = commentFormContainerElem.querySelector('input[name="ctnt"]');
+if (commentFormContainerElem) {
+    const commentSubmitBtnElem = commentFormContainerElem.querySelector('button[name="comment_submit"]');
+    const commentCtntInputElem = commentFormContainerElem.querySelector('input[name="ctnt"]');
 
 
-            commentSubmitBtnElem.addEventListener('click', e => {
-                console.log(commentCtntInputElem.value);
+    commentSubmitBtnElem.addEventListener('click', e => {
+        console.log(commentCtntInputElem.value);
 
-                const param = {
-                    iboard,
-                    'ctnt': commentCtntInputElem.value
-                }
+        const param = {
+            iboard,
+            'ctnt': commentCtntInputElem.value
+        }
 
-                myFetch.post('/ajax/auctionCmt', data => {
-                    console.log(data.result);
-                    switch (data.result) {
-                        case 0:
-                            alert('댓글 전송에 실패하였습니다.');
-                            break;
-                        case 1:
-                            commentCtntInputElem.value = null;
-                            //댓글 쓴 후 새로고침
-                            location.reload();
-                            break;
-                    }
-                }, param);
-            });
+        myFetch.post('/ajax/auctionCmt', data => {
+            console.log(data.result);
+            switch (data.result) {
+                case 0:
+                    alert('댓글 전송에 실패하였습니다.');
+                    break;
+                case 1:
+                    commentCtntInputElem.value = null;
+                    //댓글 쓴 후 새로고침
+                    location.reload();
+                    break;
+            }
+        }, param);
+    });
 
 
 }
 
 
-    isfollow();
-
+isfollow();
 
 
 

@@ -146,11 +146,28 @@ if (commentFormContainerElem) {
         }, param);
     });
 
-
+    let cou = $('#clickOpenUser');
+    let userNick = $('#userNick').text();
+    console.log(userNick);
+    cou.click(function (){
+        fetch('/userInformation',{
+            method : 'post',
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify({
+                'nickname' : userNick
+            })
+        }).then(res =>{
+            return res.json();
+        }).then(data => {
+            window.open('/userInformation','_blank','toolbar=no,location=no,status=no,menubar=no, scrollbars=auto,resizable=no,'+
+                'width=400,height=300 top=200 left=300');
+        })
+    });
 }
 
-
 isfollow();
+
+
 
 
 

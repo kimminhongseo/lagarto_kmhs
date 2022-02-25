@@ -27,7 +27,7 @@
 
                 <div id="isfollow" onsubmit="return isfollow();"></div>
 
-                    <div>작성자 : <span th:text="${data.nicknm}"/></div> <!--옆에 프로필사진-->
+                    <div id="clickOpenUser">작성자 : <span id="userNick" th:text="${data.nicknm}"/></div> <!--옆에 프로필사진-->
                     <div>카테고리 : <span th:text="${data.categorynm}"/></div>
                     <div>제목 :<span th:text="${data.title}"/></div>
                     <div>내용 : <span th:text="${data.ctnt}"/></div>

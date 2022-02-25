@@ -36,6 +36,7 @@
            OR `uid` = #{uid} OR `nickname` = #{nickname}
     </select>
 
+
     <select id="selApiUser" resultType="UserEntity">
         SELECT *
         FROM `lagarto`.`lagarto_user`

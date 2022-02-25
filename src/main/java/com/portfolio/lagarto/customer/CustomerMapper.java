@@ -12,5 +12,6 @@ public interface CustomerMapper {
     boolean insCustomer(CustomerEntity entity);
     List<CustomerVo> selCustomerList(CustomerDto dto);
     CustomerVo selCustomerDetail(CustomerDto dto);
+    int updCustomer(CustomerDto dto);
     int delCustomer(CustomerEntity entity);
 }

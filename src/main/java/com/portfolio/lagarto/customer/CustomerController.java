@@ -55,13 +55,23 @@ public class CustomerController {
         model.addAttribute("data", service.selCustomerDetail(dto));
     }
 
+    @GetMapping("/mod")
+    public String mod(CustomerDto dto, Model model) {
+        model.addAttribute("data", service.selCustomerDetail(dto));
+        return "customer/mod";
+    }
 
+    @PostMapping("/mod")
+    public String modProc(CustomerDto dto) {
+        int result = service.updCustomer(dto);
+        return "redirect:/customer/detail?iboard=" + dto.getIboard();
+    }
 
     @GetMapping("/del")
     public String delProc(CustomerEntity entity){
         int result = service.delCustomer(entity);
         if(result == 1) {
-            return "redirect:/customer/list/" + entity.getBoard_cd();
+            return "redirect:/customer/list/1";
         }
         return "customer/list";
     }

@@ -24,6 +24,23 @@
         WHERE A.iboard = ${iboard}
     </select>
 
+    <update id="updCustomer">
+        UPDATE lagarto.customer
+        <set>
+            <if test=" title != null and title != '' ">
+                title = #{title},
+            </if>
+            <if test=" ctnt != null and ctnt != '' ">
+                ctnt = #{ctnt},
+            </if>
+            <if test=" isdel == 1 ">
+                isdel = 1
+            </if>
+        </set>
+        WHERE iboard = ${iboard}
+        AND iuser = ${iuser}
+    </update>
+
     <update id="delCustomer">
         UPDATE lagarto.customer
         SET

@@ -51,10 +51,6 @@
     }
     getCommentList();
 
-    function delCmtList () {
-        commentListElem.innerHTML = '';
-    }
-
     //리스트 만들기
     const makeCommentRecordList = list => {
 

@@ -61,6 +61,16 @@ public class CustomerService {
         return mapper.selCustomerDetail(dto);
     }
 
+    public int updCustomer(CustomerDto dto) {
+        try {
+            dto.setIuser(utils.getLoginUserPk());
+            return mapper.updCustomer(dto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 2;
+        }
+    }
+
     public int delCustomer(CustomerEntity entity){
         entity.setIsdel(1);
         return mapper.delCustomer(entity);

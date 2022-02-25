@@ -102,7 +102,7 @@ public class MyFileUtils {
 
     /**
      * 서버에 첨부 파일을 생성하고, 업로드 파일 목록 반환
-     * @param files    - 파일 Array
+     * @param files  - 파일 Array
      * @param iboard - 게시글 번호
      * @return 업로드 파일 목록
      */

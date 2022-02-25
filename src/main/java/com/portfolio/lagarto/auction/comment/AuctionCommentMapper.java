@@ -1,7 +1,4 @@
 package com.portfolio.lagarto.auction.comment;
-
-import com.portfolio.lagarto.customer.comment.CustomerCommentEntity;
-import com.portfolio.lagarto.customer.comment.CustomerCommentVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,8 +8,12 @@ public interface AuctionCommentMapper {
     int insAuctionCmt(AuctionCommentEntity entity);
     List<AuctionCommentVo> selAuctionCmtList(AuctionCommentEntity entity);
 
-    int modBoardCmt(AuctionCommentEntity entity);
+    int modAuctionCmt(AuctionCommentEntity entity);
+
+    int updAuctionCmt(AuctionCommentEntity entity);
+
     int delAuctionCmt(AuctionCommentEntity entity);
-    int delAuctionCmtAll(AuctionCommentEntity entity);
+
+    int delAuctionCmtAll(AuctionCommentEntity entity); //댓글 모두 삭제.
 
 }

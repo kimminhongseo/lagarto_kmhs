@@ -55,8 +55,6 @@ public class CustomerController {
         model.addAttribute("data", service.selCustomerDetail(dto));
     }
 
-
-
     @GetMapping("/del")
     public String delProc(CustomerEntity entity){
         int result = service.delCustomer(entity);

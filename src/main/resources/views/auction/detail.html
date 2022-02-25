@@ -12,10 +12,12 @@
 <th:block layout:fragment="content">
     <!--todo: 가격올리기 기능,수정, 삭제, 댓글, 좋아요-->
 
+
     <!--session.loginUser 를 빼주면 session.loginUser.iuser가 null일때 에러.-->
     <div class="main">
         <!--Elem=docu q ~. dataIuser   Elem.dataset.iuser  하면 Data.iuser값이 js로 온다. -->
-        <div id="dataIuser" th:with="data=${Data}" th:data-iuser="${Data.iuser}">
+        <div id="dataIuser" th:with="data=${Data}" th:data-iuser="${Data.iuser}" >
+
             <!--param은 바로넣으면 안되면 우회해야함.-->
             <div id="data" th:with="ibo=${param.iboard}" th:data-iboard="${ibo}">
                 <div th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
@@ -60,6 +62,8 @@
 </button>
 </div>
 
+<button type="button" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -74,7 +78,7 @@
            <div> 경매가: <input type="text" id="formbid"></div>
           <div hidden> <input type="text" id="prebuyer" th:text="${data.buyer}" th:value="${data.buyer}"></div>
           <button type="button"  id="formbuybtn" class="btn btn-primary" >경매가 등록</button>
-          <button type="button" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
+
       </form>
 
       <div class="modal-footer">
@@ -122,7 +126,9 @@
         </div>
 
         <div id="comment_list">
+
             <table class="table table-hover caption-top">
+
                 <caption>댓글 리스트</caption>
                 <thead>
                 <tr>
@@ -135,8 +141,9 @@
 
                 <tbody>
                 </tbody>
+
             </table>
-        </div>
+
     </div>
 
 

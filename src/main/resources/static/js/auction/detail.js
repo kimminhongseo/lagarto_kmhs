@@ -86,38 +86,6 @@ if (formbuybtn) {
 }
 
 //댓글
-
-//댓글 리스트
-const getCommentList = () => {
-    myFetch.get('/ajax/auctionCmt', list => {
-        makeCommentRecordList(list);
-    }, { iboard });
-}
-getCommentList();
-
-
-//리스트 만들기
-const makeCommentRecordList = list => {
-
-    list.forEach(item => {
-
-        const trElem = document.createElement('tr');
-        trElem.innerHTML = `
-                <td>${item.icmt}</td>
-                <td>${item.ctnt}</td>
-                <td>${item.nickname}</td>
-                <td>${item.rdt}</td>
-            `;
-        tbodyElem.appendChild(trElem);
-    });
-}
-//-----------------댓글 수정삭제 (시작)
-
-
-//-----------------댓글 수정삭제 (끝)
-
-//댓글 입력 폼
-
 if (commentFormContainerElem) {
     const commentSubmitBtnElem = commentFormContainerElem.querySelector('button[name="comment_submit"]');
     const commentCtntInputElem = commentFormContainerElem.querySelector('input[name="ctnt"]');
@@ -150,6 +118,167 @@ if (commentFormContainerElem) {
 }
 
 
+
+
+//댓글 리스트
+const getCommentList = () => {
+    myFetch.get('/ajax/auctionCmt', list => {
+        makeCommentRecordList(list);
+    }, { iboard });
+}
+
+
+//리스트 만들기
+// var sessionData = sessionStorage.;
+// sessionStorage.setItem("sessionLogin",sessionData);
+
+const makeCommentRecordList = list => {
+
+    list.forEach(item => {
+        const tdElem = document.createElement('td')
+        const trElem = document.createElement('tr');
+        trElem.innerHTML = `
+                <td>${item.icmt}</td>
+                <td>${item.ctnt}</td>
+                <td>${item.nickname}</td>
+                <td>${item.rdt}</td>
+            `;
+        tbodyElem.appendChild(trElem);
+        console.log(item.iuser);
+
+        //수정 삭제 구현 연습.
+        const modBtn = document.createElement('input')
+        modBtn.type = 'button';
+        modBtn.value = '수정';
+        modBtn.addEventListener('click', () =>{
+            const tdArr = trElem.querySelectorAll('td');
+            const tdCell = tdArr[1];
+            const modInput = document.createElement('input');
+            modInput.value = item.ctnt;
+
+            const saveBtn = document.createElement('input')
+            saveBtn.type = 'button';
+            saveBtn.value = '저장';
+
+
+            tdCell.innerHTML = null;
+            tdCell.appendChild(modInput);
+        });
+
+
+        trElem.appendChild(modBtn);
+
+
+        //수정, 삭제 버튼
+        // if (`${item.iuser === 2}`) {
+        //     const modBtn = document.createElement('input');
+        //     modBtn.type = 'button';
+        //     modBtn.value = '수정';
+        //     modBtn.addEventListener('click', () => {
+        //         const tdArr = trElem.querySelectorAll('td');
+        //         const tdCell = tdArr[1];
+        //
+        //         const modInput = document.createElement('input');
+        //         modInput.value = item.ctnt;
+        //         const saveBtn = document.createElement('input')
+        //         saveBtn.type = 'button';
+        //         saveBtn.value = '저장';
+        //         saveBtn.addEventListener('click', () => {
+        //             const param = {
+        //                 icmt: item.icmt,
+        //                 ctnt: modInput.value
+        //             }
+        //
+        //             myFetch.put('/ajax/auctionCmt', data => {
+        //                 switch (data.result) {
+        //                     case 0:
+        //                         alert('댓글 수정에 실패하였습니다.')
+        //                         break;
+        //                     case 1:
+        //                         tdCell.innerText = modInput.value;
+        //                         item.ctnt = modInput.value;
+        //                         removeCancelBtn();
+        //                         break;
+        //                 }
+        //             }, param);
+        //         });
+        //
+        //         tdCell.innerHTML = null;
+        //         tdCell.appendChild(modInput);
+        //         tdCell.appendChild(saveBtn);
+        //
+        //         const cancelBtn = document.createElement('input');
+        //         cancelBtn.type = 'button';
+        //         cancelBtn.value = '취소';
+        //         cancelBtn.addEventListener('click', () => {
+        //             tdCell.innerText = item.ctnt;
+        //             removeCancelBtn();
+        //         });
+        //
+        //         const removeCancelBtn = () => {
+        //             modBtn.classList.remove('hidden');
+        //             delBtn.classList.remove('hidden');
+        //             cancelBtn.remove();
+        //         }
+        //
+        //         tdElem.insertBefore(cancelBtn, modBtn);
+        //         modBtn.classList.add('hidden');
+        //         delBtn.classList.add('hidden');
+        //     });
+        //
+        //     const delBtn = document.createElement('input');
+        //     delBtn.type = 'button';
+        //     delBtn.value = '삭제';
+        //
+        //     delBtn.addEventListener('click', () => {
+        //         if (confirm('삭제하시겠습니까?')) {
+        //             delCmt(item.icmt, trElem);
+        //         }
+        //     });
+        //
+        //     tdElem.appendChild(modBtn);
+        //     tdElem.appendChild(delBtn);
+        // }
+        // return trElem;
+
+    });
+}
+//-----------------댓글 수정삭제 (시작)
+
+//iuser 값 과 로그인한 iuser값
+
+//삭제
+const delCmt = (icmt, tr) => {
+    myFetch.delete(`/ajax/auctionCmt/${icmt}`, data => {
+        if(data.result) {
+            tr.remove();
+            // //만약 댓글이 하나도 없다면
+            // if(getTrLen() === 1) {
+            //     const cmtListElem = document.querySelector('#cmt_list');
+            //     cmtListElem.innerText = '댓글 없음!';
+            // }
+        } else {
+            alert('댓글을 삭제할 수 없습니다.');
+        }
+    });
+}
+
+// const getTrLen = () => {
+//     const cmtListElem = document.querySelector('#cmt_list');
+//     const trArr = cmtListElem.querySelectorAll('table tr');
+//     return trArr.length;
+// }
+
+
+
+//-----------------댓글 수정삭제 (끝)
+
+//댓글 입력 폼
+
+
+
+
+getCommentList();
 isfollow();
 
 

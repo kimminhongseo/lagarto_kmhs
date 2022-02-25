@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--메퍼 설정 하세요-->
-<mapper namespace="com.portfolio.lagarto.user.UserMapper">
+<mapper namespace="com.portfolio.lagarto.supplies.SuppliesMapper">
 
+    <insert id="insSupplies">
+        insert into lagarto.auction
+        (icategory, title, ctnt, iuser, price)
+        values
+        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{price})
+    </insert>
+
+
+    <select id="insSuppliesList" resultType="SuppliesVo">
+        select A.*,
+        B.nm as writernm
+        From lagarto.auction A
+        Left join lagarto.lagarto_user B
+        ON A.iuser = B.iuser
+        where A.isdel = 0
+        Order by A.iboard DESC
+        LIMIT 1
+    </select>
 
 
 </mapper>

@@ -24,16 +24,23 @@ public class AuctionCommentRestController {
     }
 
     @PostMapping("mod")
-    public Map<String, Integer> modBoardCmt(@RequestBody AuctionCommentEntity entity){
+    public Map<String, Integer> modAuctionCmt(@RequestBody AuctionCommentEntity entity){
         System.out.println(entity);
         Map<String, Integer> result = new HashMap<>();
-        result.put("result", service.modBoardCmt(entity));
+        result.put("result", service.modAuctionCmt(entity));
         return  result;
     }
 
     @GetMapping
-    public List<AuctionCommentVo> selCustomerCmtList(AuctionCommentEntity entity) {
+    public List<AuctionCommentVo> selAuctionCmtList(AuctionCommentEntity entity) {
         return service.selAuctionCmtList(entity);
+    }
+
+    @PutMapping
+    public Map<String, Integer> updAuctionCmt(@RequestBody AuctionCommentEntity entity){
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result",service.updAuctionCmt(entity));
+        return result;
     }
 
     @DeleteMapping("/{icmt}")

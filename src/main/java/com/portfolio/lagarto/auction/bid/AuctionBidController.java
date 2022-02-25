@@ -4,7 +4,7 @@ package com.portfolio.lagarto.auction.bid;
 import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.auction.AuctionService;
 
-import com.portfolio.lagarto.model.AuctionDto;
+
 import com.portfolio.lagarto.model.AuctionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

@@ -1,0 +1,47 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+<head>
+    <title>경매 등록</title>
+    <link rel="stylesheet" th:href="@{/css/supplies/write.css}">
+    <script defer th:src="@{/js/supplies/write.js}"></script>
+
+
+</head>
+
+<th:block layout:fragment="content">
+
+
+    <div class="main">
+        <div class="container">
+            <h1>경매 글쓰기</h1>
+            <div>
+
+                <form method="post" th:action="@{/auction/write}" th:object="${suppliesEntity}"
+                      >
+
+                    <input type="hidden" th:with="icate=${param.icategory}" th:data-icategory="${icate}"
+                           th:field="*{icategory}" th:value="${icategory}">
+                    <!--icategory value를 안정해서 오류가 났다.-->
+                    <div>
+                        <label for="title">제목 : <input id="title" required type="text" placeholder="제목을 입력하세요"
+                                                       th:field="*{title}"></label>
+                    </div>
+                    <div>
+                        <label for="ctnt">내용 : <input id="ctnt" required type="text" placeholder="내용을 입력하세요"
+                                                      th:field="*{ctnt}"></label>
+                    </div>
+                    <div>
+                        <label for="price">경매가 :<input id="price" required type="number" placeholder="판매가"
+                                                     th:field="*{price}"></label>
+                    </div>
+                    <input type="submit" value="등록하기">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</th:block>
+</html>

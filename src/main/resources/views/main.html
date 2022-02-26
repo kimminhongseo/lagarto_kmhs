@@ -1,46 +1,200 @@
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="temp/thymeleaf_layout">
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="temp/thymeleaf_layout">
 <head>
     <meta charset="UTF-8">
     <title>메인!</title>
 </head>
-
 <th:block layout:fragment="content">
-    <div class="main">
+    <div class="mainPage">
+        <div id="eventFont">
+            <img src="/static/img/eventFont.png">
+        </div>
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="10000">
-                    <img src="/static/img/event1.png" class="d-block w-100" alt="...">
+                    <img id="event01" src="/static/img/event01.png" class="d-block w-80" alt="">
                 </div>
                 <div class="carousel-item" data-bs-interval="2000">
-                    <img src="/static/img/cancel.png" class="d-block w-100" alt="...">
+                    <img id="event02" src="/static/img/event02.png" class="d-block w-80" alt="">
                 </div>
                 <div class="carousel-item">
-                    <img src="/static/img/google_logo.svg" class="d-block w-100" alt="...">
+                    <img id="event03" src="/static/img/event03.png" class="d-block w-80" alt="">
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <button id="btnTop10" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                <span><i style="color: #1d1d1d; font-size: 50px" class="fa-solid fa-chevron-left"></i></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span><i style="color: #1d1d1d; font-size: 50px" class="fa-solid fa-angle-right"></i></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <div> 여기는 메인!</div>
 
-        <input type="button"><a href="auction/list/">경매 리스트로 가기</a>
+        <div class="topProductTop10">
+            <h2>현재 gk 상품 Top4</h2>
+        </div>
+        <div class="line">
+        </div>
+        <div class="topProduct">
+		<span>
+		<div class="card" style="width: 18rem;">
+			<img src="/static/img/bell.png" class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+            <span>
+		<div class="card" style="width: 18rem;">
+			<img src="..." class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+            <span>
+		<div class="card" style="width: 18rem;">
+			<img src="..." class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+            <span>
+		<div class="card" style="width: 18rem;">
+			<img src="..." class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+        </div>
+        <div class="line">
+        </div>
+
+        <a class="theList" href="auction/list"><div class="d-grid gap-2"><button id="theList1" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button></div></a>
+
+        <div class="topProductTop10">
+            <h2>현재 할인 상품 Top4</h2>
+        </div>
+        <div class="line">
+        </div>
+        <div class="topProduct">
+		<span>
+		<div class="card" style="width: 18rem;">
+			<img src="/static/img/bell.png" class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+            <span>
+		<div class="card" style="width: 18rem;">
+			<img src="..." class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+            <span>
+		<div class="card" style="width: 18rem;">
+			<img src="..." class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+            <span>
+		<div class="card" style="width: 18rem;">
+			<img src="..." class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+        </div>
+        <div class="line">
+        </div>
+        <a class="theList" href="auction/list"><div class="d-grid gap-2"><button id="theList2" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button></div></a>
+
+        <div class="topProductTop10">
+            <h2>현재 할인 용품 Top4</h2>
+        </div>
+        <div class="line">
+        </div>
+        <div class="topProduct">
+		<span>
+		<div class="card" style="width: 18rem;">
+			<img src="/static/img/bell.png" class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+            <span>
+		<div class="card" style="width: 18rem;">
+			<img src="..." class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+            <span>
+		<div class="card" style="width: 18rem;">
+			<img src="..." class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+            <span>
+		<div class="card" style="width: 18rem;">
+			<img src="..." class="card-img-top" alt="...">
+			<div class="card-body">
+				<p class="card-text">
+					Some quick example text to build on the card title and make up the bulk of the card's content.
+				</p>
+			</div>
+		</div>
+		</span>
+        </div>
+        <div class="line">
+        </div>
+        <a class="theList" href="auction/list"><div class="d-grid gap-2"><button id="theList3" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button></div></a>
+
+        <div>
+            여기는 메인!
+        </div>
+        <span>
+            <div class="imgKakao"><span><a href="auction/list/" class="hrefK"><label class="mouseOver"></label></a></span></div>
+        </span>
+
         <input type="button"><a href="auction/list/">용품 리스트로 가기</a>
-
         <input type="button"><a href="customer/list/1">리뷰 리스트로 가기</a>
         <input type="button"><a href="customer/list/2">커뮤니티 리스트로 가기</a>
         <input type="button"><a href="customer/list/3">고객센터 리스트로 가기</a>
-
         <input type="button"><a href="user/mypage">마이페이지로 가기</a>
     </div>
 </th:block>
-

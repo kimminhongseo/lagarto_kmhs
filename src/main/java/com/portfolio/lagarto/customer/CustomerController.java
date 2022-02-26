@@ -55,15 +55,23 @@ public class CustomerController {
         model.addAttribute("data", service.selCustomerDetail(dto));
     }
 
-    @GetMapping("/mod")
-    public String mod(CustomerDto dto, Model model) {
+    @GetMapping("/upd")
+    public String upd(CustomerDto dto, Model model) {
         model.addAttribute("data", service.selCustomerDetail(dto));
-        return "customer/mod";
+        return "customer/upd";
     }
 
-    @PostMapping("/mod")
-    public String modProc(CustomerDto dto) {
-        int result = service.updCustomer(dto);
+    @PostMapping("/upd")
+    public String updProc(@ModelAttribute("data") CustomerDto dto, @RequestParam(value = "iboard", required = false) int iboard, Model model) {
+        CustomerVo detail = service.selCustomerDetail(dto);
+        model.addAttribute("data", detail);
+
+        List<AttachDTO> fileList = service.getAttachFileList(iboard);
+        model.addAttribute("fileList", fileList);
+
+        if(detail != null) {
+            service.updCustomer(dto);
+        }
         return "redirect:/customer/detail?iboard=" + dto.getIboard();
     }
 

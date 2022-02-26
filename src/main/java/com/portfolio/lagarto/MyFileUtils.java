@@ -108,11 +108,6 @@ public class MyFileUtils {
      */
     public List<AttachDTO> uploadFiles(MultipartFile[] files, int iboard) {
 
-        /* 파일이 비어있으면 비어있는 리스트 반환 */
-        if (files[0].getSize() < 1) {
-            return Collections.emptyList();
-        }
-
         /* 업로드 파일 정보를 담을 비어있는 리스트 */
         List<AttachDTO> attachList = new ArrayList<>();
 
@@ -124,6 +119,9 @@ public class MyFileUtils {
 
         /* 파일 개수만큼 forEach 실행 */
         for (MultipartFile file : files) {
+            if(file.getSize() < 1) {
+                continue;
+            }
             try {
                 /* 파일 확장자 */
                 final String extension = FilenameUtils.getExtension(file.getOriginalFilename());

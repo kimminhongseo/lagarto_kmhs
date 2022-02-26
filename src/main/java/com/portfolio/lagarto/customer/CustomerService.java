@@ -61,14 +61,19 @@ public class CustomerService {
         return mapper.selCustomerDetail(dto);
     }
 
-    public int updCustomer(CustomerDto dto) {
-        try {
-            dto.setIuser(utils.getLoginUserPk());
-            return mapper.updCustomer(dto);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 2;
+    public boolean updCustomer(CustomerDto dto) {
+        int queryResult = mapper.updCustomer(dto);
+
+        // 파일이 추가, 삭제, 변경된 경우
+        if ("Y".equals(dto.getChangeYn())) {
+            attachMapper.deleteAttach(dto.getIboard());
+
+            // fileIdxs에 포함된 idx를 가지는 파일의 삭제여부를 'N'으로 업데이트
+            if (CollectionUtils.isEmpty(dto.getFileIdxs()) == false) {
+                attachMapper.undeleteAttach(dto.getFileIdxs());
+            }
         }
+        return (queryResult > 0);
     }
 
     public int delCustomer(CustomerEntity entity){

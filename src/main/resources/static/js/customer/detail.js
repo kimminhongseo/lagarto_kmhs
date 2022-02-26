@@ -27,7 +27,7 @@
     const modBtnElem = document.querySelector('#modBtn');
     if(modBtnElem) {
         modBtnElem.addEventListener('click', ()=> {
-            location.href=`/customer/mod?iboard=${iboard}`;
+            location.href=`/customer/upd?iboard=${iboard}`;
         });
     }
 

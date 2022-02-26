@@ -5,8 +5,8 @@
 
 <head>
     <title>수정</title>
-    <link rel="stylesheet" th:href="@{/css/customer/mod.css}">
-    <script defer th:src="@{/js/customer/mod.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/customer/upd.css}">
+    <script defer th:src="@{/js/customer/upd.js}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
@@ -15,9 +15,11 @@
         <div class="container">
             <h1>수정</h1>
             <div>
-                <form id="writeFrm" th:action="@{/customer/mod}" th:object="${data}" method="post" enctype="multipart/form-data">
+                <form id="writeFrm" th:action="@{/customer/upd}" th:object="${data}" method="post" enctype="multipart/form-data">
                     <input type="hidden" id="board_cd" th:field="*{board_cd}" th:value="${param.board_cd}">
                     <input type="hidden" id="iboard" th:field="*{iboard}" th:value="${data.iboard}">
+<!--                    파일이 변경된 경우, changeYn 파라미터를 이용해 파일 삭제 및 재등록 처리-->
+                    <input type="hidden" th:field="*{changeYn}" th:value="N"/>
                     <div class="form-floating mb-3">
                         <input type="text" id="title" class="form-control" placeholder="title" th:field="*{title}">
                         <label class="form-label" for="title">제목</label>
@@ -40,7 +42,7 @@
                     </div>
 
                     <!--/* 저장된 파일이 없는 파일 영역 */-->
-                    <div th:if="${#lists.isEmpty( fileList )}" data-name="fileDiv" class="form-group filebox bs3-primary">
+                    <div th:if="${#lists.isEmpty(fileList)}" th:data-name="fileDiv" class="form-group filebox bs3-primary">
                         <label for="file_0" class="col-sm-2 control-label">파일1</label>
                         <div class="col-sm-10">
                             <input type="text" class="upload-name" value="파일 찾기" readonly />
@@ -57,13 +59,13 @@
                     </div>
 
                     <!--/* 저장된 파일이 있는 파일 영역 */-->
-                    <div th:unless="${#lists.isEmpty( fileList )}" th:each="row, status : ${fileList}" data-name="fileDiv" class="form-group filebox bs3-primary">
+                    <div th:unless="${#lists.isEmpty(fileList)}" th:each="row, status : ${fileList}" th:data-name="fileDiv" class="form-group filebox bs3-primary">
                         <label th:for="|file_${status.index}|" class="col-sm-2 control-label">[[ |파일${status.count}| ]]</label>
                         <div class="col-sm-10">
-                            <input type="hidden" name="fileIdxs" th:value="${row.idx}" />
+                            <input type="hidden" th:name="fileIdxs" th:value="${row.iboard}" />
                             <input type="text" class="upload-name" th:value="${row.original_name}" readonly />
                             <label th:for="|file_${status.index}|" class="control-label">찾아보기</label>
-                            <input type="file" name="files" th:id="|file_${status.index}|" class="upload-hidden" onchange="changeFilename(this)" />
+                            <input type="file" th:name="files" th:id="|file_${status.index}|" class="upload-hidden" onchange="changeFilename(this)" />
 
                             <button th:if="${status.first}" type="button" onclick="addFile()" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
                                 <i class="fa fa-plus" aria-hidden="true"></i>

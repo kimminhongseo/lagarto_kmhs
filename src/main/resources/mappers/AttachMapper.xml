@@ -75,4 +75,14 @@
             iboard = ${iboard}
     </select>
 
+    <update id="undeleteAttach" parameterType="list">
+        UPDATE lagarto.tb_attach
+        SET
+        delete_yn = 'N'
+        WHERE
+        idx IN
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

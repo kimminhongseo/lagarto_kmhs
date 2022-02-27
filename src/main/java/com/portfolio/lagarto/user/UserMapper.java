@@ -1,10 +1,7 @@
 package com.portfolio.lagarto.user;
 
 
-import com.portfolio.lagarto.model.ForgotIdVo;
-import com.portfolio.lagarto.model.PageVo;
-import com.portfolio.lagarto.model.UserDto;
-import com.portfolio.lagarto.model.UserEntity;
+import com.portfolio.lagarto.model.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,6 +23,8 @@ public interface UserMapper {
     int nicknameCheck(String nickname);
     void informationUpd(UserEntity entity);
     ForgotIdVo selUserId(UserEntity entity);
+    ForgotPwVo selUserPw(UserEntity entity);
+    void updUserPw(UserEntity entity);
     void moneyCharge(UserEntity entity);
     void insMoney(UserEntity entity);
     List<UserEntity> selMoney(PageVo vo);

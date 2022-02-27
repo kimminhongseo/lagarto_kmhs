@@ -33,7 +33,8 @@
         SELECT *
         FROM `lagarto`.`lagarto_user`
         WHERE `iuser` = #{iuser}
-           OR `uid` = #{uid} OR `nickname` = #{nickname}
+           OR `uid` = #{uid}
+           OR `nickname` = #{nickname}
     </select>
 
     <select id="selApiUser" resultType="UserEntity">
@@ -108,19 +109,39 @@
           AND `contact_third` = #{contact_third}
     </select>
 
+    <!-- 비밀번호 찾기 -->
+    <select id="selUserPw" resultType="ForgotPwVo">
+        SELECT *
+        FROM `lagarto`.`lagarto_user`
+        WHERE `uid` = #{uid}
+          AND `contact_first` = #{contact_first}
+          AND `contact_second` = #{contact_second}
+          AND `contact_third` = #{contact_third}
+    </select>
+
+    <update id="updUserPw">
+        UPDATE `lagarto`.`lagarto_user`
+        SET `upw` = #{upw}
+        WHERE `uid` = #{uid}
+    </update>
+
     <!--금액츙전 내역-->
     <insert id="insMoney">
         INSERT INTO `lagarto`.`user_add_money`(`iuser`, `money`)
-        VALUES
-            (#{iuser}, #{money})
+        VALUES (#{iuser}, #{money})
     </insert>
 
-<!--    limit줄때 2페이지면 5,10 3/10,15-->
+    <!--    limit줄때 2페이지면 5,10 3/10,15-->
     <select id="selMoney" parameterType="PageVo" resultType="UserEntity">
-        SELECT * FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser} LIMIT #{currentPage}, #{recordCount};
+        SELECT *
+        FROM `lagarto`.`user_add_money`
+        WHERE `iuser` = #{iuser}
+        LIMIT #{currentPage}, #{recordCount};
     </select>
 
     <select id="selMoneyCount" resultType="int">
-        SELECT CEIL(COUNT(*)/5) FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser};
+        SELECT CEIL(COUNT(*) / 5)
+        FROM `lagarto`.`user_add_money`
+        WHERE `iuser` = #{iuser};
     </select>
 </mapper>

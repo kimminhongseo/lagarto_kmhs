@@ -5,19 +5,23 @@ package com.portfolio.lagarto.user;
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.enums.ForgotIdResult;
+import com.portfolio.lagarto.enums.ForgotPwResult;
 import com.portfolio.lagarto.enums.JoinResult;
-import com.portfolio.lagarto.model.ForgotIdVo;
-import com.portfolio.lagarto.model.PageVo;
-import com.portfolio.lagarto.model.UserDto;
-import com.portfolio.lagarto.model.UserEntity;
+import com.portfolio.lagarto.model.*;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,6 +35,9 @@ public class UserService {
     private Utils utils;
     @Autowired
     private HttpSession hs;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
 
     public int apiInsUser(UserEntity entity){
@@ -200,6 +207,45 @@ public class UserService {
         forgotIdVo.setUid(hid);
 
         return forgotIdVo;
+    }
+
+    public ForgotPwVo forgotPw(UserEntity entity) throws MessagingException {
+        ForgotPwVo forgotPwVo = mapper.selUserPw(entity);
+
+        if (forgotPwVo == null || forgotPwVo.getPlatform_cd() != 1) {
+            forgotPwVo = new ForgotPwVo();
+            forgotPwVo.setForgotPwResult(ForgotPwResult.FAILURE);
+            return forgotPwVo;
+        }
+
+        forgotPwVo.setForgotPwResult(ForgotPwResult.SUCCESS);
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, "utf-8");
+        mimeMessageHelper.setTo(forgotPwVo.getUid());
+
+        int size = (int) ((Math.random() * (16 - 10)) + 10);
+        String tempPw = Utils.tempPw(size);
+
+        mimeMessageHelper.setSubject("[LAGARTO] 임시 비밀번호 발급");
+        mimeMessageHelper.setText(String.format("%s<br>%s<br>%s<br>%s%s%s",
+                "<h1>[LAGARTO]  임시 비밀번호 발급</h1>",
+                "<p>임시 비밀번호를 발급해 드립니다.</p>",
+                "<p>로그인 시 아래의 비밀번호를 이용해 주시고, 로그인 후 비밀번호 변경을 권장드립니다.</p>",
+                "<h3>", tempPw, "</h3>"
+        ), true);
+
+        javaMailSender.send(mimeMessage);
+
+        UserEntity copyEntity = new UserEntity();
+        String hashTempPw = BCrypt.hashpw(tempPw, BCrypt.gensalt());
+        copyEntity.setUid(forgotPwVo.getUid());
+        copyEntity.setUpw(hashTempPw);
+        System.out.println(hashTempPw);
+
+        mapper.updUserPw(copyEntity);
+
+        return forgotPwVo;
     }
 
     public void insMoney(UserEntity entity){

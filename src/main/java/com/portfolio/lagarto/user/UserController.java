@@ -4,6 +4,7 @@ package com.portfolio.lagarto.user;
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.enums.ForgotIdResult;
+import com.portfolio.lagarto.enums.ForgotPwResult;
 import com.portfolio.lagarto.enums.JoinResult;
 import com.portfolio.lagarto.follow.FollowService;
 import com.portfolio.lagarto.model.*;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +32,7 @@ public class UserController {
     private FollowService fservice;
     @Autowired
     private Utils utils;
+
 
 
     @GetMapping("/login")
@@ -257,24 +260,27 @@ public class UserController {
     }
 
     @GetMapping("/forgotId")
-    public void forgotId(@ModelAttribute("entity") UserEntity entity, Model model) {
-        model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
-        model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
-        model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
-    }
-
-    @PostMapping("/forgotId")
-    public String forgotIdProc(UserEntity entity, Model model) {
+    public String forgotId(@ModelAttribute("entity") UserEntity entity, Model model) {
         UserEntity user = utils.getLoginUser();
+
         if (user != null) {
             return "/main";
         }
 
+        model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
+        model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
+        model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
+
+        return "/user/forgotId";
+    }
+
+    @PostMapping("/forgotId")
+    public String forgotIdProc(UserEntity entity, Model model) {
         ForgotIdVo vo = service.forgotId(entity);
         if (vo.getForgotIdResult() == ForgotIdResult.FAILURE) {
             return "/user/forgotId.failure";
         }
-        model.addAttribute("user", vo);
+        model.addAttribute(Const.User, vo);
         System.out.println(vo.getUid());
         return "/user/forgotId.success";
     }
@@ -290,10 +296,29 @@ public class UserController {
     }
 
     @GetMapping("/forgotPw")
-    public void forgotPw(@ModelAttribute("entity") UserEntity entity, Model model) {
+    public String forgotPw(@ModelAttribute("entity") UserEntity entity, Model model) {
+        UserEntity user = utils.getLoginUser();
+
+        if (user != null) {
+            return "/main";
+        }
+
+        model.addAttribute("UID", Const.UID);
         model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
         model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
         model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
+
+        return "/user/forgotPw";
+    }
+
+    @PostMapping("/forgotPw")
+    public String forgotPwProc(UserEntity entity) throws MessagingException {
+        ForgotPwVo vo = service.forgotPw(entity);
+        if (vo.getForgotPwResult() == ForgotPwResult.FAILURE) {
+            return "/user/forgotPw.failure";
+        }
+
+        return "/user/forgotPw.success";
     }
 
 

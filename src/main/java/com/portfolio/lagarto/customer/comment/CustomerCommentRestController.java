@@ -24,6 +24,13 @@ public class CustomerCommentRestController {
         return service.selCustomerCmtList(entity);
     }
 
+    @PutMapping
+    public Map<String, Integer> updCustomerCmt(@RequestBody CustomerCommentEntity entity) {
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result", service.updCustomerCmt(entity));
+        return result;
+    }
+
     @DeleteMapping("/{icmt}")
     public Map<String, Integer> delCustomerCmt(@PathVariable int icmt) {
         Map<String, Integer> result = new HashMap<>();

@@ -23,6 +23,11 @@ public class CustomerCommentService {
         return mapper.selCustomerCmtList(entity);
     }
 
+    public int updCustomerCmt(CustomerCommentEntity entity) {
+        entity.setIuser(utils.getLoginUserPk());
+        return mapper.updCustomerCmt(entity);
+    }
+
     public int delCustomerCmt(int icmt) {
         CustomerCommentEntity entity = new CustomerCommentEntity();
         entity.setIcmt(icmt);

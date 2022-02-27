@@ -82,7 +82,6 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
         case 2:
             break;
     }
-
     const followBtnElem = isfollowElem.querySelector('#follow-Btn');
     if (followBtnElem){
         followBtnElem.addEventListener('click', () => {
@@ -108,6 +107,7 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
             })
         })
     }
+
     const unfollowBtnElem = isfollowElem.querySelector('#unfollow-Btn');
     if (unfollowBtnElem){
         unfollowBtnElem.addEventListener('click', () => {
@@ -123,7 +123,11 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
         })
     }
 })
+//전체데이터를 가져올 때
+function objToJson(data){
+    return Object.keys(data).map(key => `${key}=${data[key]}`).join('&');
+}
 
-let imgKakao;
+
 
 // ---------------------------------------------------------------------------------------------

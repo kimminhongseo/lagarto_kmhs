@@ -2,6 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <title>메인!</title>
+	<link rel="stylesheet" th:href="@{/static/css/main.css}"/>
+	<script defer th:src="@{/static/js/main.js}"></script>
 </head>
 <th:block layout:fragment="content">
     <div class="mainPage">
@@ -184,17 +186,13 @@
         </div>
         <a class="theList" href="auction/list"><div class="d-grid gap-2"><button id="theList3" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button></div></a>
 
-        <div>
-            여기는 메인!
-        </div>
         <span>
-            <div class="imgKakao"><span><a href="auction/list/" class="hrefK"><label class="mouseOver"></label></a></span></div>
-        </span>
-
-        <input type="button"><a href="auction/list/">용품 리스트로 가기</a>
-        <input type="button"><a href="customer/list/1">리뷰 리스트로 가기</a>
-        <input type="button"><a href="customer/list/2">커뮤니티 리스트로 가기</a>
-        <input type="button"><a href="customer/list/3">고객센터 리스트로 가기</a>
-        <input type="button"><a href="user/mypage">마이페이지로 가기</a>
+            <div class="imgKakao1"><span><label class="mouseOver1">도마뱀 리스트</label></span></div>
+			<div class="imgKakao2"><span><label class="mouseOver2">용품 리스트</label></span></div>
+			<div class="imgKakao3"><span><label class="mouseOver3">리뷰 리스트</label></span></div>
+			<div class="imgKakao4"><span><label class="mouseOver4">커뮤니티 리스트</label></span></div>
+			<div class="imgKakao5"><span><label class="mouseOver5">고객센터</label></span></div>
+		</span>
+		<div id="imgHref"></div>
     </div>
 </th:block>

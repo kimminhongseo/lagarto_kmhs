@@ -19,8 +19,8 @@ public class UserInformation {
 
     @PostMapping("/userInformation")
     @ResponseBody
-    public void userInformation(@RequestBody UserEntity entity,Model model) {
-        System.out.println(entity.getNickname());
-        model.addAttribute(Const.User, service.selUser(entity));
+    public UserEntity userInformation(@RequestBody UserEntity entity,Model model) {
+        System.out.println(entity);
+        return service.selUser(entity);
     }
 }

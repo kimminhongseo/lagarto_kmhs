@@ -366,15 +366,5 @@
     color: black;
 }
 
-.imgKakao{
-    background-image: url("/static/img/kakao01.gif");
-    width: 240px;
-    height: 240px;
-}
 
-.mouseOver{
-    width: 240px;
-    height: 240px;
-    background: black;
-    display: none;
-}
+

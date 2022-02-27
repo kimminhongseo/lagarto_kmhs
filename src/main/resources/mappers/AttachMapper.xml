@@ -43,7 +43,7 @@
         idx = #{idx}
     </select>
 
-    <update id="deleteAttach" parameterType="long">
+    <update id="deleteAttach" parameterType="integer">
         UPDATE lagarto.tb_attach
         SET
             delete_yn = 'Y'
@@ -51,6 +51,12 @@
         WHERE
             iboard = #{iboard}
     </update>
+
+    <delete id="deleteDbFiles">
+        DELETE FROM lagarto.tb_attach
+        WHERE iboard = ${iboard}
+        AND delete_yn = 'Y'
+    </delete>
 
     <select id="selectAttachList" resultType="AttachDTO">
         SELECT

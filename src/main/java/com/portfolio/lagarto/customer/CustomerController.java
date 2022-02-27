@@ -56,22 +56,16 @@ public class CustomerController {
     }
 
     @GetMapping("/upd")
-    public String upd(CustomerDto dto, Model model) {
+    public String upd(CustomerDto dto, @RequestParam(value = "iboard", required = false) int iboard ,Model model) {
         model.addAttribute("data", service.selCustomerDetail(dto));
+        model.addAttribute("fileList", service.getAttachFileList(iboard));
         return "customer/upd";
     }
 
     @PostMapping("/upd")
-    public String updProc(@ModelAttribute("data") CustomerDto dto, @RequestParam(value = "iboard", required = false) int iboard, Model model) {
-        CustomerVo detail = service.selCustomerDetail(dto);
-        model.addAttribute("data", detail);
-
-        List<AttachDTO> fileList = service.getAttachFileList(iboard);
-        model.addAttribute("fileList", fileList);
-
-        if(detail != null) {
-            service.updCustomer(dto);
-        }
+    public String updProc(CustomerDto dto, MultipartFile[] files) {
+        service.updCustomer(dto);
+        service.updCustomer(dto, files);
         return "redirect:/customer/detail?iboard=" + dto.getIboard();
     }
 

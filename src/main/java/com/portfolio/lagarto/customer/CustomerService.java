@@ -49,22 +49,15 @@ public class CustomerService {
         return mapper.selCustomerList(dto);
     }
 
-    public List<AttachDTO> getAttachFileList(int iboard) {
-
-        int fileTotalCount = attachMapper.selectAttachTotalCount(iboard);
-        if (fileTotalCount < 1) {
-            return Collections.emptyList();
-        }
-        return attachMapper.selectAttachList(iboard);}
-
     public CustomerVo selCustomerDetail(CustomerDto dto) {
+        attachMapper.deleteDbFiles(dto.getIboard());
         return mapper.selCustomerDetail(dto);
     }
 
-    public boolean updCustomer(CustomerDto dto) {
-        int queryResult = mapper.updCustomer(dto);
-
-        // 파일이 추가, 삭제, 변경된 경우
+    public int updCustomer(CustomerDto dto) {
+        dto.setIuser(utils.getLoginUserPk());
+        int result = mapper.updCustomer(dto);
+//         파일이 추가, 삭제, 변경된 경우
         if ("Y".equals(dto.getChangeYn())) {
             attachMapper.deleteAttach(dto.getIboard());
 
@@ -73,11 +66,31 @@ public class CustomerService {
                 attachMapper.undeleteAttach(dto.getFileIdxs());
             }
         }
-        return (queryResult > 0);
+        return result;
+    }
+    public int updCustomer(CustomerDto dto, MultipartFile[] files) {
+        int result = 1;
+        mapper.updCustomer(dto);
+
+        List<AttachDTO> fileList = myFileUtils.uploadFiles(files, dto.getIboard());
+        if(CollectionUtils.isEmpty(fileList) == false) {
+            result = attachMapper.insertAttach(fileList);
+        }
+        return result;
     }
 
     public int delCustomer(CustomerEntity entity){
         entity.setIsdel(1);
         return mapper.delCustomer(entity);
     }
+
+    public List<AttachDTO> getAttachFileList(int iboard) {
+
+        int fileTotalCount = attachMapper.selectAttachTotalCount(iboard);
+        if (fileTotalCount < 1) {
+            return Collections.emptyList();
+        }
+        return attachMapper.selectAttachList(iboard);
+    }
+
 }

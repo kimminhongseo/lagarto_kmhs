@@ -12,7 +12,9 @@ public interface AttachMapper {
 
     int deleteAttach(int iboard);
 
-    int undeleteAttach(List<Long> idxs);
+    void deleteDbFiles(int iboard);
+
+    int undeleteAttach(List<Integer> idxs);
 
     List<AttachDTO> selectAttachList(int iboard);
 

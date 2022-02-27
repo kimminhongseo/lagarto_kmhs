@@ -1,14 +1,14 @@
 package com.portfolio.lagarto.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class CustomerDto extends CustomerEntity {
     private String secretYn;
     private String changeYn;
-    private List<Long> fileIdxs;
+    private List<Integer> fileIdxs;
 }

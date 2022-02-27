@@ -1,4 +1,4 @@
-const fileList = [[ ${fileList} ]]; /*[- 업로드 파일 리스트 -]*/
+const fileList = []/*[[ ${fileList} ]]*/; /*[- 업로드 파일 리스트 -]*/
 let fileIdx = isEmpty(fileList) ? 0 : fileList.length; /*[- 파일 인덱스 처리용 전역 변수 -]*/
 
 function addFile() {
@@ -9,23 +9,22 @@ function addFile() {
         return false;
     }
 
-    document.getElementById('changeYn').value = 'Y';
     fileIdx++;
 
     const fileHtml = `
-		<div data-name="fileDiv" class="form-group filebox bs3-primary">
-			<label for="file_${fileIdx}" class="col-sm-2 control-label"></label>
-			<div class="col-sm-10">
-				<input type="text" class="upload-name" value="파일 찾기" readonly />
-				<label for="file_${fileIdx}" class="control-label">찾아보기</label>
-				<input type="file" name="files" id="file_${fileIdx}" class="upload-hidden" onchange="changeFilename(this)" />
+					<div data-name="fileDiv" class="form-group filebox bs3-primary">
+						<label for="file_${fileIdx}" class="col-sm-2 control-label"></label>
+						<div class="col-sm-10">
+							<input type="text" class="upload-name" value="파일 찾기" readonly />
+							<label for="file_${fileIdx}" class="control-label">찾아보기</label>
+							<input type="file" name="files" id="file_${fileIdx}" class="upload-hidden" onchange="changeFilename(this)" />
 
-				<button type="button" onclick="removeFile(this)" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
-					<i class="fa fa-minus" aria-hidden="true"></i>
-				</button>
-			</div>
-		</div>
-	`;
+							<button type="button" onclick="removeFile(this)" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+								<i class="fa fa-minus" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+				`;
 
     $('#btnDiv').before(fileHtml);
 }
@@ -55,9 +54,50 @@ function changeFilename(file) {
 
     file = $(file);
     const filename = file[0].files[0].name;
-    const target = file.prevAll('input.upload-name'); // 변경된 코드
+    const target = file.prevAll('input.upload-name');
     target.val(filename);
 
-    file.prevAll('input[name="fileIdxs"]').remove(); // 추가된 로직
+    file.prevAll('input[name="fileIdxs"]').remove();
 }
 
+/**
+ * 자료형에 상관없이 값이 비어있는지 확인
+ *
+ * @param value - 타겟 밸류
+ * @returns true or false
+ */
+function isEmpty(value) {
+    if (value == null || value == "" || value == undefined || (value != null && typeof value == "object" && !Object.keys(value).length)) {
+        return true;
+    }
+
+    return false;
+}
+
+// function registerBoard(form) {
+//
+//     form.noticeYn.value = form.noticeYn.checked == false ? 'N' : 'Y';
+//     form.secretYn.value = form.secretYn.checked == false ? 'N' : 'Y';
+//
+//     const result = (
+//         isValid(form.title, "제목", null, null)
+//         && isValid(form.content, "내용", null, null)
+//     );
+//
+//     if ( result == false ) {
+//         return false;
+//     }
+
+    // var idx = [[ ${board.idx} ]];
+    // if (isEmpty(idx) == false) {
+    //     // var queryString = /*[[ ${params.makeQueryString(params.currentPageNo)} ]]*/;
+    //
+    //     /*[- 쿼리 스트링을 오브젝트 형태로 변환 -]*/
+    //     queryString = new URLSearchParams(queryString);
+    //     queryString.forEach(function(value, key) {
+    //         if (isEmpty(value) == false) {
+    //             $(form).append('<input type="hidden" name="' + key + '" value="' + value + '" />');
+    //         }
+    //     });
+    // }
+// }

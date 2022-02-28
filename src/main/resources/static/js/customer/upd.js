@@ -73,31 +73,3 @@ function isEmpty(value) {
 
     return false;
 }
-
-// function registerBoard(form) {
-//
-//     form.noticeYn.value = form.noticeYn.checked == false ? 'N' : 'Y';
-//     form.secretYn.value = form.secretYn.checked == false ? 'N' : 'Y';
-//
-//     const result = (
-//         isValid(form.title, "제목", null, null)
-//         && isValid(form.content, "내용", null, null)
-//     );
-//
-//     if ( result == false ) {
-//         return false;
-//     }
-
-    // var idx = [[ ${board.idx} ]];
-    // if (isEmpty(idx) == false) {
-    //     // var queryString = /*[[ ${params.makeQueryString(params.currentPageNo)} ]]*/;
-    //
-    //     /*[- 쿼리 스트링을 오브젝트 형태로 변환 -]*/
-    //     queryString = new URLSearchParams(queryString);
-    //     queryString.forEach(function(value, key) {
-    //         if (isEmpty(value) == false) {
-    //             $(form).append('<input type="hidden" name="' + key + '" value="' + value + '" />');
-    //         }
-    //     });
-    // }
-// }

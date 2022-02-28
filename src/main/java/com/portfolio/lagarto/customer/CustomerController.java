@@ -71,6 +71,7 @@ public class CustomerController {
 
     @GetMapping("/del")
     public String delProc(CustomerEntity entity){
+        cmtService.delCustomerCmtAll(entity.getIboard());
         int result = service.delCustomer(entity);
         if(result == 1) {
             return "redirect:/customer/list/1";

@@ -2,6 +2,7 @@ package com.portfolio.lagarto.customer.comment;
 
 import com.portfolio.lagarto.model.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -19,8 +20,9 @@ public class CustomerCommentRestController {
         return service.insCustomerCmt(entity);
     }
 
-    @GetMapping
-    public List<CustomerCommentVo> selCustomerCmtList(CustomerCommentEntity entity) {
+    @GetMapping("/sel/{iboard}")
+    public List<CustomerCommentVo> selCustomerCmtList(CustomerCommentEntity entity, Model model) {
+        model.addAttribute("data", entity);
         return service.selCustomerCmtList(entity);
     }
 

@@ -8,26 +8,26 @@
     const commentFormContainerElem = document.querySelector('#comment_form_container');
     const commentListElem = document.querySelector('#comment_list');
     const tbodyElem = commentListElem.querySelector('table > tbody');
-
+    const modalClk = document.querySelector('#modal');
 
     //글 삭제 버튼
     const delBtnElem = document.querySelector('#delBtn');
-    if(delBtnElem) {
-            delBtnElem.addEventListener('click', e => {
-                if (confirm(msg.fnIsDel(`${iboard}번 글`)) == true) {
-                    location.href = `/customer/del?iboard=${iboard}`;
-                } else {
-                    e.preventDefault();
-                    return;
-                }
-            });
+    if (delBtnElem) {
+        delBtnElem.addEventListener('click', e => {
+            if (confirm(msg.fnIsDel(`${iboard}번 글`)) == true) {
+                location.href = `/customer/del?iboard=${iboard}`;
+            } else {
+                e.preventDefault();
+                return;
+            }
+        });
     }
 
     //글 수정 버튼
     const modBtnElem = document.querySelector('#modBtn');
-    if(modBtnElem) {
-        modBtnElem.addEventListener('click', ()=> {
-            location.href=`/customer/upd?iboard=${iboard}`;
+    if (modBtnElem) {
+        modBtnElem.addEventListener('click', () => {
+            location.href = `/customer/upd?iboard=${iboard}`;
         });
     }
 
@@ -43,7 +43,8 @@
     }
     getData();
 
-    //댓글 리스트
+    // 댓글 부분
+    // 댓글 리스트
     const getCommentList = () => {
         myFetch.get('/ajax/customerCmt', list => {
             makeCommentRecordList(list);
@@ -95,6 +96,13 @@
             }, param);
         });
     }
+    //-----------------------------------------------------------------------------
+
+    let cmtListElem = document.querySelector(".cmtList");
+    const cmtUpdFrmElem = document.querySelector("#cmtUpdFrm");
+
+
+
     //좋아요 ------------------------------------------------------------ [start] --
     const favIconElem = document.querySelector('#fav_icon');
 
@@ -156,6 +164,5 @@
         });
     }
     //좋아요 ------------------------------------------------------------ [end] --
-    // 별점 주기
 
 })();

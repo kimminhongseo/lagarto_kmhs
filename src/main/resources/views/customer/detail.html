@@ -30,7 +30,6 @@
             </div>
         </div>
 
-
         <div id="comment_list">
             <table class="table table-hover caption-top">
                 <caption>댓글 리스트</caption>
@@ -39,6 +38,14 @@
                 <tbody>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div id="modal" class="modal modal-overlay" style="display: none">
+        <div class="cmtList modal-window modal">
+            <form id="cmtUpdFrm" class="form-group">
+                <input type="text" class="form-control" th:id="ctnt" th:name="ctnt">
+                <input type="button" th:id="cmt_submit" th:value="저장">
+            </form>
         </div>
     </div>
 </th:block>

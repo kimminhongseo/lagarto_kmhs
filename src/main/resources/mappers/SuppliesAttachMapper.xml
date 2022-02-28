@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfolio.lagarto.supplies.files.SupAttachMapper">
+
+    <sql id="attachColumns">
+        idx
+        , iboard
+		, original_name
+		, save_name
+		, size
+		, delete_yn
+		, insert_time
+    </sql>
+
+    <!--<include refid="attachColumns" />은 반복해서 쓰겠다는 뜻. 재활용-->
+    <insert id="insertAttach" parameterType="list">
+        INSERT INTO lagarto.sup_attach (
+        <include refid="attachColumns" />
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.idx}
+            , #{item.iboard}
+            , #{item.original_name}
+            , #{item.save_name}
+            , #{item.size}
+            , 'N'
+            , NOW()
+            )
+        </foreach>
+    </insert>
+
+    <!--특정사진에 대한 정보-->
+    <select id="SelectAttachDetail" parameterType="int" resultType="SupAttachDTO">
+        SELECT
+        <include refid="attachColumns" />
+        FROM
+        lagarto.sup_attach
+        WHERE
+        delete_yn = 'N'
+        AND
+        idx = #{idx}
+    </select>
+
+
+    <!--삭제한것 처럼.-->
+    <update id="DeleteAttach" parameterType="long">
+        UPDATE lagarto.sup_attach
+        SET
+            delete_yn = 'Y'
+        WHERE
+            iboard = #{iboard}
+    </update>
+
+
+    <!--게시물 ?번에 등록된 사진들 모두-->
+    <select id="selectAttachList" resultType="SupAttachDTO">
+        SELECT
+        *
+        FROM
+        lagarto.sup_attach
+        WHERE
+        delete_yn = 'N'
+        AND
+        iboard = ${iboard}
+        ORDER BY idx
+    </select>
+
+    <!--사진 게시물 갯수-->
+    <select id="selectAttachTotalCount" parameterType="int" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            lagarto.sup_attach
+        WHERE
+            delete_yn = 'N'
+          AND
+            iboard = ${iboard}
+    </select>
+
+
+
+</mapper>

@@ -3,7 +3,7 @@
 <!--메퍼 설정 하세요-->
 <mapper namespace="com.portfolio.lagarto.supplies.SuppliesMapper">
 
-    <insert id="insSupplies">
+    <insert id="insSupplies" parameterType="SuppliesVo" useGeneratedKeys="true" keyProperty="iboard" >
         insert into lagarto.supplies
         (icategory, title, ctnt, iuser, price)
         values
@@ -38,17 +38,21 @@
 
     </select>
 
+    <!--group by 사용해서 save_name 뽑아옴.-->
     <select id="selSuppliesListAll" resultType="SuppliesVo">
         select A.*,
-        B.nm as writernm, B.nickname as nicknm, C.nm AS categorynm
+        B.nm as writernm, B.nickname as nicknm, C.nm AS categorynm ,D.save_name
         from lagarto.supplies A
         LEFT join lagarto.lagarto_user B
         on A.iuser = B.iuser
-        INNER JOIN lagarto.supplies_category C
+        left JOIN lagarto.supplies_category C
         ON A.icategory = C.icategory
+        LEFT JOIN (SELECT iboard, MIN(idx) , save_name FROM sup_attach GROUP BY iboard) AS D
+        ON A.iboard = D.iboard
         where A.isdel = 0
         order by A.rdt DESC
     </select>
+
 
     <select id="selSuppliesDetail" resultType="SuppliesVo">
         SELECT A.*,

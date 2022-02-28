@@ -51,7 +51,7 @@
     $('#formId').on('keyup', (k) => {
         if (k.keyCode == 13){
             dologin();
-        }ㅇ
+        }
     })
 
     $('#formPw').on('keyup', (k) => {

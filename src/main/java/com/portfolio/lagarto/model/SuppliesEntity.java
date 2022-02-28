@@ -15,4 +15,5 @@ public class SuppliesEntity {
     private int price; // 판매가
     private String rdt;
     private String mdt;
+
 }

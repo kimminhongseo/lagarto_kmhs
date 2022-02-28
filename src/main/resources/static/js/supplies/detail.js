@@ -12,3 +12,22 @@ if(delBtnElem){
         alert('삭제 되었습니다.');
     });
 }
+
+//이미지 스라이드?
+$(document).ready(function(){
+    $('.bxslider').bxSlider({
+        auto: false,
+        slideWidth: 600,
+        slideMargin: 1000,
+        speed: 500,
+        pause: 4000,
+        mode:'fade',
+        autoControls: true,
+        pager:true,
+    });
+});
+
+
+
+
+

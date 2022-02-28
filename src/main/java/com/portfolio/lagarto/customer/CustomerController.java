@@ -39,6 +39,7 @@ public class CustomerController {
 
     @PostMapping("/write")
     public String writeProc(CustomerEntity entity, MultipartFile[] files, Model model) {
+
         boolean isRegistered = this.service.insCustomer(entity, files);
         return "redirect:/customer/list/" + entity.getBoard_cd();
     }

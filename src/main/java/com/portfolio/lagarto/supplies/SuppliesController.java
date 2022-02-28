@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/supplies")
@@ -19,13 +20,15 @@ public class SuppliesController {
     @GetMapping("/write")
     public String write(@ModelAttribute("suppliesEntity") SuppliesEntity suppliesEntity){
         System.out.println(suppliesEntity.getIcategory());
-        service.insSuppliesList(suppliesEntity);
+
         return  "/supplies/write";
     }
 
     @PostMapping("/write")
-    public String writeProc(SuppliesEntity entity){
-        service.insSupplies(entity);
+    public String writeProc( SuppliesEntity entity, MultipartFile[] files){
+       boolean isRegistered= this.service.insSupplies(entity,files);
+       //난 왜 안뜨는것임?
+        System.out.println(entity.getIboard());
         return "redirect:/supplies/list";
     }
 
@@ -46,8 +49,9 @@ public class SuppliesController {
 
 
     @GetMapping("/detail")
-    public void detail(SuppliesVo vo, Model model){
+    public void detail(SuppliesVo vo, Model model, int iboard){
         model.addAttribute("Data",service.selSuppliesDetail(vo));
+        model.addAttribute("fileList",service.getSupAttachFileList(iboard));
     }
 
 

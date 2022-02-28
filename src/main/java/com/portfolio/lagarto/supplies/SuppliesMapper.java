@@ -10,8 +10,9 @@ import java.util.List;
 
 @Mapper
 public interface SuppliesMapper {
-    int insSupplies(SuppliesEntity entity);
+    boolean insSupplies(SuppliesEntity entity);
     SuppliesVo insSuppliesList(SuppliesEntity entity);
+
     List<SuppliesVo>  selSuppliesList(SuppliesVo vo);
     List<SuppliesVo>  selSuppliesListAll(SuppliesVo vo);
 

@@ -12,7 +12,7 @@ public class SuppliesEntity {
     private int iuser; //
     private int hits;
     private int isdel;
-    private int price; // 구매가
+    private int price; // 판매가
     private String rdt;
     private String mdt;
 }

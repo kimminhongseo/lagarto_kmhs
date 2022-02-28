@@ -124,6 +124,6 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
     }
 })
 
-
+let imgKakao;
 
 // ---------------------------------------------------------------------------------------------

@@ -6,11 +6,52 @@
 <head>
     <meta charset="UTF-8">
     <title>용품 리스트</title>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css}">
+    <script type="text/javascript" th:inline="javascript"></script>
 </head>
 
 <th:block layout:fragment="content">
-    <div>용품리스트</div>
+
+    <div id="data" th:with="icate=${param.icategory}" th:data-icategory="${icate}"></div>
+
+    <div class="container">
+        <div>
+            <div th:if="${session.loginUser != null}">
+                <div th:if="${icategory ge 1}"><a th:href="@{/supplies/write(icategory=${icategory})}">글쓰기</a></div>
+                <div><a href="/user/logout">로그아웃</a></div>
+            </div>         <!--th:unless를 사용하려고 했지만 어차피 로그인 페이지로만 이동하는거라 안씀-->
+            <div th:if="${session.loginUser == null}">
+                <div>로그인하시면 글작성이 가능합니다. &emsp;<input type="button" value="로그인 하러가기"
+                                                     th:onclick="|location.href='@{/user/login}'|"></div>
+            </div>
+        </div>
+        <div class="row" >
+
+            <div class="col-3"  th:each="data:${List}">
+
+                <div class="card">
+                    <div class="card-header">
+                       카테고리 : <span th:text="${data.categorynm}"/>
+                    </div>
+                    <img th:src="@{/static/uploadfile/11/jisoo2.jpg}">
+                    <div class="card-body">
+                        <h5 class="card-title">제목 : <span th:text="${data.title}"/> </h5>
+                        <div class="card-text">내용 : <span th:text="${data.ctnt}"/></div>
+                        <div class="card-text">판매가 : <span th:text="${data.price}"/> 원</div>
+                        <div class="card-text">판매자 : ( <span th:text="${data.nicknm}"/> ) 님</div>
+                        <a th:href="@{/supplies/detail(iboard=${data.iboard})}" class="btn btn-primary">자세히 보러가기</a>
+                    </div>
+                </div>
+            </div>
 
 
+
+        </div>
+    </div>
+
+    <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js}"></script>
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
 </th:block>
+
 </html>

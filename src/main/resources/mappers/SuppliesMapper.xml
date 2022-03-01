@@ -38,7 +38,7 @@
 
     </select>
 
-    <!--group by 사용해서 save_name 뽑아옴.-->
+    <!--group by 사용해서 save_name  뽑아옴. 첫번째로 넣은 사진.-->
     <select id="selSuppliesListAll" resultType="SuppliesVo">
         select A.*,
         B.nm as writernm, B.nickname as nicknm, C.nm AS categorynm ,D.save_name

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -160,8 +161,10 @@ public class AuctionController {
 
 
     @GetMapping("/detail")
-    public void detail(AuctionVo vo, Model model) {
+    public void detail(AuctionVo vo, Model model, HttpSession hs) {
         model.addAttribute("Data", service.selAuctionDetail(vo));
+        model.addAttribute("login",hs.getAttribute(Const.LOGIN_USER));
+        System.out.println("세션값 : "+hs.getAttribute(Const.LOGIN_USER));
         //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
 
     }

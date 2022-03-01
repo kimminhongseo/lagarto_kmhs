@@ -23,6 +23,7 @@ public class AuctionService {
 
     public int insAuction(AuctionEntity entity){
         entity.setIuser(utils.getLoginUserPk());
+        entity.setBuyer(utils.getLoginUserPk());
         return mapper.insAuction(entity);
     }
 

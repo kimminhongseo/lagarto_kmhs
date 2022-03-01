@@ -60,6 +60,7 @@
 
             </div>
 
+            <!--슬라이더 창-->
         <div id="images" class="col-6">
             <ul class="bxslider" id="image">
                <li th:each="fileList: ${fileList}" > <img th:src="@{/uploadfile/supplies/} + ${fileList.iboard} + @{/} + ${fileList.save_name}" ></li>

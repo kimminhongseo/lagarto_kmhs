@@ -1,8 +1,7 @@
 package com.portfolio.lagarto.customer;
 
-import com.portfolio.lagarto.model.CustomerDto;
-import com.portfolio.lagarto.model.CustomerEntity;
-import com.portfolio.lagarto.model.CustomerVo;
+import com.portfolio.lagarto.Criteria;
+import com.portfolio.lagarto.model.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,4 +13,6 @@ public interface CustomerMapper {
     CustomerVo selCustomerDetail(CustomerDto dto);
     int updCustomer(CustomerDto dto);
     int delCustomer(CustomerEntity entity);
+    List<CustomerVo> selList(TestDto dto);
+    int totalCount(TestDto dto);
 }

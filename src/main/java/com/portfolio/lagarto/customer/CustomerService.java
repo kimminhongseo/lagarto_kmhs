@@ -1,12 +1,12 @@
 package com.portfolio.lagarto.customer;
 
+import com.portfolio.lagarto.Criteria;
 import com.portfolio.lagarto.MyFileUtils;
+import com.portfolio.lagarto.PaginationInfo;
 import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.customer.files.AttachDTO;
 import com.portfolio.lagarto.customer.files.AttachMapper;
-import com.portfolio.lagarto.model.CustomerDto;
-import com.portfolio.lagarto.model.CustomerEntity;
-import com.portfolio.lagarto.model.CustomerVo;
+import com.portfolio.lagarto.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -43,6 +43,20 @@ public class CustomerService {
 
             return queryResult > 0;
         }
+    }
+
+    public List<CustomerVo> selList(TestDto dto) {
+        List<CustomerVo> list = Collections.emptyList();
+        int totalCount = mapper.totalCount(dto);
+        PaginationInfo paginationInfo = new PaginationInfo(dto);
+        paginationInfo.setTotalRecordCount(totalCount);
+
+        dto.setPaginationInfo(paginationInfo);
+
+        if(totalCount > 0) {
+            list = mapper.selList(dto);
+        }
+        return list;
     }
 
     public List<CustomerVo> selCustomerList(CustomerDto dto) {

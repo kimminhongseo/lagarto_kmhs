@@ -13,7 +13,7 @@
     <div class="main">
         <i id="fav_icon" class=" fa-regular fa-heart" th:onclick="/customer/like"></i>
         <div id="board_detail"></div>
-        <div id="dataLogin" th:with="data=${loginUser}" th:data-iuser="${session.loginUser.iuser}"></div>
+        <div id="dataLogin" th:with="dataLogin=${loginUser}" th:data-iuser="${dataLogin}"></div>
         <div id="dataIuser" th:with="data=${data}" th:data-iuser="${data.iuser}"></div>
         <div id="data" th:with="iboard=${param.iboard}" th:data-iboard="${iboard}"
              th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">

@@ -1,21 +1,17 @@
 package com.portfolio.lagarto.customer;
 
+import com.portfolio.lagarto.Criteria;
+import com.portfolio.lagarto.auction.AuctionService;
 import com.portfolio.lagarto.customer.comment.CustomerCommentService;
-import com.portfolio.lagarto.customer.files.AttachDTO;
-import com.portfolio.lagarto.customer.files.AttachFileException;
-import com.portfolio.lagarto.model.AuctionEntity;
+import com.portfolio.lagarto.model.AuctionVo;
 import com.portfolio.lagarto.model.CustomerDto;
 import com.portfolio.lagarto.model.CustomerEntity;
-import com.portfolio.lagarto.model.CustomerVo;
+import com.portfolio.lagarto.model.TestDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.lang.reflect.Method;
-import java.util.List;
 
 @Controller
 @RequestMapping("/customer")
@@ -23,6 +19,7 @@ public class CustomerController {
 
     @Autowired public CustomerService service;
     @Autowired public CustomerCommentService cmtService;
+    @Autowired public AuctionService auctionService;
 
     @GetMapping("/list/{board_cd}")
     public String list(@PathVariable int board_cd, CustomerDto dto, Model model) {
@@ -32,13 +29,19 @@ public class CustomerController {
         return "customer/list";
     }
 
+    @GetMapping("/selList")
+    public String selList(@ModelAttribute("params")TestDto dto, Model model) {
+        model.addAttribute("list", service.selList(dto));
+        return "customer/selList";
+    }
+
     @GetMapping("/write")
     public String write(@ModelAttribute("entity") CustomerEntity entity) {
         return "customer/write";
     }
 
     @PostMapping("/write")
-    public String writeProc(CustomerEntity entity, MultipartFile[] files, Model model) {
+    public String writeProc(CustomerEntity entity, MultipartFile[] files) {
         boolean isRegistered = this.service.insCustomer(entity, files);
         return "redirect:/customer/list/" + entity.getBoard_cd();
     }

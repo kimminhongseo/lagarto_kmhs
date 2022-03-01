@@ -1,0 +1,70 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+
+<head>
+    <title>리스트</title>
+    <link rel="stylesheet" th:href="@{/css/customer/list.css}">
+    <script defer th:src="@{/js/customer/list.js}"></script>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="main">
+        <div id="data" th:with="board_cd=${params.board_cd}" th:data-board_cd="${board_cd}"></div>
+        <div th:switch="${board_cd}">
+            <span th:case="1"><h1>리뷰</h1></span>
+            <span th:case="2"><h1>커뮤니티</h1></span>
+            <span th:case="3"><h1>문의</h1></span>
+        </div>
+        <div th:if="${session.loginUser != null}">
+            <button th:onclick="location.href=`/customer/write?board_cd=`+[[${board_cd}]]">글쓰기</button>
+            <button><a href="/user/logout">로그아웃</a></button>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr class="table-dark">
+                <th>번호</th>
+                <th th:if="${board_cd == 1}">상품제목</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>조회수</th>
+                <th>작성일시</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div id="iboard" th:each="item : ${list}" th:with="iboard=${item.getIboard()}" th:data-iboard="${iboard}">
+                <tr th:onclick="location.href=`/customer/detail?iboard=`+[[${iboard}]]" class="record pointer">
+                    <td th:text="${item.iboard}">번호</td>
+                    <td th:if="${board_cd == 1}" th:text="${item.productTitle}">상품제목</td>
+                    <td th:text="${item.title}">제목</td>
+                    <td th:text="${item.nickname}">작성자</td>
+                    </a>
+                    <td th:text="${item.hits}">조회수</td>
+                    <td th:text="${item.rdt}">작성일시</td>
+                </tr>
+            </div>
+            </tbody>
+        </table>
+        <nav th:if="${params != null and params.paginationInfo.totalRecordCount > 0}" th:object="${params.paginationInfo}" th:with="info=${params.paginationInfo}" aria-label="Page navigation" class="text-center">
+            <ul class="pagination">
+                <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(1)} ]])" class="page-item">
+                    <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                </li>
+                <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.firstPage - 1)} ]])" class="page-item">
+                    <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&lsaquo;</span></a>
+                </li>
+                <li th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:class="${pageNo == params.currentPageNo} ? 'active'">
+                    <a href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(pageNo)} ]])" class="page-item"></a>
+                </li>
+                <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.lastPage + 1)} ]])" class="page-item">
+                    <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&rsaquo;</span></a>
+                </li>
+                <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.totalPageCount)} ]])" class="page-item">
+                    <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</th:block>
+</html>

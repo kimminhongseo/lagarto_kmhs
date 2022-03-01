@@ -118,8 +118,6 @@ if (commentFormContainerElem) {
 }
 
 
-
-
 //댓글 리스트
 const getCommentList = () => {
     myFetch.get('/ajax/auctionCmt', list => {
@@ -132,6 +130,9 @@ const getCommentList = () => {
 // var sessionData = sessionStorage.;
 // sessionStorage.setItem("sessionLogin",sessionData);
 
+
+//-----------------댓글 수정삭제 (시작)
+const sessionloginElem = document.querySelector('#dataLogin');
 const makeCommentRecordList = list => {
 
     list.forEach(item => {
@@ -144,13 +145,12 @@ const makeCommentRecordList = list => {
                 <td>${item.rdt}</td>
             `;
         tbodyElem.appendChild(trElem);
-        console.log(item.iuser);
-
-        //수정 삭제 구현 연습.
+        //수정 삭제 구현  댓글쓴 사람이랑 현재 로그인한 사람이랑 같으면 수정/삭제 버튼 활성화
+        if(item.iuser == sessionloginElem.dataset.iuser){
         const modBtn = document.createElement('input')
         modBtn.type = 'button';
         modBtn.value = '수정';
-        modBtn.addEventListener('click', () =>{
+        modBtn.addEventListener('click', () => {
             const tdArr = trElem.querySelectorAll('td');
             const tdCell = tdArr[1];
             const modInput = document.createElement('input');
@@ -160,90 +160,65 @@ const makeCommentRecordList = list => {
             saveBtn.type = 'button';
             saveBtn.value = '저장';
 
+            saveBtn.addEventListener('click', () => {
+                const param = {
+                    icmt: item.icmt,
+                    ctnt: modInput.value
+                }
+                myFetch.put('/ajax/auctionCmt', data => {
+                    switch (data.result) {
+                        case 0:
+                            alert('댓글 수정에 실패하였습니다.')
+                            break;
+                        case 1:
+                            tdCell.innerText = modInput.value;
+                            item.ctnt = modInput.value;
+                            removeCancelBtn();
+                            break;
+                    }
+                }, param);
+            });
 
             tdCell.innerHTML = null;
             tdCell.appendChild(modInput);
+            tdCell.appendChild(saveBtn);
+            const cancelBtn = document.createElement('input');
+            cancelBtn.type = 'button';
+            cancelBtn.value = '취소';
+            cancelBtn.addEventListener('click', () => {
+                tdCell.innerText = item.ctnt;
+                removeCancelBtn();
+            });
+
+            const removeCancelBtn = () => {
+                modBtn.classList.remove('hidden');
+                delBtn.classList.remove('hidden');
+                cancelBtn.remove();
+            }
+
+            tdElem.insertBefore(cancelBtn, modBtn);
+            modBtn.classList.add('hidden');
+            delBtn.classList.add('hidden');
         });
+        const delBtn = document.createElement('input');
+        delBtn.type = 'button';
+        delBtn.value = '삭제';
 
-
+        delBtn.addEventListener('click', () => {
+            if (confirm('삭제하시겠습니까?')) {
+                delCmt(item.icmt, trElem);
+            }
+        });
         trElem.appendChild(modBtn);
+        trElem.appendChild(delBtn);
+
+        }
+    })
+    return trElem;
 
 
-        //수정, 삭제 버튼
-        // if (`${item.iuser === 2}`) {
-        //     const modBtn = document.createElement('input');
-        //     modBtn.type = 'button';
-        //     modBtn.value = '수정';
-        //     modBtn.addEventListener('click', () => {
-        //         const tdArr = trElem.querySelectorAll('td');
-        //         const tdCell = tdArr[1];
-        //
-        //         const modInput = document.createElement('input');
-        //         modInput.value = item.ctnt;
-        //         const saveBtn = document.createElement('input')
-        //         saveBtn.type = 'button';
-        //         saveBtn.value = '저장';
-        //         saveBtn.addEventListener('click', () => {
-        //             const param = {
-        //                 icmt: item.icmt,
-        //                 ctnt: modInput.value
-        //             }
-        //
-        //             myFetch.put('/ajax/auctionCmt', data => {
-        //                 switch (data.result) {
-        //                     case 0:
-        //                         alert('댓글 수정에 실패하였습니다.')
-        //                         break;
-        //                     case 1:
-        //                         tdCell.innerText = modInput.value;
-        //                         item.ctnt = modInput.value;
-        //                         removeCancelBtn();
-        //                         break;
-        //                 }
-        //             }, param);
-        //         });
-        //
-        //         tdCell.innerHTML = null;
-        //         tdCell.appendChild(modInput);
-        //         tdCell.appendChild(saveBtn);
-        //
-        //         const cancelBtn = document.createElement('input');
-        //         cancelBtn.type = 'button';
-        //         cancelBtn.value = '취소';
-        //         cancelBtn.addEventListener('click', () => {
-        //             tdCell.innerText = item.ctnt;
-        //             removeCancelBtn();
-        //         });
-        //
-        //         const removeCancelBtn = () => {
-        //             modBtn.classList.remove('hidden');
-        //             delBtn.classList.remove('hidden');
-        //             cancelBtn.remove();
-        //         }
-        //
-        //         tdElem.insertBefore(cancelBtn, modBtn);
-        //         modBtn.classList.add('hidden');
-        //         delBtn.classList.add('hidden');
-        //     });
-        //
-        //     const delBtn = document.createElement('input');
-        //     delBtn.type = 'button';
-        //     delBtn.value = '삭제';
-        //
-        //     delBtn.addEventListener('click', () => {
-        //         if (confirm('삭제하시겠습니까?')) {
-        //             delCmt(item.icmt, trElem);
-        //         }
-        //     });
-        //
-        //     tdElem.appendChild(modBtn);
-        //     tdElem.appendChild(delBtn);
-        // }
-        // return trElem;
-
-    });
 }
-//-----------------댓글 수정삭제 (시작)
+
 
 //iuser 값 과 로그인한 iuser값
 

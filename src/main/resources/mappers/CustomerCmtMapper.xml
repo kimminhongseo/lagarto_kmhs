@@ -31,7 +31,7 @@
     </update>
 
     <delete id="delCustomerCmt">
-        DELETE FROM lagarto.customer_comment WHERE icmt = ${icmt} AND iboard = ${iboard}
+        DELETE FROM lagarto.customer_comment WHERE icmt = ${icmt} AND iuser = ${iuser}
     </delete>
 
     <delete id="delCustomerCmtAll">

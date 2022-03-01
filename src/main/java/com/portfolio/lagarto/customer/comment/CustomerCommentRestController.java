@@ -1,10 +1,12 @@
 package com.portfolio.lagarto.customer.comment;
 
+import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.model.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +22,10 @@ public class CustomerCommentRestController {
         return service.insCustomerCmt(entity);
     }
 
-    @GetMapping("/sel/{iboard}")
-    public List<CustomerCommentVo> selCustomerCmtList(CustomerCommentEntity entity, Model model) {
+    @GetMapping
+    public List<CustomerCommentVo> selCustomerCmtList(CustomerCommentEntity entity, HttpSession hs, Model model) {
+        Object object = hs.getAttribute(Const.LOGIN_USER);
+        model.addAttribute(Const.LOGIN_USER, object);
         model.addAttribute("data", entity);
         return service.selCustomerCmtList(entity);
     }

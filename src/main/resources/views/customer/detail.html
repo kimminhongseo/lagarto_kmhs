@@ -13,6 +13,8 @@
     <div class="main">
         <i id="fav_icon" class=" fa-regular fa-heart" th:onclick="/customer/like"></i>
         <div id="board_detail"></div>
+        <div id="dataLogin" th:with="data=${loginUser}" th:data-iuser="${session.loginUser.iuser}"></div>
+        <div id="dataIuser" th:with="data=${data}" th:data-iuser="${data.iuser}"></div>
         <div id="data" th:with="iboard=${param.iboard}" th:data-iboard="${iboard}"
              th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
             <button id="modBtn">수정</button>
@@ -38,14 +40,6 @@
                 <tbody>
                 </tbody>
             </table>
-        </div>
-    </div>
-    <div id="modal" class="modal modal-overlay" style="display: none">
-        <div class="cmtList modal-window modal">
-            <form id="cmtUpdFrm" class="form-group">
-                <input type="text" class="form-control" th:id="ctnt" th:name="ctnt">
-                <input type="button" th:id="cmt_submit" th:value="저장">
-            </form>
         </div>
     </div>
 </th:block>

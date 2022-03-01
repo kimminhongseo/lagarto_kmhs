@@ -50,9 +50,10 @@ if (formbuybtn) {
             console.log(parseInt(iboard));
             console.log(prebuyer.value);
             console.log(formbuy.value);
+            console.log(iuser.value);
 
             fetch(`/ajax/auctionBid/buy?formbid=${formbid.value}&iboard=${parseInt(iboard)}&formimbuy=${formimbuy.value}
-            &formbuy=${formbuy.value}&prebuyer=${prebuyer.value}`, {
+            &formbuy=${formbuy.value}&prebuyer=${prebuyer.value}&iuser=${iuser.value}`, {
                 method: 'post',
                 headers: {'Content-type': 'application/json'}
             }).then(res => {

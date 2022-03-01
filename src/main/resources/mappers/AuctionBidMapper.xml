@@ -22,6 +22,13 @@
         WHERE iuser = #{buyer};
     </update>
 
+    <update id="firstremovemoney">
+        UPDATE lagarto.lagarto_user SET money = money - #{prebuy}
+        WHERE iuser = #{prebuyer}
+    </update>
+
+
+
     <select id="findmoney" resultType="int">
         SELECT money FROM lagarto_user
         WHERE iuser = #{buyer}

@@ -1,10 +1,10 @@
 package com.portfolio.lagarto.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class AuctionVo extends AuctionEntity {
     private String writernm;
     private String profile_img;

@@ -14,7 +14,7 @@ const iboard = searchParams.get('iboard');
 const commentListElem = document.querySelector('#comment_list');
 const tbodyElem = commentListElem.querySelector('table > tbody');
 const commentFormContainerElem = document.querySelector('#comment_form_container');
-
+const formimbuybtnElem = document.querySelector('#formimbuybtn');
 
 const img = document.getElementsByClassName("click_img");
 for (let x = 0; x < img.length; x++) {
@@ -250,6 +250,20 @@ const delCmt = (icmt, tr) => {
 //-----------------댓글 수정삭제 (끝)
 
 //댓글 입력 폼
+
+
+
+//마감시간이 현재보다 작으면 전체다 회색?
+
+const finishtimeElem = document.querySelector('#finishtime' );
+const finishtitmeElem1 = document.getElementById('finishtime');
+if(formimbuybtn){
+    formimbuybtnElem.addEventListener('click',()=>{
+        console.log("select : "+finishtimeElem);
+        console.log("id : "+finishtitmeElem1);
+    });
+}
+
 
 
 

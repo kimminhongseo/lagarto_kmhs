@@ -169,13 +169,6 @@ public class AuctionController {
 
     }
 
-    //js처리 위해, 값불러오는거
-    @GetMapping("/detail_data")
-    public void selAuctionDetail(Model model, AuctionVo vo){
-        model.addAttribute("Data",service.selAuctionDetail(vo));
-    }
-
-
 
     @GetMapping("/mod")
     public String mod(AuctionVo dto,Model model){

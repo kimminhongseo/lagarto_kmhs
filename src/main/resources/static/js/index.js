@@ -127,7 +127,23 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
 function objToJson(data){
     return Object.keys(data).map(key => `${key}=${data[key]}`).join('&');
 }
-
+let cou = $('#clickOpenUser');
+let userNick = $('#userNick').text();
+console.log(userNick);
+cou.click(function (){
+    fetch('/userInformation',{
+        method : 'post',
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify({
+            'nickname' : userNick
+        })
+    }).then(res =>{
+        return res.json();
+    }).then(data => {
+        window.open(`/userInformation?nickname=${data.nickname}&level=${data.level}&iuser=${data.iuser}`,'_blank','toolbar=no,location=no,status=no,menubar=no, scrollbars=auto,resizable=no,'+
+            'width=600,height=400 top=200 left=300');
+    })
+});
 
 
 // ---------------------------------------------------------------------------------------------

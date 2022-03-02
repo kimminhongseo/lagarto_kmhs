@@ -2,6 +2,7 @@ package com.portfolio.lagarto.user;
 
 
 import com.portfolio.lagarto.Const;
+import com.portfolio.lagarto.MyFileUtils;
 import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.JoinResult;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.regex.Pattern;
 public class UserController {
     @Autowired //필요한 메소드 자동찾기
     private UserService service;
+
     @Autowired
     private FollowService fservice;
     @Autowired
@@ -34,7 +37,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(Model model, @ModelAttribute("entity") UserEntity entity) {
-        if (0 != utils.getLoginUserPk()){
+        if (0 != utils.getLoginUserPk()) {
             return "redirect:/main";
         }
         model.addAttribute("title", "로그인");
@@ -49,11 +52,11 @@ public class UserController {
 
     @PostMapping("/apiLogin")
     @ResponseBody
-    public Map<String, Integer> loginProc(@RequestBody UserEntity entity){
+    public Map<String, Integer> loginProc(@RequestBody UserEntity entity) {
         UserEntity dbEntity = service.selApiUser(entity);
 
         Map<String, Integer> result = new HashMap<>();
-        if (dbEntity == null){
+        if (dbEntity == null) {
             String pw = Utils.randomPw();
             entity.setUpw(pw);
             result.put("result", 0);
@@ -184,6 +187,7 @@ public class UserController {
         result.put("result", 0);
         return result;
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
@@ -231,29 +235,36 @@ public class UserController {
     }
 
     @GetMapping("/charge")
-    public String charge(@RequestParam int pageNum, UserEntity entity,PageVo vo, Model model){ //page num = 2
-        System.out.println(pageNum);
-        if (utils.getLoginUserPk() != 0){
+    public String charge(Model model) { //page num = 2
+        if (utils.getLoginUserPk() != 0) {
+            UserEntity entity = new UserEntity();
+            entity.setIuser(utils.getLoginUserPk());
             int result = service.selMoneyCount(entity);
             model.addAttribute(Const.Count, result);
-            vo.setCurrentPage((pageNum -1) * vo.getRecordCount());
-            vo.setRecordCount(vo.getRecordCount());
-            vo.setIuser(utils.getLoginUserPk());
-            model.addAttribute(Const.Money, service.selMoney(vo));
             return "/user/charge";
         }
         return "redirect:/user/login";
     }
 
     @PostMapping("/charge")
-    public void charge(@RequestParam int money, HttpSession hs){
+    public void charge(@RequestParam int money, HttpSession hs) {
         UserEntity entity = (UserEntity) hs.getAttribute(Const.LOGIN_USER);
-        entity.setMoney(entity.getMoney()+money);
+        entity.setMoney(entity.getMoney() + money);
         UserEntity userEntity = new UserEntity();
         userEntity.setIuser(entity.getIuser());
         userEntity.setMoney(money);
         service.insMoney(userEntity);
         service.moneyCharge(userEntity);
+    }
+
+
+    @PostMapping("/moneyChargeList")
+    @ResponseBody
+    public List<UserEntity> moneyChargeList(@RequestBody PageVo vo, Model model) {
+        vo.setCurrentPage((vo.getCurrentPage() - 1) * vo.getRecordCount());
+        vo.setRecordCount(vo.getRecordCount());
+        vo.setIuser(utils.getLoginUserPk());
+        return service.selMoney(vo);
     }
 
     @GetMapping("/forgotId")
@@ -296,5 +307,16 @@ public class UserController {
         model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
     }
 
+    @PostMapping("/report")
+    @ResponseBody
+    public int reportUser(@RequestBody UserDto dto) {
+        return service.reportUser(dto);
+    }
+
+    @PostMapping("/profileImg")
+    @ResponseBody
+    public void profileImg(MultipartFile imgFile) {
+        service.uploadProfileImg(imgFile);
+    }
 
 }

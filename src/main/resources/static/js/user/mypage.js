@@ -151,14 +151,13 @@
                     switch (data.result) {
                         case 0:
                             alert('현재비밀번호가 일치하지 않습니다.')
-                            e.preventDefault();
                             break;
                         case 1:
                             alert('변경완료');
                             location.href = "/user/logout";
+                            break;
                         case 2:
                             alert('영문, 숫자, 특수문자 조합하여 8자리 이상 입력 해주십시오');
-                            e.preventDefault()
                             break;
                     }
                 })
@@ -267,6 +266,45 @@ if (unfollowBtnElem){
             })
         });
     })
+
+    var sel_file;
+
+    $(document).ready(function() {
+        $("#file1").on("change", handleImgFileSelect);
+    });
+
+    function handleImgFileSelect(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp|gif)$/;
+
+        filesArr.forEach(function(f) {
+            if (!f.type.match(reg)) {
+                alert("확장자는 이미지 확장자만 가능합니다.");
+                return;
+            }
+
+            sel_file = f;
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#img").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(f);
+        });
+    }
+
+    function fn_submit(){
+
+        var form = new FormData();
+        form.append( "imgFile", $("#file1")[0].files[0] );
+
+        fetch('/user/profileImg', {
+            method : 'post',
+            body : form
+        })
+    }
 }
 
 

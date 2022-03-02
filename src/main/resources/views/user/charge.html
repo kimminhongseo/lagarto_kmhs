@@ -31,17 +31,8 @@
         </div>
         <div>
             <table class="table" id="bottoms">
-                <tbody>
-                <tr th:each="item : ${money}" id="font-money">
-                    <div>
-                        <th:block th:if="${#lists.size(money) != 0}">
-                            <td th:text="${#numbers.formatInteger(item.money, 0, 'COMMA') +'원'}"></td>
-                            <td th:text="충전완료"></td>
-                            <td th:text="${item.rdt}"></td>
-                        </th:block>
-                    </div>
+                <tbody id="money-tbody">
 
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -49,7 +40,7 @@
         <div id="mBn">
             <div th:if="${count>0}">
                 <label th:each="num : ${#numbers.sequence(1, count)}">
-                    <a th:href="@{/user/charge(pageNum=${numStat.count})}"><button class="moneyCountBtn"  th:value="${numStat.count}" th:text="${numStat.count}" th:onclick="|javascript:asd('${numStat.count}')|"></button></a>
+                    <a><button th:value="${numStat.count}" th:text="${numStat.count}" th:onclick="|javascript:asd('${numStat.count}')|"></button></a>
                 </label>
             </div>
             <div id="nullCharge" th:unless="${count>0}">

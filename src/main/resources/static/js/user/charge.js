@@ -1,15 +1,34 @@
+let moneyTbodyElem = document.querySelector('#money-tbody');
+let num = 1;
 function asd(pageNum) {
-    console.log(pageNum);
-    fetch(`/user/charge?pageNum=${pageNum}`,{
-        method : 'get'
+    fetch('/user/moneyChargeList',{
+        method : 'post',
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify({
+            currentPage : pageNum
+        })
     }).then(res => {
         return res.json();
     }).then(data => {
-
+        console.log(data.length)
+        moneyTbodyElem.innerHTML = "";
+        for (let i = 0; i < data.length; i++){
+            let tr = document.createElement('tr');
+            let td1 = document.createElement('td');
+            td1.innerText = data[i].rdt.substring(0,11);
+            let td2 = document.createElement('td');
+            td2.innerText = data[i].money+'원';
+            let td3 = document.createElement('td');
+            td3.innerText = '충전완료';
+            moneyTbodyElem.appendChild(tr);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+        }
     })
 }
 
-
+asd(1);
 
 $('#charge_kakao').click(function () {
     // getter
@@ -45,7 +64,7 @@ $('#charge_kakao').click(function () {
             msg += '에러내용 : ' + rsp.error_msg;
         }
         alert(msg);
-        document.location.href="/user/charge?pageNum=1"; //alert창 확인 후 이동할 url 설정
+        document.location.href="/user/charge"; //alert창 확인 후 이동할 url 설정
     });
 });
 

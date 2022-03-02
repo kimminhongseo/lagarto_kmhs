@@ -8,9 +8,13 @@ import java.util.List;
 public interface AttachMapper {
     int insertAttach(List<AttachDTO> attachList);
 
-    AttachDTO selectAttachDetail(int idx);
+    AttachDTO selectAttachDetail(int iboard);
 
-    int deleteAttach(int boardIdx);
+    int deleteAttach(int iboard);
+
+    void deleteDbFiles(int iboard);
+
+    int undeleteAttach(List<Integer> idxs);
 
     List<AttachDTO> selectAttachList(int iboard);
 

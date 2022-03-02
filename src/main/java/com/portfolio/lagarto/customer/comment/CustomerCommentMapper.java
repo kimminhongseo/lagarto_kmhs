@@ -8,6 +8,7 @@ import java.util.List;
 public interface CustomerCommentMapper {
     int insCustomerCmt(CustomerCommentEntity entity);
     List<CustomerCommentVo> selCustomerCmtList(CustomerCommentEntity entity);
+    int updCustomerCmt(CustomerCommentEntity entity);
     int delCustomerCmt(CustomerCommentEntity entity);
     int delCustomerCmtAll(CustomerCommentEntity entity);
 }

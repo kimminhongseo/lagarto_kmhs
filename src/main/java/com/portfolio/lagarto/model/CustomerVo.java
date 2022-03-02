@@ -1,12 +1,40 @@
 package com.portfolio.lagarto.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class CustomerVo extends CustomerEntity {
     private String productTitle;
     private String nickname;
     private String board_nm;
+    private String changeYn;
+
+    public String getProductTitle() {
+        return productTitle;
+    }
+
+    public void setProductTitle(String productTitle) {
+        this.productTitle = productTitle;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getBoard_nm() {
+        return board_nm;
+    }
+
+    public void setBoard_nm(String board_nm) {
+        this.board_nm = board_nm;
+    }
+
+    public String getChangeYn() {
+        return changeYn;
+    }
+
+    public void setChangeYn(String changeYn) {
+        this.changeYn = changeYn;
+    }
 }

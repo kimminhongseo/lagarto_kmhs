@@ -1,0 +1,88 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+
+<head>
+    <title>수정</title>
+    <link rel="stylesheet" th:href="@{/css/customer/upd.css}">
+    <script defer th:src="@{/js/customer/upd.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="main">
+        <div class="container">
+            <h1>수정</h1>
+            <div>
+                <form id="form-horizontal" th:action="@{/customer/upd}" th:object="${data}" method="post" enctype="multipart/form-data" onsubmit="return registerBoard(this)">
+                    <input type="hidden" id="board_cd" th:field="*{board_cd}" th:value="${param.board_cd}">
+                    <input type="hidden" id="iboard" th:field="*{iboard}" th:value="${data.iboard}">
+                    <!--                    파일이 변경된 경우, changeYn 파라미터를 이용해 파일 삭제 및 재등록 처리-->
+                    <input type="hidden" th:field="*{changeYn}" value="N" />
+
+                    <div class="form-floating mb-3">
+                        <input type="text" th:name="title" id="title" class="form-control" placeholder="title" th:field="*{title}">
+                        <label class="form-label" for="title">제목</label>
+                    </div>
+                    <div class="star-rating space-x-4 mx-auto" th:if="*{board_cd == 1}">
+                        <input type="radio" id="5-stars" th:name="rating" th:value="5" v-model="ratings"/>
+                        <label for="5-stars" class="star pr-4">★</label>
+                        <input type="radio" id="4-stars" th:name="rating" th:value="4" v-model="ratings"/>
+                        <label for="4-stars" class="star">★</label>
+                        <input type="radio" id="3-stars" th:name="rating" th:value="3" v-model="ratings"/>
+                        <label for="3-stars" class="star">★</label>
+                        <input type="radio" id="2-stars" th:name="rating" th:value="2" v-model="ratings"/>
+                        <label for="2-stars" class="star">★</label>
+                        <input type="radio" id="1-star" th:name="rating" th:value="1" v-model="ratings" />
+                        <label for="1-star" class="star">★</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ctnt" class="form-label">내용</label>
+                        <textarea class="form-control" th:name="ctnt" id="ctnt" th:field="*{ctnt}" rows="3"></textarea>
+                    </div>
+
+                    <!--/* 저장된 파일이 없는 파일 영역 */-->
+                    <div th:if="${#lists.isEmpty(fileList)}" th:data-name="fileDiv" class="form-group filebox bs3-primary">
+                        <label for="file_0" class="col-sm-2 control-label">파일1</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="upload-name" value="파일 찾기" readonly />
+                            <label for="file_0" class="control-label">찾아보기</label>
+                            <input type="file" name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)" />
+
+                            <button type="button" onclick="addFile()" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" onclick="removeFile(this)" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!--/* 저장된 파일이 있는 파일 영역 */-->
+                    <div th:unless="${#lists.isEmpty(fileList)}" th:each="row, status : ${fileList}" th:data-name="fileDiv" class="form-group filebox bs3-primary">
+                        <label th:for="|file_${status.index}|" class="col-sm-2 control-label">[[ |파일${status.count}| ]]</label>
+                        <div class="col-sm-10">
+                            <input type="hidden" th:name="fileIdxs" th:value="${row.idx}" />
+                            <input type="text" class="upload-name" th:value="${row.original_name}" readonly />
+                            <label th:for="|file_${status.index}|" class="control-label">찾아보기</label>
+                            <input type="file" th:name="files" th:id="|file_${status.index}|" class="upload-hidden" onchange="changeFilename(this)" />
+
+                            <button th:if="${status.first}" type="button" onclick="addFile()" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" onclick="removeFile(this)" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="btnDiv" class="btn_wrap text-center">
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">저장하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

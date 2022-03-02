@@ -9,10 +9,10 @@ import java.util.List;
 @Mapper
 public interface CustomerMapper {
     boolean insCustomer(CustomerEntity entity);
-    List<CustomerVo> selCustomerList(CustomerDto dto);
+    List<CustomerVo> selCustomerList(TestDto dto);
     CustomerVo selCustomerDetail(CustomerDto dto);
     int updCustomer(CustomerDto dto);
     int delCustomer(CustomerEntity entity);
-    List<CustomerVo> selList(TestDto dto);
+//    List<CustomerVo> selList(TestDto dto);
     int totalCount(TestDto dto);
 }

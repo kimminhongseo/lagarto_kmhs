@@ -22,18 +22,18 @@ public class CustomerController {
     @Autowired public AuctionService auctionService;
 
     @GetMapping("/list/{board_cd}")
-    public String list(@PathVariable int board_cd, CustomerDto dto, Model model) {
+    public String list(@PathVariable int board_cd, @ModelAttribute("params") TestDto dto, Model model) {
         model.addAttribute("board_cd", board_cd);
         model.addAttribute("list", service.selCustomerList(dto));
         dto.setBoard_cd(board_cd);
         return "customer/list";
     }
 
-    @GetMapping("/selList")
-    public String selList(@ModelAttribute("params")TestDto dto, Model model) {
-        model.addAttribute("list", service.selList(dto));
-        return "customer/selList";
-    }
+//    @GetMapping("/selList")
+//    public String selList(@ModelAttribute("params")TestDto dto, Model model) {
+//        model.addAttribute("list", service.selList(dto));
+//        return "customer/selList";
+//    }
 
     @GetMapping("/write")
     public String write(@ModelAttribute("entity") CustomerEntity entity) {

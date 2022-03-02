@@ -20,6 +20,8 @@ import org.springframework.ui.Model;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -127,22 +129,37 @@ public class UserService {
         return result;
     }
 
-    public int loginSel(UserEntity entity){
-        UserEntity dbUser = null;
+    public LoginVo loginSel(LoginVo vo){
+        LoginVo dbUser = null;
         try {
-            dbUser = mapper.loginSel(entity);
+            dbUser = mapper.loginSel(vo);
         } catch (Exception e) {
             e.printStackTrace();
-            return 0; //알 수 없는 에러
+            return null;   // 알 수 없는 에러
         }
         if(dbUser != null) {
-            if(BCrypt.checkpw(entity.getUpw(), dbUser.getUpw())) {
+            if(BCrypt.checkpw(vo.getUpw(), dbUser.getUpw())) {
                 dbUser.setUpw(null);
                 utils.setLoginUser(dbUser);
-                return 1; //로그인 성공
+                return dbUser;   // 로그인 성공
             }
         }
-        return 2;//로그인 실패
+        return null;   //로그인 실패
+    }
+
+    public void putAutoSaveKey(LoginVo loginVo, HttpServletResponse httpServletResponse) {
+        Cookie rememberCookie = new Cookie("auto_id_check", loginVo.getUid());
+        rememberCookie.setPath("/");
+        if(loginVo.isAuto_id_check()) {
+            rememberCookie.setMaxAge(60*60*24*7);
+        } else {
+            rememberCookie.setMaxAge(0);
+        }
+        httpServletResponse.addCookie(rememberCookie);
+    }
+
+    public void updLastLogin(UserEntity entity) {
+        mapper.updLastLogin(entity);
     }
 
     public int selUserResult(UserEntity entity){
@@ -259,5 +276,21 @@ public class UserService {
     public int selMoneyCount(UserEntity entity){
         entity.setIuser(utils.getLoginUserPk());
         return mapper.selMoneyCount(entity);
+    }
+
+    public UserEntity selUserLevel(UserEntity entity) {
+        return mapper.selUserLevel(entity);
+    }
+
+    public void updUserLevel(UserEntity entity) {
+        mapper.updUserLevel(entity);
+    }
+
+    public void updLevelBar(int point, UserEntity entity) {
+        mapper.updLevelBar(point, entity);
+    }
+
+    public int selFirstLogin(UserEntity entity) {
+        return mapper.selFirstLogin(entity);
     }
 }

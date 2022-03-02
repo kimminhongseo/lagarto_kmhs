@@ -16,7 +16,8 @@ public interface UserMapper {
     UserEntity selUser(UserEntity entity);
     UserEntity selApiUser(UserEntity entity);
     UserEntity facebookPk(UserEntity entity);
-    UserEntity loginSel(UserEntity entity);
+    LoginVo loginSel(LoginVo loginVo);
+    void updLastLogin(UserEntity entity);
     UserEntity passwordSel(UserDto dto);
     int passwordUpd(UserDto dto);
     UserEntity authKey(UserEntity entity);
@@ -29,4 +30,10 @@ public interface UserMapper {
     void insMoney(UserEntity entity);
     List<UserEntity> selMoney(PageVo vo);
     int selMoneyCount(UserEntity entity);
+
+    UserEntity selUserLevel(UserEntity entity);
+    void updUserLevel(UserEntity entity);
+
+    void updLevelBar(int point, UserEntity entity);
+    int selFirstLogin(UserEntity entity);
 }

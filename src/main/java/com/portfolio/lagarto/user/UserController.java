@@ -2,19 +2,25 @@ package com.portfolio.lagarto.user;
 
 
 import com.portfolio.lagarto.Const;
+import com.portfolio.lagarto.SessionManager;
 import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.ForgotPwResult;
 import com.portfolio.lagarto.enums.JoinResult;
 import com.portfolio.lagarto.follow.FollowService;
 import com.portfolio.lagarto.model.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,22 +38,44 @@ public class UserController {
     private FollowService fservice;
     @Autowired
     private Utils utils;
-
+    @Autowired
+    private SessionManager sessionManager;
 
 
     @GetMapping("/login")
-    public String login(Model model, @ModelAttribute("entity") UserEntity entity) {
+    public String login(Model model, @ModelAttribute("vo") LoginVo loginVo, @CookieValue(value="auto_id_check", required = false) Cookie rememberCookie) {
         if (0 != utils.getLoginUserPk()){
             return "redirect:/main";
         }
+
+        if (rememberCookie != null) {
+            model.addAttribute("rememberCookie", rememberCookie);
+            System.out.println("cookie : " + rememberCookie.getValue());
+        }
         model.addAttribute("title", "로그인");
-        return "user/login";
+        return "/user/login";
     }
 
     @PostMapping("/login")
     @ResponseBody
-    public int loginproc(UserEntity entity) {
-        return service.loginSel(entity);
+    public int loginproc(@ModelAttribute("entity") LoginVo loginVo, HttpServletResponse response, HttpServletRequest request, HttpSession session) {
+        LoginVo loginUser = service.loginSel(loginVo);
+
+        if (loginUser == null) {
+            return 2;
+        }
+
+        service.putAutoSaveKey(loginVo, response);
+
+        UserEntity entity = new UserEntity();
+        BeanUtils.copyProperties(loginUser, entity);
+
+        entity.setLast_login_at(loginUser.getLast_login_at());
+        session.setAttribute(Const.LOGIN_MEMBER, entity);
+
+        service.updLastLogin(loginVo);
+
+        return 1;
     }
 
     @PostMapping("/apiLogin")
@@ -188,7 +216,9 @@ public class UserController {
         return result;
     }
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, SessionStatus status) {
+        status.setComplete();
+        session.removeAttribute("loginVO");
         session.invalidate();
         return "redirect:/main";
     }

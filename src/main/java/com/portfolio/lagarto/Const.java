@@ -21,6 +21,7 @@ public class Const {
     public static final String Money = "money";
     public static final String Count = "count";
     public static final String User = "user";
+    public static final String LOGIN_MEMBER = "loginMember";
 
     public static boolean checkUid(String email) {
         return email.matches(UID);

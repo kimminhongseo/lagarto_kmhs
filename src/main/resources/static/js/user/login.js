@@ -4,6 +4,7 @@
     let loginElem = document.querySelector('#login');
     let formId = loginElem.querySelector('#formId');
     let formPw = loginElem.querySelector('#formPw');
+    let cookieValue = loginElem.querySelector('#cookie_value');
     let div = document.createElement('div');
     div.innerHTML = '올바른 이메일 형식을 적어주세요.';
     div.style.display = 'flex';
@@ -22,6 +23,10 @@
     div2.style.backgroundColor = 'rgba(255,0,0,0.1)';
     div2.style.paddingTop = '30px';
     div2.style.paddingBottom = '30px';
+
+    if (cookieValue.dataset.cookie != null) {
+        loginElem.saveId.checked = true;
+    }
 
     if (btnUserElem) {
         btnLoginElem.addEventListener('click', (e) => {
@@ -90,6 +95,14 @@
             $("#recaptcha").focus();
             return false;
         }
+
+        if (!loginElem.saveId.checked) {
+            loginElem.saveId.value = false;
+            loginElem.saveId.checked = true;
+        }
+
+        console.log("auto_id : ", loginElem.saveId.value);
+        console.log("getvalue : ", loginElem.formId.value);
         return doVaildRecaptcha();
     }
 
@@ -115,7 +128,8 @@
                             type: 'post',
                             data: {
                                 uid : $('#formId').val(),
-                                upw : $('#formPw').val()
+                                upw : $('#formPw').val(),
+                                auto_id_check : $('#saveId').val()
                             },
                             success: (num) => {
                                 switch (num){

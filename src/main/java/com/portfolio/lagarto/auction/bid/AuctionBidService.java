@@ -24,21 +24,16 @@ public class AuctionBidService {
             }
 
             if(vo.getImbuy()>vo.getBuy()){ //즉시구매가 보다 낮은 금액 입력 == 정상상
+                mapper.updBid(vo);
+                mapper.removemoney(vo);
+                mapper.returnmoney(vo);
 
-                if(vo.getPrebuyer() == 0) {
-                    //처음올리면 prebuyer는 0으로 세팅 되어있으므로, 0일때는 prebuyer는 놔두고
-                    //buyer의 money에서만 차감
-
-                    mapper.removemoney(vo);
+                if(vo.getPrebuyer() == vo.getIuser()){//처음 경매라면 buyer에서 빼기만
+                    mapper.firstremovemoney(vo);
                 }
-                else{ //처음 올린게 아니고 경매 갱신하하는상황이면
-
-                    mapper.returnmoney(vo); //이건 전에 사람에게 돌려주는 것. prebuyer!=0
-                    mapper.removemoney(vo);
-                }
-
-                return mapper.updBid(vo); //성공시 1
+                return 1;
             }
+
             else{
                 return 0; //즉시구매가보다 높을때.
             }

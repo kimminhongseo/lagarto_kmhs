@@ -13,7 +13,7 @@
     <div class="forgot_main">
         <h1>비밀번호 찾기</h1>
         <div id="forgotInfo">
-            <form th:action="@{/user/forgotId}" method="post" id="forgot_id_form" th:object="${entity}">
+            <form th:action="@{/user/forgotPw}" method="post" id="forgot_form" th:object="${entity}">
                 <div class="form_container">
                     <div class="input_name">아이디 (이메일)</div>
                     <div class="uid_wrap">
@@ -53,7 +53,7 @@
 
                     <div class="btn_cont">
                         <input id="cancel_btn" class="object_button prop_light" type="button" value="취소">
-                        <input class="object_button prop_dark" type="submit" value="아이디 찾기">
+                        <input class="object_button prop_dark" name="submit_btn" type="submit" value="비밀번호 찾기">
                     </div>
                 </div>
             </form>

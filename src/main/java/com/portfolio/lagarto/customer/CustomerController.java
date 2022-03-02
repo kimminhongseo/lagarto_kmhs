@@ -41,7 +41,9 @@ public class CustomerController {
     }
 
     @PostMapping("/write")
+
     public String writeProc(CustomerEntity entity, MultipartFile[] files) {
+
         boolean isRegistered = this.service.insCustomer(entity, files);
         return "redirect:/customer/list/" + entity.getBoard_cd();
     }
@@ -57,6 +59,7 @@ public class CustomerController {
         model.addAttribute("fileList", service.getAttachFileList(iboard));
         model.addAttribute("data", service.selCustomerDetail(dto));
     }
+
 
     @GetMapping("/upd")
     public String upd(CustomerDto dto, @RequestParam(value = "iboard", required = false) int iboard ,Model model) {

@@ -32,19 +32,21 @@
 
     <!--useGeneratedKeys="true" keyProperty="icmt"-->
 
-    <insert id="modBoardCmt" >
-        insert into lagarto.auction_comment (iboard, iuser, ctnt)
-        values (${iboard},${iuser},#{ctnt})
 
-    </insert>
+
+    <update id="updAuctionCmt">
+        UPDATE lagarto.auction_comment
+        SET ctnt = #{ctnt}
+        WHERE icmt = ${icmt} AND iuser = ${iuser}
+    </update>
+
 
     <delete id="delAuctionCmt">
-        DELETE FROM lagarto.auction_comment WHERE icmt = ${icmt} AND iboard = ${iboard}
+        DELETE FROM lagarto.auction_comment
+        WHERE icmt = ${icmt} AND iuser = ${iuser}
     </delete>
 
-    <delete id="delAuctionCmtAll">
-        DELETE FROM lagarto.auction_comment WHERE iboard = ${iboard}
-    </delete>
+
 
 
 

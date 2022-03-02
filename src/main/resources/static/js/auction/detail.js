@@ -150,7 +150,7 @@ if (commentFormContainerElem) {
 }
 
 
-isfollow();
+
 
 
 

@@ -32,7 +32,18 @@
                         </div>
                         <div id="mypage_container">
                             <div>
-                                <img id="profileImg" src="/img/pro.png" class="img-thumbnail" alt="...">
+                                    <label for="file1">
+                                        <img id="img" style="width:200px; height:200px; cursor: pointer;" th:src="@{/pic/user/} + ${session.loginUser.iuser} + @{/} + ${session.loginUser.profile_img}">
+                                    </label>
+                                    <input type="file" name="file1" id="file1"
+                                           style="display: none;" multiple>
+
+                                    <span id='View_area'
+                                          style='position:relative; color: black; border: 0px solid black;'>
+                                    </span>
+                                    <div>
+                                        <button id="saveBtn" type="button" onclick="javascript:fn_submit()">저장</button>
+                                    </div>
                             </div>
                             <div id="userLi">
                                 <table class="table" id="profile_my">

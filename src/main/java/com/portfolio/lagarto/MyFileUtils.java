@@ -3,6 +3,7 @@ package com.portfolio.lagarto;
 
 import com.portfolio.lagarto.customer.files.AttachDTO;
 import com.portfolio.lagarto.customer.files.AttachFileException;
+import com.portfolio.lagarto.model.UserEntity;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,6 +92,7 @@ public class MyFileUtils {
     private final String uploadPath1 = Paths.get("C:", "develop", "upload").toString();
 
     private final String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/uploadfile/customer/";
+    private final String profileImgPath = System.getProperty("user.dir") + "/src/main/resources/static/uploadfile/profileImg/";
 
     /**
      * 서버에 생성할 파일명을 처리할 랜덤 문자열 반환
@@ -137,6 +139,55 @@ public class MyFileUtils {
                 /* 파일 정보 저장 */
                 AttachDTO attach = new AttachDTO();
                 attach.setIboard(iboard);
+                attach.setOriginal_name(file.getOriginalFilename());
+                attach.setSave_name(saveName);
+                attach.setSize((int) file.getSize());
+
+                /* 파일 정보 추가 */
+                attachList.add(attach);
+
+            } catch (IOException e) {
+                throw new AttachFileException("[" + file.getOriginalFilename() + "] failed to save file...");
+
+            } catch (Exception e) {
+                throw new AttachFileException("[" + file.getOriginalFilename() + "] failed to save file...");
+            }
+        } // end of for
+
+        return attachList;
+    }
+
+    public List<AttachDTO> profileImgPath(MultipartFile[] files, int iuser) {
+
+        /* 파일이 비어있으면 비어있는 리스트 반환 */
+        if (files[0].getSize() < 1) {
+            return Collections.emptyList();
+        }
+
+        /* 업로드 파일 정보를 담을 비어있는 리스트 */
+        List<AttachDTO> attachList = new ArrayList<>();
+
+        /* uploadPath에 해당하는 디렉터리가 존재하지 않으면, 부모 디렉터리를 포함한 모든 디렉터리를 생성 */
+        File dir = new File(profileImgPath + "/" + iuser);
+        if (dir.exists() == false) {
+            dir.mkdirs();
+        }
+
+        /* 파일 개수만큼 forEach 실행 */
+        for (MultipartFile file : files) {
+            try {
+                /* 파일 확장자 */
+                final String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+                /* 서버에 저장할 파일명 (랜덤 문자열 + 확장자) */
+                final String saveName = getRandomString() + "." + extension;
+
+                /* 업로드 경로에 saveName과 동일한 이름을 가진 파일 생성 */
+                File target = new File(profileImgPath + "/" + iuser, saveName);
+                file.transferTo(target);
+
+                /* 파일 정보 저장 */
+                AttachDTO attach = new AttachDTO();
+                attach.setIuser(iuser);
                 attach.setOriginal_name(file.getOriginalFilename());
                 attach.setSave_name(saveName);
                 attach.setSize((int) file.getSize());

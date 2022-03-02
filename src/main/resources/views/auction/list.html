@@ -7,11 +7,13 @@
     <title>리스트</title>
     <link th:href="@{/static/css/auction/list.css}" rel="stylesheet"/>
     <script defer th:src="@{/static/js/auction/list.js}"></script>
+
 </head>
 
 <th:block layout:fragment="content">
     <div class="main">
         <div id="data" th:with="icate=${param.icategory}" th:data-icategory="${icate}"></div>
+
         <div>
             <div th:if="${session.loginUser != null}">
                 <div th:if="${icategory ge 1}"><a th:href="@{/auction/write(icategory=${icategory})}">글쓰기</a></div>
@@ -21,7 +23,6 @@
                 <div>로그인하시면 글작성이 가능합니다. &emsp;<input type="button" value="로그인 하러가기"
                                                      th:onclick="|location.href='@{/user/login}'|"></div>
             </div>
-
         </div>
 
 
@@ -46,6 +47,7 @@
                     <div>
                         <div>즉시구매가 : <span th:text="${data.imbuy}"/> 원</div>
                         <div>경매가 : <span th:text="${data.buy}"/> 원</div>
+
                     </div>
                     </a>
 

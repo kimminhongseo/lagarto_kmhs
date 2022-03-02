@@ -3,7 +3,7 @@ package com.portfolio.lagarto;
 
 import com.portfolio.lagarto.customer.files.AttachDTO;
 import com.portfolio.lagarto.customer.files.AttachFileException;
-import com.portfolio.lagarto.model.UserEntity;
+import com.portfolio.lagarto.supplies.files.SupAttachDTO;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -92,7 +92,6 @@ public class MyFileUtils {
     private final String uploadPath1 = Paths.get("C:", "develop", "upload").toString();
 
     private final String uploadPath = System.getProperty("user.dir") + "/src/main/resources/static/uploadfile/customer/";
-    private final String profileImgPath = System.getProperty("user.dir") + "/src/main/resources/static/uploadfile/profileImg/";
 
     /**
      * 서버에 생성할 파일명을 처리할 랜덤 문자열 반환
@@ -157,7 +156,26 @@ public class MyFileUtils {
         return attachList;
     }
 
-    public List<AttachDTO> profileImgPath(MultipartFile[] files, int iuser) {
+
+
+    // ------------------------------용품파일 관련(customer참고)-----------------------------------
+    private final String uploadPath2 = System.getProperty("user.dir") + "/src/main/resources/static/uploadfile/supplies/";
+
+    /**
+     * 서버에 생성할 파일명을 처리할 랜덤 문자열 반환
+     * @return 랜덤 문자열
+     */
+    private final String getRandomString2() {
+        return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+
+    /**
+     * 서버에 첨부 파일을 생성하고, 업로드 파일 목록 반환
+     * @param files  - 파일 Array
+     * @param iboard - 게시글 번호
+     * @return 업로드 파일 목록
+     */
+    public List<SupAttachDTO> uploadFiles2(MultipartFile[] files, int iboard) {
 
         /* 파일이 비어있으면 비어있는 리스트 반환 */
         if (files[0].getSize() < 1) {
@@ -165,10 +183,10 @@ public class MyFileUtils {
         }
 
         /* 업로드 파일 정보를 담을 비어있는 리스트 */
-        List<AttachDTO> attachList = new ArrayList<>();
+        List<SupAttachDTO> attachList = new ArrayList<>();
 
         /* uploadPath에 해당하는 디렉터리가 존재하지 않으면, 부모 디렉터리를 포함한 모든 디렉터리를 생성 */
-        File dir = new File(profileImgPath + "/" + iuser);
+        File dir = new File(uploadPath2 + "/" + iboard);
         if (dir.exists() == false) {
             dir.mkdirs();
         }
@@ -179,15 +197,15 @@ public class MyFileUtils {
                 /* 파일 확장자 */
                 final String extension = FilenameUtils.getExtension(file.getOriginalFilename());
                 /* 서버에 저장할 파일명 (랜덤 문자열 + 확장자) */
-                final String saveName = getRandomString() + "." + extension;
+                final String saveName = getRandomString2() + "." + extension;
 
                 /* 업로드 경로에 saveName과 동일한 이름을 가진 파일 생성 */
-                File target = new File(profileImgPath + "/" + iuser, saveName);
+                File target = new File(uploadPath2 + "/" + iboard, saveName);
                 file.transferTo(target);
 
                 /* 파일 정보 저장 */
-                AttachDTO attach = new AttachDTO();
-                attach.setIuser(iuser);
+                SupAttachDTO attach = new SupAttachDTO();
+                attach.setIboard(iboard);
                 attach.setOriginal_name(file.getOriginalFilename());
                 attach.setSave_name(saveName);
                 attach.setSize((int) file.getSize());
@@ -205,7 +223,6 @@ public class MyFileUtils {
 
         return attachList;
     }
-
 
 
 

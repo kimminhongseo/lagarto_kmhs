@@ -10,6 +10,7 @@ public interface AuctionBidMapper {
 
     void returnmoney(AuctionVo vo);
     void removemoney(AuctionVo vo);
-    int updBid(AuctionVo vo);
+    void firstremovemoney(AuctionVo vo);
+    void updBid(AuctionVo vo);
     int findmoney(AuctionVo vo);
 }

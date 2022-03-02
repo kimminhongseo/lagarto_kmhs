@@ -65,8 +65,15 @@
 
     </select>
 
-    <!--삭제부분 update로 삭제 수정 같이-->
+    <!--조회수-->
+    <update id="addHits">
+        UPDATE lagarto.auction
+        set hits = hits+1
+        where iboard= ${iboard}
+    </update>
 
+
+    <!--삭제부분 update로 삭제 수정 같이-->
     <update id="updAuction">
         UPDATE lagarto.auction
         set

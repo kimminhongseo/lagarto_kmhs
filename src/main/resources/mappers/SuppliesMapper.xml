@@ -1,7 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--메퍼 설정 하세요-->
-<mapper namespace="com.portfolio.lagarto.user.UserMapper">
+<mapper namespace="com.portfolio.lagarto.supplies.SuppliesMapper">
+
+    <insert id="insSupplies" parameterType="SuppliesVo" useGeneratedKeys="true" keyProperty="iboard" >
+        insert into lagarto.supplies
+        (icategory, title, ctnt, iuser, price)
+        values
+        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{price})
+    </insert>
+
+
+    <select id="insSuppliesList" resultType="SuppliesVo">
+        select A.*,
+        B.nm as writernm
+        From lagarto.supplies A
+        Left join lagarto.lagarto_user B
+        ON A.iuser = B.iuser
+        where A.isdel = 0
+        Order by A.iboard DESC
+        LIMIT 1
+    </select>
+
+
+
+    <select id="selSuppliesList" resultType="SuppliesVo">
+        select A.*,
+        B.nm  as writernm, B.nickname as nicknm, C.nm AS categorynm
+        From lagarto.supplies A
+        Left join lagarto.lagarto_user B
+        ON A.iuser = B.iuser
+        INNER JOIN lagarto.supplies_category C
+        ON A.icategory = C.icategory
+        where A.isdel = 0
+        and A.icategory = ${icategory}
+        Order by A.iboard DESC
+
+    </select>
+
+    <!--group by 사용해서 save_name  뽑아옴. 첫번째로 넣은 사진.-->
+    <select id="selSuppliesListAll" resultType="SuppliesVo">
+        select A.*,
+        B.nm as writernm, B.nickname as nicknm, C.nm AS categorynm ,D.save_name
+        from lagarto.supplies A
+        LEFT join lagarto.lagarto_user B
+        on A.iuser = B.iuser
+        left JOIN lagarto.supplies_category C
+        ON A.icategory = C.icategory
+        LEFT JOIN (SELECT iboard, MIN(idx) , save_name FROM sup_attach GROUP BY iboard) AS D
+        ON A.iboard = D.iboard
+        where A.isdel = 0
+        order by A.rdt DESC
+    </select>
+
+
+    <select id="selSuppliesDetail" resultType="SuppliesVo">
+        SELECT A.*,
+        B.nm as writernm , B.profile_img,B.nickname as nicknm,
+        C.nm as categorynm
+        from lagarto.supplies A
+        inner join lagarto.lagarto_user B
+        on A.iuser = B.iuser
+        inner join lagarto.supplies_category C
+        on A.icategory = C.icategory
+        where A.iboard = #{iboard}
+    </select>
+
+    <update id="delSupplies">
+        UPDATE lagarto.supplies
+        set
+        isdel = #{isdel}
+        where iboard = ${iboard}
+    </update>
+
 
 
 

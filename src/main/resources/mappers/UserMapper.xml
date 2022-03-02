@@ -33,9 +33,9 @@
         SELECT *
         FROM `lagarto`.`lagarto_user`
         WHERE `iuser` = #{iuser}
-           OR `uid` = #{uid} OR `nickname` = #{nickname}
+           OR `uid` = #{uid}
+           OR `nickname` = #{nickname}
     </select>
-
 
     <select id="selApiUser" resultType="UserEntity">
         SELECT *
@@ -49,12 +49,18 @@
         WHERE `email` = #{email};
     </insert>
 
-    <select id="loginSel" resultType="UserEntity">
+    <select id="loginSel" resultType="LoginVo">
         SELECT * FROM `lagarto`.`lagarto_user`
         WHERE
         <if test=" uid != null and uid != '' ">`uid` = #{uid}</if>
         <if test=" iuser > 0 ">`iuser` = #{iuser}</if>
     </select>
+
+    <update id="updLastLogin">
+        UPDATE `lagarto`.`lagarto_user`
+        SET `last_login_at` = sysdate()
+        WHERE `uid` = #{uid}
+    </update>
 
 
     <!--현재 비밀번호 비밀번호-->
@@ -109,6 +115,22 @@
           AND `contact_third` = #{contact_third}
     </select>
 
+    <!-- 비밀번호 찾기 -->
+    <select id="selUserPw" resultType="ForgotPwVo">
+        SELECT *
+        FROM `lagarto`.`lagarto_user`
+        WHERE `uid` = #{uid}
+          AND `contact_first` = #{contact_first}
+          AND `contact_second` = #{contact_second}
+          AND `contact_third` = #{contact_third}
+    </select>
+
+    <update id="updUserPw">
+        UPDATE `lagarto`.`lagarto_user`
+        SET `upw` = #{upw}
+        WHERE `uid` = #{uid}
+    </update>
+
     <!--금액츙전 내역-->
     <insert id="insMoney">
         INSERT INTO `lagarto`.`user_add_money`(`iuser`, `money`)
@@ -138,4 +160,40 @@
         </if>
         WHERE iuser = ${iuser}
     </update>
+
+    <!-- 회원 레벨 관리 -->
+    <!-- 로그인 시, 글 작성 시, 댓글 작성 시 사용, 상품 구매 후 확정 시 -->
+    <select id="selUserLevel" resultType="UserEntity">
+        SELECT `iuser`
+        FROM `lagarto`.`lagarto_user`
+        WHERE `iuser` = #{iuser}
+          AND `level_bar` = 1000
+    </select>
+
+    <update id="updUserLevel">
+        <![CDATA[
+        UPDATE `lagarto`.`lagarto_user`
+        SET `level`     = `level` - 1,
+            `level_bar` = 0
+        WHERE `iuser` = #{iuser}
+          AND `level` > 3
+          AND `level` < 10
+        ]]>
+    </update>
+
+    <update id="updLevelBar">
+        UPDATE `lagarto`.`lagarto_user`
+        SET `level_bar` = `level_bar` + #{point}
+        WHERE `iuser` = #{iuser}
+    </update>
+
+    <select id="selFirstLogin" resultType="_int">
+        <![CDATA[
+        SELECT COUNT(`iuser`)
+        FROM `lagarto`.`lagarto_user`
+        WHERE `iuser` = #{iuser}
+          AND (DATE_FORMAT(`last_login_at`, '%Y-%m-%d') < CURDATE()
+            OR `last_login_at` IS NULL)
+        ]]>
+    </select>
 </mapper>

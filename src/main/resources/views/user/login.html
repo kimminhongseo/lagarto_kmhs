@@ -17,13 +17,14 @@
         <div class="logoMain"><img class="logo" th:src="@{/img/lagarto_logo.svg}"></div>
 
         <div class="loginWrap">
-            <form id="login" th:action="@{/user/login}" method="post" th:object="${entity}">
+            <form id="login" th:action="@{/user/login}" method="post" th:object="${vo}">
+                <div hidden id="cookie_value" th:with="cookieValue=${rememberCookie?.getValue()}" th:data-cookie="${cookieValue}"></div>
                 <div id="generalLogin">
                     <div class="loginArea" id="pId">
                         <span hidden>아이디</span>
                         <label>
                             <input type="text" class="form-control" id="formId" placeholder="아이디"
-                                   name="uid" th:field="*{uid}">
+                                   name="uid" th:value="${rememberCookie?.getValue()}">
                         </label>
                     </div>
                     <div class="loginArea">
@@ -35,7 +36,7 @@
                     </div>
                     <div class="findInfo">
                         <div class="isSave">
-                            <input id="saveId" type="checkbox" value="1">
+                            <input id="saveId" type="checkbox" th:value="true">
                             <label for="saveId"></label>
                             <span>아이디 저장</span>
                         </div>
@@ -54,7 +55,6 @@
                             <div id="bottomHider"></div>
                             <div id="leftHider"></div>
                         </div>
-    <!--                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6Ldq34seAAAAACoxUgs451Cl7FcrboIERxJs9_FM" data-callback="recaptchaCallback"></div>-->
                         <div id="btnUser">
                             <button type="button" class="btn btn-outline-success" id="btnLogin" onclick="return dologin()">로그인</button>
                             <button type="button" class="btn btn-outline-success" id="btnJoin">회원가입</button>

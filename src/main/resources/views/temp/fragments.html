@@ -7,14 +7,14 @@
         <nav class="navbar-light">
             <div class="user_menu">
                 <ul>
-                    <li class="nav-item" th:if="${session.loginUser == null}">
-                        <a class="active" href="/user/login">로그인</a>
+                    <li class="nav-item">
+                        <a class="active" th:href="@{/user/charge}">캐시충전</a>
                     </li>
                     <li class="nav-item" th:if="${session.loginUser == null}">
                         <a class="active" href="/user/join">회원가입</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="active" th:href="@{/user/charge}">캐시충전</a>
+                    <li class="nav-item" th:if="${session.loginUser == null}">
+                        <a class="active" href="/user/login">로그인</a>
                     </li>
                     <li class="nav-item" th:if="${session.loginUser != null}">
                         <a class="active" href="/user/mypage">마이페이지</a>
@@ -122,7 +122,7 @@
                 <div class="stretch"></div>
                 <div class="sns">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/watch?v=WTgsStxGifw" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                     <a href="#"><i class="fa-solid fa-comment"></i></a>
                 </div>
             </div>

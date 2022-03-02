@@ -125,7 +125,8 @@ const getCommentList = () => {
         makeCommentRecordList(list);
     }, { iboard });
 }
-getCommentList();
+
+
 
 
 //리스트 만들기
@@ -137,8 +138,27 @@ getCommentList();
 const sessionloginElem = document.querySelector('#dataLogin');
 const makeCommentRecordList = list => {
 
-    list.forEach(item => {
-        const tdElem = document.createElement('td')
+
+        //로그인 안되면 댓글 못보게.
+        if(sessionloginElem == null){
+            list.forEach(item => {
+                const tdElem = document.createElement('td');
+                const trElem = document.createElement('tr');
+                trElem.innerHTML = `
+                <td>${item.icmt}</td>
+                <td>${item.ctnt}</td>
+                <td>${item.nickname}</td>
+                <td>${(item.rdt)}</td>
+            `;
+                tbodyElem.appendChild(trElem);
+            });
+        }
+        if(sessionloginElem !=null){
+
+
+        //로그인 됐다면?
+        list.forEach(item => {
+        const tdElem = document.createElement('td');
         const trElem = document.createElement('tr');
         trElem.innerHTML = `
                 <td>${item.icmt}</td>
@@ -147,6 +167,9 @@ const makeCommentRecordList = list => {
                 <td>${item.rdt}</td>
             `;
         tbodyElem.appendChild(trElem);
+
+
+
         //수정 삭제 구현  댓글쓴 사람이랑 현재 로그인한 사람이랑 같으면 수정/삭제 버튼 활성화
         if(item.iuser == sessionloginElem.dataset.iuser){
         const modBtn = document.createElement('input')
@@ -215,10 +238,10 @@ const makeCommentRecordList = list => {
         trElem.appendChild(delBtn);
 
         }
+
     })
-    return trElem;
-
-
+     return trElem;
+     }
 }
 
 

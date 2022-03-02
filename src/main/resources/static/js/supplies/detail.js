@@ -8,8 +8,9 @@ if(delBtnElem){
     delBtnElem.addEventListener('click',() =>{
         if(confirm('현재 게시된 글을 삭제하시겠습니까?')){
             location.href=`/supplies/del?iboard=${iboard}`;
+            alert('삭제 되었습니다.');
         }
-        alert('삭제 되었습니다.');
+        return false;
     });
 }
 

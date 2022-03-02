@@ -163,7 +163,9 @@ public class AuctionController {
     @GetMapping("/detail")
     public void detail(AuctionVo vo, Model model, HttpSession hs) {
         model.addAttribute("Data", service.selAuctionDetail(vo));
+
         model.addAttribute("login",hs.getAttribute(Const.LOGIN_USER));
+
         //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
 
     }

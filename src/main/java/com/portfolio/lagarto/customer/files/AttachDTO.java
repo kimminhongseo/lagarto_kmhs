@@ -11,6 +11,9 @@ public class AttachDTO {
     /** 게시글 번호 (FK) */
     private int iboard;
 
+    /** 아이유저 **/
+    private int iuser;
+
     /** 원본 파일명 */
     private String original_name;
 

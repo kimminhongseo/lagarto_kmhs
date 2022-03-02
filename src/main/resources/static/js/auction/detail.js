@@ -125,6 +125,7 @@ const getCommentList = () => {
         makeCommentRecordList(list);
     }, { iboard });
 }
+getCommentList();
 
 
 //리스트 만들기
@@ -270,6 +271,7 @@ if(formimbuybtn){
 
 getCommentList();
 isfollow();
+
 
 
 

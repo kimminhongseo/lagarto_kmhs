@@ -36,6 +36,7 @@
            OR `uid` = #{uid} OR `nickname` = #{nickname}
     </select>
 
+
     <select id="selApiUser" resultType="UserEntity">
         SELECT *
         FROM `lagarto`.`lagarto_user`
@@ -117,10 +118,24 @@
 
 <!--    limit줄때 2페이지면 5,10 3/10,15-->
     <select id="selMoney" parameterType="PageVo" resultType="UserEntity">
-        SELECT * FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser} LIMIT #{currentPage}, #{recordCount};
+        SELECT * FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser} ORDER BY rdt desc LIMIT #{currentPage}, #{recordCount}
     </select>
 
     <select id="selMoneyCount" resultType="int">
         SELECT CEIL(COUNT(*)/5) FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser};
     </select>
+
+    <insert id="reportUser">
+        INSERT INTO `lagarto`.`user_Report`(`iuser`, `opponent`, `reportNum`, `reportContent`)
+        VALUES (#{iuser},#{opponent},#{reportNum},#{reportContent})
+    </insert>
+
+    <update id="updUser">
+        UPDATE `lagarto`.`lagarto_user`
+        SET
+        <if test=" profile_img != null and profile_img != '' ">
+            profile_img = #{profile_img}
+        </if>
+        WHERE iuser = ${iuser}
+    </update>
 </mapper>

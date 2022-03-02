@@ -1,0 +1,85 @@
+#container-Cart{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+#carts{
+    padding-top: 50px;
+    padding-left: 50px;
+    color: white;
+    font-size: 35px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+}
+#viewFist{
+    float: none;
+    margin: 0 auto;
+    width: 1500px;
+    height: 800px;
+    border-radius: 50px;
+    background-color: #eaeaea;
+    margin-bottom: 20px;
+}
+
+#rable{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    float: none;
+    margin: 0 auto;
+}
+
+#viewSecond{
+    width: 1500px;
+    height: 300px;
+    float: none;
+    margin: 0 auto;
+}
+
+#tableList{
+    display: flex;
+    padding-top: 50px;
+    padding-left: 50px;
+}
+
+#tableListSize{
+    width: 1000px;
+}
+
+#ListSum{
+    float: none;
+    margin: 0 auto;
+    font-size: 30px;
+    padding-top: 100px;
+}
+
+#secondBtn{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+#pay{
+    margin-left: 30px;
+}
+
+#address{
+    display: flex;
+    flex-direction: column;
+    margin-right: 500px;
+    margin-left: 500px;
+}
+
+.textA{
+    border: 1px solid #2b2a29;
+    font-weight: bold;
+    font-size: 15px;
+}
+#textNow{
+    padding-top: 10px;
+    text-align: center;
+}

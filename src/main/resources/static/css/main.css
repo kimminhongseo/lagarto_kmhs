@@ -1,0 +1,61 @@
+.imgKakao1{
+    background-image: url("/static/img/kakao01.gif");
+    width: 240px;
+    height: 240px;
+    margin-left: 15px;
+    margin-right: 15px;
+    float: left;
+}
+.imgKakao2{
+    background-image: url("/static/img/kakao02.gif");
+    width: 240px;
+    height: 240px;
+    margin-left: 15px;
+    margin-right: 15px;
+    float: left;
+}
+.imgKakao3{
+    background-image: url("/static/img/kakao03.gif");
+    width: 240px;
+    height: 240px;
+    margin-left: 15px;
+    margin-right: 15px;
+    float: left;
+}
+.imgKakao4{
+    background-image: url("/static/img/kakao04.gif");
+    width: 240px;
+    height: 240px;
+    margin-left: 15px;
+    margin-right: 15px;
+    float: left;
+}
+.imgKakao5{
+    background-image: url("/static/img/kakao05.gif");
+    width: 240px;
+    height: 240px;
+    margin-left: 15px;
+    margin-right: 15px;
+    float: left;
+}
+
+
+.mouseOver1, .mouseOver2, .mouseOver3, .mouseOver4, .mouseOver5{
+    width: 240px;
+    height: 240px;
+    background: black;
+    opacity: 70%;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 100px;
+    cursor : pointer;
+    font-weight: bold;
+    display: none;
+}
+.imgKakao1{
+    margin-left: 80px;
+}
+#imgHref{
+    padding: 150px;
+}

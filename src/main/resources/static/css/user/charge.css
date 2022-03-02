@@ -22,6 +22,7 @@
     float: none;
     margin: 0 auto;
     text-align: center;
+    height: 207px;
 }
 
 #money-page, #mBn{
@@ -45,5 +46,10 @@
     background: transparent;
     border: transparent;
     margin: 5px;
+}
+
+#nullCharge{
+    padding-top: 20px;
+    color: #0d6efd;
 }
 

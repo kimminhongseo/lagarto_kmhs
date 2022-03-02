@@ -5,7 +5,7 @@
 
 <head>
     <title>상세 정보</title>
-    <link rel="stylesheet" th:href="@{/static/css/auction/detail.css}">
+    <link rel="stylesheet" th:href="@{/css/auction/detail.css}">
     <script defer th:src="@{/static/js/auction/detail.js}"></script>
     <script type="text/javascript" th:inline="javascript"></script>
 </head>
@@ -129,15 +129,13 @@
                     <input type="text" name="ctnt" class="form-control" placeholder="Comment">
                 </div>
                 <div class="col">
-                    <button type="button" name="comment_submit" class="btn btn-primary">전송</button>
+                    <button type="button"  name="comment_submit" class="btn btn-primary">전송</button>
                 </div>
             </div>
         </div>
 
         <div id="comment_list">
-
             <table class="table table-hover caption-top">
-
                 <caption>댓글 리스트</caption>
                 <thead>
                 <tr>
@@ -150,10 +148,10 @@
 
                 <tbody>
                 </tbody>
-
             </table>
-
         </div>
+    </div>
+
 
     </div>
 </th:block>

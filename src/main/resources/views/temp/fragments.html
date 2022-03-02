@@ -8,7 +8,7 @@
             <div class="user_menu">
                 <ul>
                     <li class="nav-item">
-                        <a class="active" th:href="@{/user/charge(pageNum=1)}">캐시충전</a>
+                        <a class="active" th:href="@{/user/charge}">캐시충전</a>
                     </li>
                     <li class="nav-item" th:if="${session.loginUser == null}">
                         <a class="active" href="/user/join">회원가입</a>
@@ -45,7 +45,14 @@
                             </ul>
                         </li>
                         <li class="main_menu">
-                            <a class="active" aria-current="page" href="">용품</a>
+                            <a class="active" aria-current="page" href="/supplies/list">용품</a>
+                            <ul class="sub_list">
+                                <li class="sub_menu"><a href="/supplies/list/"> 용품 전체보기</a></li>
+                                <li class="sub_menu"><a href="/supplies/list/1">먹이/물그릇</a></li>
+                                <li class="sub_menu"><a href="/supplies/list/2">온/습도계</a></li>
+                                <li class="sub_menu"><a href="/supplies/list/3">사육장/바닥재</a></li>
+                                <li class="sub_menu"><a href="/supplies/list/4">은신처/유목</a></li>
+                            </ul>
                         </li>
                         <li class="main_menu">
                             <a class="active" href="/customer/list/1">리뷰</a>
@@ -61,7 +68,7 @@
                 <div class="icon_menu">
                     <a href=""><img th:src="@{/static/img/search.png}" alt="검색"></a>
                     <a href=""><img th:src="@{/static/img/bell.png}" alt="알림"></a>
-                    <a href=""><img th:src="@{/static/img/shopping_cart.png}" alt="장바구니"></a>
+                    <a href="/cart/cart"><img th:src="@{/static/img/shopping_cart.png}" alt="장바구니"></a>
                 </div>
 <!--                <div>-->
 <!--                    <form class="d-flex">-->

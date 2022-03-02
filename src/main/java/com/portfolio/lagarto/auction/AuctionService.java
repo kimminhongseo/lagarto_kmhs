@@ -8,10 +8,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class AuctionService {
+    SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd / HH:mm:ss");
+    long nowTime = System.currentTimeMillis(); //현재시간
+    String timestr = timeFormat.format(nowTime);
+
+
 
     @Autowired
     private AuctionMapper mapper;
@@ -23,6 +30,7 @@ public class AuctionService {
 
     public int insAuction(AuctionEntity entity){
         entity.setIuser(utils.getLoginUserPk());
+        entity.setBuyer(utils.getLoginUserPk());
         return mapper.insAuction(entity);
     }
 
@@ -33,7 +41,18 @@ public class AuctionService {
     public List<AuctionVo> selAuctionList(AuctionVo vo){return  mapper.selAuctionList(vo);}
     public List<AuctionVo> selAuctionListAll(AuctionVo vo){return  mapper.selAuctionListAll(vo);}
 
-    public AuctionVo selAuctionDetail (AuctionVo vo){return mapper.selAuctionDetail(vo);}
+    public AuctionVo selAuctionDetail (AuctionVo vo){
+        AuctionVo detail = mapper.selAuctionDetail(vo);
+        int hitsResult = mapper.addHits(vo);
+        if(hitsResult == 1){
+            detail.setHits(detail.getHits()+1);
+        }
+
+        System.out.println("detail에서 마감시간? : "+detail.getMdt());
+        System.out.println("지금 시간은? (문자) :" + timestr);
+
+        return detail;
+    }
 
     public int updAuction(AuctionVo vo){
         try{

@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class Const {
     public static final String UPLOAD_IMG_PATH = "D:/upload/images";
-
+    public static final String PATH_PROFILE = "C:\\img";
     public static final String LOGIN_USER = "loginUser";
 
     public static final String ERR_Login = "로그인 실패";
@@ -15,7 +15,7 @@ public class Const {
     public static final String CONTACT_SECOND = "^([0-9]{4})$";
     public static final String CONTACT_THIRD = "^([0-9]{4})$";
     public static final String KoreanEngle = "^[a-zA-Z0-9가-힣]*$";
-    public static final String PassWordCurrent = "^(?=.*[a-zA-Z])(?=.*\\\\d)(?=.*\\\\W).{8,2,}$";
+    public static final String PassWordCurrent = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$";
     public static final String Follower = "follower";
     public static final String Following = "following";
     public static final String Money = "money";

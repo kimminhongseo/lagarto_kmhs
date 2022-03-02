@@ -30,10 +30,13 @@ public interface UserMapper {
     void insMoney(UserEntity entity);
     List<UserEntity> selMoney(PageVo vo);
     int selMoneyCount(UserEntity entity);
+    int reportUser(UserDto dto);
 
     UserEntity selUserLevel(UserEntity entity);
     void updUserLevel(UserEntity entity);
 
     void updLevelBar(int point, UserEntity entity);
     int selFirstLogin(UserEntity entity);
+
+    int updUser(UserEntity entity);
 }

@@ -5,102 +5,115 @@
 
 <head>
     <title>상세 정보</title>
-    <link rel="stylesheet" th:href="@{/static/css/auction/detail.css}">
+    <link rel="stylesheet" th:href="@{/css/auction/detail.css}">
     <script defer th:src="@{/static/js/auction/detail.js}"></script>
     <script type="text/javascript" th:inline="javascript"></script>
 </head>
-<th:block layout:fragment="content">
+<th:block layout:fragment="content" >
     <!--todo: 가격올리기 기능,수정, 삭제, 댓글, 좋아요-->
 
+
     <!--session.loginUser 를 빼주면 session.loginUser.iuser가 null일때 에러.-->
-    <div class="main">
-        <!--Elem=docu q ~. dataIuser   Elem.dataset.iuser  하면 Data.iuser값이 js로 온다. -->
-        <div id="dataIuser" th:with="data=${Data}" th:data-iuser="${Data.iuser}">
-            <!--param은 바로넣으면 안되면 우회해야함.-->
-            <div id="data" th:with="ibo=${param.iboard}" th:data-iboard="${ibo}">
-                <div th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
-                    <button id="modBtn">수정</button>
-                    <button id="delBtn">삭제</button>
-                </div>
-                <!--<a th:href="@{/auction/del(iboard=${ibo})}">삭제</a>-->
-                ~~~~~여기는 디테일 부분 ~~~~~
+    <div class="main"  >
+        <!--현재 로그인거 js로 뿌려주려고-->
+        <div id="dataLogin" th:with="data=${login}" th:data-iuser="${session.loginUser.iuser}">
+            <!--Elem=docu q ~. dataIuser   Elem.dataset.iuser  하면 Data.iuser값이 js로 온다. -->
+            <div id="dataIuser" th:with="data=${Data}" th:data-iuser="${Data.iuser}">
+                <!--param은 바로넣으면 안되면 우회해야함.-->
+                <div id="data" th:with="ibo=${param.iboard}" th:data-iboard="${ibo}">
+                    <div th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
+                        <button id="modBtn">수정</button>
+                        <button id="delBtn">삭제</button>
+                    </div>
+                    <!--<a th:href="@{/auction/del(iboard=${ibo})}">삭제</a>-->
+                    ~~~~~여기는 디테일 부분 ~~~~~
 
-                <div id="isfollow" onsubmit="return isfollow();"></div>
-
-                    <div>작성자 : <span th:text="${data.nicknm}"/></div> <!--옆에 프로필사진-->
+                    <div id="isfollow" onsubmit="return isfollow();"></div>
+                    <div>조회수 : <span th:text="${data.hits}"/> </div>
+                    <div id="clickOpenUser">작성자 : <span th:text="${data.nicknm}"/></div> <!--옆에 프로필사진-->
                     <div>카테고리 : <span th:text="${data.categorynm}"/></div>
                     <div>제목 :<span th:text="${data.title}"/></div>
                     <div>내용 : <span th:text="${data.ctnt}"/></div>
                     <div>즉시 구매가: <span th:text="${data.imbuy}"/> 원</div>
-                    <span  th:if="${session.loginUser != null}">
+                    <span th:if="${session.loginUser != null}">
 
 <!--            <input type="button" onclick="check();" id="upprice" name="upprice" value="경매가 올리기" >-->
                         <!--            <div th:with="bid=${BidList}">-->
                         <!--                 <div> 현재 가격은 : (<span id="checkbuy" th:text="${bid.buy}" th:value="${bid.buy}" />) 원 입니다.</div>-->
                         <!--                <div> ↑↑↑↑현재 입찰자는 (<span id="checkwriternm" th:text="${bid.writernm}" />) 님 입니다↑↑↑↑ </div>-->
                         <!--            </div>-->
-
+               <div id="finishtime">마감 시간(최종 입찰자+1시간): <span th:text="${data.mdt}"  th:value="${data.mdt}" /></div>
             <div> 현재 가격은 : (<span id="checkbuy" th:text="${data.buy}" th:value="${data.buy}"/>) 원 입니다.</div>
-            <div> ↑↑↑↑현재 입찰자는 (<span id="checkwriternm" th:text="${data.buyernickname}" th:value="${data.buyernickname}"/>) 님 입니다↑↑↑↑ </div>
 
-</span>  </div>
+            <div th:if="${data.buyernickname !=data.nicknm}"> ↑↑↑↑현재 입찰자는 (<span id="checkwriternm"
+                                                                                 th:text="${data.buyernickname}"
+                                                                                 th:value="${data.buyernickname}"/>) 님 입니다↑↑↑↑ </div>
+            <div th:if="${data.buyernickname ==data.nicknm}"> 현재 입찰자는 아무도 없습니다.  원하는 경매가격을 적어주세요!(현재가격보다 높게 적어주세요) </div>
+
+</span></div>
 
                 <!--로그인 안하면 그냥 디테일만 보여지고 경매 참여 못함.-->
-<div th:if="${session.loginUser == null}">
-    로그인을 하시면 경매에 참여 가능 합니다.>>>>>><a th:href="@{/user/login}"> 로그인 하러가기</a>
-</div>
+                <div th:if="${session.loginUser == null}">
+                    로그인을 하시면 경매에 참여 가능 합니다.>>>>>><a th:href="@{/user/login}"> 로그인 하러가기</a>
+                </div>
 
                 <!-- Button trigger modal -->
 
                 <!-- Modal -->
                 <!--글쓴이나, 이전에 입찰했던사람 경매 막기 기능. 성공!-->
-<div th:if="${session.loginUser != null && data.iuser != session.loginUser.iuser && data.buyer != session.loginUser.iuser}">
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    경매가 등록하기
-</button>
-</div>
+                <div th:if="${session.loginUser != null && data.iuser != session.loginUser.iuser && data.buyer != session.loginUser.iuser}">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        경매가 등록하기
+                    </button>
+                </div>
+
+                <button type="button" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form class="modal-body" id="bid-modal">
-           <div> 즉시구매가: <input type="text" id="formimbuy" th:value="${data.imbuy}" readonly></div>
-           <div> 현재가: <input type="text" id="formbuy" th:value="${data.buy}" readonly></div>
-           <div> 경매가: <input type="text" id="formbid"></div>
-          <div hidden> <input type="text" id="prebuyer" th:text="${data.buyer}" th:value="${data.buyer}"></div>
-          <button type="button"  id="formbuybtn" class="btn btn-primary" >경매가 등록</button>
-          <button type="button" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
-      </form>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <form class="modal-body" id="bid-modal">
+                                <div hidden><input type="text" id="iuser" th:value="${data.iuser}" readonly></div>
+                                <div> 즉시구매가: <input type="text" id="formimbuy" th:value="${data.imbuy}" readonly></div>
+                                <div> 현재가: <input type="text" id="formbuy" th:value="${data.buy}" readonly></div>
+                                <div> 경매가: <input type="text" id="formbid"></div>
+                                <div hidden><input type="text" id="prebuyer" th:text="${data.buyer}"
+                                                   th:value="${data.buyer}"></div>
+                                <button type="button" id="formbuybtn" class="btn btn-primary">경매가 등록</button>
 
-      <div class="modal-footer">
-             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  </div>
-</div>
+                            </form>
 
-        <div id="img_item">
-        <img id="image0" onclick="test();" class="click_img"
-             th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}"
-             onerror="this.style.display='none'" }/>
-        <img id="image1" onclick="test();" class="click_img"
-             th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image2}"
-             onerror="this.style.display='none'" }}/>
-        <img id="image2" onclick="test();" class="click_img"
-             th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image3}"
-             onerror="this.style.display='none'" }/>
-        <img id="image3" onclick="test();" class="click_img"
-             th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image4}"
-             onerror="this.style.display='none'" }/>
-        <img id="image4" onclick="test();" class="click_img"
-             th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image5}"
-             onerror="this.style.display='none'" }/>
-    </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="img_item">
+                    <img id="image0" onclick="test();" class="click_img"
+                         th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}"
+                         onerror="this.style.display='none'" }/>
+                    <img id="image1" onclick="test();" class="click_img"
+                         th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image2}"
+                         onerror="this.style.display='none'" }}/>
+                    <img id="image2" onclick="test();" class="click_img"
+                         th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image3}"
+                         onerror="this.style.display='none'" }/>
+                    <img id="image3" onclick="test();" class="click_img"
+                         th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image4}"
+                         onerror="this.style.display='none'" }/>
+                    <img id="image4" onclick="test();" class="click_img"
+                         th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image5}"
+                         onerror="this.style.display='none'" }/>
+                </div>
 
 
                 <!--이건 나중에 auction_bid와 엮어야함함-->

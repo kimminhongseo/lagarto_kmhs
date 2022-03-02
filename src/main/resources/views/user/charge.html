@@ -31,20 +31,21 @@
         </div>
         <div>
             <table class="table" id="bottoms">
-                <tbody>
-                <tr th:each="item : ${money}" id="font-money">
-                    <td th:text="${#numbers.formatInteger(item.money, 0, 'COMMA') +'원'}"></td>
-                    <td th:text="충전완료"></td>
-                    <td th:text="${item.rdt}"></td>
-                </tr>
+                <tbody id="money-tbody">
+
                 </tbody>
             </table>
         </div>
 
         <div id="mBn">
-            <label th:each="num : ${#numbers.sequence(1, count)}">
-                <a th:href="@{/user/charge(pageNum=${numStat.count})}"><button class="moneyCountBtn"  th:value="${numStat.count}" th:text="${numStat.count}" th:onclick="|javascript:asd('${numStat.count}')|"></button></a>
-            </label>
+            <div th:if="${count>0}">
+                <label th:each="num : ${#numbers.sequence(1, count)}">
+                    <a><button th:value="${numStat.count}" th:text="${numStat.count}" th:onclick="|javascript:asd('${numStat.count}')|"></button></a>
+                </label>
+            </div>
+            <div id="nullCharge" th:unless="${count>0}">
+                충전 내역이 없습니다.
+            </div>
         </div>
     </div>
 </th:block>

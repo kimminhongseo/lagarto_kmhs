@@ -7,7 +7,7 @@
         insert into lagarto.auction
         (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5,buyer)
         values
-        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},0)
+        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{iuser})
 
     </insert>
 
@@ -65,8 +65,15 @@
 
     </select>
 
-    <!--삭제부분 update로 삭제 수정 같이-->
+    <!--조회수-->
+    <update id="addHits">
+        UPDATE lagarto.auction
+        set hits = hits+1
+        where iboard= ${iboard}
+    </update>
 
+
+    <!--삭제부분 update로 삭제 수정 같이-->
     <update id="updAuction">
         UPDATE lagarto.auction
         set

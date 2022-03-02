@@ -134,22 +134,32 @@
     <!--금액츙전 내역-->
     <insert id="insMoney">
         INSERT INTO `lagarto`.`user_add_money`(`iuser`, `money`)
-        VALUES (#{iuser}, #{money})
+        VALUES
+            (#{iuser}, #{money})
     </insert>
 
-    <!--    limit줄때 2페이지면 5,10 3/10,15-->
+<!--    limit줄때 2페이지면 5,10 3/10,15-->
     <select id="selMoney" parameterType="PageVo" resultType="UserEntity">
-        SELECT *
-        FROM `lagarto`.`user_add_money`
-        WHERE `iuser` = #{iuser}
-        LIMIT #{currentPage}, #{recordCount};
+        SELECT * FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser} ORDER BY rdt desc LIMIT #{currentPage}, #{recordCount}
     </select>
 
     <select id="selMoneyCount" resultType="int">
-        SELECT CEIL(COUNT(*) / 5)
-        FROM `lagarto`.`user_add_money`
-        WHERE `iuser` = #{iuser};
+        SELECT CEIL(COUNT(*)/5) FROM `lagarto`.`user_add_money` WHERE `iuser` = #{iuser};
     </select>
+
+    <insert id="reportUser">
+        INSERT INTO `lagarto`.`user_Report`(`iuser`, `opponent`, `reportNum`, `reportContent`)
+        VALUES (#{iuser},#{opponent},#{reportNum},#{reportContent})
+    </insert>
+
+    <update id="updUser">
+        UPDATE `lagarto`.`lagarto_user`
+        SET
+        <if test=" profile_img != null and profile_img != '' ">
+            profile_img = #{profile_img}
+        </if>
+        WHERE iuser = ${iuser}
+    </update>
 
     <!-- 회원 레벨 관리 -->
     <!-- 로그인 시, 글 작성 시, 댓글 작성 시 사용, 상품 구매 후 확정 시 -->

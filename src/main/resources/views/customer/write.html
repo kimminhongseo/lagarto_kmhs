@@ -5,7 +5,7 @@
 
 <head>
     <title>글쓰기</title>
-    <link rel="stylesheet" th:href="@{/css/customer/write.css}">
+    <link rel="stylesheet" th:href="@{/css/su/write.css}">
     <script defer th:src="@{/js/customer/write.js}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
@@ -41,7 +41,7 @@
                     <div data-name="fileDiv" class="form-group filebox bs3-primary">
                         <label for="file_0" class="col-sm-2 control-label">파일1</label>
                         <div class="col-sm-10">
-                            <input type="text" class="upload-name" value="파일 찾기" readonly />
+                            <input type="text" class="upload-name" value="파일 찾기" readonly/>
                             <label for="file_0" class="control-label">찾아보기</label>
                             <input type="file" name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)" />
 

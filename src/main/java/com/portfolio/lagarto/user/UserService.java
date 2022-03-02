@@ -3,7 +3,9 @@ package com.portfolio.lagarto.user;
 
 
 import com.portfolio.lagarto.Const;
+import com.portfolio.lagarto.MyFileUtils;
 import com.portfolio.lagarto.Utils;
+import com.portfolio.lagarto.customer.files.AttachDTO;
 import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.ForgotPwResult;
 import com.portfolio.lagarto.enums.JoinResult;
@@ -17,6 +19,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -32,7 +36,8 @@ public class UserService {
 
     @Autowired
     private UserMapper mapper;
-
+    @Autowired
+    private MyFileUtils fileUtils;
     @Autowired
     private Utils utils;
     @Autowired
@@ -276,6 +281,47 @@ public class UserService {
     public int selMoneyCount(UserEntity entity){
         entity.setIuser(utils.getLoginUserPk());
         return mapper.selMoneyCount(entity);
+    }
+
+    public int reportUser(UserDto dto) {
+        dto.setIuser(utils.getLoginUserPk());
+        if (dto.getIuser() == dto.getOpponent()){
+            return 2;
+        }
+        if (dto.getReportNum() == 0){
+            return 3;
+        }
+        return mapper.reportUser(dto);
+    }
+
+    //이미지 업로드 처리 및 저장 파일명 리턴
+    public String uploadProfileImg(MultipartFile mf) {
+        if(mf == null) { return null; }
+
+        UserEntity loginUser = utils.getLoginUser();
+
+        final String PATH = Const.PATH_PROFILE + "/user/" + loginUser.getIuser();
+        String fileNm = fileUtils.saveFile(PATH, mf);
+        System.out.println("fileNm : " + fileNm);
+        if(fileNm == null) { return null; }
+
+
+        //기존 파일명
+
+        String oldFilePath = PATH + "/" + loginUser.getProfile_img();
+        fileUtils.delFile(oldFilePath);
+
+        //파일명을 t_user 테이블에 update
+        UserEntity entity = new UserEntity();
+        entity.setIuser(loginUser.getIuser());
+        entity.setProfile_img(fileNm);
+        mapper.updUser(entity);
+
+        //세션 프로필 파일명을 수정해 준다.
+        loginUser.setProfile_img(fileNm);
+        return fileNm;
+
+
     }
 
     public UserEntity selUserLevel(UserEntity entity) {

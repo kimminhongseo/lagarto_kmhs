@@ -1,0 +1,44 @@
+#isfollow {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    font-size: 25px;
+}
+
+#declaration{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    float: none;
+    margin: 0 auto;
+}
+
+.table{
+    text-align: center;
+    font-weight: bold;
+}
+
+h6{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+    color: #2b2a29;
+    font-weight: bold;
+    opacity: 70%;
+}
+.modal-title{
+    text-align: center;
+    float: none;
+    margin: 0 auto;
+}
+#fraudReport{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    float: none;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+body{
+    background-image: url("/static/img/BackgroundImg.png");
+}

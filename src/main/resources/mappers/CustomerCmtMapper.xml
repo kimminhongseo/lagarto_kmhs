@@ -26,8 +26,12 @@
         AND A.icmt = ${icmt}
     </select>
 
+    <update id="updCustomerCmt">
+        UPDATE lagarto.customer_comment SET ctnt = #{ctnt} WHERE icmt = ${icmt} AND iuser = ${iuser}
+    </update>
+
     <delete id="delCustomerCmt">
-        DELETE FROM lagarto.customer_comment WHERE icmt = ${icmt} AND iboard = ${iboard}
+        DELETE FROM lagarto.customer_comment WHERE icmt = ${icmt} AND iuser = ${iuser}
     </delete>
 
     <delete id="delCustomerCmtAll">

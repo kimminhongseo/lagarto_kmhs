@@ -10,7 +10,9 @@
     <div>작성일시 : <span th:text="${data.rdt}"></span></div>
     <div>내용</div>
     <div th:text="${data.ctnt}"></div>
-    <div th:each="fileList : ${fileList}">
-        <img th:src="@{/uploadfile/customer/} + ${fileList.iboard} + @{/} + ${fileList.save_name}" width="300px">
+    <div>
+
+        <img th:each="fileList : ${fileList}" th:src="@{/uploadfile/customer/} + ${fileList.iboard} + @{/} + ${fileList.save_name}" width="300px">
+
     </div>
 </div>

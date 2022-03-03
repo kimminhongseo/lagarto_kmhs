@@ -32,17 +32,14 @@ public class AuctionCommentService {
         entity.setIuser(utils.getLoginUserPk());
         return mapper.delAuctionCmt(entity);
     }
-    public  int modBoardCmt(AuctionCommentEntity entity){
+
+
+    public int updAuctionCmt(AuctionCommentEntity entity){
         entity.setIuser(utils.getLoginUserPk());
         entity.getIcmt();
-        return mapper.modBoardCmt(entity);
+        return mapper.updAuctionCmt(entity);
     }
 
 
-    public int delAuctionCmtAll(int iboard) {
-        AuctionCommentEntity entity = new AuctionCommentEntity();
-        entity.setIboard(iboard);
-        return mapper.delAuctionCmtAll(entity);
-    }
 
 }

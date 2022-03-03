@@ -1,10 +1,7 @@
 package com.portfolio.lagarto.user;
 
 
-import com.portfolio.lagarto.model.ForgotIdVo;
-import com.portfolio.lagarto.model.PageVo;
-import com.portfolio.lagarto.model.UserDto;
-import com.portfolio.lagarto.model.UserEntity;
+import com.portfolio.lagarto.model.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,18 +16,27 @@ public interface UserMapper {
     UserEntity selUser(UserEntity entity);
     UserEntity selApiUser(UserEntity entity);
     UserEntity facebookPk(UserEntity entity);
-    UserEntity loginSel(UserEntity entity);
+    LoginVo loginSel(LoginVo loginVo);
+    void updLastLogin(UserEntity entity);
     UserEntity passwordSel(UserDto dto);
     int passwordUpd(UserDto dto);
     UserEntity authKey(UserEntity entity);
     int nicknameCheck(String nickname);
     void informationUpd(UserEntity entity);
     ForgotIdVo selUserId(UserEntity entity);
+    ForgotPwVo selUserPw(UserEntity entity);
+    void updUserPw(UserEntity entity);
     void moneyCharge(UserEntity entity);
     void insMoney(UserEntity entity);
     List<UserEntity> selMoney(PageVo vo);
     int selMoneyCount(UserEntity entity);
     int reportUser(UserDto dto);
+
+    UserEntity selUserLevel(UserEntity entity);
+    void updUserLevel(UserEntity entity);
+
+    void updLevelBar(int point, UserEntity entity);
+    int selFirstLogin(UserEntity entity);
 
     int updUser(UserEntity entity);
 }

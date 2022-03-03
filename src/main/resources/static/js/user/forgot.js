@@ -1,13 +1,14 @@
 {
-    const forgotIdForm = document.querySelector('#forgot_id_form');
+    const forgotForm = document.querySelector('#forgot_form');
 
-    if (forgotIdForm) {
+    if (forgotForm) {
+
         const cancelBtn = document.querySelector('#cancel_btn');
         cancelBtn.addEventListener('click', () => {
             window.history.back();
         })
 
-        forgotIdForm.onsubmit = () => {
+        forgotForm.submit_btn.addEventListener('click', (e) => {
             let inputs = document.querySelectorAll('input');
 
             for (let i = 0; i < inputs.length; i++) {
@@ -20,12 +21,14 @@
                     if (!regex.test(input.value)) {
                         alert(`${name}를 다시 확인해 주세요.`);
                         input.focus();
+
+                        e.preventDefault();
                         return false;
                     }
                 }
             }
 
-            return true;
-        }
+            forgotForm.submit();
+        });
     }
 }

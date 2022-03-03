@@ -9,7 +9,7 @@ public class Const {
 
     public static final String ERR_Login = "로그인 실패";
     public static final String MSG = "msg";
-    public static final String UID = "^(?=.{8,50}$)([0-9a-z]([_]?[0-9a-z])*?)@([0-9a-z][0-9a-z\\-]*[0-9a-z]\\.)?([0-9a-z][0-9a-z\\-]*[0-9a-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$";
+    public static final String UID = "^(?=.{8,50}$)([0-9a-z]([_]?[.]?[0-9a-z])*?)@([0-9a-z][0-9a-z\\-]*[0-9a-z]\\.)?([0-9a-z][0-9a-z\\-]*[0-9a-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$";
     public static final String UPW = "^([0-9a-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:',<.>/?]{8,16})$";
     public static final String CONTACT_FIRST = "^(010|011|016|017|018|019)$";
     public static final String CONTACT_SECOND = "^([0-9]{4})$";
@@ -21,6 +21,7 @@ public class Const {
     public static final String Money = "money";
     public static final String Count = "count";
     public static final String User = "user";
+    public static final String LOGIN_MEMBER = "loginMember";
 
     public static boolean checkUid(String email) {
         return email.matches(UID);

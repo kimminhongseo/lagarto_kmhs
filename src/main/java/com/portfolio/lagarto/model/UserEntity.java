@@ -32,6 +32,7 @@ public class UserEntity {
     private int level_bar;
     private String rdt;
     private boolean auth;
+    private String last_login_at;
 
     private JoinResult result;
 

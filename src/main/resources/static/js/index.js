@@ -82,6 +82,7 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
         case 2:
             break;
     }
+
     const followBtnElem = isfollowElem.querySelector('#follow-Btn');
     if (followBtnElem){
         followBtnElem.addEventListener('click', () => {
@@ -145,5 +146,7 @@ cou.click(function (){
     })
 });
 
+
+let imgKakao;
 
 // ---------------------------------------------------------------------------------------------

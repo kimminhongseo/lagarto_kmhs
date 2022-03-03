@@ -1,4 +1,4 @@
-package com.portfolio.lagarto.customer.files;
+package com.portfolio.lagarto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Getter
 @Setter
 public class Criteria {
-
     /** 현재 페이지 번호 */
     private int currentPageNo;
 
@@ -45,4 +44,3 @@ public class Criteria {
     }
 
 }
-

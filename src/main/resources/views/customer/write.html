@@ -5,7 +5,7 @@
 
 <head>
     <title>글쓰기</title>
-    <link rel="stylesheet" th:href="@{/css/customer/write.css}">
+    <link rel="stylesheet" th:href="@{/css/su/write.css}">
     <script defer th:src="@{/js/customer/write.js}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
@@ -22,26 +22,29 @@
                         <input type="text" id="title" class="form-control" placeholder="title" th:field="*{title}">
                         <label class="form-label" for="title">제목</label>
                     </div>
+
                     <div class="star-rating space-x-4 mx-auto" th:if="*{board_cd == 1}">
-                        <input type="radio" id="5-stars" th:name="rating" th:value="5" v-model="ratings"/>
-                        <label for="5-stars" class="star pr-4">★</label>
-                        <input type="radio" id="4-stars" th:name="rating" th:value="4" v-model="ratings"/>
-                        <label for="4-stars" class="star">★</label>
-                        <input type="radio" id="3-stars" th:name="rating" th:value="3" v-model="ratings"/>
-                        <label for="3-stars" class="star">★</label>
-                        <input type="radio" id="2-stars" th:name="rating" th:value="2" v-model="ratings"/>
-                        <label for="2-stars" class="star">★</label>
-                        <input type="radio" id="1-star" th:name="rating" th:value="1" v-model="ratings" />
-                        <label for="1-star" class="star">★</label>
+                            <input type="radio" id="5-stars" th:name="rating" th:value="5" v-model="ratings"/>
+                            <label for="5-stars" class="star pr-4">★</label>
+                            <input type="radio" id="4-stars" th:name="rating" th:value="4" v-model="ratings"/>
+                            <label for="4-stars" class="star">★</label>
+                            <input type="radio" id="3-stars" th:name="rating" th:value="3" v-model="ratings"/>
+                            <label for="3-stars" class="star">★</label>
+                            <input type="radio" id="2-stars" th:name="rating" th:value="2" v-model="ratings"/>
+                            <label for="2-stars" class="star">★</label>
+                            <input type="radio" id="1-star" th:name="rating" th:value="1" v-model="ratings" />
+                            <label for="1-star" class="star">★</label>
                     </div>
+
                     <div class="mb-3">
                         <label for="ctnt" class="form-label">내용</label>
                         <textarea class="form-control" id="ctnt" th:field="*{ctnt}" rows="3"></textarea>
                     </div>
+
                     <div data-name="fileDiv" class="form-group filebox bs3-primary">
                         <label for="file_0" class="col-sm-2 control-label">파일1</label>
                         <div class="col-sm-10">
-                            <input type="text" class="upload-name" value="파일 찾기" readonly />
+                            <input type="text" class="upload-name" value="파일 찾기" readonly/>
                             <label for="file_0" class="control-label">찾아보기</label>
                             <input type="file" name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)" />
 
@@ -53,6 +56,7 @@
                             </button>
                         </div>
                     </div>
+
                     <div id="btnDiv">
                         <button class="btn btn-primary" type="submit">저장</button>
                     </div>

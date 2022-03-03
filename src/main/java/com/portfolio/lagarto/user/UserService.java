@@ -7,21 +7,27 @@ import com.portfolio.lagarto.MyFileUtils;
 import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.customer.files.AttachDTO;
 import com.portfolio.lagarto.enums.ForgotIdResult;
+import com.portfolio.lagarto.enums.ForgotPwResult;
 import com.portfolio.lagarto.enums.JoinResult;
-import com.portfolio.lagarto.model.ForgotIdVo;
-import com.portfolio.lagarto.model.PageVo;
-import com.portfolio.lagarto.model.UserDto;
-import com.portfolio.lagarto.model.UserEntity;
+import com.portfolio.lagarto.model.*;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,6 +42,9 @@ public class UserService {
     private Utils utils;
     @Autowired
     private HttpSession hs;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
 
     public int apiInsUser(UserEntity entity){
@@ -125,22 +134,37 @@ public class UserService {
         return result;
     }
 
-    public int loginSel(UserEntity entity){
-        UserEntity dbUser = null;
+    public LoginVo loginSel(LoginVo vo){
+        LoginVo dbUser = null;
         try {
-            dbUser = mapper.loginSel(entity);
+            dbUser = mapper.loginSel(vo);
         } catch (Exception e) {
             e.printStackTrace();
-            return 0; //알 수 없는 에러
+            return null;   // 알 수 없는 에러
         }
         if(dbUser != null) {
-            if(BCrypt.checkpw(entity.getUpw(), dbUser.getUpw())) {
+            if(BCrypt.checkpw(vo.getUpw(), dbUser.getUpw())) {
                 dbUser.setUpw(null);
                 utils.setLoginUser(dbUser);
-                return 1; //로그인 성공
+                return dbUser;   // 로그인 성공
             }
         }
-        return 2;//로그인 실패
+        return null;   //로그인 실패
+    }
+
+    public void putAutoSaveKey(LoginVo loginVo, HttpServletResponse httpServletResponse) {
+        Cookie rememberCookie = new Cookie("auto_id_check", loginVo.getUid());
+        rememberCookie.setPath("/");
+        if(loginVo.isAuto_id_check()) {
+            rememberCookie.setMaxAge(60*60*24*7);
+        } else {
+            rememberCookie.setMaxAge(0);
+        }
+        httpServletResponse.addCookie(rememberCookie);
+    }
+
+    public void updLastLogin(UserEntity entity) {
+        mapper.updLastLogin(entity);
     }
 
     public int selUserResult(UserEntity entity){
@@ -207,6 +231,45 @@ public class UserService {
         return forgotIdVo;
     }
 
+    public ForgotPwVo forgotPw(UserEntity entity) throws MessagingException {
+        ForgotPwVo forgotPwVo = mapper.selUserPw(entity);
+
+        if (forgotPwVo == null || forgotPwVo.getPlatform_cd() != 1) {
+            forgotPwVo = new ForgotPwVo();
+            forgotPwVo.setForgotPwResult(ForgotPwResult.FAILURE);
+            return forgotPwVo;
+        }
+
+        forgotPwVo.setForgotPwResult(ForgotPwResult.SUCCESS);
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, "utf-8");
+        mimeMessageHelper.setTo(forgotPwVo.getUid());
+
+        int size = (int) ((Math.random() * (16 - 10)) + 10);
+        String tempPw = Utils.tempPw(size);
+
+        mimeMessageHelper.setSubject("[LAGARTO] 임시 비밀번호 발급");
+        mimeMessageHelper.setText(String.format("%s<br>%s<br>%s<br>%s%s%s",
+                "<h1>[LAGARTO]  임시 비밀번호 발급</h1>",
+                "<p>임시 비밀번호를 발급해 드립니다.</p>",
+                "<p>로그인 시 아래의 비밀번호를 이용해 주시고, 로그인 후 비밀번호 변경을 권장드립니다.</p>",
+                "<h3>", tempPw, "</h3>"
+        ), true);
+
+        javaMailSender.send(mimeMessage);
+
+        UserEntity copyEntity = new UserEntity();
+        String hashTempPw = BCrypt.hashpw(tempPw, BCrypt.gensalt());
+        copyEntity.setUid(forgotPwVo.getUid());
+        copyEntity.setUpw(hashTempPw);
+        System.out.println(hashTempPw);
+
+        mapper.updUserPw(copyEntity);
+
+        return forgotPwVo;
+    }
+
     public void insMoney(UserEntity entity){
         mapper.insMoney(entity);
     }
@@ -259,5 +322,21 @@ public class UserService {
         return fileNm;
 
 
+    }
+
+    public UserEntity selUserLevel(UserEntity entity) {
+        return mapper.selUserLevel(entity);
+    }
+
+    public void updUserLevel(UserEntity entity) {
+        mapper.updUserLevel(entity);
+    }
+
+    public void updLevelBar(int point, UserEntity entity) {
+        mapper.updLevelBar(point, entity);
+    }
+
+    public int selFirstLogin(UserEntity entity) {
+        return mapper.selFirstLogin(entity);
     }
 }

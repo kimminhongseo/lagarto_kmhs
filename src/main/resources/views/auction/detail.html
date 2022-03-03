@@ -16,6 +16,9 @@
     <!--session.loginUser 를 빼주면 session.loginUser.iuser가 null일때 에러.-->
     <div class="main"  >
         <!--현재 로그인거 js로 뿌려주려고-->
+        <div th:if="${session.loginUser != null}">
+        <i id="fav_icon" class=" fa-regular fa-heart fa-7x"></i>
+        </div>
 
         <div  id="dataLogin" th:if="${session.loginUser != null}" th:with="data=${login}" th:data-iuser="${session.loginUser.iuser}"></div>
       <!-- <div  th:unless="${session.loginUser == null}" th:with="data=${login}" th:data-iuser="${2}"></div>-->
@@ -29,9 +32,7 @@
                         <button id="delBtn">삭제</button>
                     </div>
                     <!--<a th:href="@{/auction/del(iboard=${ibo})}">삭제</a>-->
-                    ~~~~~여기는 디테일 부분 ~~~~~
 
-                    <div id="isfollow" onsubmit="return isfollow();"></div>
                     <div>조회수 : <span th:text="${data.hits}"/> </div>
                     <div id="clickOpenUser">작성자 : <span  id="userNick"  th:text="${data.nicknm}"/></div> <!--옆에 프로필사진-->
                     <div>카테고리 : <span th:text="${data.categorynm}"/></div>

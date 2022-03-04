@@ -10,6 +10,7 @@ import com.portfolio.lagarto.enums.ForgotPwResult;
 import com.portfolio.lagarto.enums.JoinResult;
 import com.portfolio.lagarto.follow.FollowService;
 import com.portfolio.lagarto.model.*;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,6 +76,15 @@ public class UserController {
 
         entity.setLast_login_at(loginUser.getLast_login_at());
         session.setAttribute(Const.LOGIN_MEMBER, entity);
+
+        // 로그인 시 point + 10
+        int firstLogin = service.selFirstLogin(loginUser);
+        if (firstLogin == 1) {
+            service.updLevelBar(10, loginUser);
+            if (service.selUserLevel(loginUser) == 1) {
+                service.updUserLevel(loginUser);
+            }
+        }
 
         service.updLastLogin(loginVo);
 

@@ -324,7 +324,7 @@ public class UserService {
 
     }
 
-    public UserEntity selUserLevel(UserEntity entity) {
+    public int selUserLevel(UserEntity entity) {
         return mapper.selUserLevel(entity);
     }
 
@@ -332,8 +332,8 @@ public class UserService {
         mapper.updUserLevel(entity);
     }
 
-    public void updLevelBar(int point, UserEntity entity) {
-        mapper.updLevelBar(point, entity);
+    public void updLevelBar(int point, LoginVo loginVo) {
+        mapper.updLevelBar(point, loginVo.getIuser());
     }
 
     public int selFirstLogin(UserEntity entity) {

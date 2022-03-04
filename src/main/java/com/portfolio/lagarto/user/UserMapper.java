@@ -3,6 +3,7 @@ package com.portfolio.lagarto.user;
 
 import com.portfolio.lagarto.model.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,10 +33,10 @@ public interface UserMapper {
     int selMoneyCount(UserEntity entity);
     int reportUser(UserDto dto);
 
-    UserEntity selUserLevel(UserEntity entity);
+    int selUserLevel(UserEntity entity);
     void updUserLevel(UserEntity entity);
 
-    void updLevelBar(int point, UserEntity entity);
+    void updLevelBar(@Param("point") int point, @Param("iuser") int iuser);
     int selFirstLogin(UserEntity entity);
 
     int updUser(UserEntity entity);

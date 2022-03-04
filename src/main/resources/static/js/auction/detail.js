@@ -125,7 +125,8 @@ const getCommentList = () => {
         makeCommentRecordList(list);
     }, { iboard });
 }
-getCommentList();
+
+
 
 
 //리스트 만들기
@@ -137,88 +138,110 @@ getCommentList();
 const sessionloginElem = document.querySelector('#dataLogin');
 const makeCommentRecordList = list => {
 
-    list.forEach(item => {
-        const tdElem = document.createElement('td')
-        const trElem = document.createElement('tr');
-        trElem.innerHTML = `
+
+    //로그인 안되면 댓글 못보게.
+    if(sessionloginElem == null){
+        list.forEach(item => {
+            const tdElem = document.createElement('td');
+            const trElem = document.createElement('tr');
+            trElem.innerHTML = `
+                <td>${item.icmt}</td>
+                <td>${item.ctnt}</td>
+                <td>${item.nickname}</td>
+                <td>${(item.rdt)}</td>
+            `;
+            tbodyElem.appendChild(trElem);
+        });
+    }
+    if(sessionloginElem !=null){
+
+
+        //로그인 됐다면?
+        list.forEach(item => {
+            const tdElem = document.createElement('td');
+            const trElem = document.createElement('tr');
+            trElem.innerHTML = `
                 <td>${item.icmt}</td>
                 <td>${item.ctnt}</td>
                 <td>${item.nickname}</td>
                 <td>${item.rdt}</td>
             `;
-        tbodyElem.appendChild(trElem);
-        //수정 삭제 구현  댓글쓴 사람이랑 현재 로그인한 사람이랑 같으면 수정/삭제 버튼 활성화
-        if(item.iuser == sessionloginElem.dataset.iuser){
-        const modBtn = document.createElement('input')
-        modBtn.type = 'button';
-        modBtn.value = '수정';
-        modBtn.addEventListener('click', () => {
-            const tdArr = trElem.querySelectorAll('td');
-            const tdCell = tdArr[1];
-            const modInput = document.createElement('input');
-            modInput.value = item.ctnt;
+            tbodyElem.appendChild(trElem);
 
-            const saveBtn = document.createElement('input')
-            saveBtn.type = 'button';
-            saveBtn.value = '저장';
 
-            saveBtn.addEventListener('click', () => {
-                const param = {
-                    icmt: item.icmt,
-                    ctnt: modInput.value
-                }
-                myFetch.put('/ajax/auctionCmt', data => {
-                    switch (data.result) {
-                        case 0:
-                            alert('댓글 수정에 실패하였습니다.')
-                            break;
-                        case 1:
-                            tdCell.innerText = modInput.value;
-                            item.ctnt = modInput.value;
-                            removeCancelBtn();
-                            break;
+
+            //수정 삭제 구현  댓글쓴 사람이랑 현재 로그인한 사람이랑 같으면 수정/삭제 버튼 활성화
+            if(item.iuser == sessionloginElem.dataset.iuser){
+                const modBtn = document.createElement('input')
+                modBtn.type = 'button';
+                modBtn.value = '수정';
+                modBtn.addEventListener('click', () => {
+                    const tdArr = trElem.querySelectorAll('td');
+                    const tdCell = tdArr[1];
+                    const modInput = document.createElement('input');
+                    modInput.value = item.ctnt;
+
+                    const saveBtn = document.createElement('input')
+                    saveBtn.type = 'button';
+                    saveBtn.value = '저장';
+
+                    saveBtn.addEventListener('click', () => {
+                        const param = {
+                            icmt: item.icmt,
+                            ctnt: modInput.value
+                        }
+                        myFetch.put('/ajax/auctionCmt', data => {
+                            switch (data.result) {
+                                case 0:
+                                    alert('댓글 수정에 실패하였습니다.')
+                                    break;
+                                case 1:
+                                    tdCell.innerText = modInput.value;
+                                    item.ctnt = modInput.value;
+                                    removeCancelBtn();
+                                    break;
+                            }
+                        }, param);
+                    });
+
+                    tdCell.innerHTML = null;
+                    tdCell.appendChild(modInput);
+                    tdCell.appendChild(saveBtn);
+                    const cancelBtn = document.createElement('input');
+                    cancelBtn.type = 'button';
+                    cancelBtn.value = '취소';
+                    cancelBtn.addEventListener('click', () => {
+                        tdCell.innerText = item.ctnt;
+                        removeCancelBtn();
+                    });
+
+                    const removeCancelBtn = () => {
+                        modBtn.classList.remove('hidden');
+                        delBtn.classList.remove('hidden');
+                        cancelBtn.remove();
                     }
-                }, param);
-            });
 
-            tdCell.innerHTML = null;
-            tdCell.appendChild(modInput);
-            tdCell.appendChild(saveBtn);
-            const cancelBtn = document.createElement('input');
-            cancelBtn.type = 'button';
-            cancelBtn.value = '취소';
-            cancelBtn.addEventListener('click', () => {
-                tdCell.innerText = item.ctnt;
-                removeCancelBtn();
-            });
+                    tdElem.insertBefore(cancelBtn, modBtn);
+                    modBtn.classList.add('hidden');
+                    delBtn.classList.add('hidden');
+                });
+                const delBtn = document.createElement('input');
+                delBtn.type = 'button';
+                delBtn.value = '삭제';
 
-            const removeCancelBtn = () => {
-                modBtn.classList.remove('hidden');
-                delBtn.classList.remove('hidden');
-                cancelBtn.remove();
+                delBtn.addEventListener('click', () => {
+                    if (confirm('삭제하시겠습니까?')) {
+                        delCmt(item.icmt, trElem);
+                    }
+                });
+                trElem.appendChild(modBtn);
+                trElem.appendChild(delBtn);
+
             }
 
-            tdElem.insertBefore(cancelBtn, modBtn);
-            modBtn.classList.add('hidden');
-            delBtn.classList.add('hidden');
-        });
-        const delBtn = document.createElement('input');
-        delBtn.type = 'button';
-        delBtn.value = '삭제';
-
-        delBtn.addEventListener('click', () => {
-            if (confirm('삭제하시겠습니까?')) {
-                delCmt(item.icmt, trElem);
-            }
-        });
-        trElem.appendChild(modBtn);
-        trElem.appendChild(delBtn);
-
-        }
-    })
-    return trElem;
-
-
+        })
+        return trElem;
+    }
 }
 
 
@@ -271,23 +294,3 @@ if(formimbuybtn){
 
 getCommentList();
 isfollow();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

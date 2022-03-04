@@ -8,7 +8,8 @@
     const commentFormContainerElem = document.querySelector('#comment_form_container');
     const commentListElem = document.querySelector('#comment_list');
     const tbodyElem = commentListElem.querySelector('table > tbody');
-    const modalClk = document.querySelector('#modal');
+    const sessionloginElem = document.querySelector('#dataLogin');
+
 
     //글 삭제 버튼
     const delBtnElem = document.querySelector('#delBtn');
@@ -97,7 +98,6 @@
         });
     }
     //-----------------------------------------------------------------------------
-    const sessionloginElem = document.querySelector('#dataLogin');
     const makeCommentRecordList = list => {
 
         list.forEach(item => {
@@ -178,8 +178,8 @@
                 trElem.appendChild(delBtn);
 
             }
-        })
         return trElem;
+        })
 
 
     }

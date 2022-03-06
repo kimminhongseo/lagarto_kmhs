@@ -5,9 +5,9 @@
 
     <insert id="insAuction">
         insert into lagarto.auction
-        (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5,buyer)
+        (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5,buyer,mdt)
         values
-        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{iuser})
+        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{iuser},'9999-12-31 23:59:59')
 
     </insert>
 

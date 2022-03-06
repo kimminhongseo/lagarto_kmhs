@@ -18,7 +18,7 @@
 
 
     <!--session.loginUser 를 빼주면 session.loginUser.iuser가 null일때 에러.-->
-    <div class="main">
+    <div class="main" >
         <div class="row">
 
         <div class="col">
@@ -54,7 +54,7 @@
                         <!--                <div> ↑↑↑↑현재 입찰자는 (<span id="checkwriternm" th:text="${bid.writernm}" />) 님 입니다↑↑↑↑ </div>-->
                         <!--            </div>-->
                <div id="finishtime">마감 시간(최종 입찰자+1시간): <span th:text="${data.mdt}"  th:value="${data.mdt}" />
-              <div><input type="hidden" id="mdt" th:value="${data.mdt}">  <span id="finish"/></div>
+              <h1><input type="hidden" id="mdt" th:value="${data.mdt}">  <span id="finish"/></h1>
                </div>
 
             <div> 현재 가격은 : (<span id="checkbuy" th:text="${data.buy}" th:value="${data.buy}"/>) 원 입니다.
@@ -78,12 +78,13 @@
                 <!-- Modal -->
                 <!--글쓴이나, 이전에 입찰했던사람 경매 막기 기능. 성공!-->
                 <div th:if="${session.loginUser != null && data.iuser != session.loginUser.iuser && data.buyer != session.loginUser.iuser}">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button id="bidwrite" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         경매가 등록하기
                     </button>
+                    <button type="button" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
                 </div>
 
-                <button type="button" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
+
 
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -138,7 +139,7 @@
         </div>
 
             <div class="col">
-               <img id="soldout" src="/static/img/3dd870d0c3fa8aa19ba0174a19dc1eef60d06d92.png">
+               <img  id="soldout" src="/static/img/3dd870d0c3fa8aa19ba0174a19dc1eef60d06d92.png">
             </div>
 
 

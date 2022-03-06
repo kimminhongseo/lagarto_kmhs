@@ -315,13 +315,6 @@ if(favIconElem) {
 //-----------------경매 남은시간 및 끝났을때 이벤트
 
 
-
-
-
-
-
-
-
 const countDownTimer = function (id,date){
     var _vDate = new Date(date); // 전달 받은 일자
     var _second = 1000;
@@ -337,6 +330,9 @@ const countDownTimer = function (id,date){
         if(distDt<0){
             clearInterval(timer);
             document.getElementById(id).textContent='경매가 마감되었습니다.';
+            document.getElementById("soldout").style.visibility = "visible"; //마감되면 sold out 이미지
+            document.getElementById("bidwrite").style.visibility = "hidden"; //경매가 등록 사라지게
+            document.getElementById("formimbuybtn").style.visibility = "hidden";
             return;
         }
         var days = Math.floor(distDt / _day);
@@ -350,15 +346,12 @@ const countDownTimer = function (id,date){
         document.getElementById(id).textContent += minutes + '분 ';
         document.getElementById(id).textContent += seconds + '초 남았습니다';
 
+
     }
     timer= setInterval(showRemaining,1000);
 }
 
 
-
-function getNow(){
-    return new Date().getTime();
-}
 const mdtElem = document.getElementById('mdt');
 if(mdtElem){
         fetch(`ajax/auctionBid/timer?iboard=${iboard}`,{
@@ -370,12 +363,11 @@ if(mdtElem){
             console.log(data);
             countDownTimer('finish',mdtElem.value);
 
-          // var myInt = Number(new Date(data.timestamp));
-            //  console.log("mdt : "+myInt); //mdt 의미
-
-            //현재 시간?
         })
     }
+
+//-----------------경매 남은시간 및 끝났을때 이벤트 (끝)
+
 
 
 

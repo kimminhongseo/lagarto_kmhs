@@ -29,12 +29,6 @@ public class CustomerController {
         return "customer/list";
     }
 
-//    @GetMapping("/selList")
-//    public String selList(@ModelAttribute("params")TestDto dto, Model model) {
-//        model.addAttribute("list", service.selList(dto));
-//        return "customer/selList";
-//    }
-
     @GetMapping("/write")
     public String write(@ModelAttribute("entity") CustomerEntity entity) {
         return "customer/write";
@@ -45,21 +39,15 @@ public class CustomerController {
     public String writeProc(CustomerEntity entity, MultipartFile[] files) {
 
         boolean isRegistered = this.service.insCustomer(entity, files);
-        return "redirect:/customer/list/" + entity.getBoard_cd();
+        return "redirect:/customer/detail?iboard=" + entity.getIboard();
     }
 
     @GetMapping("/detail")
-    public void detail(Model model, CustomerDto dto) {
-        model.addAttribute("data", service.selCustomerDetail(dto));
-
-    }
-
-    @GetMapping("/detail_item")
-    public void selCustomerDetail(Model model, CustomerDto dto, int iboard) {
+    public void detail(Model model, CustomerDto dto, int iboard) {
         model.addAttribute("fileList", service.getAttachFileList(iboard));
         model.addAttribute("data", service.selCustomerDetail(dto));
-    }
 
+    }
 
     @GetMapping("/upd")
     public String upd(CustomerDto dto, @RequestParam(value = "iboard", required = false) int iboard ,Model model) {

@@ -1,3 +1,3 @@
-// function movePage(uri, queryString) {
-//     location.href = uri + queryString;
-// }
+function movePage(uri, queryString) {
+    location.href = uri + queryString;
+}

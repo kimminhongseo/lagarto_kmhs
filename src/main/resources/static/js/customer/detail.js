@@ -35,7 +35,7 @@
 
     //글 디테일 데이터 가져오기
     const getData = () => {
-        fetch(`/customer/detail_item?iboard=${iboard}`)
+        fetch(`/customer/detail?iboard=${iboard}`)
             .then(res => res.text())
             .then(data => {
                 console.log(data);
@@ -265,4 +265,12 @@
     }
     //좋아요 ------------------------------------------------------------ [end] --
 // getCommentList();
+    $(function(){
+        $('.slider').bxSlider({
+            mode: 'fade',
+            captions: true,
+            slideWidth: 500,
+            adaptiveHeight: true
+        });
+    });
 })();

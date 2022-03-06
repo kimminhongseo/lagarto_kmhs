@@ -134,18 +134,12 @@ public class AuctionController {
 
 
         model.addAttribute("inslist",service.insAuctionList(auctionEntity));
-
-
-
         return "/auction/uploadstatusview";
     }
 
-
     @GetMapping("/list")
     public String list(AuctionVo vo, Model model) {
-
         model.addAttribute("List", service.selAuctionListAll(vo));
-
         return "auction/list";
     }
 

@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,8 +39,15 @@ public class AuctionService {
       return mapper.insAuctionList(entity);
     }
 
-    public List<AuctionVo> selAuctionList(AuctionVo vo){return  mapper.selAuctionList(vo);}
-    public List<AuctionVo> selAuctionListAll(AuctionVo vo){return  mapper.selAuctionListAll(vo);}
+
+    public List<AuctionVo> selAuctionList(AuctionVo vo){
+
+        return mapper.selAuctionList(vo);
+    }
+    public List<AuctionVo> selAuctionListAll(AuctionVo vo){
+        return  mapper.selAuctionListAll(vo);}
+
+
 
     public AuctionVo selAuctionDetail (AuctionVo vo){
         AuctionVo detail = mapper.selAuctionDetail(vo);

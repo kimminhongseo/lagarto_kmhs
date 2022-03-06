@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -21,8 +23,7 @@ public class AuctionBidController {
     @Autowired
     private AuctionBidService service;
 
-    @Autowired
-    private AuctionService service1;
+
 
     @Autowired
     private Utils utils;
@@ -58,12 +59,20 @@ public class AuctionBidController {
     }
 
     @GetMapping("/timer") //시간재기
-    public int time (@RequestParam("iboard") int iboard)
+    public int time (@RequestParam("iboard") int iboard,@RequestParam("mdt") int mdt)
     {
         AuctionVo vo = new AuctionVo();
         vo.setIboard(iboard);
 
+
       return service.checktimer(vo);
+    }
+
+    @PutMapping() //낙찰 유무
+    public Map<String, Integer> bidcheck (@RequestBody AuctionVo vo){
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result", service.bidcheck(vo));
+        return result;
     }
 
 

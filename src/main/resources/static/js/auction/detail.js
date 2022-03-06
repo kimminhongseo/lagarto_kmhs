@@ -327,14 +327,34 @@ const countDownTimer = function (id,date){
         var now = new Date();
         var distDt = _vDate - now;
 
-        if(distDt<0){
+        if(distDt<0){ //경매 마감되었을때.
             clearInterval(timer);
             document.getElementById(id).textContent='경매가 마감되었습니다.';
             document.getElementById("soldout").style.visibility = "visible"; //마감되면 sold out 이미지
-            document.getElementById("bidwrite").style.visibility = "hidden"; //경매가 등록 사라지게
-            document.getElementById("formimbuybtn").style.visibility = "hidden";
+
+            if(document.getElementById("bidwrite")){
+                document.getElementById("bidwrite").style.visibility = "hidden"; //경매가 등록 사라지게
+            }
+            if(document.getElementById("formimbuybtn")){
+                document.getElementById("formimbuybtn").style.visibility = "hidden"; //즉시구매 사라지게
+            }
+            const param={
+                iboard
+            }
+            myFetch.put('/ajax/auctionBid',data =>{
+                switch (data.result){
+                    case 0:
+                        alert('실패');
+                        break;
+                    case 1:
+                        alert("경매가 끝난 상품입니다.");
+                        break;
+                }
+            },param);
+
             return;
         }
+
         var days = Math.floor(distDt / _day);
         var hours = Math.floor((distDt % _day) / _hour);
         var minutes = Math.floor((distDt % _hour) / _minute);
@@ -346,28 +366,36 @@ const countDownTimer = function (id,date){
         document.getElementById(id).textContent += minutes + '분 ';
         document.getElementById(id).textContent += seconds + '초 남았습니다';
 
-
     }
     timer= setInterval(showRemaining,1000);
 }
 
 
+
+
+
+
 const mdtElem = document.getElementById('mdt');
 if(mdtElem){
-        fetch(`ajax/auctionBid/timer?iboard=${iboard}`,{
+        fetch(`/ajax/auctionBid/timer?iboard=${iboard}&mdt=${mdt.value}`,{
             method: 'GET',
             headers : {'Content-type': 'application/json'}
         }).then(res=>{
             return res.json();
         }).then(data=>{
-            console.log(data);
-            countDownTimer('finish',mdtElem.value);
+
+            countDownTimer('finish',mdtElem.value); //string으로 받아와도 괜찮은가
 
         })
     }
 
+
+
+
+
 //-----------------경매 남은시간 및 끝났을때 이벤트 (끝)
 
+//------경매 끝나면 bid 가 1 되도록.
 
 
 

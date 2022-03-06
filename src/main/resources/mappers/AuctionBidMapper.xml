@@ -39,6 +39,11 @@
         WHERE iboard = #{iboard};
     </select>
 
+    <update id="bidcheck">
+        update auction set bid = 1
+        where iboard = #{iboard}
+    </update>
+
 
 
 

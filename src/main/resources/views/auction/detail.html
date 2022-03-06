@@ -53,8 +53,8 @@
                         <!--                 <div> 현재 가격은 : (<span id="checkbuy" th:text="${bid.buy}" th:value="${bid.buy}" />) 원 입니다.</div>-->
                         <!--                <div> ↑↑↑↑현재 입찰자는 (<span id="checkwriternm" th:text="${bid.writernm}" />) 님 입니다↑↑↑↑ </div>-->
                         <!--            </div>-->
-               <div id="finishtime">마감 시간(최종 입찰자+1시간): <span th:text="${data.mdt}"  th:value="${data.mdt}" />
-              <h1><input type="hidden" id="mdt" th:value="${data.mdt}">  <span id="finish"/></h1>
+               <div id="finishtime">마감 시간(최종 입찰자+1시간)
+              <h1><input type="hidden" id="mdt"  th:value="${data.mdt}">  <span id="finish"/></h1>
                </div>
 
             <div> 현재 가격은 : (<span id="checkbuy" th:text="${data.buy}" th:value="${data.buy}"/>) 원 입니다.
@@ -81,7 +81,7 @@
                     <button id="bidwrite" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         경매가 등록하기
                     </button>
-                    <button type="button" id="formimbuybtn" class="btn btn-primary">즉시구매</button>
+                    <button id="formimbuybtn" type="button" class="btn btn-primary">즉시구매</button>
                 </div>
 
 

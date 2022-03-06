@@ -15,3 +15,7 @@
 
 #soldout
 { visibility: hidden; }
+#bidwrite
+{ visibility: visible; }
+#formimbuybtn
+{ visibility: visible; }

@@ -11,10 +11,6 @@
 
 <th:block layout:fragment="content">
     <div class="main">
-
-
-
-
         <div id="data" th:with="board_cd=${board_cd}" th:data-board_cd="${board_cd}"></div>
         <div th:switch="${board_cd}">
             <span th:case="1"><h1>리뷰</h1></span>
@@ -58,13 +54,12 @@
             </tr>
             </thead>
             <tbody>
-            <div id="iboard" th:each="item : ${list}" th:with="iboard=${item.getIboard()}" th:data-iboard="${iboard}">
-                <tr th:onclick="location.href=`/customer/detail?iboard=`+[[${iboard}]]" class="record pointer">
+            <div th:each="item : ${list}">
+                <tr class="record pointer" th:with="iboard=${item.iboard}" th:data-iboard="${iboard}">
                     <td th:text="${item.iboard}">번호</td>
                     <td th:if="${board_cd == 1}" th:text="${item.productTitle}">상품제목</td>
                     <td th:text="${item.title}">제목</td>
                     <td th:text="${item.nickname}">작성자</td>
-                    </a>
                     <td th:text="${item.hits}">조회수</td>
                     <td th:text="${item.rdt}">작성일시</td>
                 </tr>

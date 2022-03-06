@@ -58,7 +58,10 @@
                 <tr class="record pointer" th:with="iboard=${item.iboard}" th:data-iboard="${iboard}">
                     <td th:text="${item.iboard}">번호</td>
                     <td th:if="${board_cd == 1}" th:text="${item.productTitle}">상품제목</td>
-                    <td th:text="${item.title}">제목</td>
+                    <th:block>
+                        <td th:if="${item.secretYn eq 'Y'}"th:text="'🔒'+${item.title}">제목</td>
+                        <td th:unless="${item.secretYn eq 'Y'}" th:text="${item.title}">제목</td>
+                    </th:block>
                     <td th:text="${item.nickname}">작성자</td>
                     <td th:text="${item.hits}">조회수</td>
                     <td th:text="${item.rdt}">작성일시</td>

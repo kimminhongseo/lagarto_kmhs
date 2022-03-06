@@ -28,8 +28,8 @@ public class CustomerController {
     public String list(@PathVariable int board_cd, @ModelAttribute("params") TestDto dto, Model model, HttpSession hs) {
         model.addAttribute("board_cd", board_cd);
         model.addAttribute("list", service.selCustomerList(dto));
-        dto.setBoard_cd(board_cd);
         model.addAttribute("login",hs.getAttribute(Const.LOGIN_USER));
+        dto.setBoard_cd(board_cd);
         return "customer/list";
     }
 

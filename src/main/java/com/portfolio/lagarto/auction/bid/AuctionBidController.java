@@ -54,9 +54,18 @@ public class AuctionBidController {
     public int returnmoney(@RequestParam("formbid") int formbid, @RequestParam("formbuy") int formbuy,
                            @RequestParam("iboard") int iboard, @RequestParam("prebuyer") int prebuyer)
     {
-
         return 1;
     }
+
+    @GetMapping("/timer") //시간재기
+    public int time (@RequestParam("iboard") int iboard)
+    {
+        AuctionVo vo = new AuctionVo();
+        vo.setIboard(iboard);
+
+      return service.checktimer(vo);
+    }
+
 
 
 

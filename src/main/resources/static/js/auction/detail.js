@@ -301,14 +301,83 @@ if(favIconElem) {
 
 
 //마감시간이 현재보다 작으면 전체다 회색?
-const finishtimeElem = document.querySelector('#finishtime' );
-const finishtitmeElem1 = document.getElementById('finishtime');
-if(formimbuybtn){
-    formimbuybtnElem.addEventListener('click',()=>{
-        console.log("select : "+finishtimeElem);
-        console.log("id : "+finishtitmeElem1);
-    });
+// const finishtimeElem = document.querySelector('#finishtime' );
+// const finishtitmeElem1 = document.getElementById('finishtime');
+// if(formimbuybtn){
+//     formimbuybtnElem.addEventListener('click',()=>{
+//         console.log("select : "+finishtimeElem);
+//         console.log("id : "+finishtitmeElem1);
+//     });
+// }
+
+
+
+//-----------------경매 남은시간 및 끝났을때 이벤트
+
+
+
+
+
+
+
+
+
+const countDownTimer = function (id,date){
+    var _vDate = new Date(date); // 전달 받은 일자
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining(){
+        var now = new Date();
+        var distDt = _vDate - now;
+
+        if(distDt<0){
+            clearInterval(timer);
+            document.getElementById(id).textContent='경매가 마감되었습니다.';
+            return;
+        }
+        var days = Math.floor(distDt / _day);
+        var hours = Math.floor((distDt % _day) / _hour);
+        var minutes = Math.floor((distDt % _hour) / _minute);
+        var seconds = Math.floor((distDt % _minute) / _second);
+
+        //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
+        document.getElementById(id).textContent = days + '일 ';
+        document.getElementById(id).textContent += hours + '시간 ';
+        document.getElementById(id).textContent += minutes + '분 ';
+        document.getElementById(id).textContent += seconds + '초 남았습니다';
+
+    }
+    timer= setInterval(showRemaining,1000);
 }
+
+
+
+function getNow(){
+    return new Date().getTime();
+}
+const mdtElem = document.getElementById('mdt');
+if(mdtElem){
+        fetch(`ajax/auctionBid/timer?iboard=${iboard}`,{
+            method: 'GET',
+            headers : {'Content-type': 'application/json'}
+        }).then(res=>{
+            return res.json();
+        }).then(data=>{
+            console.log(data);
+            countDownTimer('finish',mdtElem.value);
+
+          // var myInt = Number(new Date(data.timestamp));
+            //  console.log("mdt : "+myInt); //mdt 의미
+
+            //현재 시간?
+        })
+    }
+
+
 
 
 

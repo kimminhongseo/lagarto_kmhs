@@ -39,8 +39,9 @@ public class AuctionBidService {
             }
 
 
+    }
 
-
-
+    public int checktimer(AuctionVo vo){
+       return mapper.checktimer(vo);
     }
 }

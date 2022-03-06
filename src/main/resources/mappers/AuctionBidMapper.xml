@@ -34,6 +34,11 @@
         WHERE iuser = #{buyer}
     </select>
 
+    <select id="checktimer" resultType="int">
+        SELECT mdt FROM auction
+        WHERE iboard = #{iboard};
+    </select>
+
 
 
 

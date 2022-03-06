@@ -13,4 +13,5 @@ public interface AuctionBidMapper {
     void firstremovemoney(AuctionVo vo);
     void updBid(AuctionVo vo);
     int findmoney(AuctionVo vo);
+    int checktimer(AuctionVo vo);
 }

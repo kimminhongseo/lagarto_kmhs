@@ -77,6 +77,30 @@ public class AuctionService {
         return mapper.delAuction(vo);
     }
 
+
+    public List<AuctionVo> buyMyPage(){
+        AuctionVo vo = new AuctionVo();
+        vo.setBuyer(utils.getLoginUserPk());
+        return mapper.buyMyPage(vo);
+    }
+
+    public List<AuctionVo> sellMyPage(){ //판매완료
+        AuctionVo vo = new AuctionVo();
+        vo.setIuser(utils.getLoginUserPk());
+        return mapper.sellMyPage(vo);
+    }
+
+    public List<AuctionVo> sellingMyPage(){ //판매중
+        AuctionVo vo = new AuctionVo();
+        vo.setIuser(utils.getLoginUserPk());
+        return mapper.sellingMyPage(vo);
+    }
+
+
+
+
+
+
     public List<AuctionCategoryEntity> auctionMenuList(){return  mapper.selAuctionCategoryList();}
 
 

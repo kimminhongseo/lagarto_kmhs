@@ -11,7 +11,6 @@ import lombok.ToString;
 @ToString
 public class UserEntity {
     private int iuser;
-    private String email;
     private String uid;
     private String upw;
     private String nm;
@@ -33,7 +32,4 @@ public class UserEntity {
     private String rdt;
     private boolean auth;
     private String last_login_at;
-
-    private JoinResult result;
-
 }

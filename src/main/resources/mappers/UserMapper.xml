@@ -43,12 +43,6 @@
         WHERE `uid` = #{uid}
     </select>
 
-    <insert id="facebookPk">
-        UPDATE `lagarto`.`lagarto_user`
-        SET `nickname` = #{nickname}
-        WHERE `email` = #{email};
-    </insert>
-
     <select id="loginSel" resultType="LoginVo">
         SELECT * FROM `lagarto`.`lagarto_user`
         WHERE

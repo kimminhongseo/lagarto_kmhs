@@ -5,6 +5,7 @@
 
     --font-style-default: 'Noto Sans KR', sans-serif;;
     --font-style-nanum: 'Nanum Gothic', sans-serif;
+    --font-color-default: #212529;
 
     --width-max: 70%;
     --board-width-max: 80rem;

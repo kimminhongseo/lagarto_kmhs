@@ -16,7 +16,6 @@ public interface UserMapper {
     int isDesc(UserEntity entity);
     UserEntity selUser(UserEntity entity);
     UserEntity selApiUser(UserEntity entity);
-    UserEntity facebookPk(UserEntity entity);
     LoginVo loginSel(LoginVo loginVo);
     void updLastLogin(UserEntity entity);
     UserEntity passwordSel(UserDto dto);

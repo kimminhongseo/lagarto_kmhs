@@ -43,12 +43,6 @@
         WHERE `uid` = #{uid}
     </select>
 
-    <insert id="facebookPk">
-        UPDATE `lagarto`.`lagarto_user`
-        SET `nickname` = #{nickname}
-        WHERE `email` = #{email};
-    </insert>
-
     <select id="loginSel" resultType="LoginVo">
         SELECT * FROM `lagarto`.`lagarto_user`
         WHERE
@@ -163,11 +157,11 @@
 
     <!-- 회원 레벨 관리 -->
     <!-- 로그인 시, 글 작성 시, 댓글 작성 시 사용, 상품 구매 후 확정 시 -->
-    <select id="selUserLevel" resultType="UserEntity">
-        SELECT `iuser`
+    <select id="selUserLevel" resultType="int">
+        SELECT COUNT(`iuser`)
         FROM `lagarto`.`lagarto_user`
         WHERE `iuser` = #{iuser}
-          AND `level_bar` = 1000
+          AND `level_bar` >= 1000
     </select>
 
     <update id="updUserLevel">

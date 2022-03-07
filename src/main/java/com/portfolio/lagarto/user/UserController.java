@@ -11,6 +11,7 @@ import com.portfolio.lagarto.enums.ForgotPwResult;
 import com.portfolio.lagarto.enums.JoinResult;
 import com.portfolio.lagarto.follow.FollowService;
 import com.portfolio.lagarto.model.*;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
@@ -83,6 +84,15 @@ public class UserController {
         entity.setLast_login_at(loginUser.getLast_login_at());
         session.setAttribute(Const.LOGIN_MEMBER, entity);
 
+        // 로그인 시 point + 10
+        int firstLogin = service.selFirstLogin(entity);
+        if (firstLogin == 1) {
+            service.updLevelBar(10, entity);
+            if (service.selUserLevel(entity) == 1) {
+                service.updUserLevel(entity);
+            }
+        }
+
         service.updLastLogin(loginVo);
 
         return 1;
@@ -100,14 +110,24 @@ public class UserController {
             result.put("result", 0);
         } else {
             utils.setLoginUser(dbEntity);
-            System.out.println(utils.getLoginUserPk());
+
+            // 로그인 시 point + 10
+            int firstLogin = service.selFirstLogin(dbEntity);
+            if (firstLogin == 1) {
+                service.updLevelBar(10, dbEntity);
+                if (service.selUserLevel(dbEntity) == 1) {
+                    service.updUserLevel(dbEntity);
+                }
+            }
+
+            service.updLastLogin(dbEntity);
             result.put("result", 1);
         }
         return result;
     }
 
     @GetMapping("/certification")
-    public void certification(@ModelAttribute("entity") UserEntity entity, Model model) {
+    public void certification(@ModelAttribute("entity") JoinVo joinVo, Model model) {
         model.addAttribute("CONTACT_FIRST", Const.CONTACT_FIRST);
         model.addAttribute("CONTACT_SECOND", Const.CONTACT_SECOND);
         model.addAttribute("CONTACT_THIRD", Const.CONTACT_THIRD);
@@ -115,23 +135,23 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/apiCertification")
-    public Map<String, Integer> certificationProc(@RequestBody UserEntity entity) {
+    public Map<String, Integer> certificationProc(@RequestBody JoinVo joinVo) {
         Map<String, Integer> result = new HashMap<>();
-        System.out.println(entity);
+        System.out.println(joinVo);
 
         String pw = Utils.randomPw();
-        entity.setUpw(pw);
+        joinVo.setUpw(pw);
 
         // 중복된 번호
         int contactCheck = 0;
 
-        service.contactCheck(entity);
-        JoinResult joinRslt = entity.getResult();
+        service.contactCheck(joinVo);
+        JoinResult joinRslt = joinVo.getResult();
 
         // 사용 가능한 번호
         if (joinRslt == JoinResult.AVAILABLE_CONTACT) {
             contactCheck = 1;
-            service.apiJoin(entity);
+            service.apiJoin(joinVo);
         }
 
         result.put("result", contactCheck);
@@ -159,8 +179,6 @@ public class UserController {
             System.out.println("회원가입 실패");
         }
 
-        // TODO : email 전송 기능 구현 후 email 인증 페이지로 이동 후 회원가입 처리
-
         return "redirect:/user/login";
     }
 
@@ -169,28 +187,21 @@ public class UserController {
         return "/user/disc/" + cd;
     }
 
-    @PostMapping("/apiJoin")
-    public void apiJoinProc(UserEntity entity) {
-        System.out.println(entity.getNickname());
-        service.facebookIns(entity);
-    }
-
     @PostMapping("/uidChk")
     @ResponseBody
-    public Map<String, Integer> emailCount(@RequestBody UserEntity entity) {
+    public Map<String, Integer> emailCount(@RequestBody JoinVo joinVo) {
         Map<String, Integer> result = new HashMap<>();
-        System.out.println("uid : " + entity.getUid());
-        result.put("result", service.uidCheck(entity));
+        System.out.println("uid : " + joinVo.getUid());
+        result.put("result", service.uidCheck(joinVo));
         return result;
     }
 
-
     @PostMapping("/contChk")
     @ResponseBody
-    public Map<String, Integer> contactCount(@RequestBody UserEntity entity) {
+    public Map<String, Integer> contactCount(@RequestBody JoinVo joinVo) {
         Map<String, Integer> result = new HashMap<>();
-        System.out.println("contact : " + entity.getContact_first() + entity.getContact_second() + entity.getContact_third());
-        result.put("result", service.contactCheck(entity));
+        System.out.println("contact : " + joinVo.getContact_first() + joinVo.getContact_second() + joinVo.getContact_third());
+        result.put("result", service.contactCheck(joinVo));
         return result;
     }
 

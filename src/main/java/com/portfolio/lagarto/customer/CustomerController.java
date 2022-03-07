@@ -43,6 +43,7 @@ public class CustomerController {
     public String writeProc(CustomerEntity entity, MultipartFile[] files) {
 
         boolean isRegistered = this.service.insCustomer(entity, files);
+        //TODO
         return "redirect:/customer/detail?iboard=" + entity.getIboard();
     }
 

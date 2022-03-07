@@ -63,72 +63,71 @@ public class UserService {
     }
 
     public int insUser(UserEntity entity) {
-        UserEntity copyEntity = new UserEntity();
-        BeanUtils.copyProperties(entity, copyEntity);
+        JoinVo joinVo = new JoinVo();
+        BeanUtils.copyProperties(entity, joinVo);
 
 
         // 필수 약관동의 체크
-        if (!(copyEntity.getDisc_agree_a() == 1 && copyEntity.getDisc_agree_b() == 1)) {
+        if (!(joinVo.getDisc_agree_a() == 1 && joinVo.getDisc_agree_b() == 1)) {
             System.out.println("약관 error");
-            copyEntity.setResult(JoinResult.FAILURE);
+            joinVo.setResult(JoinResult.FAILURE);
             return 0;
         }
 
         // 아이디 정규식 체크
-        if (!Const.checkUid(copyEntity.getUid())) {
+        if (!Const.checkUid(joinVo.getUid())) {
             System.out.println("아이디 정규식 error");
-            copyEntity.setResult(JoinResult.FAILURE);
+            joinVo.setResult(JoinResult.FAILURE);
             return 0;
         }
 
         // 아이디 중복 체크
-        if (mapper.selUidCount(copyEntity) > 0) {
+        if (mapper.selUidCount(joinVo) > 0) {
             System.out.println("중복 error");
-            copyEntity.setResult(JoinResult.DUPLICATE_EMAIL);
+            joinVo.setResult(JoinResult.DUPLICATE_EMAIL);
             return 0;
         }
 
         // 전화번호 중복 체크
-        if (mapper.selContactCount(copyEntity) > 0) {
+        if (mapper.selContactCount(joinVo) > 0) {
             System.out.println("번호 error");
-            copyEntity.setResult(JoinResult.DUPLICATE_CONTACT);
+            joinVo.setResult(JoinResult.DUPLICATE_CONTACT);
             return 0;
         }
 
-        String hashUpw = BCrypt.hashpw(copyEntity.getUpw(), BCrypt.gensalt());
-        copyEntity.setUpw(hashUpw);
-        copyEntity.setPlatform_cd(Const.Platform.GENERAL);
-        System.out.println(hashUpw);
+        String hashUpw = BCrypt.hashpw(joinVo.getUpw(), BCrypt.gensalt());
+        joinVo.setUpw(hashUpw);
+        joinVo.setPlatform_cd(Const.Platform.GENERAL);
 
-        copyEntity.setResult(JoinResult.SUCCESS);
-        return mapper.insUser(copyEntity);
+        joinVo.setResult(JoinResult.SUCCESS);
+        return mapper.insUser(joinVo);
     }
 
-    public int apiJoin(UserEntity entity) {
-        entity.setDisc_agree_b(1);
-        entity.setDisc_agree_b(1);
-        entity.setDisc_agree_c(0);
-        entity.setResult(JoinResult.SUCCESS);
-        return mapper.insUser(entity);
+    public int apiJoin(JoinVo joinVo) {
+        joinVo.setDisc_agree_a(1);
+        joinVo.setDisc_agree_b(1);
+        joinVo.setDisc_agree_c(0);
+        joinVo.setResult(JoinResult.SUCCESS);
+        return mapper.insUser(joinVo);
     }
 
-    public int contactCheck(UserEntity entity) {
-        int result = mapper.selContactCount(entity);
+    public int contactCheck(JoinVo joinVo) {
+        int result = mapper.selContactCount(joinVo);
 
         if (result > 0) {
-            entity.setResult(JoinResult.DUPLICATE_CONTACT);
+            joinVo.setResult(JoinResult.DUPLICATE_CONTACT);
             return result;
         }
 
-        entity.setResult(JoinResult.AVAILABLE_CONTACT);
+        joinVo.setResult(JoinResult.AVAILABLE_CONTACT);
         return result;
     }
 
-    public int uidCheck(UserEntity entity) {
-        int result = mapper.selUidCount(entity);
+    public int uidCheck(JoinVo joinVo) {
+        int result = mapper.selUidCount(joinVo);
 
         if (result > 0) {
-            entity.setResult(JoinResult.DUPLICATE_EMAIL);
+            joinVo.setResult(JoinResult.DUPLICATE_EMAIL);
         }
 
         return result;
@@ -179,12 +178,6 @@ public class UserService {
     public UserEntity selApiUser(UserEntity entity) {
         return mapper.selApiUser(entity);
     }
-
-    public UserEntity facebookIns(UserEntity entity){
-        entity.setIuser(utils.getLoginUserPk());
-        return mapper.facebookPk(entity);
-    }
-
 
     public int passwordSel(UserDto dto){
         UserEntity dbUpw = mapper.passwordSel(dto);
@@ -324,7 +317,7 @@ public class UserService {
 
     }
 
-    public UserEntity selUserLevel(UserEntity entity) {
+    public int selUserLevel(UserEntity entity) {
         return mapper.selUserLevel(entity);
     }
 
@@ -333,7 +326,7 @@ public class UserService {
     }
 
     public void updLevelBar(int point, UserEntity entity) {
-        mapper.updLevelBar(point, entity);
+        mapper.updLevelBar(point, entity.getIuser());
     }
 
     public int selFirstLogin(UserEntity entity) {

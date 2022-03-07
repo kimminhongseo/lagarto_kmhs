@@ -127,12 +127,12 @@
                             url: '/user/login',
                             type: 'post',
                             data: {
-                                uid : $('#formId').val(),
-                                upw : $('#formPw').val(),
-                                auto_id_check : $('#saveId').val()
+                                uid: $('#formId').val(),
+                                upw: $('#formPw').val(),
+                                auto_id_check: $('#saveId').val()
                             },
                             success: (num) => {
-                                switch (num){
+                                switch (num) {
                                     case 1:
                                         location.href = '/main';
                                         break;
@@ -163,58 +163,6 @@
                 "_blank",
                 "width=800, height=700, location=no, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
         }
-
-
-        //기존 로그인 상태를 가져오기 위해 Facebook에 대한 호출
-        function statusChangeCallback(res) {
-            statusChangeCallback(response);
-        }
-
-
-        function fnFbCustomLogin() {
-            FB.login(function (response) {
-                if (response.status === 'connected') {
-                    FB.api('/me', 'get', {fields: 'name,email'}, function (r) {
-                        let url = '/user/apiLogin';
-                        console.log(r);
-
-                        fetch(url, {
-                            method: 'post',
-                            headers: {'Content-type': 'application/json'},
-                            body: JSON.stringify(r)
-                        }).then(function (res) {
-                            return res.json();
-                        }).then(hh => {
-                            switch (hh) {
-                                case 1:
-                                    location.href = "http://localhost:8090/user/certification"
-                                    break;
-                                case 0:
-                                    location.href = "http://localhost:8090/page/main"
-                                    break;
-                            }
-                        });
-                    })
-                } else if (response.status === 'not_authorized') {
-                    // 사람은 Facebook에 로그인했지만 앱에는 로그인하지 않았습니다.
-                    alert('앱에 로그인해야 이용가능한 기능입니다.');
-                } else {
-                    // 그 사람은 Facebook에 로그인하지 않았으므로이 앱에 로그인했는지 여부는 확실하지 않습니다.
-                    alert('페이스북에 로그인해야 이용가능한 기능입니다.');
-                }
-            }, {scope: 'public_profile,email'});
-        }
-
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '612308656721361', // 내 앱 ID를 입력한다.
-                cookie: true,
-                xfbml: true,
-                version: 'v12.0'
-            });
-            FB.AppEvents.logPageView();
-        };
-
     }
 
 

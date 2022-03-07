@@ -1,4 +1,5 @@
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="temp/thymeleaf_layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
 <head>
     <meta charset="UTF-8">
     <title>메인!</title>
@@ -22,177 +23,336 @@
                     <img id="event03" src="/static/img/event03.png" class="d-block w-80" alt="">
                 </div>
             </div>
-            <button id="btnTop10" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <button id="btnTop10" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="prev">
                 <span><i style="color: #1d1d1d; font-size: 50px" class="fa-solid fa-chevron-left"></i></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="next">
                 <span><i style="color: #1d1d1d; font-size: 50px" class="fa-solid fa-angle-right"></i></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
 
-        <div class="topProductTop10">
-            <h2>현재 gk 상품 Top4</h2>
-        </div>
-        <div class="line">
-        </div>
-        <div class="topProduct">
-		<span>
-		<div class="card" style="width: 18rem;">
-			<img src="/static/img/bell.png" class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
+        <div class="main_content">
+			<div class="home_products">
+				<div class="product_title topProductTop10">
+					<h2>companion animal</h2>
+					<p>반려동물</p>
+				</div>
+				<div class="product">
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
 			</div>
-		</div>
-		</span>
-            <span>
-		<div class="card" style="width: 18rem;">
-			<img src="..." class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
-			</div>
-		</div>
-		</span>
-            <span>
-		<div class="card" style="width: 18rem;">
-			<img src="..." class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
-			</div>
-		</div>
-		</span>
-            <span>
-		<div class="card" style="width: 18rem;">
-			<img src="..." class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
-			</div>
-		</div>
-		</span>
-        </div>
-        <div class="line">
-        </div>
 
-        <a class="theList" href="auction/list"><div class="d-grid gap-2"><button id="theList1" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button></div></a>
+			<a class="theList" href="auction/list">
+				<div class="d-grid gap-2">
+					<button id="theList1" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button>
+				</div>
+			</a>
 
-        <div class="topProductTop10">
-            <h2>현재 할인 상품 Top4</h2>
-        </div>
-        <div class="line">
-        </div>
-        <div class="topProduct">
-		<span>
-		<div class="card" style="width: 18rem;">
-			<img src="/static/img/bell.png" class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
+			<div class="home_products">
+				<div class="product_title topProductTop10">
+					<h2>new item</h2>
+					<p>신규상품</p>
+				</div>
+				<div class="product">
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
 			</div>
-		</div>
-		</span>
-            <span>
-		<div class="card" style="width: 18rem;">
-			<img src="..." class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
-			</div>
-		</div>
-		</span>
-            <span>
-		<div class="card" style="width: 18rem;">
-			<img src="..." class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
-			</div>
-		</div>
-		</span>
-            <span>
-		<div class="card" style="width: 18rem;">
-			<img src="..." class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
-			</div>
-		</div>
-		</span>
-        </div>
-        <div class="line">
-        </div>
-        <a class="theList" href="auction/list"><div class="d-grid gap-2"><button id="theList2" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button></div></a>
 
-        <div class="topProductTop10">
-            <h2>현재 할인 용품 Top4</h2>
-        </div>
-        <div class="line">
-        </div>
-        <div class="topProduct">
-		<span>
-		<div class="card" style="width: 18rem;">
-			<img src="/static/img/bell.png" class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
-			</div>
-		</div>
-		</span>
-            <span>
-		<div class="card" style="width: 18rem;">
-			<img src="..." class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
-			</div>
-		</div>
-		</span>
-            <span>
-		<div class="card" style="width: 18rem;">
-			<img src="..." class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
-			</div>
-		</div>
-		</span>
-            <span>
-		<div class="card" style="width: 18rem;">
-			<img src="..." class="card-img-top" alt="...">
-			<div class="card-body">
-				<p class="card-text">
-					Some quick example text to build on the card title and make up the bulk of the card's content.
-				</p>
-			</div>
-		</div>
-		</span>
-        </div>
-        <div class="line">
-        </div>
-        <a class="theList" href="auction/list"><div class="d-grid gap-2"><button id="theList3" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button></div></a>
+			<a class="theList" href="auction/list">
+				<div class="d-grid gap-2">
+					<button id="theList2" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button>
+				</div>
+			</a>
 
-        <span>
-            <div class="imgKakao1"><span><label class="mouseOver1">도마뱀 리스트</label></span></div>
-			<div class="imgKakao2"><span><label class="mouseOver2">용품 리스트</label></span></div>
-			<div class="imgKakao3"><span><label class="mouseOver3">리뷰 리스트</label></span></div>
-			<div class="imgKakao4"><span><label class="mouseOver4">커뮤니티 리스트</label></span></div>
-			<div class="imgKakao5"><span><label class="mouseOver5">고객센터</label></span></div>
-		</span>
-        <div id="imgHref"></div>
+			<div class="home_products">
+				<div class="product_title topProductTop10">
+					<h2>popular item</h2>
+					<p>인기상품</p>
+				</div>
+				<div class="product">
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="product_detail">
+							<div class="detail_img">
+								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+							</div>
+							<div class="detail_text">
+								<div class="name">
+									<p>리자드/모니터</p>
+									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+								</div>
+								<div class="price">
+									<div class="price_num">
+										<em>120,000</em>
+										<span>원</span>
+									</div>
+									<div class="price_type">
+										<p>즉시 구매가</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<a class="theList" href="auction/list">
+				<div class="d-grid gap-2">
+					<button id="theList3" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button>
+				</div>
+			</a>
+
+			<span>
+				<div class="imgKakao1"><span><label class="mouseOver1">도마뱀 리스트</label></span></div>
+				<div class="imgKakao2"><span><label class="mouseOver2">용품 리스트</label></span></div>
+				<div class="imgKakao3"><span><label class="mouseOver3">리뷰 리스트</label></span></div>
+				<div class="imgKakao4"><span><label class="mouseOver4">커뮤니티 리스트</label></span></div>
+				<div class="imgKakao5"><span><label class="mouseOver5">고객센터</label></span></div>
+			</span>
+			<div id="imgHref"></div>
+        </div>
     </div>
 </th:block>

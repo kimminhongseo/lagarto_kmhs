@@ -71,6 +71,7 @@ public class FollowController {
         FollowEntity followEntity = new FollowEntity();
         followEntity.setIuserMe(iuserMe.getIuser());
         followEntity.setIuserYou(iuserYou.getIuser());
+        //0302균기 : 여기서 null받아와져서 에러가 떠짐. (detail.js에서 session.login == null)이면
         if (followEntity.getIuserMe() == followEntity.getIuserYou()){
             return 2;
         }

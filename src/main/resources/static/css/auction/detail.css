@@ -6,3 +6,16 @@
 #clickOpenUser{
     cursor: pointer;
 }
+
+
+#soldout{
+    width: 300px;
+    height: 300px;
+}
+
+#soldout
+{ visibility: hidden; }
+#bidwrite
+{ visibility: visible; }
+#formimbuybtn
+{ visibility: visible; }

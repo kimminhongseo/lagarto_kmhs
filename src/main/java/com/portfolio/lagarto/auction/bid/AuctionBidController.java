@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -21,8 +23,7 @@ public class AuctionBidController {
     @Autowired
     private AuctionBidService service;
 
-    @Autowired
-    private AuctionService service1;
+
 
     @Autowired
     private Utils utils;
@@ -38,9 +39,7 @@ public class AuctionBidController {
         vo.setBuy(formbid); //경매희망값
         vo.setImbuy(formimbuy); //즉시구매
         vo.setIboard(iboard);
-
         vo.setIuser(iuser); //글쓴이!
-
         vo.setPrebuy(formbuy); //현재 등록된값
         vo.setPrebuyer(prebuyer); //현재가 올린 그 사람. = 예전사람
         vo.setBuyer(utils.getLoginUserPk()); // 현재 로그인한 사람
@@ -54,9 +53,26 @@ public class AuctionBidController {
     public int returnmoney(@RequestParam("formbid") int formbid, @RequestParam("formbuy") int formbuy,
                            @RequestParam("iboard") int iboard, @RequestParam("prebuyer") int prebuyer)
     {
-
         return 1;
     }
+
+    @GetMapping("/timer") //시간재기
+    public int time (@RequestParam("iboard") int iboard,@RequestParam("mdt") int mdt)
+    {
+        AuctionVo vo = new AuctionVo();
+        vo.setIboard(iboard);
+
+
+      return service.checktimer(vo);
+    }
+
+    @PutMapping() //낙찰 유무
+    public Map<String, Integer> bidcheck (@RequestBody AuctionVo vo){
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result", service.bidcheck(vo));
+        return result;
+    }
+
 
 
 

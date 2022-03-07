@@ -1,6 +1,7 @@
 package com.portfolio.lagarto.supplies;
 
 
+import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.model.AuctionVo;
 import com.portfolio.lagarto.model.SuppliesEntity;
 import com.portfolio.lagarto.model.SuppliesVo;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/supplies")
@@ -49,9 +52,10 @@ public class SuppliesController {
 
 
     @GetMapping("/detail")
-    public void detail(SuppliesVo vo, Model model, int iboard){
+    public void detail(SuppliesVo vo, Model model, int iboard, HttpSession hs){
         model.addAttribute("Data",service.selSuppliesDetail(vo));
         model.addAttribute("fileList",service.getSupAttachFileList(iboard));
+        model.addAttribute("login",hs.getAttribute(Const.LOGIN_USER));
     }
 
 

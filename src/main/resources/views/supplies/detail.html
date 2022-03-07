@@ -25,6 +25,8 @@
 <th:block layout:fragment="content">
 
     <div class="main">
+        <div  id="dataLogin" th:if="${session.loginUser != null}" th:with="data=${login}" th:data-iuser="${session.loginUser.iuser}"></div>
+
         <!--Elem=docu q ~. dataIuser   Elem.dataset.iuser  하면 Data.iuser값이 js로 온다. -->
         <div id="dataIuser" class="row" th:with="data=${Data}" th:data-iuser="${Data.iuser}" >
 
@@ -38,19 +40,20 @@
 
 
                 <div id="isfollow" onsubmit="return isfollow();"></div>
-
+                <span hidden id="icategory" th:text="${data.icategory}" th:value="${data.icategory}"/>
+                <div hidden><input type="text" id="iuser" th:value="${data.iuser}" ></div>
                 <div>작성자 : <span th:text="${data.nicknm}"/></div> <!--옆에 프로필사진-->
-                <div>카테고리 : <span th:text="${data.categorynm}"/></div>
-                <div>제목 :<span th:text="${data.title}"/></div>
+                <div>카테고리 : <span th:text="${data.categorynm}" /></div>
+                <div>제목 :<span id="title" th:text="${data.title}" th:value="${data.title}"/></div>
                 <div>내용 : <span th:text="${data.ctnt}"/></div>
-                <div>판매가: <span th:text="${data.price}"/> 원</div>
+                <div>판매가: <span id="price" th:text="${data.price}" th:value="${data.price}"/> 원</div>
 
             <!--로그인 안하면 그냥 디테일만 보여지고 경매 참여 못함.-->
             <div th:if="${session.loginUser == null}">
                 로그인을 하시면 구매가능 합니다.>>>>>><a th:href="@{/user/login}"> 로그인 하러가기</a>
             </div>
             <div th:if="${session.loginUser != null}">
-                <button id="buyBtn">구매하기</button>
+                <button id="buyBtn">장바구니 담기</button>
             </div>
                 <div id="smallimages">
                     <span th:each="fileList: ${fileList}">

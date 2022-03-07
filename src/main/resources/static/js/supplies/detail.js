@@ -28,6 +28,33 @@ $(document).ready(function(){
     });
 });
 
+const buyBtnElem = document.querySelector('#buyBtn');
+
+
+console.log(buyBtnElem);
+
+
+if(buyBtnElem){
+    buyBtnElem.addEventListener('click',()=>{
+        fetch(`/cart1/ajax?iuser=${iuser.value}&iboard=${parseInt(iboard)}`,{
+            method:'POST',
+            headers: { "Content-Type" : "application/json" }
+        }).then(res=>{
+            return res.json();
+        }).then(data =>{
+            switch (data){
+                case 1:
+                    alert('insert 성공!');
+                    break;
+                case 0:
+                    alert("실패");
+            }
+        })
+
+    });
+}
+
+
 
 
 

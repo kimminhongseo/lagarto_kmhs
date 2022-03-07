@@ -90,6 +90,7 @@ public class CustomerService {
 
     public int delCustomer(CustomerEntity entity){
         entity.setIsdel(1);
+        attachMapper.deleteAttach(entity.getIboard());
         return mapper.delCustomer(entity);
     }
 

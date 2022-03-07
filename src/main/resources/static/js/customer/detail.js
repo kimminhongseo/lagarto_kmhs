@@ -273,4 +273,15 @@
             adaptiveHeight: true
         });
     });
+
+    const img = document.querySelectorAll(".thumbnail");
+    for (let i = 0; i < img.length; i++) {
+        img.item(i).onclick=function() {
+            window.open(
+                this.src,
+                "new",
+                "fullscreen=yes,resizable=yes"
+            )};
+    }
+
 })();

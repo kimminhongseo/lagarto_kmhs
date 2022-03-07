@@ -28,12 +28,8 @@
         <div th:if="${data.board_cd == 1}">
             <div>상품 제목 : <span th:text="${data.productTitle}"></span></div>
             <div>별점 :
-                <th:block th:if="${data.rating == 0}">
-                    <span>평가가 없습니다.</span>
-                </th:block>
-                <th:block>
-                    <span th:text="${'⭐'* data.rating}"></span>
-                </th:block>
+                    <span th:if="${data.rating == 0}" th:text="'평가가 없습니다.'"></span>
+                    <span th:unless="${data.rating == 0}" th:text="${'⭐'* data.rating}"></span>
             </div>
         </div>
         <div>글 번호 : <span th:text="${data.iboard}"></span></div>
@@ -42,11 +38,14 @@
         <div>작성일시 : <span th:text="${data.rdt}"></span></div>
         <div>내용</div>
         <div th:text="${data.ctnt}"></div>
-<!--        <div><img th:each="fileList : ${fileList}" th:src="@{/uploadfile/customer/} + ${fileList.iboard} + @{/} + ${fileList.save_name}" width="300px"></div>-->
+
         <div class="slider" th:if="${#lists.size(fileList) != 0}">
-            <div th:each="fileList : ${fileList}">
-                <img th:src="@{/uploadfile/customer/} + ${fileList.iboard} + @{/} + ${fileList.save_name}" width="500px">
-            </div>
+                <img th:each="fileList : ${fileList}" th:src="@{/uploadfile/customer/} + ${fileList.iboard} + @{/} + ${fileList.save_name}" width="500px">
+        </div>
+        <div>
+            <a target="_blank" th:if="${#lists.size(fileList) != 0}" th:each="fileList : ${fileList}">
+                <img class="thumbnail" style="cursor:pointer" th:src="@{/uploadfile/customer/} + ${fileList.iboard} + @{/} + ${fileList.save_name}" width="100px">
+            </a>
         </div>
 
         <div id="comment_form_container" class="mt-3" th:if="${session.loginUser != null}">

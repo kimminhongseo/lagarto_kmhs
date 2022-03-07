@@ -39,6 +39,7 @@
         </form>
 
         <div th:if="${session.loginUser != null}">
+            <div th:hidden th:data-loginUser="${loginUser}"></div>
             <button th:onclick="location.href=`/customer/write?board_cd=`+[[${board_cd}]]">글쓰기</button>
             <button><a href="/user/logout">로그아웃</a></button>
         </div>

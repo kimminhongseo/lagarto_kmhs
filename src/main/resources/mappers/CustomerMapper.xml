@@ -60,6 +60,7 @@
     <update id="updCustomer">
         UPDATE lagarto.customer
         SET
+
         title = #{title},
         ctnt = #{ctnt},
         rating = ${rating}

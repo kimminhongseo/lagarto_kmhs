@@ -22,6 +22,8 @@ public class Cart {
 
     @GetMapping("/cart")
     public String cart(){
+
+
         if (0 != utils.getLoginUserPk()) {
             return "/cart/cart";
         }

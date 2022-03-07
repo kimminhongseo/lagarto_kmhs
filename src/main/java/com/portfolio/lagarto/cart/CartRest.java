@@ -19,7 +19,7 @@ public class CartRest {
     @Autowired
     private Utils utils;
 
-    @PostMapping("/ajax")
+    @PostMapping("/ajax") //장바구니 담기 누르면 cart 테이블로 이동함.
     public  int cartlist(@RequestParam("iuser") int iuser ,@RequestParam("iboard") int iboard)
     {
         SuppliesEntity entity = new SuppliesEntity();

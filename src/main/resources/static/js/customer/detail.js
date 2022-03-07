@@ -8,7 +8,8 @@
     const commentFormContainerElem = document.querySelector('#comment_form_container');
     const commentListElem = document.querySelector('#comment_list');
     const tbodyElem = commentListElem.querySelector('table > tbody');
-    const modalClk = document.querySelector('#modal');
+    const sessionloginElem = document.querySelector('#dataLogin');
+
 
     //글 삭제 버튼
     const delBtnElem = document.querySelector('#delBtn');
@@ -34,7 +35,7 @@
 
     //글 디테일 데이터 가져오기
     const getData = () => {
-        fetch(`/customer/detail_item?iboard=${iboard}`)
+        fetch(`/customer/detail?iboard=${iboard}`)
             .then(res => res.text())
             .then(data => {
                 console.log(data);
@@ -97,7 +98,6 @@
         });
     }
     //-----------------------------------------------------------------------------
-    const sessionloginElem = document.querySelector('#dataLogin');
     const makeCommentRecordList = list => {
 
         list.forEach(item => {
@@ -178,8 +178,8 @@
                 trElem.appendChild(delBtn);
 
             }
-        })
         return trElem;
+        })
 
 
     }
@@ -265,4 +265,23 @@
     }
     //좋아요 ------------------------------------------------------------ [end] --
 // getCommentList();
+    $(function(){
+        $('.slider').bxSlider({
+            mode: 'fade',
+            captions: true,
+            slideWidth: 500,
+            adaptiveHeight: true
+        });
+    });
+
+    const img = document.querySelectorAll(".thumbnail");
+    for (let i = 0; i < img.length; i++) {
+        img.item(i).onclick=function() {
+            window.open(
+                this.src,
+                "new",
+                "fullscreen=yes,resizable=yes"
+            )};
+    }
+
 })();

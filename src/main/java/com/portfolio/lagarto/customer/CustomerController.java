@@ -1,5 +1,6 @@
 package com.portfolio.lagarto.customer;
 
+import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.Criteria;
 import com.portfolio.lagarto.auction.AuctionService;
 import com.portfolio.lagarto.customer.comment.CustomerCommentService;
@@ -13,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
@@ -22,18 +25,13 @@ public class CustomerController {
     @Autowired public AuctionService auctionService;
 
     @GetMapping("/list/{board_cd}")
-    public String list(@PathVariable int board_cd, @ModelAttribute("params") TestDto dto, Model model) {
+    public String list(@PathVariable int board_cd, @ModelAttribute("params") TestDto dto, Model model, HttpSession hs) {
         model.addAttribute("board_cd", board_cd);
         model.addAttribute("list", service.selCustomerList(dto));
+        model.addAttribute("loginUser",hs.getAttribute(Const.LOGIN_USER));
         dto.setBoard_cd(board_cd);
         return "customer/list";
     }
-
-//    @GetMapping("/selList")
-//    public String selList(@ModelAttribute("params")TestDto dto, Model model) {
-//        model.addAttribute("list", service.selList(dto));
-//        return "customer/selList";
-//    }
 
     @GetMapping("/write")
     public String write(@ModelAttribute("entity") CustomerEntity entity) {
@@ -45,21 +43,15 @@ public class CustomerController {
     public String writeProc(CustomerEntity entity, MultipartFile[] files) {
 
         boolean isRegistered = this.service.insCustomer(entity, files);
-        return "redirect:/customer/list/" + entity.getBoard_cd();
+        return "redirect:/customer/detail?iboard=" + entity.getIboard();
     }
 
     @GetMapping("/detail")
-    public void detail(Model model, CustomerDto dto) {
-        model.addAttribute("data", service.selCustomerDetail(dto));
-
-    }
-
-    @GetMapping("/detail_item")
-    public void selCustomerDetail(Model model, CustomerDto dto, int iboard) {
+    public void detail(Model model, CustomerDto dto, int iboard) {
         model.addAttribute("fileList", service.getAttachFileList(iboard));
         model.addAttribute("data", service.selCustomerDetail(dto));
-    }
 
+    }
 
     @GetMapping("/upd")
     public String upd(CustomerDto dto, @RequestParam(value = "iboard", required = false) int iboard ,Model model) {

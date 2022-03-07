@@ -13,6 +13,5 @@ public interface CustomerMapper {
     CustomerVo selCustomerDetail(CustomerDto dto);
     int updCustomer(CustomerDto dto);
     int delCustomer(CustomerEntity entity);
-//    List<CustomerVo> selList(TestDto dto);
     int totalCount(TestDto dto);
 }

@@ -18,24 +18,21 @@
                 <form id="form-horizontal" th:action="@{/customer/upd}" th:object="${data}" method="post" enctype="multipart/form-data" onsubmit="return registerBoard(this)">
                     <input type="hidden" id="board_cd" th:field="*{board_cd}" th:value="${param.board_cd}">
                     <input type="hidden" id="iboard" th:field="*{iboard}" th:value="${data.iboard}">
-                    <!--                    파일이 변경된 경우, changeYn 파라미터를 이용해 파일 삭제 및 재등록 처리-->
+                    <!--파일이 변경된 경우, changeYn 파라미터를 이용해 파일 삭제 및 재등록 처리-->
                     <input type="hidden" th:field="*{changeYn}" value="N" />
 
                     <div class="form-floating mb-3">
                         <input type="text" th:name="title" id="title" class="form-control" placeholder="title" th:field="*{title}">
                         <label class="form-label" for="title">제목</label>
                     </div>
-                    <div class="star-rating space-x-4 mx-auto" th:if="*{board_cd == 1}">
-                        <input type="radio" id="5-stars" th:name="rating" th:value="5" v-model="ratings"/>
-                        <label for="5-stars" class="star pr-4">★</label>
-                        <input type="radio" id="4-stars" th:name="rating" th:value="4" v-model="ratings"/>
-                        <label for="4-stars" class="star">★</label>
-                        <input type="radio" id="3-stars" th:name="rating" th:value="3" v-model="ratings"/>
-                        <label for="3-stars" class="star">★</label>
-                        <input type="radio" id="2-stars" th:name="rating" th:value="2" v-model="ratings"/>
-                        <label for="2-stars" class="star">★</label>
-                        <input type="radio" id="1-star" th:name="rating" th:value="1" v-model="ratings" />
-                        <label for="1-star" class="star">★</label>
+                    <div>
+                        <fieldset th:if="*{board_cd == 1}" th:field="*{rating}" th:value="${param.rating}">
+                            <input type="radio" name="rating" value="5" id="rate1" th:checked="${data.rating == 5}"><label for="rate1">⭐</label>
+                            <input type="radio" name="rating" value="4" id="rate2" th:checked="${data.rating == 4}"><label for="rate2">⭐</label>
+                            <input type="radio" name="rating" value="3" id="rate3" th:checked="${data.rating == 3}"><label for="rate3">⭐</label>
+                            <input type="radio" name="rating" value="2" id="rate4" th:checked="${data.rating == 2}"><label for="rate4">⭐</label>
+                            <input type="radio" name="rating" value="1" id="rate5" th:checked="${data.rating == 1}"><label for="rate5">⭐</label>
+                        </fieldset>
                     </div>
                     <div class="mb-3">
                         <label for="ctnt" class="form-label">내용</label>

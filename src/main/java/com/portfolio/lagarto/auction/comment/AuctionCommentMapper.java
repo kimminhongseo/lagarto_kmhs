@@ -14,6 +14,5 @@ public interface AuctionCommentMapper {
 
     int delAuctionCmt(AuctionCommentEntity entity);
 
-    int delAuctionCmtAll(AuctionCommentEntity entity); //댓글 모두 삭제.
 
 }

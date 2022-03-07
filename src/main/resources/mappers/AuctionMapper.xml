@@ -5,9 +5,9 @@
 
     <insert id="insAuction">
         insert into lagarto.auction
-        (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5,buyer)
+        (icategory, title, ctnt, iuser, buy, imbuy, image1, image2, image3, image4, image5,buyer,mdt)
         values
-        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{iuser})
+        (#{icategory}, #{title}, #{ctnt}, #{iuser}, #{buy}, #{imbuy}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{iuser},NOW()+3000000)
 
     </insert>
 
@@ -100,7 +100,46 @@
 
 
 
+    <!--mypage에 보낼 정보들-->
+    <select id="buyMyPage" resultType="AuctionVo">
+        SELECT A.*,
+        B.nm as writernm , B.profile_img,B.nickname as nicknm , B.money,
+        C.nm as categorynm
+        from lagarto.auction A
+        left join lagarto.lagarto_user B
+        on A.iuser = B.iuser
+        left join lagarto.auction_category C
+        on A.icategory = C.icategory
+        WHERE A.buyer = #{buyer}  AND A.bid = 1;
+    </select>
 
+    <!--판매완료-->
+    <select id="sellMyPage" resultType="AuctionVo">
+        SELECT A.*,
+        B.nm as writernm , B.profile_img,B.nickname as nicknm , B.money,
+        C.nm as categorynm
+        from lagarto.auction A
+        left join lagarto.lagarto_user B
+        on A.iuser = B.iuser
+        left join lagarto.auction_category C
+        on A.icategory = C.icategory
+        WHERE A.bid=1 AND A.iuser =#{iuser}
+    </select>
+
+
+    <!--판매중-->
+    <select id="sellingMyPage" resultType="AuctionVo">
+        SELECT A.*,
+        B.nm as writernm , B.profile_img,B.nickname as nicknm , B.money,
+        C.nm as categorynm
+        from lagarto.auction A
+        left join lagarto.lagarto_user B
+        on A.iuser = B.iuser
+        left join lagarto.auction_category C
+        on A.icategory = C.icategory
+        WHERE A.bid=0 AND A.iuser =#{iuser}
+
+    </select>
 
     
     

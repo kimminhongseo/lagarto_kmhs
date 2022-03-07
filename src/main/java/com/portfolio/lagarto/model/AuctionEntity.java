@@ -23,4 +23,5 @@ public class AuctionEntity  {
     private String mdt;
     private int buyer; //현재 입찰자
     private int prebuyer; //바로 전 입찰자
+    private int bid;
 }

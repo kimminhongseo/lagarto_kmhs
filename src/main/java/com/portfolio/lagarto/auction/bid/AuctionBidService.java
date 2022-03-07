@@ -39,8 +39,19 @@ public class AuctionBidService {
             }
 
 
-
-
-
     }
+
+    public int checktimer(AuctionVo vo){
+       return mapper.checktimer(vo);
+    }
+
+    public int bidcheck(AuctionVo vo){
+        vo.setBid(1);
+        return mapper.bidcheck(vo);
+    }
+
+
+
+
+
 }

@@ -16,6 +16,11 @@ public interface AuctionMapper {
     List<AuctionVo> selAuctionListAll(AuctionVo vo);
     List<AuctionCategoryEntity> selAuctionCategoryList();
 
+    List<AuctionVo> buyMyPage(AuctionVo vo); //mypage 보낼거
+    List<AuctionVo> sellMyPage(AuctionVo vo);
+    List<AuctionVo> sellingMyPage(AuctionVo vo);
+
+
     int updAuction(AuctionVo vo);
     int delAuction(AuctionVo vo);
 

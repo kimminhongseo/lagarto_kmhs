@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.portfolio.lagarto.auction.like.AuctionLikeMapper">
+    <insert id="insAuctionLike">
+        INSERT INTO lagarto.auction_like (iboard, iuser)
+        VALUES (${iboard}, ${iuser})
+    </insert>
+
+    <select id="selAuctionLike" resultType="AuctionLikeEntity">
+        SELECT iboard, iuser, rdt
+        FROM lagarto.auction_like
+        WHERE iboard = ${iboard}
+        AND iuser = ${iuser}
+    </select>
+
+    <delete id="delAuctionLike">
+        DELETE FROM lagarto.auction_like
+        WHERE iboard = ${iboard}
+        AND iuser = ${iuser}
+    </delete>
+
+</mapper>

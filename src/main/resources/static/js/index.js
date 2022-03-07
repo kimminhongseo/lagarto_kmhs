@@ -124,7 +124,7 @@ let isfollow = () => fetch(`/isfollow/${dataIuserElem.dataset.iuser}`).then(res 
         })
     }
 })
-//전체데이터를 가져올 때
+// 전체데이터를 가져올 때
 function objToJson(data){
     return Object.keys(data).map(key => `${key}=${data[key]}`).join('&');
 }

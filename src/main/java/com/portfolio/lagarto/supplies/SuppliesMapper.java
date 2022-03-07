@@ -20,4 +20,10 @@ public interface SuppliesMapper {
 
     int delSupplies(SuppliesVo vo);
 
+    //cartlist
+
+    int cartList(SuppliesEntity entity);
+
+
+
 }

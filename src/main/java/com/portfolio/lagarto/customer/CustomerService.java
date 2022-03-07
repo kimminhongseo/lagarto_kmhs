@@ -44,20 +44,6 @@ public class CustomerService {
         }
     }
 
-//    public List<CustomerVo> selList(TestDto dto) {
-//        List<CustomerVo> list = Collections.emptyList();
-//        int totalCount = mapper.totalCount(dto);
-//        PaginationInfo paginationInfo = new PaginationInfo(dto);
-//        paginationInfo.setTotalRecordCount(totalCount);
-//
-//        dto.setPaginationInfo(paginationInfo);
-//
-//        if(totalCount > 0) {
-//            list = mapper.selList(dto);
-//        }
-//        return list;
-//    }
-
     public List<CustomerVo> selCustomerList(TestDto dto) {
         List<CustomerVo> list = Collections.emptyList();
         int totalCount = mapper.totalCount(dto);
@@ -104,6 +90,7 @@ public class CustomerService {
 
     public int delCustomer(CustomerEntity entity){
         entity.setIsdel(1);
+        attachMapper.deleteAttach(entity.getIboard());
         return mapper.delCustomer(entity);
     }
 

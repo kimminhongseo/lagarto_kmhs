@@ -20,4 +20,5 @@ public class CustomerEntity {
     private int hits;
     private int isdel;
     private int rating;
+    private String secretYn;
 }

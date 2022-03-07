@@ -1,5 +1,6 @@
 let moneyTbodyElem = document.querySelector('#money-tbody');
 let num = 1;
+
 function asd(pageNum) {
     fetch('/user/moneyChargeList',{
         method : 'post',

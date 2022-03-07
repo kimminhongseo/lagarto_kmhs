@@ -74,6 +74,17 @@
     </update>
 
 
+    <!--여기선 cartlist에 뿌려줄것.-->
+    <insert id="cartList">
+        insert into lagarto.cart
+        (iboard, iuser)
+        values
+        (#{iboard},#{iuser})
+    </insert>
+
+
+
+
 
 
 </mapper>

@@ -169,14 +169,15 @@ email-true{
     margin: 0 auto;
     margin-top: 20px;
 }
-#header-trade, #buy-container,#sell-container, #buy-box, #list-buy-list, #list-sell-list, #buy-col{
+#header-trade, #buy-container,#sell-container, #buy-box,#selling-container,
+#list-buy-list, #list-sell-list,#list-selling-list, #buy-col{
     display: flex;
     justify-items: center;
     justify-content: center;
     float: none;
     margin: 0 auto;
 }
-#buy-container, #sell-container, #review-container{
+#buy-container, #sell-container, #selling-container,#review-container{
     margin-top: 10px;
     width: 1000px;
     height: 350px;
@@ -185,7 +186,7 @@ email-true{
 
 
 
-#buy-table, #sell-table {
+#buy-table, #sell-table,#selling-table {
     table-layout: fixed;
     width: 100%;
     border-spacing: 0;
@@ -213,13 +214,13 @@ email-true{
     text-align: center;
 }
 
-#buy-tbody, #sell-tbody ,#review-tbody{
+#buy-tbody, #sell-tbody,#selling-tbody ,#review-tbody{
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
 }
 
-#buy-tr1, #sell-tr1{
+#buy-tr1, #sell-tr1,#selling-tr1{
     box-sizing: border-box;
     height: 40px;
     padding: 7px 0;
@@ -227,7 +228,7 @@ email-true{
     background-color: #e8f2ff;
     text-align: center;
 }
-#buy-tr2, #sell-tr2{
+#buy-tr2, #sell-tr2,#selling-tr2{
     box-sizing: border-box;
     height: 40px;
     padding: 7px 0;

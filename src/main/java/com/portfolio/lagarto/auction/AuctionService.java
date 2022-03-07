@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,8 +39,15 @@ public class AuctionService {
       return mapper.insAuctionList(entity);
     }
 
-    public List<AuctionVo> selAuctionList(AuctionVo vo){return  mapper.selAuctionList(vo);}
-    public List<AuctionVo> selAuctionListAll(AuctionVo vo){return  mapper.selAuctionListAll(vo);}
+
+    public List<AuctionVo> selAuctionList(AuctionVo vo){
+
+        return mapper.selAuctionList(vo);
+    }
+    public List<AuctionVo> selAuctionListAll(AuctionVo vo){
+        return  mapper.selAuctionListAll(vo);}
+
+
 
     public AuctionVo selAuctionDetail (AuctionVo vo){
         AuctionVo detail = mapper.selAuctionDetail(vo);
@@ -68,6 +76,30 @@ public class AuctionService {
         vo.setIsdel(1);
         return mapper.delAuction(vo);
     }
+
+
+    public List<AuctionVo> buyMyPage(){
+        AuctionVo vo = new AuctionVo();
+        vo.setBuyer(utils.getLoginUserPk());
+        return mapper.buyMyPage(vo);
+    }
+
+    public List<AuctionVo> sellMyPage(){ //판매완료
+        AuctionVo vo = new AuctionVo();
+        vo.setIuser(utils.getLoginUserPk());
+        return mapper.sellMyPage(vo);
+    }
+
+    public List<AuctionVo> sellingMyPage(){ //판매중
+        AuctionVo vo = new AuctionVo();
+        vo.setIuser(utils.getLoginUserPk());
+        return mapper.sellingMyPage(vo);
+    }
+
+
+
+
+
 
     public List<AuctionCategoryEntity> auctionMenuList(){return  mapper.selAuctionCategoryList();}
 

@@ -75,6 +75,10 @@ public class SuppliesService {
         return mapper.delSupplies(vo);
     }
 
+    public int cartList(SuppliesEntity entity){
+        int result = mapper.cartList(entity);
+        return result;
+    }
 
 
 

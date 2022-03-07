@@ -1,21 +1,15 @@
-//todo:첨부파일이 없다면 '첨부파일이 없습니다' 라고 하기
-//data.image 가 null  이면 img_item에 innerHTML 하면 될거같은데,,,,
-//todo:이미지 클릭시 크게 보이도록
 
-//magnificPopup 이기능은 jQuery를 사용하여 클릭하면
-// 모달창 뜨면서 좌우로 넘길수 있음.
-
-
+// todo: bxslider (용품에서 쓴것) 참고해서 활용해보기
 // 이미지 클릭하면 상세기되는거(팝업으로 근데 새창임)  window.open(_self) 해주면 현재 페이지에서 열림.
 const searchParams = new URL(window.location.href).searchParams;
 const iboard = searchParams.get('iboard');
-
-
 const commentListElem = document.querySelector('#comment_list');
 const tbodyElem = commentListElem.querySelector('table > tbody');
 const commentFormContainerElem = document.querySelector('#comment_form_container');
 const formimbuybtnElem = document.querySelector('#formimbuybtn');
 
+
+//이미지 작게  고정.
 const img = document.getElementsByClassName("click_img");
 for (let x = 0; x < img.length; x++) {
     img.item(x).onclick=function() {window.open(this.src,'_blank','toolbar=no,location=no,status=no,menubar=no, scrollbars=auto,resizable=no,' +
@@ -29,7 +23,7 @@ if(modBtnElem) {
         location.href=`/auction/mod?iboard=${iboard}`;
     });
 }
-
+//DEL >> 잘됨.
 const delBtnElem = document.querySelector('#delBtn');
 if(delBtnElem){
     delBtnElem.addEventListener('click',() =>{
@@ -40,17 +34,11 @@ if(delBtnElem){
 }
 const formbuybtn = document.querySelector('#formbuybtn');
 
-//여기서 경매가 등록하면 바뀌도롞?
 
+//경매가 등록시 바뀌도록.
 if (formbuybtn) {
     formbuybtn.addEventListener('click', () => {
         if(confirm("경매가를 수정 하시겠습니까?")){
-            console.log(formbid.value);
-            console.log(formimbuy.value);
-            console.log(parseInt(iboard));
-            console.log(prebuyer.value);
-            console.log(formbuy.value);
-            console.log(iuser.value);
 
             fetch(`/ajax/auctionBid/buy?formbid=${formbid.value}&iboard=${parseInt(iboard)}&formimbuy=${formimbuy.value}
             &formbuy=${formbuy.value}&prebuyer=${prebuyer.value}&iuser=${iuser.value}`, {
@@ -59,7 +47,6 @@ if (formbuybtn) {
             }).then(res => {
                 return res.json();
             }).then(data => {
-
                 switch (data){
                     case 1: //fetch 로 전에있던값을 넣어줘라. 그 전 사람에게. case: 1일떄 일어나겠네.
                         window.close();
@@ -78,15 +65,13 @@ if (formbuybtn) {
                         return false;
                         break;
                 }
-
-
             })
         }
 
     })
 }
 
-//댓글
+//댓글 입력폼. 내용이랑 입력했을때 반응
 if (commentFormContainerElem) {
     const commentSubmitBtnElem = commentFormContainerElem.querySelector('button[name="comment_submit"]');
     const commentCtntInputElem = commentFormContainerElem.querySelector('input[name="ctnt"]');
@@ -118,7 +103,6 @@ if (commentFormContainerElem) {
 
 }
 
-
 //댓글 리스트
 const getCommentList = () => {
     myFetch.get('/ajax/auctionCmt', list => {
@@ -126,126 +110,110 @@ const getCommentList = () => {
     }, { iboard });
 }
 
-
-
-
 //리스트 만들기
-// var sessionData = sessionStorage.;
-// sessionStorage.setItem("sessionLogin",sessionData);
-
-
 //-----------------댓글 수정삭제 (시작)
 const sessionloginElem = document.querySelector('#dataLogin');
 const makeCommentRecordList = list => {
 
-
-    //로그인 안되면 댓글 못보게.
-    if(sessionloginElem == null){
-        list.forEach(item => {
-            const tdElem = document.createElement('td');
-            const trElem = document.createElement('tr');
-            trElem.innerHTML = `
+        //로그인 안되면 댓글만 보이게
+        if(sessionloginElem == null){
+            list.forEach(item => {
+                const tdElem = document.createElement('td');
+                const trElem = document.createElement('tr');
+                trElem.innerHTML = `
                 <td>${item.icmt}</td>
                 <td>${item.ctnt}</td>
                 <td>${item.nickname}</td>
                 <td>${(item.rdt)}</td>
             `;
-            tbodyElem.appendChild(trElem);
-        });
-    }
-    if(sessionloginElem !=null){
+                tbodyElem.appendChild(trElem);
+            });
+        }
 
+        //로그인 됐다면? >> 수정,삭제 여부
+        if(sessionloginElem !=null){
 
-        //로그인 됐다면?
         list.forEach(item => {
-            const tdElem = document.createElement('td');
-            const trElem = document.createElement('tr');
-            trElem.innerHTML = `
+        const tdElem = document.createElement('td');
+        const trElem = document.createElement('tr');
+        trElem.innerHTML = `
                 <td>${item.icmt}</td>
                 <td>${item.ctnt}</td>
                 <td>${item.nickname}</td>
                 <td>${item.rdt}</td>
             `;
-            tbodyElem.appendChild(trElem);
+        tbodyElem.appendChild(trElem);
 
+        //수정 삭제 구현  댓글쓴 사람이랑 현재 로그인한 사람이랑 같으면 수정/삭제 버튼 활성화
+        if(item.iuser == sessionloginElem.dataset.iuser){
+        const modBtn = document.createElement('input')
+        modBtn.type = 'button';
+        modBtn.value = '수정';
+        modBtn.addEventListener('click', () => {
+            const tdArr = trElem.querySelectorAll('td');
+            const tdCell = tdArr[1];
+            const modInput = document.createElement('input');
+            modInput.value = item.ctnt;
 
+            const saveBtn = document.createElement('input')
+            saveBtn.type = 'button';
+            saveBtn.value = '저장';
 
-            //수정 삭제 구현  댓글쓴 사람이랑 현재 로그인한 사람이랑 같으면 수정/삭제 버튼 활성화
-            if(item.iuser == sessionloginElem.dataset.iuser){
-                const modBtn = document.createElement('input')
-                modBtn.type = 'button';
-                modBtn.value = '수정';
-                modBtn.addEventListener('click', () => {
-                    const tdArr = trElem.querySelectorAll('td');
-                    const tdCell = tdArr[1];
-                    const modInput = document.createElement('input');
-                    modInput.value = item.ctnt;
-
-                    const saveBtn = document.createElement('input')
-                    saveBtn.type = 'button';
-                    saveBtn.value = '저장';
-
-                    saveBtn.addEventListener('click', () => {
-                        const param = {
-                            icmt: item.icmt,
-                            ctnt: modInput.value
-                        }
-                        myFetch.put('/ajax/auctionCmt', data => {
-                            switch (data.result) {
-                                case 0:
-                                    alert('댓글 수정에 실패하였습니다.')
-                                    break;
-                                case 1:
-                                    tdCell.innerText = modInput.value;
-                                    item.ctnt = modInput.value;
-                                    removeCancelBtn();
-                                    break;
-                            }
-                        }, param);
-                    });
-
-                    tdCell.innerHTML = null;
-                    tdCell.appendChild(modInput);
-                    tdCell.appendChild(saveBtn);
-                    const cancelBtn = document.createElement('input');
-                    cancelBtn.type = 'button';
-                    cancelBtn.value = '취소';
-                    cancelBtn.addEventListener('click', () => {
-                        tdCell.innerText = item.ctnt;
-                        removeCancelBtn();
-                    });
-
-                    const removeCancelBtn = () => {
-                        modBtn.classList.remove('hidden');
-                        delBtn.classList.remove('hidden');
-                        cancelBtn.remove();
+            saveBtn.addEventListener('click', () => {
+                const param = {
+                    icmt: item.icmt,
+                    ctnt: modInput.value
+                }
+                myFetch.put('/ajax/auctionCmt', data => {
+                    switch (data.result) {
+                        case 0:
+                            alert('댓글 수정에 실패하였습니다.')
+                            break;
+                        case 1:
+                            tdCell.innerText = modInput.value;
+                            item.ctnt = modInput.value;
+                            removeCancelBtn();
+                            break;
                     }
+                }, param);
+            });
 
-                    tdElem.insertBefore(cancelBtn, modBtn);
-                    modBtn.classList.add('hidden');
-                    delBtn.classList.add('hidden');
-                });
-                const delBtn = document.createElement('input');
-                delBtn.type = 'button';
-                delBtn.value = '삭제';
+            tdCell.innerHTML = null;
+            tdCell.appendChild(modInput);
+            tdCell.appendChild(saveBtn);
+            const cancelBtn = document.createElement('input');
+            cancelBtn.type = 'button';
+            cancelBtn.value = '취소';
+            cancelBtn.addEventListener('click', () => {
+                tdCell.innerText = item.ctnt;
+                removeCancelBtn();
+            });
 
-                delBtn.addEventListener('click', () => {
-                    if (confirm('삭제하시겠습니까?')) {
-                        delCmt(item.icmt, trElem);
-                    }
-                });
-                trElem.appendChild(modBtn);
-                trElem.appendChild(delBtn);
-
+            const removeCancelBtn = () => {
+                modBtn.classList.remove('hidden');
+                delBtn.classList.remove('hidden');
+                cancelBtn.remove();
             }
+            tdElem.insertBefore(cancelBtn, modBtn);
+            modBtn.classList.add('hidden');
+            delBtn.classList.add('hidden');
+        });
+        const delBtn = document.createElement('input');
+        delBtn.type = 'button';
+        delBtn.value = '삭제';
 
-        })
-        return trElem;
-    }
+        delBtn.addEventListener('click', () => {
+            if (confirm('삭제하시겠습니까?')) {
+                delCmt(item.icmt, trElem);
+            }
+        });
+        trElem.appendChild(modBtn);
+        trElem.appendChild(delBtn);
+        }
+    })
+    // return trElem; 없어도 작동
+     }
 }
-
-
-//iuser 값 과 로그인한 iuser값
 
 //삭제
 const delCmt = (icmt, tr) => {
@@ -262,31 +230,172 @@ const delCmt = (icmt, tr) => {
         }
     });
 }
+//----------------------------------댓글 수정삭제 (끝)----------------------------------
 
-// const getTrLen = () => {
-//     const cmtListElem = document.querySelector('#cmt_list');
-//     const trArr = cmtListElem.querySelectorAll('table tr');
-//     return trArr.length;
+
+// ----------------------------------좋아요 구현 (시작)-------------------
+const favIconElem = document.querySelector('#fav_icon');
+
+const isFav = () => {
+    myFetch.get(`/auction/like/${iboard}`, (data) => {
+        console.log(data.result);
+        switch(data.result) {
+            case 0:
+                disableFav();
+                break;
+            case 1:
+                enableFav();
+                break;
+        }
+    });
+}
+
+const disableFav = () => {
+    if(favIconElem) {
+        favIconElem.classList.remove('fa-solid');
+        favIconElem.classList.add('fa-regular');
+    }
+}
+
+const enableFav = () => {
+    if(favIconElem) {
+        favIconElem.classList.remove('fa-regular');
+        favIconElem.classList.add('fa-solid');
+    }
+}
+
+if(favIconElem) {
+    isFav();
+    favIconElem.addEventListener('click', () => {
+        if(favIconElem.classList.contains('fa-regular')) { //no 좋아요
+            const param = { iboard };
+            myFetch.post(`/auction/like`, data => {
+                switch (data.result) {
+                    case 0:
+                        alert('좋아요 처리에 실패하였습니다.');
+                        break;
+                    case 1:
+                        enableFav();
+                        break;
+                }
+            }, param);
+        } else { //yes 좋아요
+            myFetch.delete(`/auction/like/${iboard}`, data => {
+                switch (data.result) {
+                    case 0:
+                        alert('좋아요 처리에 실패하였습니다.');
+                        break;
+                    case 1:
+                        disableFav();
+                        break;
+                }
+            });
+        }
+    });
+}
+
+
+
+
+// ----------------------------------좋아요 구현 (끝)-------------------
+
+
+//마감시간이 현재보다 작으면 전체다 회색?
+// const finishtimeElem = document.querySelector('#finishtime' );
+// const finishtitmeElem1 = document.getElementById('finishtime');
+// if(formimbuybtn){
+//     formimbuybtnElem.addEventListener('click',()=>{
+//         console.log("select : "+finishtimeElem);
+//         console.log("id : "+finishtitmeElem1);
+//     });
 // }
 
 
 
-//-----------------댓글 수정삭제 (끝)
-
-//댓글 입력 폼
+//-----------------경매 남은시간 및 끝났을때 이벤트
 
 
+const countDownTimer = function (id,date){
+    var _vDate = new Date(date); // 전달 받은 일자
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
 
-//마감시간이 현재보다 작으면 전체다 회색?
+    function showRemaining(){
+        var now = new Date();
+        var distDt = _vDate - now;
 
-const finishtimeElem = document.querySelector('#finishtime' );
-const finishtitmeElem1 = document.getElementById('finishtime');
-if(formimbuybtn){
-    formimbuybtnElem.addEventListener('click',()=>{
-        console.log("select : "+finishtimeElem);
-        console.log("id : "+finishtitmeElem1);
-    });
+        if(distDt<0){ //경매 마감되었을때.
+            clearInterval(timer);
+            document.getElementById(id).textContent='경매가 마감되었습니다.';
+            document.getElementById("soldout").style.visibility = "visible"; //마감되면 sold out 이미지
+
+            if(document.getElementById("bidwrite")){
+                document.getElementById("bidwrite").style.visibility = "hidden"; //경매가 등록 사라지게
+            }
+            if(document.getElementById("formimbuybtn")){
+                document.getElementById("formimbuybtn").style.visibility = "hidden"; //즉시구매 사라지게
+            }
+            const param={
+                iboard
+            }
+            myFetch.put('/ajax/auctionBid',data =>{
+                switch (data.result){
+                    case 0:
+                        alert('실패');
+                        break;
+                    case 1:
+                        alert("경매가 끝난 상품입니다.");
+                        break;
+                }
+            },param);
+
+            return;
+        }
+
+        var days = Math.floor(distDt / _day);
+        var hours = Math.floor((distDt % _day) / _hour);
+        var minutes = Math.floor((distDt % _hour) / _minute);
+        var seconds = Math.floor((distDt % _minute) / _second);
+
+        //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
+        document.getElementById(id).textContent = days + '일 ';
+        document.getElementById(id).textContent += hours + '시간 ';
+        document.getElementById(id).textContent += minutes + '분 ';
+        document.getElementById(id).textContent += seconds + '초 남았습니다';
+
+    }
+    timer= setInterval(showRemaining,1000);
 }
+
+
+
+
+
+
+const mdtElem = document.getElementById('mdt');
+if(mdtElem){
+        fetch(`/ajax/auctionBid/timer?iboard=${iboard}&mdt=${mdt.value}`,{
+            method: 'GET',
+            headers : {'Content-type': 'application/json'}
+        }).then(res=>{
+            return res.json();
+        }).then(data=>{
+
+            countDownTimer('finish',mdtElem.value); //string으로 받아와도 괜찮은가
+
+        })
+    }
+
+
+
+
+
+//-----------------경매 남은시간 및 끝났을때 이벤트 (끝)
+
+//------경매 끝나면 bid 가 1 되도록.
 
 
 
@@ -294,3 +403,24 @@ if(formimbuybtn){
 
 getCommentList();
 isfollow();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,6 +5,7 @@ import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.SessionManager;
 import com.portfolio.lagarto.MyFileUtils;
 import com.portfolio.lagarto.Utils;
+import com.portfolio.lagarto.auction.AuctionService;
 import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.ForgotPwResult;
 import com.portfolio.lagarto.enums.JoinResult;
@@ -12,6 +13,7 @@ import com.portfolio.lagarto.follow.FollowService;
 import com.portfolio.lagarto.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -39,6 +41,11 @@ public class UserController {
 
     @Autowired
     private FollowService fservice;
+
+    @Autowired
+    private AuctionService aservice;
+
+
     @Autowired
     private Utils utils;
     @Autowired
@@ -191,9 +198,14 @@ public class UserController {
     public String mypage(Model model) {
         model.addAttribute(Const.Follower, fservice.FollowList());
         model.addAttribute(Const.Following, fservice.FollowingList());
+        model.addAttribute("buying",aservice.buyMyPage()); //auction 정보
+        model.addAttribute("sell",aservice.sellMyPage());
+        model.addAttribute("selling",aservice.sellingMyPage());
         if (0 != utils.getLoginUserPk()) {
             return "/user/mypage";
         }
+
+
         return "redirect:/user/login";
     }
 

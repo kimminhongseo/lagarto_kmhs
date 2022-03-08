@@ -5,7 +5,6 @@ package com.portfolio.lagarto.user;
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.MyFileUtils;
 import com.portfolio.lagarto.Utils;
-import com.portfolio.lagarto.customer.files.AttachDTO;
 import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.ForgotPwResult;
 import com.portfolio.lagarto.enums.JoinResult;
@@ -13,13 +12,9 @@ import com.portfolio.lagarto.model.*;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
@@ -27,7 +22,6 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 

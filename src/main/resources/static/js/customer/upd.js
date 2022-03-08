@@ -73,3 +73,19 @@ function isEmpty(value) {
 
     return false;
 }
+
+function registerBoard(form) {
+
+    form.noticeYn.value = form.noticeYn.checked == false ? 'N' : 'Y';
+    form.secretYn.value = form.secretYn.checked == false ? 'N' : 'Y';
+
+    var result = (
+        isValid(form.title, "제목", null, null)
+        && isValid(form.iuser, "이름", null, null)
+        && isValid(form.content, "내용", null, null)
+    );
+
+    if (result == false) {
+        return false;
+    }
+}

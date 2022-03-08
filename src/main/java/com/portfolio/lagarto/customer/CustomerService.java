@@ -3,8 +3,8 @@ package com.portfolio.lagarto.customer;
 import com.portfolio.lagarto.MyFileUtils;
 import com.portfolio.lagarto.PaginationInfo;
 import com.portfolio.lagarto.Utils;
-import com.portfolio.lagarto.customer.files.AttachDTO;
-import com.portfolio.lagarto.customer.files.AttachMapper;
+import com.portfolio.lagarto.customer.files.CustomerAttachDTO;
+import com.portfolio.lagarto.customer.files.CustomerAttachMapper;
 import com.portfolio.lagarto.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.List;
 public class CustomerService {
 
     @Autowired private CustomerMapper mapper;
-    @Autowired private AttachMapper attachMapper;
+    @Autowired private CustomerAttachMapper attachMapper;
     @Autowired private Utils utils;
     @Autowired private MyFileUtils myFileUtils;
 
@@ -32,7 +32,7 @@ public class CustomerService {
         if (!this.insCustomer(entity)) {
             return false;
         } else {
-            List<AttachDTO> fileList = this.myFileUtils.uploadFiles(files, entity.getIboard());
+            List<CustomerAttachDTO> fileList = this.myFileUtils.uploadFiles(files, entity.getIboard());
             if (!CollectionUtils.isEmpty(fileList)) {
                 queryResult = this.attachMapper.insertAttach(fileList);
                 if (queryResult < 1) {
@@ -81,7 +81,7 @@ public class CustomerService {
         int result = 1;
         mapper.updCustomer(dto);
 
-        List<AttachDTO> fileList = myFileUtils.uploadFiles(files, dto.getIboard());
+        List<CustomerAttachDTO> fileList = myFileUtils.uploadFiles(files, dto.getIboard());
         if(CollectionUtils.isEmpty(fileList) == false) {
             result = attachMapper.insertAttach(fileList);
         }
@@ -94,7 +94,7 @@ public class CustomerService {
         return mapper.delCustomer(entity);
     }
 
-    public List<AttachDTO> getAttachFileList(int iboard) {
+    public List<CustomerAttachDTO> getAttachFileList(int iboard) {
 
         int fileTotalCount = attachMapper.selectAttachTotalCount(iboard);
         if (fileTotalCount < 1) {

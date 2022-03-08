@@ -21,4 +21,5 @@ public class CustomerEntity {
     private int isdel;
     private int rating;
     private String secretYn;
+    private String noticeYn;
 }

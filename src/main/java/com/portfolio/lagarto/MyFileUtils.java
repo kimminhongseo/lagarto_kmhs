@@ -1,7 +1,7 @@
 package com.portfolio.lagarto;
 
 
-import com.portfolio.lagarto.customer.files.AttachDTO;
+import com.portfolio.lagarto.customer.files.CustomerAttachDTO;
 import com.portfolio.lagarto.customer.files.AttachFileException;
 import com.portfolio.lagarto.supplies.files.SupAttachDTO;
 import org.apache.commons.io.FilenameUtils;
@@ -11,8 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -107,10 +105,10 @@ public class MyFileUtils {
      * @param iboard - 게시글 번호
      * @return 업로드 파일 목록
      */
-    public List<AttachDTO> uploadFiles(MultipartFile[] files, int iboard) {
+    public List<CustomerAttachDTO> uploadFiles(MultipartFile[] files, int iboard) {
 
         /* 업로드 파일 정보를 담을 비어있는 리스트 */
-        List<AttachDTO> attachList = new ArrayList<>();
+        List<CustomerAttachDTO> attachList = new ArrayList<>();
 
         /* uploadPath에 해당하는 디렉터리가 존재하지 않으면, 부모 디렉터리를 포함한 모든 디렉터리를 생성 */
         File dir = new File(uploadPath + "/" + iboard);
@@ -134,7 +132,7 @@ public class MyFileUtils {
                 file.transferTo(target);
 
                 /* 파일 정보 저장 */
-                AttachDTO attach = new AttachDTO();
+                CustomerAttachDTO attach = new CustomerAttachDTO();
                 attach.setIboard(iboard);
                 attach.setOriginal_name(file.getOriginalFilename());
                 attach.setSave_name(saveName);

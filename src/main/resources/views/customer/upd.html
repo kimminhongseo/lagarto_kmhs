@@ -26,7 +26,7 @@
                         <label class="form-label" for="title">제목</label>
                     </div>
                     <div>
-                        <fieldset th:if="*{board_cd == 1}" th:field="*{rating}" th:value="${param.rating}">
+                        <fieldset th:if="${data.board_cd == 1}" th:field="*{rating}" th:value="${param.rating}">
                             <input type="radio" name="rating" value="5" id="rate1" th:checked="${data.rating == 5}"><label for="rate1">⭐</label>
                             <input type="radio" name="rating" value="4" id="rate2" th:checked="${data.rating == 4}"><label for="rate2">⭐</label>
                             <input type="radio" name="rating" value="3" id="rate3" th:checked="${data.rating == 3}"><label for="rate3">⭐</label>
@@ -34,6 +34,15 @@
                             <input type="radio" name="rating" value="1" id="rate5" th:checked="${data.rating == 1}"><label for="rate5">⭐</label>
                         </fieldset>
                     </div>
+                    <div th:if="${data.board_cd == 3}">
+                        <span th:if="${data.iuser == 0}" class="form-group col-sm-10" style="margin-top: 10px;"> 공지글 설정
+                            <input type="checkbox" th:value="*{noticeYn}" id="noticeYn" name="noticeYn" th:checked="*{#strings.equals( noticeYn, 'Y' )}" />
+                        </span>
+                        <span class="form-group col-sm-10" style="margin-top: 10px;"> 비밀글 설정
+                            <input type="checkbox" th:value="*{secretYn}" id="secretYn" name="secretYn" th:checked="*{#strings.equals( secretYn, 'Y' )}" />
+                        </span>
+                    </div>
+
                     <div class="mb-3">
                         <label for="ctnt" class="form-label">내용</label>
                         <textarea class="form-control" th:name="ctnt" id="ctnt" th:field="*{ctnt}" rows="3"></textarea>

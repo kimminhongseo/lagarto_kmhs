@@ -5,10 +5,10 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface AttachMapper {
-    int insertAttach(List<AttachDTO> attachList);
+public interface CustomerAttachMapper {
+    int insertAttach(List<CustomerAttachDTO> attachList);
 
-    AttachDTO selectAttachDetail(int iboard);
+    CustomerAttachDTO selectAttachDetail(int iboard);
 
     int deleteAttach(int iboard);
 
@@ -16,7 +16,7 @@ public interface AttachMapper {
 
     int undeleteAttach(List<Integer> idxs);
 
-    List<AttachDTO> selectAttachList(int iboard);
+    List<CustomerAttachDTO> selectAttachList(int iboard);
 
     int selectAttachTotalCount(int iboard);
 }

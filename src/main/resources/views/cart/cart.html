@@ -14,37 +14,28 @@
     <div id="container-Cart">
         <div id="viewFist">
             <div id="carts">장바구니</div>
+
             <div id="tableList">
                 <div id="tableListSize">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">상품번호</th>
-                            <th scope="col">용품 이름</th>
-                            <th scope="col">가격</th>
-                            <th scope="col">갯수</th>
+                            <th>상품번호</th>
+                            <th>용품 이름</th>
+                            <th>가격</th>
+                            <th>갯수</th>
                         </tr>
                         </thead>
+
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry the Bird</td>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
+                        <tr th:each="data:${cart}">
+                            <td th:text="${data.iboard}"></td>
+                            <td th:text="${data.title}"></td>
+                            <td th:text="${data.price}"></td>
+                            <td><button>sdasd</button></td>
                         </tr>
                         </tbody>
+
                     </table>
                 </div>
                 <div id="ListSum">

@@ -74,7 +74,7 @@
     </update>
 
 
-    <!--여기선 cartlist에 뿌려줄것.-->
+    <!--여기선 용품을 cartlist에 뿌려줄것.-->
     <insert id="cartList">
         insert into lagarto.cart
         (iboard, iuser)
@@ -82,6 +82,14 @@
         (#{iboard},#{iuser})
     </insert>
 
+    <!--cartList에 담긴 정보들들 DISTINCT는 중복방지-->
+    <select id="myCartList" resultType="SuppliesVo">
+        SELECT DISTINCT A.iboard,A.iuser,B.* FROM cart A
+        INNER JOIN supplies B
+        ON A.iboard = B.iboard
+        WHERE A.iuser =#{iuser}
+        ORDER BY A.iboard;;
+    </select>
 
 
 

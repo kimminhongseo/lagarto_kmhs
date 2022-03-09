@@ -20,6 +20,8 @@ public class TestDto extends CommonDTO {
     private int isdel;
     private int rating;
     private String secretYn;
+    private String noticeYn;
     private String changeYn;
+
     private List<Integer> fileIdxs;
 }

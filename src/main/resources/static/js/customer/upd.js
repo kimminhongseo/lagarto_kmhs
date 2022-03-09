@@ -1,5 +1,6 @@
 const fileList = []/*[[ ${fileList} ]]*/; /*[- 업로드 파일 리스트 -]*/
 let fileIdx = isEmpty(fileList) ? 0 : fileList.length; /*[- 파일 인덱스 처리용 전역 변수 -]*/
+const modFrmElem = document.querySelector('#form-horizontal');
 
 function addFile() {
 
@@ -81,7 +82,6 @@ function registerBoard(form) {
 
     var result = (
         isValid(form.title, "제목", null, null)
-        && isValid(form.iuser, "이름", null, null)
         && isValid(form.content, "내용", null, null)
     );
 
@@ -89,3 +89,16 @@ function registerBoard(form) {
         return false;
     }
 }
+
+modFrmElem.addEventListener('submit', (e) => {
+    const titleVal = writeFrmElem.title.value;
+    const ctntVal = writeFrmElem.ctnt.value;
+    if(titleVal.length < 1 || titleVal === '') {
+        alert('제목을 입력해 주세요.');
+        e.preventDefault();
+    }
+    if(ctntVal.length < 1 || ctntVal === '') {
+        alert('내용을 입력해 주세요.');
+        e.preventDefault();
+    }
+});

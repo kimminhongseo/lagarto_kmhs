@@ -35,11 +35,11 @@
                         </fieldset>
                     </div>
                     <div th:if="${data.board_cd == 3}">
-                        <span th:if="${data.iuser == 0}" class="form-group col-sm-10" style="margin-top: 10px;"> 공지글 설정
-                            <input type="checkbox" th:value="*{noticeYn}" id="noticeYn" name="noticeYn" th:checked="*{#strings.equals( noticeYn, 'Y' )}" />
+                        <span th:if="${data.iuser == 3}" class="form-group col-sm-10" style="margin-top: 10px;"> 공지글 설정
+                            <input type="checkbox" th:value="${'Y'}" th:field="*{noticeYn}" id="noticeYn" th:name="noticeYn" th:checked="${data.noticeYn == 'Y'}" />
                         </span>
                         <span class="form-group col-sm-10" style="margin-top: 10px;"> 비밀글 설정
-                            <input type="checkbox" th:value="*{secretYn}" id="secretYn" name="secretYn" th:checked="*{#strings.equals( secretYn, 'Y' )}" />
+                            <input type="checkbox" th:value="${'Y'}" th:field="*{secretYn}" id="secretYn" th:name="secretYn" th:checked="${data.secretYn == 'Y'}" />
                         </span>
                     </div>
 

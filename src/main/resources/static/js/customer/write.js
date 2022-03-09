@@ -44,16 +44,16 @@ function addFile() {
 //     target.remove();
 // }
 
-writeFrmElem.addEventListener('keyup', () => {
+writeFrmElem.addEventListener('submit', (e) => {
     const titleVal = writeFrmElem.title.value;
     const ctntVal = writeFrmElem.ctnt.value;
     if(titleVal.length < 1 || titleVal === '') {
         alert('제목을 입력해 주세요.');
-        return;
+        e.preventDefault();
     }
     if(ctntVal.length < 1 || ctntVal === '') {
         alert('내용을 입력해 주세요.');
-        return;
+        e.preventDefault();
     }
 });
 
@@ -73,7 +73,6 @@ function registerBoard(form) {
 
     var result = (
         isValid(form.title, "제목", null, null)
-        && isValid(form.nickname, "이름", null, null)
         && isValid(form.content, "내용", null, null)
     );
 

@@ -33,13 +33,13 @@
                     </div>
 
                     <div th:if="${entity.board_cd == 3}">
-                        <th:block th:if="${#httpSession.getAttribute('iuser') == 0}">
+                        <th:block th:if="${loginUser == 3}">
                             <span class="form-group col-sm-10" style="margin-top: 10px;"> 공지글 설정
-                                <input type="checkbox" th:value="*{noticeYn}" id="noticeYn" name="noticeYn" th:checked="*{#strings.equals( noticeYn, 'Y' )}" />
+                                <input type="checkbox" th:value="${'Y'}" th:field="*{noticeYn}" id="noticeYn" name="noticeYn" th:checked="*{#strings.equals( noticeYn, 'Y' )}" />
                             </span>
                         </th:block>
-                        <span class="form-group col-sm-10" style="margin-top: 10px;"> 비밀글 설정
-                            <input type="checkbox" th:value="*{secretYn}" id="secretYn" name="secretYn" th:checked="*{#strings.equals( secretYn, 'Y' )}" />
+                        <span class="form-group col-sm-10" style="margin-top: 10px;"  th:if="${loginUser != 3}"> 비밀글 설정
+                            <input type="checkbox" th:value="${'Y'}" th:field="*{secretYn}" id="secretYn" name="secretYn" th:checked="*{#strings.equals( secretYn, 'Y' )}" />
                         </span>
                     </div>
 

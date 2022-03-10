@@ -1,5 +1,6 @@
 const fileList = []/*[[ ${fileList} ]]*/; /*[- 업로드 파일 리스트 -]*/
 let fileIdx = isEmpty(fileList) ? 0 : fileList.length; /*[- 파일 인덱스 처리용 전역 변수 -]*/
+const modFrmElem = document.querySelector('#form-horizontal');
 
 function addFile() {
 
@@ -73,3 +74,31 @@ function isEmpty(value) {
 
     return false;
 }
+
+function registerBoard(form) {
+
+    form.noticeYn.value = form.noticeYn.checked == false ? 'N' : 'Y';
+    form.secretYn.value = form.secretYn.checked == false ? 'N' : 'Y';
+
+    var result = (
+        isValid(form.title, "제목", null, null)
+        && isValid(form.content, "내용", null, null)
+    );
+
+    if (result == false) {
+        return false;
+    }
+}
+
+modFrmElem.addEventListener('submit', (e) => {
+    const titleVal = writeFrmElem.title.value;
+    const ctntVal = writeFrmElem.ctnt.value;
+    if(titleVal.length < 1 || titleVal === '') {
+        alert('제목을 입력해 주세요.');
+        e.preventDefault();
+    }
+    if(ctntVal.length < 1 || ctntVal === '') {
+        alert('내용을 입력해 주세요.');
+        e.preventDefault();
+    }
+});

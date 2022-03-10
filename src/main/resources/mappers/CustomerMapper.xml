@@ -4,9 +4,9 @@
 
     <insert id="insCustomer" parameterType="CustomerDto" useGeneratedKeys="true" keyProperty="iboard">
         INSERT INTO lagarto.customer
-        (iboard, board_cd, title, ctnt, iuser, rating, secretYn)
+        (iboard, board_cd, title, ctnt, iuser, rating, secretYn, noticeYn)
         VALUES
-        (${iboard}, ${board_cd}, #{title}, #{ctnt}, ${iuser}, ${rating}, #{secretYn})
+        (${iboard}, ${board_cd}, #{title}, #{ctnt}, ${iuser}, ${rating}, #{secretYn}, #{noticeYn})
     </insert>
 
     <select id="selCustomerList" parameterType="TestDto" resultType="CustomerVo">
@@ -50,7 +50,7 @@
         LEFT JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
         LEFT JOIN lagarto.customer_board_type C ON A.board_cd = C.board_cd
         LEFT JOIN lagarto.auction D ON A.product_cd = D.iboard
-        WHERE A.iboard = ${iboard}
+        WHERE A.iboard = ${iboard} AND A.isdel = 0
     </select>
 
     <select id="totalCount" parameterType="TestDto" resultType="int">
@@ -63,7 +63,9 @@
 
         title = #{title},
         ctnt = #{ctnt},
-        rating = ${rating}
+        rating = ${rating},
+        secretYn = #{secretYn},
+        noticeYn = #{noticeYn}
         WHERE iboard = ${iboard}
         AND iuser = ${iuser}
     </update>

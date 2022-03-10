@@ -3,7 +3,7 @@ package com.portfolio.lagarto.customer.files;
 import lombok.Data;
 
 @Data
-public class AttachDTO {
+public class CustomerAttachDTO {
 
     /** 파일 번호 (PK) */
     private int idx;

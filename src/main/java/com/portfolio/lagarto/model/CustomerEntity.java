@@ -13,12 +13,11 @@ public class CustomerEntity {
     private int product_cd;
     private String title;
     private String ctnt;
-    private String ctnt_img;
     private int iuser;
     private String rdt;
-    private String mdt;
     private int hits;
     private int isdel;
     private int rating;
     private String secretYn;
+    private String noticeYn;
 }

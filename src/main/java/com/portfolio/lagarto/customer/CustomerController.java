@@ -2,8 +2,10 @@ package com.portfolio.lagarto.customer;
 
 import com.portfolio.lagarto.Const;
 import com.portfolio.lagarto.Criteria;
+import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.auction.AuctionService;
 import com.portfolio.lagarto.customer.comment.CustomerCommentService;
+import com.portfolio.lagarto.customer.files.AttachFileException;
 import com.portfolio.lagarto.model.AuctionVo;
 import com.portfolio.lagarto.model.CustomerDto;
 import com.portfolio.lagarto.model.CustomerEntity;
@@ -23,25 +25,26 @@ public class CustomerController {
     @Autowired public CustomerService service;
     @Autowired public CustomerCommentService cmtService;
     @Autowired public AuctionService auctionService;
+    @Autowired public Utils utils;
 
     @GetMapping("/list/{board_cd}")
-    public String list(@PathVariable int board_cd, @ModelAttribute("params") TestDto dto, Model model, HttpSession hs) {
+    public String list(@PathVariable int board_cd, @ModelAttribute("params") TestDto dto, Model model) {
         model.addAttribute("board_cd", board_cd);
         model.addAttribute("list", service.selCustomerList(dto));
-        model.addAttribute("loginUser",hs.getAttribute(Const.LOGIN_USER));
+        model.addAttribute("loginUser",utils.getLoginUserPk());
         dto.setBoard_cd(board_cd);
         return "customer/list";
     }
 
     @GetMapping("/write")
-    public String write(@ModelAttribute("entity") CustomerEntity entity) {
+    public String write(@ModelAttribute("entity") CustomerEntity entity, Model model) {
+        model.addAttribute("loginUser",utils.getLoginUserPk());
         return "customer/write";
     }
 
     @PostMapping("/write")
 
     public String writeProc(CustomerEntity entity, MultipartFile[] files) {
-
         boolean isRegistered = this.service.insCustomer(entity, files);
         //TODO
         return "redirect:/customer/detail?iboard=" + entity.getIboard();
@@ -51,7 +54,6 @@ public class CustomerController {
     public void detail(Model model, CustomerDto dto, int iboard) {
         model.addAttribute("fileList", service.getAttachFileList(iboard));
         model.addAttribute("data", service.selCustomerDetail(dto));
-
     }
 
     @GetMapping("/upd")

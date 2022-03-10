@@ -127,16 +127,16 @@ public class UserService {
         return result;
     }
 
-    public LoginVo loginSel(LoginVo vo){
+    public LoginVo loginSel(LoginVo loginVo){
         LoginVo dbUser = null;
         try {
-            dbUser = mapper.loginSel(vo);
+            dbUser = mapper.loginSel(loginVo);
         } catch (Exception e) {
             e.printStackTrace();
             return null;   // 알 수 없는 에러
         }
         if(dbUser != null) {
-            if(BCrypt.checkpw(vo.getUpw(), dbUser.getUpw())) {
+            if(BCrypt.checkpw(loginVo.getUpw(), dbUser.getUpw())) {
                 dbUser.setUpw(null);
                 utils.setLoginUser(dbUser);
                 return dbUser;   // 로그인 성공

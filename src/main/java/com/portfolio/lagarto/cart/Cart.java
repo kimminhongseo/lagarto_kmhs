@@ -6,6 +6,7 @@ import com.portfolio.lagarto.model.SuppliesVo;
 import com.portfolio.lagarto.supplies.SuppliesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,9 +22,8 @@ public class Cart {
     private SuppliesService service;
 
     @GetMapping("/cart")
-    public String cart(){
-
-
+    public String cart(SuppliesVo vo, Model model){
+        model.addAttribute("cart",service.myCartList(vo));
         if (0 != utils.getLoginUserPk()) {
             return "/cart/cart";
         }

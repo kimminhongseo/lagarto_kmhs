@@ -86,6 +86,7 @@ if (commentFormContainerElem) {
         }
 
         myFetch.post('/ajax/auctionCmt', data => {
+            // todo: alert 확인
             console.log(data.result);
             switch (data.result) {
                 case 0:
@@ -112,6 +113,7 @@ const getCommentList = () => {
 
 //리스트 만들기
 //-----------------댓글 수정삭제 (시작)
+
 const sessionloginElem = document.querySelector('#dataLogin');
 const makeCommentRecordList = list => {
 
@@ -313,7 +315,8 @@ if(favIconElem) {
 
 
 //-----------------경매 남은시간 및 끝났을때 이벤트
-
+const IuserElem = document.querySelector('#dataIuser'); //파는 사람
+const BuyerElem = document.querySelector('#dataBuyer'); //사는 사람
 
 const countDownTimer = function (id,date){
     var _vDate = new Date(date); // 전달 받은 일자
@@ -339,15 +342,22 @@ const countDownTimer = function (id,date){
                 document.getElementById("formimbuybtn").style.visibility = "hidden"; //즉시구매 사라지게
             }
             const param={
-                iboard
+                iboard,
+                'iuser':IuserElem.dataset.iuser,
+                'buyer':BuyerElem.dataset.buyer
             }
-            myFetch.put('/ajax/auctionBid',data =>{
+            myFetch.put(`/ajax/auctionBid`,data =>{
                 switch (data.result){
                     case 0:
                         alert('실패');
                         break;
                     case 1:
                         alert("경매가 끝난 상품입니다.");
+                        console.log("경매끝");
+                        break;
+                    case 2:
+                        alert("유찰된 상품입니다.");
+                        console.log("유찰");
                         break;
                 }
             },param);

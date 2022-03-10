@@ -7,50 +7,40 @@
     <title>장바구니</title>
     <link rel="stylesheet" th:href="@{/static/css/cart/cart.css}">
     <script defer th:src="@{/static/js/cart/cart.js}"></script>
+    <script type="text/javascript" th:inline="javascript"></script>
 
 </head>
 
 <th:block layout:fragment="content">
     <div id="container-Cart">
+        <div id="cartiuser" th:with="data=${cart}" th:data-iuser="${session.loginUser.iuser}"></div>
         <div id="viewFist">
             <div id="carts">장바구니</div>
+
             <div id="tableList">
                 <div id="tableListSize">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">상품번호</th>
-                            <th scope="col">용품 이름</th>
-                            <th scope="col">가격</th>
-                            <th scope="col">갯수</th>
+                            <th>상품번호</th>
+                            <th>용품 이름</th>
+                            <th>가격</th>
+                            <th>갯수</th>
+
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry the Bird</td>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+
+                        <tbody id="cartdata">
+
                         </tbody>
+
+
                     </table>
                 </div>
-                <div id="ListSum">
-                    <div th:text="'총 주문 금액'"></div>
-                    <div th:text="'현재금액 : ' + ${session.loginUser.money} + '원'"></div>
-                    <div>결제금액 : 1000000원</div>
+                <div id="ListSum" >
+                    <div id="fee"> </div>
+                    <br>
+                    <div th:text="'현재 포인트 : ' + ${session.loginUser.money} + ' 원'"></div>
                 </div>
             </div>
         </div>

@@ -80,6 +80,17 @@ public class SuppliesService {
         return result;
     }
 
+    public List<SuppliesVo> myCartList(SuppliesVo vo){
+        vo.setIuser(utils.getLoginUserPk());
+        return mapper.myCartList(vo);
+    }
+
+    public int plusnum(SuppliesVo vo){
+        vo.setIuser(utils.getLoginUserPk());
+        return mapper.plusnum(vo);
+    }
+
+
 
 
 

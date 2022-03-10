@@ -29,7 +29,6 @@ public class AuctionCommentRestController {
     @GetMapping
     public List<AuctionCommentVo> selAuctionCmtList(AuctionCommentEntity entity, HttpSession hs) {
         Object object = hs.getAttribute(Const.LOGIN_USER);
-        System.out.println("objrectaedas!! : "+object);
         return service.selAuctionCmtList(entity);
     }
 

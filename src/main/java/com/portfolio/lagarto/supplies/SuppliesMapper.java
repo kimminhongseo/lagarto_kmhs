@@ -25,5 +25,9 @@ public interface SuppliesMapper {
     int cartList(SuppliesEntity entity);
 
 
+    List<SuppliesVo> myCartList(SuppliesVo vo);
+
+    int plusnum(SuppliesVo vo);
+
 
 }

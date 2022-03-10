@@ -62,14 +62,12 @@ public class AuctionBidController {
         AuctionVo vo = new AuctionVo();
         vo.setIboard(iboard);
 
-
       return service.checktimer(vo);
     }
 
     @PutMapping() //낙찰 유무
-    public Map<String, Integer> bidcheck (@RequestBody AuctionVo vo){
-        Map<String, Integer> result = new HashMap<>();
-        result.put("result", service.bidcheck(vo));
+    public int bidcheck (@RequestBody AuctionVo vo){
+        int result =  service.bidcheck(vo);
         return result;
     }
 

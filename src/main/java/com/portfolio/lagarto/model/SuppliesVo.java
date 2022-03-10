@@ -10,4 +10,6 @@ public class SuppliesVo extends SuppliesEntity {
     private String categorynm;
     private String nicknm;
     private String save_name; //리스트에서 사진 뿌려주려고..
+    private int num; //갯수
+
 }

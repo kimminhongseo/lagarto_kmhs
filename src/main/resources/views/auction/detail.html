@@ -7,9 +7,7 @@
     <title>상세 정보</title>
     <link rel="stylesheet" th:href="@{/css/auction/detail.css}">
     <script defer th:src="@{/static/js/auction/detail.js}"></script>
-    <script type="text/javascript" th:inline="javascript">
-
-    </script>
+    <script type="text/javascript" th:inline="javascript"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
@@ -32,6 +30,7 @@
 
         <!--Elem=docu q ~. dataIuser   Elem.dataset.iuser  하면 Data.iuser값이 js로 온다. -->
             <div id="dataIuser" th:with="data=${Data}" th:data-iuser="${Data.iuser}">
+                <div id="dataBuyer" th:with="data=${Data}" th:data-buyer="${Data.buyer}">
                 <!--param은 바로넣으면 안되면 우회해야함.-->
                 <div id="data" th:with="ibo=${param.iboard}" th:data-iboard="${ibo}">
                     <div th:if="${session.loginUser != null && session.loginUser.iuser == data.iuser}">
@@ -175,10 +174,11 @@
                 </thead>
 
                 <tbody>
+
                 </tbody>
             </table>
         </div>
 
-
+    </div>
 </th:block>
 </html>

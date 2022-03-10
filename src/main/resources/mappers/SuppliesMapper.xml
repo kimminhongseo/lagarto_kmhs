@@ -84,12 +84,17 @@
 
     <!--cartList에 담긴 정보들들 DISTINCT는 중복방지-->
     <select id="myCartList" resultType="SuppliesVo">
-        SELECT DISTINCT A.iboard,A.iuser,B.* FROM cart A
+        SELECT DISTINCT A.iboard,A.iuser,A.num,B.* FROM cart A
         INNER JOIN supplies B
         ON A.iboard = B.iboard
-        WHERE A.iuser =#{iuser}
-        ORDER BY A.iboard;;
+        WHERE A.iuser= #{iuser}
+        ORDER BY A.iboard;
     </select>
+
+    <update id="plusnum">
+        update cart set num = num+1
+        where iboard = #{iboard} and iuser = #{iuser}
+    </update>
 
 
 

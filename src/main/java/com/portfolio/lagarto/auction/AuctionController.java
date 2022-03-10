@@ -245,8 +245,6 @@ public class AuctionController {
         return "redirect:/auction/list/";
     }
 
-    @GetMapping("/upprice")
-    public void upprice(){};
 
 
 }

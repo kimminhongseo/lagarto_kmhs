@@ -27,5 +27,7 @@ public interface SuppliesMapper {
 
     List<SuppliesVo> myCartList(SuppliesVo vo);
 
+    int plusnum(SuppliesVo vo);
+
 
 }

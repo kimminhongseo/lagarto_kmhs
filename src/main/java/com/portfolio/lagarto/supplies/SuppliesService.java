@@ -85,6 +85,12 @@ public class SuppliesService {
         return mapper.myCartList(vo);
     }
 
+    public int plusnum(SuppliesVo vo){
+        vo.setIuser(utils.getLoginUserPk());
+        return mapper.plusnum(vo);
+    }
+
+
 
 
 

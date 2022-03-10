@@ -7,11 +7,13 @@
     <title>장바구니</title>
     <link rel="stylesheet" th:href="@{/static/css/cart/cart.css}">
     <script defer th:src="@{/static/js/cart/cart.js}"></script>
+    <script type="text/javascript" th:inline="javascript"></script>
 
 </head>
 
 <th:block layout:fragment="content">
     <div id="container-Cart">
+        <div id="cartiuser" th:with="data=${cart}" th:data-iuser="${session.loginUser.iuser}"></div>
         <div id="viewFist">
             <div id="carts">장바구니</div>
 
@@ -24,24 +26,21 @@
                             <th>용품 이름</th>
                             <th>가격</th>
                             <th>갯수</th>
+
                         </tr>
                         </thead>
 
-                        <tbody>
-                        <tr th:each="data:${cart}">
-                            <td th:text="${data.iboard}"></td>
-                            <td th:text="${data.title}"></td>
-                            <td th:text="${data.price}"></td>
-                            <td><button>sdasd</button></td>
-                        </tr>
+                        <tbody id="cartdata">
+
                         </tbody>
+
 
                     </table>
                 </div>
-                <div id="ListSum">
-                    <div th:text="'총 주문 금액'"></div>
-                    <div th:text="'현재금액 : ' + ${session.loginUser.money} + '원'"></div>
-                    <div>결제금액 : 1000000원</div>
+                <div id="ListSum" >
+                    <div id="fee"> </div>
+                    <br>
+                    <div th:text="'현재 포인트 : ' + ${session.loginUser.money} + ' 원'"></div>
                 </div>
             </div>
         </div>

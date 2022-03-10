@@ -46,8 +46,10 @@ public class AuctionBidService {
     }
 
     public int bidcheck(AuctionVo vo){
-        vo.setBid(1);
-        return mapper.bidcheck(vo);
+        if(vo.getBuyer() == vo.getIuser()){
+            return 2;
+        }
+        return mapper.bidcheck(vo); // bid 1로 바꿈
     }
 
 

@@ -100,7 +100,7 @@ public class UserController {
 
     @PostMapping("/apiLogin")
     @ResponseBody
-    public Map<String, Integer> loginProc(@RequestBody UserEntity entity) {
+    public Map<String, Integer> apiLogin(@RequestBody UserEntity entity) {
         UserEntity dbEntity = service.selApiUser(entity);
 
         Map<String, Integer> result = new HashMap<>();
@@ -347,16 +347,6 @@ public class UserController {
         model.addAttribute(Const.User, vo);
         System.out.println(vo.getUid());
         return "/user/forgotId.success";
-    }
-
-    @GetMapping("/forgotId.success")
-    public String forgotIdSuccess() {
-        return "/user/forgotId.success";
-    }
-
-    @GetMapping("/forgotId.failure")
-    public String forgotIdFailure() {
-        return "/user/forgotId.failure";
     }
 
     @GetMapping("/forgotPw")

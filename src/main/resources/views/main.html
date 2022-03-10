@@ -8,20 +8,30 @@
 </head>
 <th:block layout:fragment="content">
     <div class="mainPage">
-        <div id="eventFont">
-            <img src="/static/img/eventFont.png">
-        </div>
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="10000">
-                    <img id="event01" src="/static/img/event01.png" class="d-block w-80" alt="">
+                <div class="carousel-item active main_banner" data-bs-interval="2000">
+					<div class="d-block w-80 event_banner">
+						<div class="banner1">
+							<div>
+								<img src="/static/img/main_banner1.png" alt="인스타그램 이벤트">
+								<img src="/static/img/main_banner1_insta.png" alt="인스타그램 계정">
+							</div>
+							<div class="banner_text">
+								<p>우리 SNS 친구해요!</p>
+								<h1>팔로우 이벤트</h1>
+								<p class="banner_text_detail">LAGARTO 인스타그램 계정을 팔로우 하고<br>
+									1000 포인트 받아가세요</p>
+							</div>
+						</div>
+					</div>
                 </div>
-                <div class="carousel-item" data-bs-interval="2000">
-                    <img id="event02" src="/static/img/event02.png" class="d-block w-80" alt="">
-                </div>
-                <div class="carousel-item">
-                    <img id="event03" src="/static/img/event03.png" class="d-block w-80" alt="">
-                </div>
+<!--                <div class="carousel-item" data-bs-interval="2000">-->
+<!--                    <img id="event02" src="/static/img/event02.png" class="d-block w-80" alt="">-->
+<!--                </div>-->
+<!--                <div class="carousel-item">-->
+<!--                    <img id="event03" src="/static/img/event03.png" class="d-block w-80" alt="">-->
+<!--                </div>-->
             </div>
             <button id="btnTop10" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
                     data-bs-slide="prev">

@@ -418,45 +418,21 @@
                         <div>
                             <h1>나의 리뷰</h1>
                         </div>
-<!--                        <div id="review-my">-->
-<!--                            내가 쓴 리뷰-->
-<!--                        </div>-->
+                        <div id="review-my"></div>
                     </div>
-                            <div id="review-container">
-                                <table class="g_blue_table tb_list" id="review-table">
-                                    <tbody id="review-tbody">
-                                    <tr th:each="rev : ${review}" id="review-tr2">
-                                        <td th:text="${rev.productTitle}">상품제목</td>
-                                        <td th:text="${rev.title}">title</td>
-                                        <td th:text="${rev.nickname}">nickname</td>
-                                        <td th:text="${rev.rdt}">rdt</td>
-                                        <td th:text="${'⭐' * rev.rating}"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <div class="page_wrap">
-                                    <nav th:if="${params != null and params.paginationInfo.totalRecordCount > 0}" th:object="${params.paginationInfo}" th:with="info=${params.paginationInfo}" aria-label="Page navigation" class="text-center">
-                                        <ul class="pagination">
-                                            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(1)} ]])" class="pprev">
-                                                <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-                                            </li>
-                                            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.firstPage - 1)} ]])" class="prev">
-                                                <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&lsaquo;</span></a>
-                                            </li>
-                                            <li th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:class="${pageNo == params.currentPageNo} ? 'active'">
-                                                <a href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(pageNo)} ]])" class="page-item"></a>
-                                            </li>
-                                            <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.lastPage + 1)} ]])" class="next">
-                                                <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&rsaquo;</span></a>
-                                            </li>
-                                            <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.totalPageCount)} ]])" class="nnext">
-                                                <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-
+                        <div id="review-container">
+                            <table class="g_blue_table tb_list" id="review-table">
+                                <tbody id="review-tbody">
+                                <tr th:each="rev : ${review}" id="review-tr2">
+                                    <td th:text="${rev.productTitle}">상품제목</td>
+                                    <td th:text="${rev.title}">title</td>
+                                    <td th:text="${rev.nickname}">nickname</td>
+                                    <td th:text="${rev.rdt}">rdt</td>
+                                    <td th:text="${'⭐' * rev.rating}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                 </div>
             </div>
         </div>

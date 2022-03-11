@@ -18,11 +18,12 @@
                 <form id="writeFrm" th:action="@{/customer/write}" th:object="${entity}" method="post" enctype="multipart/form-data">
                     <input type="hidden" id="board_cd" th:field="*{board_cd}" th:value="${param.board_cd}">
                     <input type="hidden" id="iboard" th:field="*{iboard}" th:value="${entity.iboard}">
-                    <input type="hidden" id="product_cd" name="product_cd" th:field="*{product_cd}" th:value="${entity.product_cd}">
+                    <input type="hidden" id="product_cd" th:name="product_cd" th:field="*{product_cd}">
                     <div class="form-floating mb-3">
                         <input type="text" id="title" class="form-control" placeholder="title" th:field="*{title}">
                         <label class="form-label" for="title">제목</label>
                     </div>
+
                     <div>
                         <fieldset th:if="${entity.board_cd == 1}" th:field="*{rating}" th:value="${param.rating}">
                             <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
@@ -34,12 +35,12 @@
                     </div>
 
                     <div th:if="${entity.board_cd == 3}">
-                        <th:block th:if="${loginUser == 3}">
+                        <th:block th:if="${loginUser == 0}">
                             <span class="form-group col-sm-10" style="margin-top: 10px;"> 공지글 설정
                                 <input type="checkbox" th:value="${'Y'}" th:field="*{noticeYn}" id="noticeYn" name="noticeYn" th:checked="*{#strings.equals( noticeYn, 'Y' )}" />
                             </span>
                         </th:block>
-                        <span class="form-group col-sm-10" style="margin-top: 10px;"  th:if="${loginUser != 3}"> 비밀글 설정
+                        <span class="form-group col-sm-10" style="margin-top: 10px;"  th:if="${loginUser != 0}"> 비밀글 설정
                             <input type="checkbox" th:value="${'Y'}" th:field="*{secretYn}" id="secretYn" name="secretYn" th:checked="*{#strings.equals( secretYn, 'Y' )}" />
                         </span>
                     </div>

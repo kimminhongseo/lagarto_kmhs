@@ -4,9 +4,9 @@
 
     <insert id="insCustomer" parameterType="CustomerDto" useGeneratedKeys="true" keyProperty="iboard">
         INSERT INTO lagarto.customer
-        (iboard, board_cd, title, ctnt, iuser, rating, secretYn, noticeYn)
+        (iboard, board_cd, product_cd, title, ctnt, iuser, rating, secretYn, noticeYn)
         VALUES
-        (${iboard}, ${board_cd}, #{title}, #{ctnt}, ${iuser}, ${rating}, #{secretYn}, #{noticeYn})
+        (${iboard}, ${board_cd}, ${product_cd}, #{title}, #{ctnt}, ${iuser}, ${rating}, #{secretYn}, #{noticeYn})
     </insert>
 
     <select id="selCustomerList" parameterType="TestDto" resultType="CustomerVo">

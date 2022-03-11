@@ -319,3 +319,6 @@ const moveToReviewWrite = (item) => {
 };
 reviewBtnElem.forEach(moveToReviewWrite);
 
+function movePage(uri, queryString) {
+    location.href = uri + queryString;
+}

@@ -97,6 +97,14 @@ public class SuppliesService {
         return mapper.minusnum(vo);
     }
 
+    public int delcart(int iboard){
+        SuppliesVo vo = new SuppliesVo();
+        vo.setIboard(iboard);
+        vo.setIuser(utils.getLoginUserPk());
+        return mapper.delcart(vo);
+    }
+
+
 
 
 

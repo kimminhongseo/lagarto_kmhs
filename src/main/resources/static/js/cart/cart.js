@@ -1,52 +1,4 @@
 
-<!--
-
--->
-
-
-/*
-// 총 몇개의 상품 있는지?
-const rows = document.getElementById("cartdata").getElementsByTagName('tr');
-console.log(" 총 몇개인가 ? "+rows.length);
-
-
-const dataElem = document.querySelector('#cartdata');
-console.log("dataElem")
-console.log(dataElem);
-
-
-
-    for(i=0; i<rows.length; i++){
-        dataElem.children[i].id= i;
-       dataElem.children[i].children[3].children[0].id='num'+i;
-        console.log(dataElem.children[i].children[2].textContent);
-    }
-let selectElem = document.querySelector('#num1');
-console.log(selectElem);
-
-
-
-//select 박스 값 가져오기
-
-$("select[name=num]").change(function(){
-    console.log($(this).val()); //value값 가져오기
-});
-
-
-//요금
-const feeElem = document.querySelector('#fee');
-
-
-
-
-//불러오는거
-
- */
-
-
-//restcontroller로 다시해보자
-
-
 
 const iuser = document.querySelector('#cartiuser').dataset.iuser;
 const tableListElem = document.querySelector('#tableList');
@@ -54,8 +6,11 @@ const tbodyElem = tableListElem.querySelector('table > tbody');
 
 const mypointElem = document.querySelector('#mypoint');
 
+//보유금액 < 결제 금액 이라면 결제하기 버튼 안보이게 하려고
+const payBtnElem = document.querySelector('#pay');
 
- const getCartList = () =>{
+
+const getCartList = () =>{
      myFetch.get('/cart1/list', list=>{
          selCartList(list);
      },iuser);
@@ -122,19 +77,26 @@ const selCartList = list =>{
                  }
              },param);
 
+             if(item.num ==1){ //1일때 -누르면 0이 되니까 삭제처리
+                 if(confirm(`${item.title} 을 삭제 하시겠습니까?`)) {
+                     delcart(item.iboard,trElem);
+                 }
+                 return false;
+             }
              location.reload();
          });
 
          trElem.appendChild(minusBtn);
          trElem.appendChild(plusBtn);
 
-         //장바구니 오면 개수 1개니까 가격이랑 곱해서 전체 가격 계산.
+
+
+         //잔액, 합계값
          let sumfee = 0
          for(i=0; i<list.length;i++){
              sumfee = sumfee + (list[i].price *list[i].num);
          }
-         //plus 함수 // minus 함수.
-         //sumfee에 각각 리턴값 해보기
+
          const feeElem = document.querySelector('#fee');
          feeElem.innerHTML=`<div>보유 금액: ${mypointElem.dataset.money} 원</div>
                             <div>결제 금액: ${sumfee} 원 </div>`
@@ -142,20 +104,37 @@ const selCartList = list =>{
 
          let balance = mypointElem.dataset.money - sumfee;
          const balanceElem = document.querySelector('#balance');
-         balanceElem.innerHTML=`<div> 결제후 남은 캐쉬: ${balance}원</div>`
+         if(balance < 0){
+             balanceElem.innerHTML='<div>잔액이 부족합니다. 충전 후 이용해 주세요.</div>'
+            payBtnElem.style.visibility ="hidden";
 
+         }else{
+             balanceElem.innerHTML=`<div> 결제후 남은 캐쉬: ${balance}원</div>`
+             payBtnElem.style.visibility ="visible";
+         }
      })
 
+}
+
+const delcart = (iboard,tr) =>{
+     myFetch.delete(`/cart1/${iboard}`,data=>{
+         if(data.result){
+             tr.remove();
+         }
+         else{
+             alert('상품을 삭제할 수 없습니다.');
+         }
+     })
+}
 
 
- }
 
 
 
-//
-// $("select[name=num]").change(function(){
-//     console.log($(this).val());//value값 가져오기
-//     var numValue = $(this).val();});
+
+
+
+
 
 getCartList();
 

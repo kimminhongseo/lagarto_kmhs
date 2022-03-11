@@ -55,4 +55,12 @@ public class CartRest {
         result.put("result",service.minusnum(vo));
         return result;
     }
+
+    @DeleteMapping("/{iboard}")
+    public Map<String, Integer> delcart(@PathVariable int iboard){
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result", service.delcart(iboard));
+        System.out.println(iboard);
+        return result;
+    }
 }

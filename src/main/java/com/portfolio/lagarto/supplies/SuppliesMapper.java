@@ -30,5 +30,7 @@ public interface SuppliesMapper {
     int plusnum(SuppliesVo vo);
     int minusnum(SuppliesVo vo);
 
+    int delcart(SuppliesVo vo);
+
 
 }

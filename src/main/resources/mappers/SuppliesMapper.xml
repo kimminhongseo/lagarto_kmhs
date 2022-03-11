@@ -104,6 +104,13 @@
         where iboard = #{iboard} and iuser = #{iuser}
     </update>
 
+    <delete id="delcart">
+        DELETE FROM cart
+        WHERE iboard = ${iboard} AND iuser = ${iuser}
+    </delete>
+
+
+
 
 
 

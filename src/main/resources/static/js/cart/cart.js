@@ -49,50 +49,17 @@ const feeElem = document.querySelector('#fee');
 
 
 const iuser = document.querySelector('#cartiuser').dataset.iuser;
-
 const tableListElem = document.querySelector('#tableList');
 const tbodyElem = tableListElem.querySelector('table > tbody');
 
-
-//갯수
-const rows = document.getElementById("cartdata").getElementsByTagName('tr');
-console.log("장바구니에 담긴 항목 갯수 : "+rows.length);
+const mypointElem = document.querySelector('#mypoint');
 
 
  const getCartList = () =>{
      myFetch.get('/cart1/list', list=>{
          selCartList(list);
-     },{iuser});
+     },iuser);
  }
-
-
-
-//cart 갯수 올리기 함수
-function fnCalCount(type, ths){
-    var $input = $(ths).parents("td").find("input");
-    var tCount = Number($input.val());
-    var tEqCount = 10;
-
-    if(type=='p'){
-        if(tCount < tEqCount) $input.val(Number(tCount)+1);
-        //fetch로 p 면 putmapping update num  = num+1
-
-
-        myFetch.put('/cart1/plus',data=>{
-            switch (data.result){
-                case 0:
-                    alert('작동 안됨');
-                    break;
-                case 1:
-                    alert('1증가?');
-                    break;
-            }
-        });
-
-    }else{
-        if(tCount >0) $input.val(Number(tCount)-1);
-    }
-}
 
 
 
@@ -103,54 +70,95 @@ const selCartList = list =>{
                  <td>${item.iboard}</td>
                 <td>${item.title}</td>
                 <td>${item.price}</td>
-                 <td>
-                      <button class="minus"  onclick="fnCalCount('m',this);">-</button>
-                      <input class="resultnum" value="${item.num}" readonly>
-                      <button class="plus" onclick="fnCalCount('p', this);">+</button>
-                   </td>
+                 <td>${item.num}</td>
             `;
 
-      console.log(document.getElementsByClassName("input[class=ressultnum]"))
-
-
        tbodyElem.appendChild(trElem);
-       console.log(tbodyElem);
 
 
+         const plusBtn = document.createElement('input');
+         plusBtn.type = 'button';
+         plusBtn.value = '+';
+
+         plusBtn.addEventListener('click',()=>{
+             const tdArr =trElem.querySelectorAll('td');
+             let tdcell = tdArr[3]  // 숫자
+             tdcell.value = tdArr[3].textContent;
+             console.log(tdcell);
+             console.log(tdcell.value);
+             console.log(list.length);
+
+             const param = {
+                 iboard:item.iboard
+             }
+             myFetch.put('/cart1/plus',data=>{
+                switch (data.result){
+                    case 0:
+                        alert('실패');
+                        break;
+                    case 1:
+
+                        break;
+                }
+             },param);
+             location.reload();
+         });
+
+
+         const minusBtn = document.createElement('input');
+         minusBtn.type='button';
+         minusBtn.value='-';
+         minusBtn.addEventListener('click',()=>{
+             const param = {
+                 iboard:item.iboard
+             }
+             myFetch.put('/cart1/minus',data=>{
+                 switch (data.result){
+                     case 0:
+                         alert('실패');
+                         break;
+                     case 1:
+                         break;
+                 }
+             },param);
+
+             location.reload();
+         });
+
+         trElem.appendChild(minusBtn);
+         trElem.appendChild(plusBtn);
+
+         //장바구니 오면 개수 1개니까 가격이랑 곱해서 전체 가격 계산.
+         let sumfee = 0
+         for(i=0; i<list.length;i++){
+             sumfee = sumfee + (list[i].price *list[i].num);
+         }
+         //plus 함수 // minus 함수.
+         //sumfee에 각각 리턴값 해보기
+         const feeElem = document.querySelector('#fee');
+         feeElem.innerHTML=`<div>보유 금액: ${mypointElem.dataset.money} 원</div>
+                            <div>결제 금액: ${sumfee} 원 </div>`
+
+
+         let balance = mypointElem.dataset.money - sumfee;
+         const balanceElem = document.querySelector('#balance');
+         balanceElem.innerHTML=`<div> 결제후 남은 캐쉬: ${balance}원</div>`
 
      })
 
 
-     console.log(document.getElementsByTagName("input"));
 
-
-
-
-
-     //장바구니 오면 개수 1개니까 가격이랑 곱해서 전체 가격 계산.
-     let sumfee = 0
-     for(i=0; i<rows.length;i++){
-        sumfee = sumfee + (list[i].price);
-        console.log(list[i].iboard); // 상품 번호들.
-
-     }
-
-
-     //plus 함수 // minus 함수.
-     //sumfee에 각각 리턴값 해보기
-
-     const feeElem = document.querySelector('#fee');
-     feeElem.innerHTML=`<div>결제금액은 ${sumfee} 원 입니다.</div>`
  }
+
+
 
 //
 // $("select[name=num]").change(function(){
 //     console.log($(this).val());//value값 가져오기
 //     var numValue = $(this).val();});
 
-
-
-
 getCartList();
+
+
 
 

@@ -87,7 +87,14 @@ public class SuppliesService {
 
     public int plusnum(SuppliesVo vo){
         vo.setIuser(utils.getLoginUserPk());
+        vo.getIboard();
+
         return mapper.plusnum(vo);
+    }
+
+    public int minusnum(SuppliesVo vo){
+        vo.setIuser(utils.getLoginUserPk());
+        return mapper.minusnum(vo);
     }
 
 

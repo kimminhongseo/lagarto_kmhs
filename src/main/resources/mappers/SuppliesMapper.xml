@@ -92,9 +92,19 @@
     </select>
 
     <update id="plusnum">
-        update cart set num = num+1
+        update cart
+        set num = num+1
         where iboard = #{iboard} and iuser = #{iuser}
     </update>
+
+
+    <update id="minusnum">
+        update cart
+        set num = num-1
+        where iboard = #{iboard} and iuser = #{iuser}
+    </update>
+
+
 
 
 

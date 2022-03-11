@@ -18,12 +18,9 @@ public class Cart {
     @Autowired
     private Utils utils;
 
-    @Autowired
-    private SuppliesService service;
 
     @GetMapping("/cart")
-    public String cart(SuppliesVo vo, Model model){
-        model.addAttribute("cart",service.myCartList(vo));
+    public String cart(){
         if (0 != utils.getLoginUserPk()) {
             return "/cart/cart";
         }

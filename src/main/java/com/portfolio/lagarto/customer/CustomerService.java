@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -57,6 +58,21 @@ public class CustomerService {
         }
         return list;
     }
+
+    public List<CustomerVo> selMyReviewList(TestDto dto) {
+        List<CustomerVo> list;
+        int totalCount = mapper.totalCount(dto);
+        PaginationInfo paginationInfo = new PaginationInfo(dto);
+        paginationInfo.setTotalRecordCount(totalCount);
+
+        dto.setIuser(utils.getLoginUserPk());
+        dto.setPaginationInfo(paginationInfo);
+
+            list = mapper.selMyReviewList(dto);
+        return list;
+    }
+
+
 
     public CustomerVo selCustomerDetail(CustomerDto dto) {
         attachMapper.deleteDbFiles(dto.getIboard());

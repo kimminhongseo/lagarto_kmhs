@@ -53,6 +53,15 @@
         WHERE A.iboard = ${iboard} AND A.isdel = 0
     </select>
 
+    <select id="selMyReviewList" parameterType="TestDto" resultType="CustomerVo">
+        SELECT A.* , B.nickname, C.title AS productTitle FROM lagarto.customer A
+        INNER JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
+        LEFT JOIN lagarto.auction C ON A.product_cd = C.iboard
+        WHERE A.board_cd = 1 AND A.isdel = 0 AND A.iuser = #{iuser}
+        ORDER BY A.iboard DESC
+            LIMIT #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+    </select>
+
     <select id="totalCount" parameterType="TestDto" resultType="int">
         SELECT COUNT(*) FROM lagarto.customer WHERE isdel = 0 AND board_cd = ${board_cd}
     </select>

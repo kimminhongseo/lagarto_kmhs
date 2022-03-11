@@ -12,7 +12,6 @@ public class TestDto extends CommonDTO {
     private int product_cd;
     private String title;
     private String ctnt;
-    private String ctnt_img;
     private int iuser;
     private String rdt;
     private String mdt;

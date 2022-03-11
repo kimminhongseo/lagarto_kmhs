@@ -18,6 +18,7 @@
                 <form id="writeFrm" th:action="@{/customer/write}" th:object="${entity}" method="post" enctype="multipart/form-data">
                     <input type="hidden" id="board_cd" th:field="*{board_cd}" th:value="${param.board_cd}">
                     <input type="hidden" id="iboard" th:field="*{iboard}" th:value="${entity.iboard}">
+                    <input type="hidden" id="product_cd" name="product_cd" th:field="*{product_cd}" th:value="${entity.product_cd}">
                     <div class="form-floating mb-3">
                         <input type="text" id="title" class="form-control" placeholder="title" th:field="*{title}">
                         <label class="form-label" for="title">제목</label>

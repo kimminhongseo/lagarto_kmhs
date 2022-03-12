@@ -52,7 +52,8 @@
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">
         SELECT A.*,
-        B.nm as writernm , B.profile_img,B.nickname as nicknm , B.money,
+        B.nm as writernm , B.profile_img,B.nickname as nicknm ,
+        B.money,B.address_post,B.address_primary,B.address_secondary,
         C.nm as categorynm, D.nickname AS buyernickname
         from lagarto.auction A
         left join lagarto.lagarto_user B
@@ -141,6 +142,11 @@
 
     </select>
 
+    <!--즉시구매-->
+    <update id="imbuyclick">
+        UPDATE lagarto.auction SET buyer = #{buyer}, mdt = NOW(), bid=1
+        WHERE iboard = #{iboard}
+    </update>
     
     
     

@@ -212,6 +212,7 @@ public class UserController {
         model.addAttribute("buying",aservice.buyMyPage()); //auction 정보
         model.addAttribute("sell",aservice.sellMyPage());
         model.addAttribute("selling",aservice.sellingMyPage());
+
         if (0 != utils.getLoginUserPk()) {
             return "/user/mypage";
         }

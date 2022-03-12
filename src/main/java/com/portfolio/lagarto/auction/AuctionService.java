@@ -77,6 +77,12 @@ public class AuctionService {
         return mapper.delAuction(vo);
     }
 
+    public int imbuyclick(AuctionVo vo){
+        vo.setBuyer(utils.getLoginUserPk());//구매자를 현재 로그인한사람으로
+        return mapper.imbuyclick(vo);
+    }
+
+
 
     public List<AuctionVo> buyMyPage(){
         AuctionVo vo = new AuctionVo();

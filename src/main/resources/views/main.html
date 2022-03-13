@@ -10,7 +10,7 @@
     <div class="mainPage">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active main_banner" data-bs-interval="2000">
+                <div class="carousel-item active main_banner" data-bs-interval="4000">
 					<div class="d-block w-80 event_banner">
 						<div class="banner1">
 							<div>
@@ -26,12 +26,19 @@
 						</div>
 					</div>
                 </div>
-<!--                <div class="carousel-item" data-bs-interval="2000">-->
-<!--                    <img id="event02" src="/static/img/event02.png" class="d-block w-80" alt="">-->
-<!--                </div>-->
-<!--                <div class="carousel-item">-->
-<!--                    <img id="event03" src="/static/img/event03.png" class="d-block w-80" alt="">-->
-<!--                </div>-->
+				<div class="carousel-item main_banner" data-bs-interval="4000">
+					<div class="d-block w-80 event_banner">
+						<div class="banner2">
+							<div>
+								<img src="/static/img/main_banner2.png" alt="첫 구매 이벤트">
+							</div>
+							<div class="banner_text">
+								<p>WELCOME EVENT</p>
+								<h1><span>첫 거래시</span><br>5000원 혜택</h1>
+							</div>
+						</div>
+					</div>
+				</div>
             </div>
             <button id="btnTop10" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
                     data-bs-slide="prev">
@@ -143,11 +150,11 @@
 				</div>
 			</div>
 
-			<a class="theList" href="auction/list">
-				<div class="d-grid gap-2">
-					<button id="theList1" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button>
-				</div>
-			</a>
+			<div class="sub_banner sb1">
+				<a href="auction/list">
+					<img src="/static/img/sub_banner1.png" alt="도마뱀 게시판 이동">
+				</a>
+			</div>
 
 			<div class="home_products">
 				<div class="product_title topProductTop10">
@@ -246,11 +253,11 @@
 				</div>
 			</div>
 
-			<a class="theList" href="auction/list">
-				<div class="d-grid gap-2">
-					<button id="theList2" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button>
-				</div>
-			</a>
+			<div class="sub_banner sb2">
+				<a href="supplies/list/1">
+					<img src="/static/img/sub_banner2.png" alt="용품-먹이 게시판 이동">
+				</a>
+			</div>
 
 			<div class="home_products">
 				<div class="product_title topProductTop10">
@@ -349,20 +356,20 @@
 				</div>
 			</div>
 
-			<a class="theList" href="auction/list">
-				<div class="d-grid gap-2">
-					<button id="theList3" type="button" class="btn btn-outline-secondary">상품 보러 가기 click!</button>
-				</div>
-			</a>
+			<div class="sub_banner sb3">
+				<a href="supplies/list/3">
+					<img src="/static/img/sub_banner3.png" alt="용품-사육장 게시판 이동">
+				</a>
+			</div>
 
-			<span>
-				<div class="imgKakao1"><span><label class="mouseOver1">도마뱀 리스트</label></span></div>
-				<div class="imgKakao2"><span><label class="mouseOver2">용품 리스트</label></span></div>
-				<div class="imgKakao3"><span><label class="mouseOver3">리뷰 리스트</label></span></div>
-				<div class="imgKakao4"><span><label class="mouseOver4">커뮤니티 리스트</label></span></div>
-				<div class="imgKakao5"><span><label class="mouseOver5">고객센터</label></span></div>
-			</span>
-			<div id="imgHref"></div>
+<!--			<span>-->
+<!--				<div class="imgKakao1"><span><label class="mouseOver1">도마뱀 리스트</label></span></div>-->
+<!--				<div class="imgKakao2"><span><label class="mouseOver2">용품 리스트</label></span></div>-->
+<!--				<div class="imgKakao3"><span><label class="mouseOver3">리뷰 리스트</label></span></div>-->
+<!--				<div class="imgKakao4"><span><label class="mouseOver4">커뮤니티 리스트</label></span></div>-->
+<!--				<div class="imgKakao5"><span><label class="mouseOver5">고객센터</label></span></div>-->
+<!--			</span>-->
+<!--			<div id="imgHref"></div>-->
         </div>
     </div>
 </th:block>

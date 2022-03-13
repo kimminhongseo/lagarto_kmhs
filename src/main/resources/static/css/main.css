@@ -68,6 +68,10 @@
     background-color: #ddffe6;
 }
 
+.mainPage .main_banner:nth-child(2) {
+    background-color: #ef4d4d;
+}
+
 .mainPage .main_banner .event_banner {
     width: var(--width-max);
     height: 100%;
@@ -82,12 +86,17 @@
 
 .mainPage .main_banner .event_banner .banner1 div img:nth-child(1) {
     width: 500px;
+    left: -50px;
 }
 
 .mainPage .main_banner .event_banner .banner1 div img:nth-child(2) {
     width: 150px;
-    left: 220px;
+    left: 175px;
     top: 180px;
+}
+
+.mainPage .main_banner .event_banner .banner2 div img:nth-child(1) {
+    width: 450px;
 }
 
 .mainPage .main_banner .event_banner .banner_text {
@@ -97,26 +106,38 @@
 }
 
 .mainPage .main_banner .event_banner .banner_text h1 {
-    color: #4b985f;
     font-family: 'GmarketSansBold';
-    font-size: 3.5rem;
+    font-size: 3.7rem;
     text-align: right;
     margin: 0;
 }
 
 .mainPage .main_banner .event_banner .banner_text p {
-    color: #4b985f;
     font-family: 'S-CoreDream-3Light';
     text-align: right;
     margin: 0;
 }
 
+.mainPage .main_banner .event_banner .banner1 .banner_text {
+    color: #4b985f;
+}
+
+.mainPage .main_banner .event_banner .banner2 .banner_text {
+    color: #fff;
+}
+
+.mainPage .main_banner .event_banner .banner2 .banner_text span {
+    color: #ffb808;
+    font-family: 'GmarketSansBold';
+}
+
 .mainPage .main_banner .event_banner .banner_text p:nth-child(1) {
+    font-family: 'S-CoreDream-6Bold';
     font-size: 1.3rem;
-    font-weight: bold;
 }
 
 .mainPage .main_banner .event_banner .banner_text .banner_text_detail {
+    color: #557e5f;
     line-height: 1.7rem;
     padding-top: 2rem;
 }
@@ -132,6 +153,17 @@
     flex-direction: column;
     margin: 0 auto 1rem;
     padding: 0;
+}
+
+.product_title  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.product_title p {
+    font-size: 0.95rem;
+    opacity: 0.6;
 }
 
 .product {
@@ -197,8 +229,36 @@
     line-height: 0.8rem;
 }
 
+.sub_banner {
+    width: 100%;
+    height: 300px;
+    margin: 5rem 0;
+}
 
+.sb1 {
+    background-color: #4d7870;
+}
 
+.sb2 {
+    background-color: #ffa443;
+}
+
+.sb3 {
+    background-color: #000;
+}
+
+.sub_banner a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sub_banner a img {
+    width: 930px;
+    height: fit-content;
+}
 
 
 

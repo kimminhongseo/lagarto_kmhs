@@ -112,9 +112,38 @@ const selCartList = list =>{
              balanceElem.innerHTML=`<div> 결제후 남은 캐쉬: ${balance}원</div>`
              payBtnElem.style.visibility ="visible";
          }
+
+        //즉시구매 기능 구현
+
+         if(payBtnElem){
+             payBtnElem.addEventListener('click',()=>{
+                 if(confirm('정말로 결제 하시겠습니까???')){
+                     const param={
+                         balance
+                     }
+                     console.log('잔액 업데이트~');
+                     myFetch.put(`/cart1/balance`,data =>{
+                         switch (data.result){
+                             case 0:
+                                 alert('실패');
+                                 return false;
+                             case 1:
+                                 alert('성공');
+                                 location.reload();
+                         }
+                     },param);
+                     //결제하면 ${balance} 를 money에 update해주기.
+                 }
+             })
+         }
+
+
      })
 
 }
+
+
+
 
 const delcart = (iboard,tr) =>{
      myFetch.delete(`/cart1/${iboard}`,data=>{
@@ -126,6 +155,9 @@ const delcart = (iboard,tr) =>{
          }
      })
 }
+
+
+
 
 
 

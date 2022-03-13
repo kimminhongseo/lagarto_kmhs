@@ -12,6 +12,7 @@ const formimbuybtnElem = document.querySelector('#formimbuybtn');
 //이미지 작게  고정.
 const img = document.getElementsByClassName("click_img");
 for (let x = 0; x < img.length; x++) {
+
     img.item(x).onclick=function() {window.open(this.src,'_blank','toolbar=no,location=no,status=no,menubar=no, scrollbars=auto,resizable=no,' +
         'width=500,height=500 top=200 left=300')};
 }

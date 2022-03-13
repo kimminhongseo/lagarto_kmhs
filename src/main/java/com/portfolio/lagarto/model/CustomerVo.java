@@ -5,6 +5,7 @@ public class CustomerVo extends CustomerEntity {
     private String nickname;
     private String board_nm;
     private String changeYn;
+    private int level;
 
     public String getProductTitle() {
         return productTitle;
@@ -36,5 +37,13 @@ public class CustomerVo extends CustomerEntity {
 
     public void setChangeYn(String changeYn) {
         this.changeYn = changeYn;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

@@ -59,6 +59,20 @@ public class CustomerService {
         return list;
     }
 
+    public List<CustomerVo> selNoticeList(TestDto dto) {
+        List<CustomerVo> list = null;
+        int totalCount = mapper.totalCount(dto);
+        PaginationInfo paginationInfo = new PaginationInfo(dto);
+        paginationInfo.setTotalRecordCount(totalCount);
+
+        dto.setPaginationInfo(paginationInfo);
+
+        if(totalCount > 0) {
+            list = mapper.selCustomerList(dto);
+        }
+        return list;
+    }
+
     public List<CustomerVo> selMyReviewList(TestDto dto) {
         List<CustomerVo> list;
         int totalCount = mapper.totalCount(dto);

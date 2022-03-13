@@ -31,6 +31,7 @@ public class CustomerController {
         model.addAttribute("board_cd", board_cd);
         model.addAttribute("list", service.selCustomerList(dto));
         model.addAttribute("loginUser",utils.getLoginUserPk());
+        model.addAttribute("notice", service.selNoticeList(dto));
         dto.setBoard_cd(board_cd);
         return "customer/list";
     }

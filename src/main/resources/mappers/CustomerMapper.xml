@@ -10,7 +10,7 @@
     </insert>
 
     <select id="selCustomerList" parameterType="TestDto" resultType="CustomerVo">
-        SELECT A.* , B.nickname, C.title AS productTitle, C.iboard FROM lagarto.customer A
+        SELECT A.* ,B.level ,B.nickname, C.title AS productTitle, C.iboard FROM lagarto.customer A
         INNER JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
         LEFT JOIN lagarto.auction C ON A.product_cd = C.iboard
         WHERE A.board_cd = ${board_cd} AND A.isdel = 0
@@ -45,6 +45,51 @@
         LIMIT #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
     </select>
 
+    <select id="selNotice" parameterType="TestDto" resultType="CustomerVo">
+        SELECT A.* ,B.level ,B.nickname, C.title AS productTitle, C.iboard FROM lagarto.customer A
+        INNER JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
+        LEFT JOIN lagarto.auction C ON A.product_cd = C.iboard
+        WHERE A.board_cd = ${board_cd} AND A.isdel = 0 AND A.noticeYn = 'Y'
+        <if test="searchKeyword != null and searchKeyword != ''">
+            <choose>
+                <!-- 검색 유형이 있을 때 -->
+                <when test="searchType != null and searchType != ''">
+                    <choose>
+                        <when test="'title'.equals(searchType)">
+                            AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+                        </when>
+                        <when test="'ctnt'.equals(searchType)">
+                            AND A.ctnt LIKE CONCAT('%', #{searchKeyword}, '%')
+                        </when>
+                        <when test="'nickname'.equals(searchType)">
+                            AND B.nickname LIKE CONCAT('%', #{searchKeyword}, '%')
+                        </when>
+                    </choose>
+                </when>
+                <!-- 검색 유형이 없을 때 -->
+                <otherwise>
+                    AND
+                    (
+                    A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+                    OR A.ctnt LIKE CONCAT('%', #{searchKeyword}, '%')
+                    OR B.nickname LIKE CONCAT('%', #{searchKeyword}, '%')
+                    )
+                </otherwise>
+            </choose>
+        </if>
+        ORDER BY A.iboard DESC
+        LIMIT #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+    </select>
+
+    <select id="selMyReviewList" parameterType="TestDto" resultType="CustomerVo">
+        SELECT A.*, B.nickname, C.title AS productTitle FROM lagarto.customer A
+        INNER JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
+        LEFT JOIN lagarto.auction C ON A.product_cd = C.iboard
+        WHERE A.board_cd = 1 AND A.isdel = 0 AND A.iuser = #{iuser}
+        ORDER BY A.iboard DESC
+            LIMIT #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+    </select>
+
     <select id="selCustomerDetail" resultType="CustomerVo">
         SELECT A.*, B.nickname, C.board_nm, D.title AS productTitle FROM lagarto.customer A
         LEFT JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
@@ -53,14 +98,6 @@
         WHERE A.iboard = ${iboard} AND A.isdel = 0
     </select>
 
-    <select id="selMyReviewList" parameterType="TestDto" resultType="CustomerVo">
-        SELECT A.* , B.nickname, C.title AS productTitle FROM lagarto.customer A
-        INNER JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
-        LEFT JOIN lagarto.auction C ON A.product_cd = C.iboard
-        WHERE A.board_cd = 1 AND A.isdel = 0 AND A.iuser = #{iuser}
-        ORDER BY A.iboard DESC
-            LIMIT #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
-    </select>
 
     <select id="totalCount" parameterType="TestDto" resultType="int">
         SELECT COUNT(*) FROM lagarto.customer WHERE isdel = 0 AND board_cd = ${board_cd}

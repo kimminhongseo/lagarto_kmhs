@@ -21,6 +21,7 @@ public class TestDto extends CommonDTO {
     private String secretYn;
     private String noticeYn;
     private String changeYn;
+    private int level;
 
     private List<Integer> fileIdxs;
 }

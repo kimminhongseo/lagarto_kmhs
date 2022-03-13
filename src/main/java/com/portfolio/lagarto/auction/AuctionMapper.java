@@ -20,6 +20,7 @@ public interface AuctionMapper {
     List<AuctionVo> sellMyPage(AuctionVo vo);
     List<AuctionVo> sellingMyPage(AuctionVo vo);
 
+    int imbuyclick(AuctionVo vo);
 
     int updAuction(AuctionVo vo);
     int delAuction(AuctionVo vo);

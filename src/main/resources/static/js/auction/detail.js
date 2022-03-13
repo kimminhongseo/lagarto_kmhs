@@ -12,6 +12,7 @@ const formimbuybtnElem = document.querySelector('#formimbuybtn');
 //이미지 작게  고정.
 const img = document.getElementsByClassName("click_img");
 for (let x = 0; x < img.length; x++) {
+
     img.item(x).onclick=function() {window.open(this.src,'_blank','toolbar=no,location=no,status=no,menubar=no, scrollbars=auto,resizable=no,' +
         'width=500,height=500 top=200 left=300')};
 }
@@ -70,6 +71,27 @@ if (formbuybtn) {
 
     })
 }
+
+
+//즉시구매시 처리 >> 거래내역에 올라가도록. (시작)
+const payElem = document.querySelector('#pay');
+if(payElem){
+    payElem.addEventListener('click',()=>{
+        if(confirm('정말로 구매하시겠습니까????')){
+            const param ={
+                iboard
+            }
+            myFetch.put('/auction/imbuy',data=>{
+                location.href= "http://localhost:8090/user/mypage";
+            },param);
+        }
+
+    })
+}
+//즉시구매시 처리 >> 거래내역에 올라가도록. (끝)
+
+
+
 
 //댓글 입력폼. 내용이랑 입력했을때 반응
 if (commentFormContainerElem) {
@@ -298,22 +320,6 @@ if(favIconElem) {
 
 
 
-
-// ----------------------------------좋아요 구현 (끝)-------------------
-
-
-//마감시간이 현재보다 작으면 전체다 회색?
-// const finishtimeElem = document.querySelector('#finishtime' );
-// const finishtitmeElem1 = document.getElementById('finishtime');
-// if(formimbuybtn){
-//     formimbuybtnElem.addEventListener('click',()=>{
-//         console.log("select : "+finishtimeElem);
-//         console.log("id : "+finishtitmeElem1);
-//     });
-// }
-
-
-
 //-----------------경매 남은시간 및 끝났을때 이벤트
 const IuserElem = document.querySelector('#dataIuser'); //파는 사람
 const BuyerElem = document.querySelector('#dataBuyer'); //사는 사람
@@ -381,10 +387,6 @@ const countDownTimer = function (id,date){
 }
 
 
-
-
-
-
 const mdtElem = document.getElementById('mdt');
 if(mdtElem){
         fetch(`/ajax/auctionBid/timer?iboard=${iboard}&mdt=${mdt.value}`,{
@@ -399,13 +401,9 @@ if(mdtElem){
         })
     }
 
-
-
-
-
 //-----------------경매 남은시간 및 끝났을때 이벤트 (끝)
 
-//------경매 끝나면 bid 가 1 되도록.
+
 
 
 

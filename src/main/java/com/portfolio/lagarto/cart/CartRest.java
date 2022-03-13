@@ -5,10 +5,13 @@ import com.portfolio.lagarto.model.SuppliesEntity;
 import com.portfolio.lagarto.model.SuppliesVo;
 import com.portfolio.lagarto.supplies.SuppliesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/cart1")
@@ -30,8 +33,9 @@ public class CartRest {
         return service.cartList(entity);
     }
     @GetMapping("/list")
-    public List<SuppliesVo> myCartList(SuppliesVo vo){
-       return service.myCartList(vo);
+    public List<SuppliesVo> myCartList(SuppliesVo vo, Model model){
+        model.addAttribute("cart1",service.myCartList(vo));
+        return service.myCartList(vo);
     }
 
 //    @GetMapping("/check")
@@ -39,11 +43,33 @@ public class CartRest {
 
 
     @PutMapping("/plus")
-    public int  plusnum(@RequestBody SuppliesVo vo, HttpSession hs){
-        System.out.println(hs);
-        SuppliesVo vo1 = new SuppliesVo();
-        return service.plusnum(vo1);
+    public Map<String,Integer> plusnum(@RequestBody SuppliesVo vo){
+        Map<String,Integer> result = new HashMap<>();
+        result.put("result",service.plusnum(vo));
+        return result;
+    }
+
+    @PutMapping("/minus")
+    public Map<String,Integer> minusnum(@RequestBody SuppliesVo vo) {
+        Map<String,Integer> result = new HashMap<>();
+        result.put("result",service.minusnum(vo));
+        return result;
+    }
+
+    //결제하면 잔액 없데이트 balance 가져와야함.
+    @PutMapping("/balance")
+    public Map<String,Integer> balancenum(@RequestBody SuppliesVo vo){
+        Map<String,Integer> result = new HashMap<>();
+        result.put("result",service.balancenum(vo));
+        return result;
     }
 
 
+    @DeleteMapping("/{iboard}")
+    public Map<String, Integer> delcart(@PathVariable int iboard){
+        Map<String, Integer> result = new HashMap<>();
+        result.put("result", service.delcart(iboard));
+        System.out.println(iboard);
+        return result;
+    }
 }

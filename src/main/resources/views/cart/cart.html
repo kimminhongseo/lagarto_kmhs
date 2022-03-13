@@ -14,6 +14,7 @@
 <th:block layout:fragment="content">
     <div id="container-Cart">
         <div id="cartiuser" th:with="data=${cart}" th:data-iuser="${session.loginUser.iuser}"></div>
+        <div id="mypoint" th:with="data=${cart}" th:data-money="${session.loginUser.money}"></div>
         <div id="viewFist">
             <div id="carts">장바구니</div>
 
@@ -34,19 +35,19 @@
 
                         </tbody>
 
-
                     </table>
                 </div>
                 <div id="ListSum" >
                     <div id="fee"> </div>
                     <br>
-                    <div th:text="'현재 포인트 : ' + ${session.loginUser.money} + ' 원'"></div>
+                    <div id="balance"></div>
                 </div>
             </div>
         </div>
         <div id="rable">
             <div id="viewSecond">
-                <div id="address">
+
+                <div id="address" th:if="${session.loginUser.address_post} != null">
                     <div>지번</div>
                     <div class="textA" th:text="${session.loginUser.address_post}"></div>
                     <div>주소</div>
@@ -55,9 +56,12 @@
                     <div class="textA" th:text="${session.loginUser.address_secondary}"></div>
                     <div id="textNow">현재 설정한 주소로 배송 됩니다:)</div>
                 </div>
+                <div th:if="${session.loginUser.address_post} == null">
+                    <div>등록한 주소가 없습니다. 주소를 등록해주세요. >>>> <a th:href="@{/user/mypage}"> 정보 입력하러 가기</a></div>
+                </div>
                 <div id="secondBtn">
                     <a th:href="@{/auction/list}"><button type="button" class="btn btn-outline-primary btn-lg">오늘의 용품 보러가기</button></a>
-                    <button id="pay" type="button" class="btn btn-outline-success btn-lg">결제하기</button>
+                    <button id="pay" type="button" class="btn btn-outline-success btn-lg ">결제하기</button>
                 </div>
             </div>
         </div>

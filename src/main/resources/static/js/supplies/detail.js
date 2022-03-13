@@ -43,11 +43,17 @@ if(buyBtnElem){
             return res.json();
         }).then(data =>{
             switch (data){
-                case 1:
-                    alert('insert 성공!');
-                    break;
                 case 0:
-                    alert("실패");
+                    alert('실패');
+                    break;
+                case 1:
+                    alert('장바구니 담기 성공!');
+                    break;
+                case 2:
+                    alert("이미 장바구니에 있습니다.");
+                    break;
+
+
             }
         })
 

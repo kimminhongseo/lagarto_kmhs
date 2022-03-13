@@ -22,7 +22,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -157,9 +159,7 @@ public class AuctionController {
     @GetMapping("/detail")
     public void detail(AuctionVo vo, Model model, HttpSession hs) {
         model.addAttribute("Data", service.selAuctionDetail(vo));
-
         model.addAttribute("login",hs.getAttribute(Const.LOGIN_USER));
-
         //여기서 auction_bidtest 의 buy, iboard, 받아와야함. 그리고 model에 담아서 뿌리기?
 
     }
@@ -243,6 +243,13 @@ public class AuctionController {
     public String delProc(AuctionVo vo){
         int result = service.delAuction(vo);
         return "redirect:/auction/list/";
+    }
+
+
+    @PutMapping("/imbuy")
+    @ResponseBody
+    public int imbuyclick(@RequestBody AuctionVo vo){
+        return service.imbuyclick(vo);
     }
 
 

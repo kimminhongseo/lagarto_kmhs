@@ -26,14 +26,16 @@
 
     <select id="selSuppliesList" resultType="SuppliesVo">
         select A.*,
-        B.nm  as writernm, B.nickname as nicknm, C.nm AS categorynm
+        B.nm  as writernm, B.nickname as nicknm, C.nm AS categorynm,D.save_name
         From lagarto.supplies A
         Left join lagarto.lagarto_user B
         ON A.iuser = B.iuser
         INNER JOIN lagarto.supplies_category C
         ON A.icategory = C.icategory
+        LEFT JOIN (SELECT iboard, MIN(idx) , save_name FROM sup_attach GROUP BY iboard) AS D
+        ON A.iboard = D.iboard
         where A.isdel = 0
-        and A.icategory = ${icategory}
+        and A.icategory = #{icategory}
         Order by A.iboard DESC
 
     </select>
@@ -87,14 +89,52 @@
         SELECT DISTINCT A.iboard,A.iuser,A.num,B.* FROM cart A
         INNER JOIN supplies B
         ON A.iboard = B.iboard
-        WHERE A.iuser= #{iuser}
+        WHERE A.iuser= #{iuser} AND A.payment = 0
         ORDER BY A.iboard;
     </select>
 
+    <!--장바구니 결제 안된거 2번 안담기도록-->
+    <select id="overlap" resultType="CartEntity">
+        SELECT * FROM cart
+        WHERE iuser = #{iuser} AND iboard = #{iboard} AND payment = 0;
+    </select>
+    
+    
+
     <update id="plusnum">
-        update cart set num = num+1
+        update cart
+        set num = num+1
         where iboard = #{iboard} and iuser = #{iuser}
     </update>
+
+
+    <update id="minusnum">
+        update cart
+        set num = num-1
+        where iboard = #{iboard} and iuser = #{iuser}
+    </update>
+
+    <update id="balancenum">
+        update lagarto_user
+        set money = #{balance} payment = 1
+        where iuser=#{iuser}
+    </update>
+
+
+    <delete id="delcart">
+        DELETE FROM cart
+        WHERE iboard = ${iboard} AND iuser = ${iuser}
+    </delete>
+
+
+    <select id="cartmoney" resultType="SuppliesVo">
+        SELECT * FROM lagarto_user
+        where iuser = #{iuser}
+    </select>
+
+
+
+
 
 
 

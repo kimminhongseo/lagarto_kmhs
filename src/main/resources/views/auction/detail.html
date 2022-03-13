@@ -80,7 +80,7 @@
                     <button id="bidwrite" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         경매가 등록하기
                     </button>
-                    <button id="formimbuybtn" type="button" class="btn btn-primary">즉시구매</button>
+                    <button id="formimbuybtn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imbuyModal" >즉시구매</button>
                 </div>
 
 
@@ -112,6 +112,40 @@
                         </div>
                     </div>
                 </div>
+
+                    <div class="modal fade" id="imbuyModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="imbuyModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <form class="modal-body modal-" id="imbuy-modal">
+                                    <h5>현재 보유 금액 : <span th:value="${session.loginUser.money}" th:text="${session.loginUser.money}"/> 원 </h5>
+                                    <h5>즉시 구매가 :<span th:value="${data.imbuy}" th:text="${data.imbuy}"/> 원 </h5>
+                                    <h5>구매후 잔액 : <span th:value="${session.loginUser.money}-${data.imbuy}" th:text="${session.loginUser.money}-${data.imbuy}" /> 원</h5>
+                                    <br>
+                                    <div>우편번호 : <span th:value="${session.loginUser.address_post}" th:text="${session.loginUser.address_post}" /></div>
+                                    <div>주소 : <span th:value="${session.loginUser.address_primary}" th:text="${session.loginUser.address_primary}" /></div>
+                                    <div>상세주소 : <span th:value="${session.loginUser.address_secondary}" th:text="${session.loginUser.address_secondary}" /></div>
+                                    <br>
+                                    <button type="button" id="pay" class="btn btn-primary">즉시 구매 하기</button>
+                                    <span>즉시 구매시 해당 주소로 배송이 됩니다.</span>
+
+                                </form>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
 
                 <div id="img_item">
                     <img id="image0" onclick="test();" class="click_img"

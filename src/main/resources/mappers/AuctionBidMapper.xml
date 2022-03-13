@@ -7,7 +7,7 @@
 
     <update id="updBid">
         UPDATE lagarto.auction SET buy = #{buy}, buyer = #{buyer} ,
-        prebuyer = #{prebuyer} , prebuy=#{prebuy}, mdt = DATE_ADD(NOW(), INTERVAL 1 HOUR)
+        prebuyer = #{prebuyer} , prebuy=#{prebuy}, mdt = DATE_ADD(NOW(), INTERVAL 10 SECOND)
         WHERE iboard = #{iboard}
     </update>
 

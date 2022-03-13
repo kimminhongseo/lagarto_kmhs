@@ -23,7 +23,8 @@ public class Cart {
 
     @GetMapping("/cart")
     public String cart(SuppliesVo vo, Model model){
-        model.addAttribute("cart",service.myCartList(vo));
+        model.addAttribute("cartinfo",service.cartmoney(vo));
+
         if (0 != utils.getLoginUserPk()) {
             return "/cart/cart";
         }

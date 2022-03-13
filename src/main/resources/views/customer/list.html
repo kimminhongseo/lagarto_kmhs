@@ -63,9 +63,6 @@
                         <th:block th:data-noticeYn="${item.noticeYn}">
                             <span th:if="${item.noticeYn eq 'Y'}">🔔</span>
                         </th:block>
-                        <th:block th:data-secretYn="${item.secretYn}">
-                            <span th:if="${item.secretYn eq 'Y'}">🔒</span>
-                        </th:block>
                         <span th:text="${item.title}">제목</span>
                     </td>
                     <td th:text="${item.nickname}">작성자</td>
@@ -73,7 +70,7 @@
                     <td th:text="${item.rdt}">작성일시</td>
                 </tr>
                 <div th:unless="${item.noticeYn == 'Y'}">
-                    <div th:if="${item.secretYn == 'Y'}">
+                    <div th:if="${item.secretYn == 'Y' && session.loginUser != null}">
 <!--                        iuser 값이 0 이면 관리자-->
                         <tr class="record pointer" th:if="${item.iuser == loginUser || loginUser == 0}" th:data-iboard="${item.iboard}" >
                             <div hidden th:data-iuser="${item.iuser}"></div>

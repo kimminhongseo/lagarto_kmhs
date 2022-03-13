@@ -8,9 +8,6 @@ const moveToDetail = (item) => {
 };
 recordList.forEach(moveToDetail);
 
-const removeMoveToDetail = (item) => {
-    item.remove();
-}
 
 function movePage(uri, queryString) {
     location.href = uri + queryString;

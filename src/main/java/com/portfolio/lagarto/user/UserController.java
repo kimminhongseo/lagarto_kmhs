@@ -46,6 +46,8 @@ public class UserController {
     @Autowired
     private AuctionService aservice;
 
+    @Autowired
+    private CustomerService customerService;
 
     @Autowired
     private Utils utils;
@@ -206,13 +208,13 @@ public class UserController {
     }
 
     @GetMapping("/mypage")
-    public String mypage(Model model) {
+    public String mypage(Model model, @ModelAttribute("params") TestDto dto) {
         model.addAttribute(Const.Follower, fservice.FollowList());
         model.addAttribute(Const.Following, fservice.FollowingList());
         model.addAttribute("buying",aservice.buyMyPage()); //auction 정보
         model.addAttribute("sell",aservice.sellMyPage());
         model.addAttribute("selling",aservice.sellingMyPage());
-
+        model.addAttribute("review",customerService.selMyReviewList(dto));
         if (0 != utils.getLoginUserPk()) {
             return "/user/mypage";
         }

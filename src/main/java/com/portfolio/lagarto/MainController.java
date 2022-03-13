@@ -1,7 +1,10 @@
 package com.portfolio.lagarto;
 
+import com.portfolio.lagarto.auction.AuctionService;
+import com.portfolio.lagarto.model.AuctionVo;
 import com.portfolio.lagarto.model.UserEntity;
 import com.portfolio.lagarto.recaptcha.VerifyRecaptcha;
+import com.portfolio.lagarto.supplies.SuppliesService;
 import com.portfolio.lagarto.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping
 public class MainController {
+    @Autowired
+    private AuctionService auctionService;
+
+    @Autowired
+    private SuppliesService suppliesService;
 
     @GetMapping("/")
     public String gomain(){
@@ -20,7 +28,9 @@ public class MainController {
     }
 
     @GetMapping("main")
-    public void main() {};
+    public void main(Model model, AuctionVo auctionVo) {
+        model.addAttribute("auctionList", auctionService.selAuctionListAll(auctionVo));
+    }
 
     @ResponseBody
     @PostMapping("/valid-recaptcha")

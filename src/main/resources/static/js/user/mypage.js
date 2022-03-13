@@ -8,6 +8,7 @@
     const passwordChkUpwElem = passswordFrmElem.querySelector('#password-chk-input');
     const passwordSmtElem = passswordFrmElem.querySelector('#password-smt');
     const div = document.createElement('div');
+
     div.innerHTML = `비밀번호가 일치하지 않습니다`;
     div.id = 'errpasswordCHK';
     div.style.color = 'red';
@@ -307,5 +308,17 @@ if (unfollowBtnElem){
     }
 }
 
+const reviewBtnElem = document.querySelectorAll('.reviewBtn');
 
+const moveToReviewWrite = (item) => {
+    item.addEventListener('click', (e) => {
+        let product_cd = item.dataset.product_cd;
+        console.log(product_cd);
+        location.href = `/customer/write?board_cd=1&product_cd=${product_cd}`;
+    });
+};
+reviewBtnElem.forEach(moveToReviewWrite);
 
+function movePage(uri, queryString) {
+    location.href = uri + queryString;
+}

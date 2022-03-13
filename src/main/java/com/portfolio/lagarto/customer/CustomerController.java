@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/customer")
@@ -32,6 +31,7 @@ public class CustomerController {
         model.addAttribute("board_cd", board_cd);
         model.addAttribute("list", service.selCustomerList(dto));
         model.addAttribute("loginUser",utils.getLoginUserPk());
+        model.addAttribute("notice", service.selNoticeList(dto));
         dto.setBoard_cd(board_cd);
         return "customer/list";
     }
@@ -43,7 +43,6 @@ public class CustomerController {
     }
 
     @PostMapping("/write")
-
     public String writeProc(CustomerEntity entity, MultipartFile[] files) {
         boolean isRegistered = this.service.insCustomer(entity, files);
         //TODO

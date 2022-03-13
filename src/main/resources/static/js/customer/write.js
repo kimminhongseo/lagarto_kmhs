@@ -29,32 +29,19 @@ function addFile() {
     $('#btnDiv').before(fileHtml);
 }
 
-// function removeFile(elem) {
-//
-//     const prevTag = $(elem).prev().prop('tagName');
-//     if (prevTag === 'BUTTON') {
-//         const file = $(elem).prevAll('input[type="file"]');
-//         const filename = $(elem).prevAll('input[type="text"]');
-//         file.val('');
-//         filename.val('파일 찾기');
-//         return false;
-//     }
-//
-//     const target = $(elem).parents('div[data-name="fileDiv"]');
-//     target.remove();
-// }
-
 writeFrmElem.addEventListener('submit', (e) => {
     const titleVal = writeFrmElem.title.value;
     const ctntVal = writeFrmElem.ctnt.value;
-    if(titleVal.length < 1 || titleVal === '') {
-        alert('제목을 입력해 주세요.');
+    // const productVal = writeFrmElem.product_cd.value;
+    if(titleVal.length < 1 || titleVal === '' || titleVal > 15) {
+        alert('제목은 1~15자 사이로 작성해주세요.');
         e.preventDefault();
     }
     if(ctntVal.length < 1 || ctntVal === '') {
         alert('내용을 입력해 주세요.');
         e.preventDefault();
     }
+
 });
 
     function changeFilename(file) {
@@ -70,10 +57,9 @@ function registerBoard(form) {
     form.noticeYn.value = form.noticeYn.checked === false ? 'N' : 'Y';
     form.secretYn.value = form.secretYn.checked === false ? 'N' : 'Y';
 
-
-    var result = (
-        isValid(form.title, "제목", null, null)
-        && isValid(form.content, "내용", null, null)
+    const result = (
+        isValid(form.title, "제목", null)
+        && isValid(form.content, "내용", null)
     );
 
     if (result === false) {
@@ -111,4 +97,7 @@ function isValid(field, fieldName, focusField) {
 function charToUnicode(str) {
     return (str.charCodeAt(str.length - 1) - 0xAC00) % 28;
 }
+
+
+
 

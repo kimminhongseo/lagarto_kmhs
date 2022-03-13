@@ -177,14 +177,19 @@ email-true{
     float: none;
     margin: 0 auto;
 }
-#buy-container, #sell-container, #selling-container,#review-container{
+#buy-container, #sell-container, #selling-container{
     margin-top: 10px;
     width: 1000px;
     height: 350px;
     border: 2px solid #e7e7e7;
 }
 
-
+#review-container {
+    margin-top: 10px;
+    width: 1000px;
+    height: auto;
+    border: 2px solid #e7e7e7;
+}
 
 #buy-table, #sell-table,#selling-table {
     table-layout: fixed;

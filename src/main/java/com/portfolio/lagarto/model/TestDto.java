@@ -12,7 +12,6 @@ public class TestDto extends CommonDTO {
     private int product_cd;
     private String title;
     private String ctnt;
-    private String ctnt_img;
     private int iuser;
     private String rdt;
     private String mdt;
@@ -22,6 +21,7 @@ public class TestDto extends CommonDTO {
     private String secretYn;
     private String noticeYn;
     private String changeYn;
+    private int level;
 
     private List<Integer> fileIdxs;
 }

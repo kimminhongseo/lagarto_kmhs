@@ -336,6 +336,9 @@
                                                         <td th:text="${item.buy}"></td>
                                                         <td th:text="${#strings.substring(item.mdt,0,16)}"></td>
                                                         <td>구매완료</td>
+                                                        <td>
+                                                            <button th:with="product_cd=${item.iboard}" th:data-product_cd="${product_cd}" th:value="${product_cd}" class="reviewBtn">리뷰 작성</button>
+                                                        </td>
                                                     </tr>
                                                     </tbody>
 
@@ -401,10 +404,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
                                 </div>
                             </div>
 
@@ -415,36 +414,25 @@
 
 
                 <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-                    <form>
-                        <div id="header-review">
-                            <div>
-                                <h1>나의 리뷰</h1>
-                            </div>
-                            <div id="review-my">
-                                내가 쓴 총 리뷰 1개
-                            </div>
-                            <div id="review-container">
-                                <table class="g_blue_table tb_list" id="review-table">
-                                    <tbody id="review-tbody">
-                                    <tr id="review-tr2">
-                                        <td>
-                                            <img id="review-img" src="/img/pro.png" class="img-thumbnail" alt="...">
-                                        </td>
-                                        <td>
-                                            리자드걸
-                                        </td>
-                                        <td>
-                                            예쁜 도마뱀 팝니다
-                                        </td>
-                                        <td>
-                                            ★★★★☆
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div id="header-review">
+                        <div>
+                            <h1>나의 리뷰</h1>
                         </div>
-                    </form>
+                        <div id="review-my"></div>
+                    </div>
+                        <div id="review-container">
+                            <table class="g_blue_table tb_list" id="review-table">
+                                <tbody id="review-tbody">
+                                <tr th:each="rev : ${review}" id="review-tr2">
+                                    <td th:text="${rev.productTitle}">상품제목</td>
+                                    <td th:text="${rev.title}">title</td>
+                                    <td th:text="${rev.nickname}">nickname</td>
+                                    <td th:text="${rev.rdt}">rdt</td>
+                                    <td th:text="${'⭐' * rev.rating}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                 </div>
             </div>
         </div>

@@ -16,6 +16,7 @@
         UPDATE lagarto.lagarto_user SET money = money + #{prebuy}
         WHERE iuser = #{prebuyer};
     </update>
+
     
     <update id="removemoney">
         UPDATE lagarto.lagarto_user SET money = money - #{buy}
@@ -43,6 +44,11 @@
         update auction set bid = 1
         where iboard = #{iboard}
     </update>
+
+<!--    <update id="imbuy">-->
+<!--        update lagarto_user set money = #{money}-->
+<!--        where iuser = #{iuser}-->
+<!--    </update>-->
 
 
 

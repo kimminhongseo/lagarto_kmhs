@@ -55,6 +55,40 @@
         order by A.rdt DESC
     </select>
 
+    <select id="selSuppliesListAllnew4" resultType="SuppliesVo">
+        select A.*,
+        B.nm as writernm, B.nickname as nicknm, C.nm AS categorynm ,D.save_name
+        from lagarto.supplies A
+        LEFT join lagarto.lagarto_user B
+        on A.iuser = B.iuser
+        left JOIN lagarto.supplies_category C
+        ON A.icategory = C.icategory
+        LEFT JOIN (SELECT iboard, MIN(idx) , save_name FROM sup_attach GROUP BY iboard) AS D
+        ON A.iboard = D.iboard
+        where A.isdel = 0
+        order by A.rdt desc
+        Limit 4
+    </select>
+
+    <select id="selSuppliesListAll4" resultType="SuppliesVo">
+        select A.*,
+        B.nm as writernm, B.nickname as nicknm, C.nm AS categorynm ,D.save_name
+        from lagarto.supplies A
+        LEFT join lagarto.lagarto_user B
+        on A.iuser = B.iuser
+        left JOIN lagarto.supplies_category C
+        ON A.icategory = C.icategory
+        LEFT JOIN (SELECT iboard, MIN(idx) , save_name FROM sup_attach GROUP BY iboard) AS D
+        ON A.iboard = D.iboard
+        where A.isdel = 0
+        order by A.hits DESC
+        limit 4
+    </select>
+
+
+
+
+
 
     <select id="selSuppliesDetail" resultType="SuppliesVo">
         SELECT A.*,
@@ -93,10 +127,10 @@
         ORDER BY A.iboard;
     </select>
 
-    <!--장바구니 결제 안된거 2번 안담기도록-->
+    <!--payment= 1로 바꿔줌으로써 select 안되게-->
     <select id="overlap" resultType="CartEntity">
         SELECT * FROM cart
-        WHERE iuser = #{iuser} AND iboard = #{iboard} AND payment = 0;
+        WHERE iuser = #{iuser} AND payment = 0;
     </select>
     
     
@@ -114,11 +148,20 @@
         where iboard = #{iboard} and iuser = #{iuser}
     </update>
 
+    <!--결제하면 잔액 세팅-->
     <update id="balancenum">
         update lagarto_user
-        set money = #{balance} payment = 1
+        set money = #{balance}
         where iuser=#{iuser}
     </update>
+    <!--결제하면 cart에 iuser 해당하는거 payment 1 처리-->
+    <update id="payment1">
+        update cart
+        set payment = 1
+        where iuser = #{iuser}
+    </update>
+
+
 
 
     <delete id="delcart">

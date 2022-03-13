@@ -60,6 +60,7 @@ public class CartRest {
     @PutMapping("/balance")
     public Map<String,Integer> balancenum(@RequestBody SuppliesVo vo){
         Map<String,Integer> result = new HashMap<>();
+        vo.setIuser(utils.getLoginUserPk());
         result.put("result",service.balancenum(vo));
         return result;
     }

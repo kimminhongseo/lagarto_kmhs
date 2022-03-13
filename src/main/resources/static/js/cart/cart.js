@@ -128,7 +128,7 @@ const selCartList = list =>{
                                  alert('실패');
                                  return false;
                              case 1:
-                                 alert('성공');
+                                 alert('결제되었습니다.');
                                  location.reload();
                          }
                      },param);

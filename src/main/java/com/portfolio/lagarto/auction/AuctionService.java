@@ -1,7 +1,9 @@
 package com.portfolio.lagarto.auction;
 
 import com.portfolio.lagarto.Utils;
+import com.portfolio.lagarto.auction.bid.AuctionBidMapper;
 import com.portfolio.lagarto.model.*;
+import com.portfolio.lagarto.user.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +25,9 @@ public class AuctionService {
 
     @Autowired
     private AuctionMapper mapper;
+
+    @Autowired
+    private AuctionBidMapper auctionBidMapper;
 
 
     @Autowired
@@ -47,6 +52,9 @@ public class AuctionService {
     public List<AuctionVo> selAuctionListAll(AuctionVo vo){
         return  mapper.selAuctionListAll(vo);}
 
+    public List<AuctionVo> selAuctionListAll4(AuctionVo vo){
+        return mapper.selAuctionListAll4(vo);
+    }
 
 
     public AuctionVo selAuctionDetail (AuctionVo vo){
@@ -79,6 +87,7 @@ public class AuctionService {
 
     public int imbuyclick(AuctionVo vo){
         vo.setBuyer(utils.getLoginUserPk());//구매자를 현재 로그인한사람으로
+       // auctionBidMapper.imbuy(vo); //즉시구매시 money필요
         return mapper.imbuyclick(vo);
     }
 

@@ -2,6 +2,7 @@ package com.portfolio.lagarto;
 
 import com.portfolio.lagarto.auction.AuctionService;
 import com.portfolio.lagarto.model.AuctionVo;
+import com.portfolio.lagarto.model.SuppliesVo;
 import com.portfolio.lagarto.model.UserEntity;
 import com.portfolio.lagarto.recaptcha.VerifyRecaptcha;
 import com.portfolio.lagarto.supplies.SuppliesService;
@@ -28,8 +29,10 @@ public class MainController {
     }
 
     @GetMapping("main")
-    public void main(Model model, AuctionVo auctionVo) {
-        model.addAttribute("auctionList", auctionService.selAuctionListAll(auctionVo));
+    public void main(Model model, AuctionVo auctionVo, SuppliesVo suppliesVo) {
+        model.addAttribute("auctionList", auctionService.selAuctionListAll4(auctionVo));
+        model.addAttribute("suppliesList",suppliesService.selSuppliesListAll4(suppliesVo));
+        model.addAttribute("suppliesListnew",suppliesService.selSuppliesListAllnew4(suppliesVo));
     }
 
     @ResponseBody

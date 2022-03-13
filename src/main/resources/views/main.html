@@ -58,97 +58,37 @@
 					<h2>companion animal</h2>
 					<p>반려동물</p>
 				</div>
-				<div class="product">
-					<a href="#">
+				<div class="product" >
+
+					<a th:href="@{/auction/detail(iboard=${data.iboard})}" th:each="data:${auctionList}">
 						<div class="product_detail">
 							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+								<img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" class="card-img-top" alt="...">
 							</div>
 							<div class="detail_text">
 								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+									<p><span th:text="${data.title}"/></p>
+									<p th:text="${data.categorynm}"></p>
 								</div>
 								<div class="price">
 									<div class="price_num">
-										<em>120,000</em>
+										<em th:text="${data.buy}"></em>
 										<span>원</span>
 									</div>
 									<div class="price_type">
-										<p>즉시 구매가</p>
+										<p th:text="${data.imbuy}"></p>
+										<span>원</span>
 									</div>
 								</div>
 							</div>
 						</div>
 					</a>
-					<a href="#">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
-								</div>
-								<div class="price">
-									<div class="price_num">
-										<em>120,000</em>
-										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					<a href="#">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
-								</div>
-								<div class="price">
-									<div class="price_num">
-										<em>120,000</em>
-										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					<a href="#">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
-								</div>
-								<div class="price">
-									<div class="price_num">
-										<em>120,000</em>
-										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
+
+
 				</div>
 			</div>
+
+
 
 			<div class="sub_banner sb1">
 				<a href="auction/list">
@@ -162,94 +102,27 @@
 					<p>신규상품</p>
 				</div>
 				<div class="product">
-					<a href="#">
+
+					<a th:href="@{/supplies/detail(iboard=${data.iboard})}" th:each="data:${suppliesListnew}">
 						<div class="product_detail">
 							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+								<img th:src="@{/uploadfile/supplies/} + ${data.iboard} + @{/} + ${data.save_name}" class="card-img-top" alt="...">
 							</div>
 							<div class="detail_text">
 								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+									<p><span th:text="${data.title}"/></p>
+									<p th:text="${data.categorynm}"></p>
 								</div>
 								<div class="price">
 									<div class="price_num">
-										<em>120,000</em>
+										<em th:text="${data.price}"></em>
 										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</a>
-					<a href="#">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
-								</div>
-								<div class="price">
-									<div class="price_num">
-										<em>120,000</em>
-										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					<a href="#">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
-								</div>
-								<div class="price">
-									<div class="price_num">
-										<em>120,000</em>
-										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					<a href="#">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
-								</div>
-								<div class="price">
-									<div class="price_num">
-										<em>120,000</em>
-										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
+
 				</div>
 			</div>
 
@@ -260,99 +133,34 @@
 			</div>
 
 			<div class="home_products">
+
 				<div class="product_title topProductTop10">
 					<h2>popular item</h2>
 					<p>인기상품</p>
 				</div>
-				<div class="product">
-					<a href="#">
+
+				<div class="product" >
+
+					<a th:href="@{/supplies/detail(iboard=${data.iboard})}" th:each="data:${suppliesList}">
 						<div class="product_detail">
 							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
+								<img th:src="@{/uploadfile/supplies/} + ${data.iboard} + @{/} + ${data.save_name}" class="card-img-top" alt="...">
 							</div>
 							<div class="detail_text">
 								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
+									<p><span th:text="${data.title}"/></p>
+									<p th:text="${data.categorynm}"></p>
 								</div>
 								<div class="price">
 									<div class="price_num">
-										<em>120,000</em>
+										<em th:text="${data.price}"></em>
 										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</a>
-					<a href="#">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
-								</div>
-								<div class="price">
-									<div class="price_num">
-										<em>120,000</em>
-										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					<a href="#">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
-								</div>
-								<div class="price">
-									<div class="price_num">
-										<em>120,000</em>
-										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					<a href="#">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img src="/static/img/lizard1.jpg" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p>리자드/모니터</p>
-									<p>수단플레이트리자드 (Sudan Plate Lizard)</p>
-								</div>
-								<div class="price">
-									<div class="price_num">
-										<em>120,000</em>
-										<span>원</span>
-									</div>
-									<div class="price_type">
-										<p>즉시 구매가</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
+
 				</div>
 			</div>
 

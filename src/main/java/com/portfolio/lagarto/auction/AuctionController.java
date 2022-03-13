@@ -69,7 +69,7 @@ public class AuctionController {
         StringBuilder fileNames = new StringBuilder();
         //게시판번호 + 1 이 이번에 insert 되는것. uploadfile + iboard값 이라고 경로지정
 
-            //todo: insAuctionList  null뜸 해결하기.
+            //todo: insAuctionList  keyProperty="iboard" 써야함.
         String uploadDirectory = first_uploadDirectory + "/" + (service.insAuctionList(auctionEntity).getIboard()+1);
         if(service.insAuctionList(auctionEntity) == null){
         uploadDirectory = first_uploadDirectory + "/" + "1";
@@ -127,7 +127,7 @@ public class AuctionController {
         }
 
         //업로드한 상태 보여주는 창 >> 여기서 리스트로 가거나 자기가 쓴글로 가도록 만들자
-        return "redirect:/auction/uploadstatusview"; //경매등록 눌렀을때 가는곳
+        return "redirect:/auction/list"; //경매등록 눌렀을때 가는곳
 
     }
 

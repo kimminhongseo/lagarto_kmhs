@@ -72,16 +72,16 @@ if (formbuybtn) {
     })
 }
 
-
 //즉시구매시 처리 >> 거래내역에 올라가도록. (시작)
 const payElem = document.querySelector('#pay');
 if(payElem){
     payElem.addEventListener('click',()=>{
         if(confirm('정말로 구매하시겠습니까????')){
             const param ={
-                iboard
+                iboard,
+
             }
-            myFetch.put('/auction/imbuy',data=>{
+            myFetch.put(`/auction/imbuy`,data=>{
                 location.href= "http://localhost:8090/user/mypage";
             },param);
         }

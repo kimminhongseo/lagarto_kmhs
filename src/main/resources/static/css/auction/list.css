@@ -6,7 +6,7 @@
 .auction_container{
     display: flex;
     flex-direction: column;
-    background-color: #ffa69e;
+    background-color: darkseagreen;
     border: black solid 1px;
 }
 .auction_list{

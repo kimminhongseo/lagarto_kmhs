@@ -53,6 +53,11 @@ public class SuppliesService {
     }
     public List<SuppliesVo> selSuppliesList(SuppliesVo vo){return  mapper.selSuppliesList(vo);}
     public List<SuppliesVo> selSuppliesListAll(SuppliesVo vo){return  mapper.selSuppliesListAll(vo);}
+    public List<SuppliesVo> selSuppliesListAllnew4(SuppliesVo vo){return  mapper.selSuppliesListAllnew4(vo);}
+    public List<SuppliesVo> selSuppliesListAll4(SuppliesVo vo){return  mapper.selSuppliesListAll4(vo);}
+
+
+
     public List<SupAttachDTO> getSupAttachFileList(int iboard){
 
         int fileTotalCount = attachMapper.selectAttachTotalCount(iboard);
@@ -110,7 +115,7 @@ public class SuppliesService {
     }
 
     public int balancenum(SuppliesVo vo){
-        vo.setIuser(utils.getLoginUserPk());
+        mapper.payment1(vo);
         return mapper.balancenum(vo);
     }
 

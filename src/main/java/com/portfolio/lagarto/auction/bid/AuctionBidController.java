@@ -36,7 +36,7 @@ public class AuctionBidController {
                     @RequestParam("prebuyer") int prebuyer, @RequestParam("iuser")int iuser) {
         AuctionVo vo = new AuctionVo();
 
-        vo.setBuy(formbid); //경매희망값
+        vo.setBuy(formbid); //경매희망값 내가 적은값
         vo.setImbuy(formimbuy); //즉시구매
         vo.setIboard(iboard);
         vo.setIuser(iuser); //글쓴이!

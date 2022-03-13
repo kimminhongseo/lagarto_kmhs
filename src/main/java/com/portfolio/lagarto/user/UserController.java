@@ -6,6 +6,7 @@ import com.portfolio.lagarto.SessionManager;
 import com.portfolio.lagarto.MyFileUtils;
 import com.portfolio.lagarto.Utils;
 import com.portfolio.lagarto.auction.AuctionService;
+import com.portfolio.lagarto.customer.CustomerService;
 import com.portfolio.lagarto.enums.ForgotIdResult;
 import com.portfolio.lagarto.enums.ForgotPwResult;
 import com.portfolio.lagarto.enums.JoinResult;
@@ -45,6 +46,7 @@ public class UserController {
 
     @Autowired
     private AuctionService aservice;
+
 
     @Autowired
     private CustomerService customerService;

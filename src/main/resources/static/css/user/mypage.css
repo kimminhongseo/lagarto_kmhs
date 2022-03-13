@@ -267,3 +267,6 @@ email-true{
     border: 1px solid #000;
     border-radius: 100px;
 }
+.record {
+    cursor: pointer;
+}

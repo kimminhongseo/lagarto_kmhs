@@ -29,16 +29,10 @@ function addFile() {
     $('#btnDiv').before(fileHtml);
 }
 
-
-let searchParam=(key) => {
-    return new URLSearchParams(location.search).get(key);
-};
-
-const product_cd= searchParam("product_cd");
-
 writeFrmElem.addEventListener('submit', (e) => {
     const titleVal = writeFrmElem.title.value;
     const ctntVal = writeFrmElem.ctnt.value;
+    // const productVal = writeFrmElem.product_cd.value;
     if(titleVal.length < 1 || titleVal === '' || titleVal > 15) {
         alert('제목은 1~15자 사이로 작성해주세요.');
         e.preventDefault();
@@ -47,7 +41,6 @@ writeFrmElem.addEventListener('submit', (e) => {
         alert('내용을 입력해 주세요.');
         e.preventDefault();
     }
-    writeFrmElem.product_cd.setAttribute('product_cd', product_cd);
 
 });
 
@@ -63,7 +56,6 @@ function registerBoard(form) {
 
     form.noticeYn.value = form.noticeYn.checked === false ? 'N' : 'Y';
     form.secretYn.value = form.secretYn.checked === false ? 'N' : 'Y';
-
 
     const result = (
         isValid(form.title, "제목", null)

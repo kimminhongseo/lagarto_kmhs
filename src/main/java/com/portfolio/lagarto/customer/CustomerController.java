@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/customer")
@@ -43,7 +42,6 @@ public class CustomerController {
     }
 
     @PostMapping("/write")
-
     public String writeProc(CustomerEntity entity, MultipartFile[] files) {
         boolean isRegistered = this.service.insCustomer(entity, files);
         //TODO

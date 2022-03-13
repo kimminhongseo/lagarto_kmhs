@@ -12,10 +12,14 @@
     <div class="row">
         <div class="col-4">
             <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">회원 정보 설정</a>
-                <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">비밀번호 변경</a>
-                <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">거래 내역</a>
-                <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">나의 리뷰</a>
+                <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#list-home"
+                   role="tab" aria-controls="list-home">회원 정보 설정</a>
+                <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-profile" role="tab"
+                   aria-controls="list-profile">비밀번호 변경</a>
+                <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-messages" role="tab"
+                   aria-controls="list-messages">거래 내역</a>
+                <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-settings" role="tab"
+                   aria-controls="list-settings">나의 리뷰</a>
             </div>
         </div>
         <div class="col-8">
@@ -32,18 +36,19 @@
                         </div>
                         <div id="mypage_container">
                             <div>
-                                    <label for="file1">
-                                        <img id="img" style="width:200px; height:200px; cursor: pointer;" th:src="@{/pic/user/} + ${session.loginUser.iuser} + @{/} + ${session.loginUser.profile_img}">
-                                    </label>
-                                    <input type="file" name="file1" id="file1"
-                                           style="display: none;" multiple>
+                                <label for="file1">
+                                    <img id="img" style="width:200px; height:200px; cursor: pointer;"
+                                         th:src="@{/pic/user/} + ${session.loginUser.iuser} + @{/} + ${session.loginUser.profile_img}">
+                                </label>
+                                <input type="file" name="file1" id="file1"
+                                       style="display: none;" multiple>
 
-                                    <span id='View_area'
-                                          style='position:relative; color: black; border: 0px solid black;'>
+                                <span id='View_area'
+                                      style='position:relative; color: black; border: 0px solid black;'>
                                     </span>
-                                    <div>
-                                        <button id="saveBtn" type="button" onclick="javascript:fn_submit()">저장</button>
-                                    </div>
+                                <div>
+                                    <button id="saveBtn" type="button" onclick="javascript:fn_submit()">저장</button>
+                                </div>
                             </div>
                             <div id="userLi">
                                 <table class="table" id="profile_my">
@@ -92,7 +97,8 @@
 						<span id="email_span">
 						<!-- Button trigger modal -->
 						<label th:if="${session.loginUser.isAuth()==false}">
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="email-button">
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" id="email-button">
 						Email </button>
 						</label>
 						<label th:if="${session.loginUser.isAuth()==true}">
@@ -100,46 +106,58 @@
 						Email </button>
 						</label>
                             <!-- Modal -->
-						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel">Email 인증</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
 									</div>
 									<div class="modal-body" id="email-modal">
 										<div>
 											<div>
-												<input type="text" class="form-control" id="formEmail" th:value="${session.loginUser.getUid()}" readonly aria-label="Username" aria-describedby="basic-addon1">
+												<input type="text" class="form-control" id="formEmail"
+                                                       th:value="${session.loginUser.getUid()}" readonly
+                                                       aria-label="Username" aria-describedby="basic-addon1">
 												<button class="btn btn-primary" type="button" id="formEmail-send">인증메일 전송</button>
 											</div>
 											<div id="timer">
 											</div>
 											<div>
-												<input type="text" class="form-control" id="formEmail_Number" placeholder="인증번호 입력" aria-label="Username" aria-describedby="basic-addon1">
-												<button class="btn btn-primary" type="button" id="formEmail_submit">확인</button>
+												<input type="text" class="form-control" id="formEmail_Number"
+                                                       placeholder="인증번호 입력" aria-label="Username"
+                                                       aria-describedby="basic-addon1">
+												<button class="btn btn-primary" type="button"
+                                                        id="formEmail_submit">확인</button>
 											</div>
 										</div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+										<button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">닫기</button>
 									</div>
 								</div>
 							</div>
 						</div>
 						</span>
-                            <span><button type="button" class="btn btn-primary" id="information-button">정보수정</button></span>
+                            <span><button type="button" class="btn btn-primary"
+                                          id="information-button">정보수정</button></span>
                             <span>
 						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal2">
 						팔로워</button>
                                 <!-- Modal -->
-						<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
 							<div class="modal-dialog modal-dialog-scrollable" id="modal-foll">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel2">팔로워</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
 										<table class="table">
@@ -170,22 +188,26 @@
 										</table>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
 									</div>
 								</div>
 							</div>
 						</div>
 						</span>
                             <span>
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal3">
 						팔로잉</button>
                                 <!-- Modal -->
-						<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+						<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3"
+                             aria-hidden="true">
 							<div class="modal-dialog modal-dialog-scrollable" id="modal-foll1">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel3">팔로잉</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
 										<table class="table">
@@ -207,16 +229,18 @@
 											<td th:text="${item.nickname}">
 											</td>
 											<td class="myFollowBtns">
-                                                <button id="unfollow-Btn" th:value="${item.iuserMe}" ><i class="fa-solid fa-user-minus"></i></button>
+                                                <button id="unfollow-Btn" th:value="${item.iuserMe}"><i
+                                                        class="fa-solid fa-user-minus"></i></button>
                                             </td>
-											<td th:text="${item.level}" >
+											<td th:text="${item.level}">
 											</td>
 										</tr>
 										</tbody>
 										</table>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
 									</div>
 								</div>
 							</div>
@@ -261,18 +285,22 @@
                             <div id="password-update">
                                 <div>
                                     <span id="password-current">현재 비밀번호</span>
-                                    <span><input type="password" name="upw" size="50" maxlength="20" id="password-current-input"></span>
+                                    <span><input type="password" name="upw" size="50" maxlength="20"
+                                                 id="password-current-input"></span>
                                 </div>
                                 <div id="paswordUPD">
                                     <span id="password-upd">변경 비밀번호</span>
-                                    <span><input type="password" size="50" id="password-upd-input" maxlength="20" name="newUpw"></span>
+                                    <span><input type="password" size="50" id="password-upd-input" maxlength="20"
+                                                 name="newUpw"></span>
                                 </div>
                                 <div id="paswordCHk">
                                     <span id="password-chk">확인 비밀번호</span>
-                                    <span><input type="password" size="50" id="password-chk-input" maxlength="20" name="confirmupw"></span>
+                                    <span><input type="password" size="50" id="password-chk-input" maxlength="20"
+                                                 name="confirmupw"></span>
                                 </div>
                                 <div>
-                                    <input class="btn btn-primary" id="password-smt" type="submit" value="비밀번호 변경" onsubmit="password()" n>
+                                    <input class="btn btn-primary" id="password-smt" type="submit" value="비밀번호 변경"
+                                           onsubmit="password()" n>
                                 </div>
                             </div>
                         </div>
@@ -308,15 +336,22 @@
                         <div class="col">
                             <div class="col-2" id="buy-col">
                                 <div class="list-group d-flex flex-row bd-highlight" id="list-tab1" role="tablist">
-                                    <a class="list-group-item list-group-item-action active p-2 bd-highlight" id="list-buy-list" data-bs-toggle="list" href="#list-buy" role="tab" aria-controls="list-buy">구매</a>
-                                    <a class="list-group-item list-group-item-action p-2 bd-highlight" id="list-sell-list" data-bs-toggle="list" href="#list-sell" role="tab" aria-controls="list-sell">판매</a>
-                                    <a class="list-group-item list-group-item-action p-2 bd-highlight" id="list-selling-list" data-bs-toggle="list" href="#list-selling" role="tab" aria-controls="list-selling">판매중</a>
+                                    <a class="list-group-item list-group-item-action active p-2 bd-highlight"
+                                       id="list-buy-list" data-bs-toggle="list" href="#list-buy" role="tab"
+                                       aria-controls="list-buy">구매</a>
+                                    <a class="list-group-item list-group-item-action p-2 bd-highlight"
+                                       id="list-sell-list" data-bs-toggle="list" href="#list-sell" role="tab"
+                                       aria-controls="list-sell">판매</a>
+                                    <a class="list-group-item list-group-item-action p-2 bd-highlight"
+                                       id="list-selling-list" data-bs-toggle="list" href="#list-selling" role="tab"
+                                       aria-controls="list-selling">판매중</a>
                                 </div>
                             </div>
                             <div class="col-1" id="buy-box">
                                 <div class="tab-content" id="nav-tabContent1">
 
-                                    <div class="tab-pane fade show active" id="list-buy" role="tabpanel" aria-labelledby="list-buy-list">
+                                    <div class="tab-pane fade show active" id="list-buy" role="tabpanel"
+                                         aria-labelledby="list-buy-list">
                                         <div id="buy-container">
                                             <div>
                                                 <table class="g_blue_table tb_list" id="buy-table">
@@ -327,6 +362,7 @@
                                                         <th>거래금액</th>
                                                         <th>등록일</th>
                                                         <th>구분</th>
+                                                        <th>기타</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -337,7 +373,10 @@
                                                         <td th:text="${#strings.substring(item.mdt,0,16)}"></td>
                                                         <td>구매완료</td>
                                                         <td>
-                                                            <button th:with="product_cd=${item.iboard}" th:data-product_cd="${product_cd}" th:value="${product_cd}" class="reviewBtn">리뷰 작성</button>
+                                                            <button th:with="product_cd=${item.iboard}"
+                                                                    th:data-product_cd="${product_cd}"
+                                                                    th:value="${product_cd}" class="reviewBtn">리뷰 작성
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -347,7 +386,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="tab-pane fade" id="list-sell" role="tabpanel" aria-labelledby="list-sell-list">
+                                    <div class="tab-pane fade" id="list-sell" role="tabpanel"
+                                         aria-labelledby="list-sell-list">
                                         <div id="sell-container">
                                             <div>
                                                 <table class="g_blue_table tb_list" id="sell-table">
@@ -359,15 +399,15 @@
                                                         <th>등록일</th>
                                                         <th>구분</th>
                                                     </tr>
-                                                    <tr th:each="item:${sell}"  id="sell-tr2">
+                                                    <tr th:each="item:${sell}" id="sell-tr2">
                                                         <td th:text="${item.categorynm}"></td>
                                                         <td th:text="${item.title}"></td>
                                                         <td th:text="${item.buy}"></td>
                                                         <td th:text="${#strings.substring(item.mdt,0,16)}"></td>
                                                         <td>판매완료</td>
-<!--                                                        <td colspan="6" class="first">-->
-<!--                                                            등록된 물품이 없습니다.-->
-<!--                                                        </td>-->
+                                                        <!--                                                        <td colspan="6" class="first">-->
+                                                        <!--                                                            등록된 물품이 없습니다.-->
+                                                        <!--                                                        </td>-->
                                                     </tr>
                                                     </tbody>
 
@@ -376,7 +416,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="tab-pane fade" id="list-selling" role="tabpanel" aria-labelledby="list-selling-list">
+                                    <div class="tab-pane fade" id="list-selling" role="tabpanel"
+                                         aria-labelledby="list-selling-list">
                                         <div id="selling-container">
                                             <div>
                                                 <table class="g_blue_table tb_list" id="selling-table">
@@ -388,16 +429,16 @@
                                                         <th>등록일</th>
                                                         <th>구분</th>
                                                     </tr>
-                                                    <tr th:each="item:${selling}"  id="selling-tr2">
+                                                    <tr th:each="item:${selling}" id="selling-tr2">
                                                         <td th:text="${item.categorynm}"></td>
                                                         <td th:text="${item.title}"></td>
                                                         <td th:text="${item.buy}"></td>
                                                         <td th:text="${#strings.substring(item.mdt,0,16)}"></td>
                                                         <td>판매중</td>
 
-<!--                                                        <td colspan="6" class="first">-->
-<!--                                                            등록된 물품 x-->
-<!--                                                        </td>-->
+                                                        <!--                                                        <td colspan="6" class="first">-->
+                                                        <!--                                                            등록된 물품 x-->
+                                                        <!--                                                        </td>-->
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -412,51 +453,26 @@
                 </div>
 
 
-
                 <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
                     <div id="header-review">
                         <div>
                             <h1>나의 리뷰</h1>
                         </div>
-<!--                        <div id="review-my">-->
-<!--                            내가 쓴 리뷰-->
-<!--                        </div>-->
+                        <div id="review-my"></div>
                     </div>
-                            <div id="review-container">
-                                <table class="g_blue_table tb_list" id="review-table">
-                                    <tbody id="review-tbody">
-                                    <tr th:each="rev : ${review}" id="review-tr2">
-                                        <td th:text="${rev.productTitle}">상품제목</td>
-                                        <td th:text="${rev.title}">title</td>
-                                        <td th:text="${rev.nickname}">nickname</td>
-                                        <td th:text="${rev.rdt}">rdt</td>
-                                        <td th:text="${'⭐' * rev.rating}"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <div class="page_wrap">
-                                    <nav th:if="${params != null and params.paginationInfo.totalRecordCount > 0}" th:object="${params.paginationInfo}" th:with="info=${params.paginationInfo}" aria-label="Page navigation" class="text-center">
-                                        <ul class="pagination">
-                                            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(1)} ]])" class="pprev">
-                                                <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-                                            </li>
-                                            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.firstPage - 1)} ]])" class="prev">
-                                                <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&lsaquo;</span></a>
-                                            </li>
-                                            <li th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:class="${pageNo == params.currentPageNo} ? 'active'">
-                                                <a href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(pageNo)} ]])" class="page-item"></a>
-                                            </li>
-                                            <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.lastPage + 1)} ]])" class="next">
-                                                <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&rsaquo;</span></a>
-                                            </li>
-                                            <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.totalPageCount)} ]])" class="nnext">
-                                                <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-
+                    <div id="review-container">
+                        <table class="g_blue_table tb_list" id="review-table">
+                            <tbody id="review-tbody">
+                            <tr th:each="rev : ${review}" id="review-tr2">
+                                <td th:text="${rev.productTitle}">상품제목</td>
+                                <td th:text="${rev.title}">title</td>
+                                <td th:text="${rev.nickname}">nickname</td>
+                                <td th:text="${rev.rdt}">rdt</td>
+                                <td th:text="${'⭐' * rev.rating}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

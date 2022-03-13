@@ -38,10 +38,9 @@
             <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
 
-        <div th:if="${session.loginUser != null}">
+        <div th:if="${session.loginUser != null && board_cd != 1}">
             <div th:hidden th:data-loginUser="${loginUser}"></div>
             <button th:onclick="location.href=`/customer/write?board_cd=`+[[${board_cd}]]">글쓰기</button>
-            <button><a href="/user/logout">로그아웃</a></button>
         </div>
         <table class="table table-hover">
             <thead>
@@ -64,12 +63,8 @@
                         <th:block th:data-noticeYn="${item.noticeYn}">
                             <span th:if="${item.noticeYn eq 'Y'}">🔔</span>
                         </th:block>
-                        <th:block th:data-secretYn="${item.secretYn}">
-                            <span th:if="${item.secretYn eq 'Y'}">🔒</span>
-                        </th:block>
                         <span th:text="${item.title}">제목</span>
                     </td>
-
                     <td th:text="${item.nickname}">작성자</td>
                     <td th:text="${item.hits}">조회수</td>
                     <td th:text="${item.rdt}">작성일시</td>
@@ -81,21 +76,16 @@
                             <td th:text="${item.iboard}">번호</td>
                             <td th:if="${board_cd == 1}" th:text="${item.productTitle}">상품제목</td>
                             <td>
-                                <th:block th:data-noticeYn="${item.noticeYn}">
-                                    <span th:if="${item.noticeYn eq 'Y'}">🔔</span>
-                                </th:block>
                                 <th:block th:data-secretYn="${item.secretYn}">
                                     <span th:if="${item.secretYn eq 'Y'}">🔒</span>
                                 </th:block>
                                 <span th:text="${item.title}">제목</span>
                             </td>
-
                             <td th:text="${item.nickname}">작성자</td>
                             <td th:text="${item.hits}">조회수</td>
                             <td th:text="${item.rdt}">작성일시</td>
                         </tr>
                     </div>
-
 
                     <tr class="record pointer" th:unless="${item.secretYn == 'Y'}" th:data-iboard="${item.iboard}" >
                         <div hidden th:data-iuser="${item.iuser}"></div>
@@ -105,12 +95,8 @@
                             <th:block th:data-noticeYn="${item.noticeYn}">
                                 <span th:if="${item.noticeYn eq 'Y'}">🔔</span>
                             </th:block>
-                            <th:block th:data-secretYn="${item.secretYn}">
-                                <span th:if="${item.secretYn eq 'Y'}">🔒</span>
-                            </th:block>
                             <span th:text="${item.title}">제목</span>
                         </td>
-
                         <td th:text="${item.nickname}">작성자</td>
                         <td th:text="${item.hits}">조회수</td>
                         <td th:text="${item.rdt}">작성일시</td>

@@ -78,7 +78,7 @@ if(payElem){
     payElem.addEventListener('click',()=>{
         if(confirm('정말로 구매하시겠습니까????')){
             const param ={
-                iboard,
+                iboard
 
             }
             myFetch.put(`/auction/imbuy`,data=>{

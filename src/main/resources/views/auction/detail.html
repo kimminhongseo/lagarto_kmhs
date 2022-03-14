@@ -134,7 +134,7 @@
                                     <div>주소 : <span th:value="${session.loginUser.address_primary}" th:text="${session.loginUser.address_primary}" /></div>
                                     <div>상세주소 : <span th:value="${session.loginUser.address_secondary}" th:text="${session.loginUser.address_secondary}" /></div>
                                     <br>
-                                    <button th:if="${session.loginUser.money}-${data.imbuy} > 0 " type="button" id="pay" class="btn btn-primary">즉시 구매 하기</button>
+                                    <button th:if="${session.loginUser.money}-${data.imbuy} >= 0 " type="button" id="pay" class="btn btn-primary">즉시 구매 하기</button>
                                     <span>즉시 구매시 해당 주소로 배송이 됩니다.</span>
 
                                 </form>

@@ -87,7 +87,7 @@ public class AuctionService {
 
     public int imbuyclick(AuctionVo vo){
         vo.setBuyer(utils.getLoginUserPk());//구매자를 현재 로그인한사람으로
-       // auctionBidMapper.imbuy(vo); //즉시구매시 money필요
+//        auctionBidMapper.imbuy(vo); //즉시구매시 money필요
         return mapper.imbuyclick(vo);
     }
 

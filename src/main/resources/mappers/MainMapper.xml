@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.portfolio.lagarto.MainMapper">
+    <select id="selMainAuctionList" resultType="AuctionVo">
+        SELECT A.*, B.`nm` AS categorynm
+        FROM `lagarto`.`auction` AS A
+                 LEFT JOIN `lagarto`.`auction_category` AS B
+                           ON A.`icategory` = B.`icategory`
+        WHERE A.`isdel` = 0
+        ORDER BY A.`rdt` DESC
+        LIMIT 4
+    </select>
+
+    <select id="selMainSuppliesList" resultType="SuppliesVo">
+        SELECT A.*, B.`nm` AS categorynm, C.`save_name`
+        FROM `lagarto`.`supplies` AS A
+                 LEFT JOIN `lagarto`.`supplies_category` AS B
+                           ON A.`icategory` = B.`icategory`
+                 LEFT JOIN (SELECT `iboard`, MIN(idx), `save_name` FROM `lagarto`.`sup_attach` GROUP BY `iboard`) AS C
+                           ON A.`iboard` = C.`iboard`
+        WHERE A.`isdel` = 0
+        ORDER BY A.`rdt` DESC
+        LIMIT 4
+    </select>
+
+    <select id="selMainTopSuppliesList" resultType="SuppliesVo">
+        SELECT A.*, B.`nm` AS categorynm, C.`save_name`
+        FROM `lagarto`.`supplies` AS A
+                 LEFT JOIN `lagarto`.`supplies_category` AS B
+                           ON A.`icategory` = B.`icategory`
+                 LEFT JOIN (SELECT `iboard`, MIN(idx), `save_name` FROM `lagarto`.`sup_attach` GROUP BY `iboard`) AS C
+                           ON A.`iboard` = C.`iboard`
+        WHERE A.`isdel` = 0
+        ORDER BY A.`hits` DESC
+        LIMIT 4
+    </select>
+</mapper>

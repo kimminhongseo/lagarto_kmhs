@@ -58,37 +58,34 @@
 					<h2>companion animal</h2>
 					<p>반려동물</p>
 				</div>
-				<div class="product" >
-
-					<a th:href="@{/auction/detail(iboard=${data.iboard})}" th:each="data:${auctionList}">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p><span th:text="${data.title}"/></p>
-									<p th:text="${data.categorynm}"></p>
+				<div class="product">
+					<div th:each="data:${auctionList}">
+						<a th:href="@{/auction/detail(iboard=${data.iboard})}">
+							<div class="product_detail">
+								<div class="detail_img">
+									<img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" }
+										 onerror="this.src='/static/img/pro.png'"/>
 								</div>
-								<div class="price">
-									<div class="price_num">
-										<em th:text="${data.buy}"></em>
-										<span>원</span>
+								<div class="detail_text">
+									<div class="name">
+										<p th:text="${data.categorynm}"></p>
+										<p th:text="${data.title}"></p>
 									</div>
-									<div class="price_type">
-										<p th:text="${data.imbuy}"></p>
-										<span>원</span>
+									<div class="price">
+										<div class="price_num">
+											<em th:text="${data.imbuy}"></em>
+											<span>원</span>
+										</div>
+										<div class="price_type">
+											<p>즉시 구매가</p>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</a>
-
-
+						</a>
+					</div>
 				</div>
 			</div>
-
-
 
 			<div class="sub_banner sb1">
 				<a href="auction/list">
@@ -102,27 +99,31 @@
 					<p>신규상품</p>
 				</div>
 				<div class="product">
-
-					<a th:href="@{/supplies/detail(iboard=${data.iboard})}" th:each="data:${suppliesListnew}">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img th:src="@{/uploadfile/supplies/} + ${data.iboard} + @{/} + ${data.save_name}" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p><span th:text="${data.title}"/></p>
-									<p th:text="${data.categorynm}"></p>
+					<div th:each="data:${suppliesList}">
+						<a th:href="@{/supplies/detail(iboard=${data.iboard})}">
+							<div class="product_detail">
+								<div class="detail_img">
+									<img th:src="@{/static/uploadfile/supplies/} + ${data.iboard}+ @{/} + ${data.save_name}"
+										 onerror="this.src='/img/aa.jpg'">
 								</div>
-								<div class="price">
-									<div class="price_num">
-										<em th:text="${data.price}"></em>
-										<span>원</span>
+								<div class="detail_text">
+									<div class="name">
+										<p th:text="${data.categorynm}"></p>
+										<p th:text="${data.title}"></p>
+									</div>
+									<div class="price">
+										<div class="price_num">
+											<em th:text="${data.price}"></em>
+											<span>원</span>
+										</div>
+										<div class="price_type">
+											<p>회원 판매가</p>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</a>
-
+						</a>
+					</div>
 				</div>
 			</div>
 
@@ -133,34 +134,36 @@
 			</div>
 
 			<div class="home_products">
-
 				<div class="product_title topProductTop10">
 					<h2>popular item</h2>
 					<p>인기상품</p>
 				</div>
-
-				<div class="product" >
-
-					<a th:href="@{/supplies/detail(iboard=${data.iboard})}" th:each="data:${suppliesList}">
-						<div class="product_detail">
-							<div class="detail_img">
-								<img th:src="@{/uploadfile/supplies/} + ${data.iboard} + @{/} + ${data.save_name}" class="card-img-top" alt="...">
-							</div>
-							<div class="detail_text">
-								<div class="name">
-									<p><span th:text="${data.title}"/></p>
-									<p th:text="${data.categorynm}"></p>
+				<div class="product">
+					<div th:each="data:${suppliesTopList}">
+						<a th:href="@{/supplies/detail(iboard=${data.iboard})}">
+							<div class="product_detail">
+								<div class="detail_img">
+									<img th:src="@{/static/uploadfile/supplies/} + ${data.iboard}+ @{/} + ${data.save_name}"
+										 onerror="this.src='/img/aa.jpg'">
 								</div>
-								<div class="price">
-									<div class="price_num">
-										<em th:text="${data.price}"></em>
-										<span>원</span>
+								<div class="detail_text">
+									<div class="name">
+										<p th:text="${data.categorynm}"></p>
+										<p th:text="${data.title}"></p>
+									</div>
+									<div class="price">
+										<div class="price_num">
+											<em th:text="${data.price}"></em>
+											<span>원</span>
+										</div>
+										<div class="price_type">
+											<p>회원 판매가</p>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</a>
-
+						</a>
+					</div>
 				</div>
 			</div>
 

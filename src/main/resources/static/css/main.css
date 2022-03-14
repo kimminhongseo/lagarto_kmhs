@@ -179,8 +179,11 @@
     padding-right: 20px;
 }
 
-.product > a {
+.product > div {
     width: 23%;
+}
+
+.product > div > a {
     color: var(--font-color-default);
     text-decoration: none;
 }
@@ -193,7 +196,7 @@
 }
 
 .product .product_detail .detail_img img {
-    width: 90%;
+    width: 100%;
     height: auto;
     position: absolute;
     top: 50%;

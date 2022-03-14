@@ -125,13 +125,16 @@
                                 <form class="modal-body modal-" id="imbuy-modal">
                                     <h5>현재 보유 금액 : <span th:value="${session.loginUser.money}" th:text="${session.loginUser.money}"/> 원 </h5>
                                     <h5>즉시 구매가 :<span th:value="${data.imbuy}" th:text="${data.imbuy}"/> 원 </h5>
-                                    <h5>구매후 잔액 : <span th:value="${session.loginUser.money}-${data.imbuy}" th:text="${session.loginUser.money}-${data.imbuy}" /> 원</h5>
+
+                                    <h5 th:if="${session.loginUser.money}-${data.imbuy} > 0 ">구매후 잔액 : <span th:value="${session.loginUser.money}-${data.imbuy}" th:text="${session.loginUser.money}-${data.imbuy}" /> 원</h5>
+                                    <h5 th:if="${session.loginUser.money}-${data.imbuy} < 0 ">잔액이 부족합니다.</h5>
+
                                     <br>
                                     <div>우편번호 : <span th:value="${session.loginUser.address_post}" th:text="${session.loginUser.address_post}" /></div>
                                     <div>주소 : <span th:value="${session.loginUser.address_primary}" th:text="${session.loginUser.address_primary}" /></div>
                                     <div>상세주소 : <span th:value="${session.loginUser.address_secondary}" th:text="${session.loginUser.address_secondary}" /></div>
                                     <br>
-                                    <button type="button" id="pay" class="btn btn-primary">즉시 구매 하기</button>
+                                    <button th:if="${session.loginUser.money}-${data.imbuy} >= 0 " type="button" id="pay" class="btn btn-primary">즉시 구매 하기</button>
                                     <span>즉시 구매시 해당 주소로 배송이 됩니다.</span>
 
                                 </form>

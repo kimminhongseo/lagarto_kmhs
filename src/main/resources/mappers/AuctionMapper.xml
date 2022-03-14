@@ -49,6 +49,7 @@
         order by A.rdt desc
     </select>
 
+
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">
         SELECT A.*,

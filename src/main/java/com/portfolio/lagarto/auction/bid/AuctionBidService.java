@@ -24,7 +24,7 @@ public class AuctionBidService {
                 }
 
 
-                if(vo.getImbuy()>vo.getBuy()){ //즉시구매가 보다 낮은 금액 입력 == 정상상
+                if(vo.getImbuy()>vo.getBuy()){ //즉시구매가 보다 낮은 금액 입력 => 정상
                 mapper.updBid(vo);
                 mapper.removemoney(vo);
                 mapper.returnmoney(vo);

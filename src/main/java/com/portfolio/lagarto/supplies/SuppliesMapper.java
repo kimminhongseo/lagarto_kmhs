@@ -16,6 +16,9 @@ public interface SuppliesMapper {
 
     List<SuppliesVo>  selSuppliesList(SuppliesVo vo);
     List<SuppliesVo>  selSuppliesListAll(SuppliesVo vo);
+    List<SuppliesVo>  selSuppliesListAll4(SuppliesVo vo);
+    List<SuppliesVo>  selSuppliesListAllnew4(SuppliesVo vo);
+
 
     SuppliesVo selSuppliesDetail(SuppliesVo vo);
 
@@ -34,6 +37,7 @@ public interface SuppliesMapper {
     int plusnum(SuppliesVo vo);
     int minusnum(SuppliesVo vo);
     int balancenum(SuppliesVo vo);
+    void payment1(SuppliesVo vo);
 
     int delcart(SuppliesVo vo);
 

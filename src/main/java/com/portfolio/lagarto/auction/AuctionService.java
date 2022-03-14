@@ -52,9 +52,7 @@ public class AuctionService {
     public List<AuctionVo> selAuctionListAll(AuctionVo vo){
         return  mapper.selAuctionListAll(vo);}
 
-    public List<AuctionVo> selAuctionListAll4(AuctionVo vo){
-        return mapper.selAuctionListAll4(vo);
-    }
+
 
 
     public AuctionVo selAuctionDetail (AuctionVo vo){

@@ -2,6 +2,7 @@ package com.portfolio.lagarto;
 
 import com.portfolio.lagarto.auction.AuctionService;
 import com.portfolio.lagarto.model.AuctionVo;
+import com.portfolio.lagarto.model.SuppliesVo;
 import com.portfolio.lagarto.model.UserEntity;
 import com.portfolio.lagarto.recaptcha.VerifyRecaptcha;
 import com.portfolio.lagarto.supplies.SuppliesService;

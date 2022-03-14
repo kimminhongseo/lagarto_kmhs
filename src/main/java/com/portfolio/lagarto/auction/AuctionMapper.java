@@ -14,7 +14,7 @@ public interface AuctionMapper {
     int addHits(AuctionVo vo);
     List<AuctionVo> selAuctionList(AuctionVo vo);
     List<AuctionVo> selAuctionListAll(AuctionVo vo);
-    List<AuctionVo> selAuctionListAll4(AuctionVo vo);
+
 
     List<AuctionCategoryEntity> selAuctionCategoryList();
 

@@ -49,18 +49,6 @@
         order by A.rdt desc
     </select>
 
-    <select id="selAuctionListAll4" resultType="AuctionVo">
-        select A.*,
-        B.nm as writernm, B.nickname as nicknm,C.nm as categorynm
-        from lagarto.auction A
-        left join lagarto.lagarto_user B
-        on A.iuser = B.iuser
-        left join lagarto.auction_category C
-        on A.icategory = C.icategory
-        where A.isdel = 0
-        order by A.rdt desc
-        LIMIT 4;
-    </select>
 
   <!--디테일 만들쟈~-->
     <select id="selAuctionDetail" resultType="AuctionVo">

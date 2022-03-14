@@ -55,39 +55,6 @@
         order by A.rdt DESC
     </select>
 
-    <select id="selSuppliesListAllnew4" resultType="SuppliesVo">
-        select A.*,
-        B.nm as writernm, B.nickname as nicknm, C.nm AS categorynm ,D.save_name
-        from lagarto.supplies A
-        LEFT join lagarto.lagarto_user B
-        on A.iuser = B.iuser
-        left JOIN lagarto.supplies_category C
-        ON A.icategory = C.icategory
-        LEFT JOIN (SELECT iboard, MIN(idx) , save_name FROM sup_attach GROUP BY iboard) AS D
-        ON A.iboard = D.iboard
-        where A.isdel = 0
-        order by A.rdt desc
-        Limit 4
-    </select>
-
-    <select id="selSuppliesListAll4" resultType="SuppliesVo">
-        select A.*,
-        B.nm as writernm, B.nickname as nicknm, C.nm AS categorynm ,D.save_name
-        from lagarto.supplies A
-        LEFT join lagarto.lagarto_user B
-        on A.iuser = B.iuser
-        left JOIN lagarto.supplies_category C
-        ON A.icategory = C.icategory
-        LEFT JOIN (SELECT iboard, MIN(idx) , save_name FROM sup_attach GROUP BY iboard) AS D
-        ON A.iboard = D.iboard
-        where A.isdel = 0
-        order by A.hits DESC
-        limit 4
-    </select>
-
-
-
-
 
 
     <select id="selSuppliesDetail" resultType="SuppliesVo">

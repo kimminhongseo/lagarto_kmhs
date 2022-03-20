@@ -45,7 +45,7 @@
         LIMIT #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
     </select>
 
-    <select id="selNotice" parameterType="TestDto" resultType="CustomerVo">
+    <select id="selNoticeList" parameterType="TestDto" resultType="CustomerVo">
         SELECT A.* ,B.level ,B.nickname, C.title AS productTitle, C.iboard FROM lagarto.customer A
         INNER JOIN lagarto.lagarto_user B ON A.iuser = B.iuser
         LEFT JOIN lagarto.auction C ON A.product_cd = C.iboard

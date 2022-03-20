@@ -68,7 +68,7 @@ public class CustomerService {
         dto.setPaginationInfo(paginationInfo);
 
         if(totalCount > 0) {
-            list = mapper.selCustomerList(dto);
+            list = mapper.selNoticeList(dto);
         }
         return list;
     }

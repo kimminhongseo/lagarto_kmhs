@@ -423,6 +423,13 @@
                         <div id="review-container">
                             <table class="g_blue_table tb_list" id="review-table">
                                 <tbody th:each="rev : ${review}" id="review-tbody">
+                                <tr>
+                                    <th>상품제목</th>
+                                    <th>제목</th>
+                                    <th>거래금액</th>
+                                    <th>등록일</th>
+                                    <th>별점</th>
+                                </tr>
                                 <tr class="record" id="review-tr2" th:data-iboard="${rev.iboard}">
                                     <td th:text="${rev.productTitle}">상품제목</td>
                                     <td th:text="${rev.title}">title</td>

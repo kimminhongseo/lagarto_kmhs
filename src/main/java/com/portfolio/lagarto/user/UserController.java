@@ -209,6 +209,8 @@ public class UserController {
         return result;
     }
 
+
+    //todo 구매완료 판매완료 판매중인거 실시간으로 보려주려면 세션에 담아야함.
     @GetMapping("/mypage")
     public String mypage(Model model, @ModelAttribute("params") TestDto dto) {
         model.addAttribute(Const.Follower, fservice.FollowList());
@@ -391,5 +393,18 @@ public class UserController {
     public void profileImg(MultipartFile imgFile) {
         service.uploadProfileImg(imgFile);
     }
+
+
+
+    @GetMapping()
+    public String naver(){
+        return "user/naverloginAPI";
+    }
+
+    @GetMapping("/callback")
+    public String  navercallback(){
+        return "user/callback";
+    }
+
 
 }

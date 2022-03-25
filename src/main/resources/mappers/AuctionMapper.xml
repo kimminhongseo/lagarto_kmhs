@@ -45,6 +45,7 @@
         from lagarto.auction A
         left join lagarto.lagarto_user B
         on A.iuser = B.iuser
+
         where A.isdel = 0
         order by A.rdt desc
     </select>

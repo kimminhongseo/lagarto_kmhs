@@ -42,11 +42,15 @@
     text-decoration: none;
 }
 
-.card   img{
+.card{
+    margin-bottom: 10px;
+}
+
+.card > img{
     width: 100%;
     height: 200px;
 }
 
-.card{
-
+.card-body > *{
+    margin: 5px;
 }

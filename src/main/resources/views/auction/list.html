@@ -36,18 +36,17 @@
 
                             <div class="card-header">
                                 <div hidden>게시판 번호: <span class="iboard" th:text="${data.iboard}"/></div>
+                                종류 : <span th:text="${data.categorynm}"/>
+                                <div><small>현재 조회수 : <span th:text="${data.hits}"/></small></div>
                             </div>
-
                                 <!--이미지1 없으면 pro.png 파일이 기본파일로-->
                                 <img th:src="@{/static/uploadfile/} + ${data.iboard} + @{/} + ${data.image1}" }
                                      onerror="this.src='/static/img/pro.png'"/>
                             <div class="card-body">
-                                <div class="card-title">작성자 : <span th:text="${data.nicknm}"/></div>
+                                <h5 class="card-title">작성자 : <span th:text="${data.nicknm}"/></h5>
                                 <div class="card-text">조회수 : <span th:text="${data.hits}"/></div>
-                                <div class="card-text">
-                                    <div>제목 :<span th:text="${data.title}"/></div>
-                                    <div>내용 : <span th:text="${data.ctnt}"/></div>
-                                </div>
+                                <b class="card-text"> 제목 :<span th:text="${data.title}"/></b>
+                                <div class="cart-text"> 설명 : <span th:text="${data.ctnt}"/></div>
                                 <div class="card-text">
                                     <div>즉시구매가 : <span th:text="${data.imbuy}"/> 원</div>
                                     <div>경매가 : <span th:text="${data.buy}"/> 원</div>

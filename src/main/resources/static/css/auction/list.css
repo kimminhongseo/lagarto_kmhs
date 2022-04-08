@@ -1,39 +1,56 @@
-*{
-    padding: 0; margin: 0; box-sizing: border-box;
-}
+/**{*/
+/*    padding: 0; margin: 0; box-sizing: border-box;*/
+/*}*/
 
+/*.auction_container{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    background-color: darkseagreen;*/
+/*    border: black solid 1px;*/
+/*}*/
+/*.auction_list{*/
 
-.auction_container{
-    display: flex;
-    flex-direction: column;
-    background-color: darkseagreen;
-    border: black solid 1px;
-}
-.auction_list{
+/*    display: grid;*/
+/*    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));*/
+/*}*/
 
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
-}
+/*.auction_container h1{*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    justify-items: center;*/
+/*}*/
 
-.auction_container h1{
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-}
+/*.auction_container .listing-auction_image img {*/
+/*    width: 300px;*/
+/*    height: 300px;*/
+/*}*/
 
-.auction_container .listing-auction_image img {
-    width: 300px;
-    height: 300px;
-}
+/*.auction_container a{*/
+/*    color : black;*/
+/*    text-decoration: none;*/
+/*}*/
+/*.auction_container a:link { color: black; }*/
+/*.auction_container a:visited { color: black; }*/
 
-.auction_container a{
-    color : black;
+/*.auction_container img{*/
+/*    width: 200px;*/
+/*    height: 200px;*/
+/*}*/
+
+.move-detail{
+    color: black;
     text-decoration: none;
 }
-.auction_container a:link { color: black; }
-.auction_container a:visited { color: black; }
 
-.auction_container img{
-    width: 200px;
+.card{
+    margin-bottom: 10px;
+}
+
+.card > img{
+    width: 100%;
     height: 200px;
+}
+
+.card-body > *{
+    margin: 5px;
 }

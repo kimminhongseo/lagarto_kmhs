@@ -38,15 +38,17 @@
         Order by A.iboard DESC
 
     </select>
-
     <select id="selAuctionListAll" resultType="AuctionVo">
         select A.*,
-        B.nm as writernm, B.nickname as nicknm
+        B.nm as writernm, B.nickname as nicknm,
+        C.nm AS categorynm
         from lagarto.auction A
         left join lagarto.lagarto_user B
         on A.iuser = B.iuser
+        INNER JOIN lagarto.auction_category C
+        ON A.icategory=C.icategory
         where A.isdel = 0
-        order by A.rdt desc
+        order by A.rdt DESC;
     </select>
 
 

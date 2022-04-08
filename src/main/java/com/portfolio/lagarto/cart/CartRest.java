@@ -57,6 +57,7 @@ public class CartRest {
     }
 
     //결제하면 잔액 없데이트 balance 가져와야함.
+    // todo 세션에 담기.
     @PutMapping("/balance")
     public Map<String,Integer> balancenum(@RequestBody SuppliesVo vo){
         Map<String,Integer> result = new HashMap<>();

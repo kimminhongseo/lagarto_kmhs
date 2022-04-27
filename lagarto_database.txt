@@ -1,0 +1,314 @@
+CREATE DATABASE `lagarto`;
+
+-- ---------------- USER TABLE ----------------
+
+CREATE TABLE `lagarto`.`lagarto_user`
+(
+    `iuser`             INT UNSIGNED AUTO_INCREMENT,
+    `uid`               VARCHAR(50)      NOT NULL COMMENT 'email',
+    `upw`               VARCHAR(128)     NOT NULL,
+    `nm`                VARCHAR(10),
+    `nickname`          VARCHAR(10),
+    `contact_first`     VARCHAR(3)       NOT NULL,
+    `contact_second`    VARCHAR(4)       NOT NULL,
+    `contact_third`     VARCHAR(4)       NOT NULL,
+    `profile_img`       VARCHAR(100),
+    `address_post`      VARCHAR(5),
+    `address_primary`   VARCHAR(100),
+    `address_secondary` VARCHAR(100),
+    `disc_agree_a`      TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    `disc_agree_b`      TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    `disc_agree_c`      TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    `platform_cd`       TINYINT UNSIGNED NOT NULL,
+    `money`             int(30) unsigned          DEFAULT 0,
+    `level`             TINYINT UNSIGNED NOT NULL DEFAULT 9 COMMENT '1~9',
+    `level_bar`         INT UNSIGNED     NOT NULL DEFAULT 0 COMMENT '0~1000',
+    `rdt`               DATETIME                  DEFAULT NOW(),
+    `auth`              BOOLEAN                   DEFAULT FALSE,
+    `last_login_at`     DATETIME,
+    `auto_id_check`     TINYINT                   DEFAULT 0,
+    CONSTRAINT PRIMARY KEY (`iuser`),
+    CONSTRAINT FOREIGN KEY (`platform_cd`) REFERENCES `lagarto`.`user_platform_type` (`platform_cd`) ON DELETE CASCADE,
+    CONSTRAINT UNIQUE (`uid`),
+    CONSTRAINT UNIQUE (`contact_first`, `contact_second`, `contact_third`),
+    CONSTRAINT UNIQUE (`nickname`)
+);
+
+CREATE TABLE `lagarto`.`user_platform_type`
+(
+    `platform_cd` TINYINT UNSIGNED NOT NULL,
+    `platform_nm` VARCHAR(10)      NOT NULL,
+    CONSTRAINT PRIMARY KEY (`platform_cd`)
+);
+
+INSERT INTO `lagarto`.`user_platform_type`
+    (`platform_cd`, `platform_nm`)
+VALUES (1, 'general'),
+       (2, 'naver'),
+       (3, 'kakao'),
+       (4, 'google');
+
+CREATE TABLE `lagarto`.`lagarto_user_follow`
+(
+    `follow_num` INT(10) unsigned NOT NULL AUTO_INCREMENT,
+    `iuserMe`    INT(10) UNSIGNED,
+    `iuserYou`   INT(10) UNSIGNED,
+    PRIMARY KEY (`follow_num`),
+    FOREIGN KEY (`iuserMe`) REFERENCES `lagarto_user` (`iuser`),
+    FOREIGN KEY (`iuserYou`) REFERENCES `lagarto_user` (`iuser`)
+);
+
+CREATE TABLE `lagarto`.`user_add_money`
+(
+    `iuser` INT(10) UNSIGNED NOT NULL,
+    `money` INT(30),
+    `rdt`   DATE DEFAULT CURRENT_TIMESTAMP(),
+    FOREIGN KEY (`iuser`) REFERENCES `lagarto`.`lagarto_user` (`iuser`)
+);
+
+CREATE TABLE `lagarto`.`user_report`
+(
+    `iuser`         INT(10) UNSIGNED NOT NULL,
+    `opponent`      INT(10) UNSIGNED NOT NULL,
+    `reportNum`     INT(5) UNSIGNED  NOT NULL,
+    `reportContent` VARCHAR(200)     NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+    `rdt`           DATE             NULL DEFAULT current_timestamp(),
+    INDEX `iuser` (`iuser`) USING BTREE,
+    INDEX `opponent` (`opponent`) USING BTREE,
+    CONSTRAINT `user_report_ibfk_1` FOREIGN KEY (`iuser`) REFERENCES `lagarto`.`lagarto_user` (`iuser`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+    CONSTRAINT `user_report_ibfk_2` FOREIGN KEY (`opponent`) REFERENCES `lagarto`.`lagarto_user` (`iuser`) ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+    COLLATE = 'utf8mb3_general_ci'
+    ENGINE = InnoDB
+;
+
+
+-- ---------------- AUCTION TABLE ----------------
+
+CREATE TABLE IF NOT EXISTS `lagarto`.`auction`
+(
+    `iboard`    int(10) unsigned    NOT NULL AUTO_INCREMENT,
+    `icategory` int(10) unsigned    NOT NULL,
+    `title`     varchar(50)         NOT NULL,
+    `ctnt`      text                NOT NULL,
+    `iuser`     int(10) unsigned    NOT NULL,
+    `image1`    varchar(200)                 DEFAULT NULL,
+    `image2`    varchar(200)                 DEFAULT NULL,
+    `image3`    varchar(200)                 DEFAULT NULL,
+    `image4`    varchar(200)                 DEFAULT NULL,
+    `image5`    varchar(200)                 DEFAULT NULL,
+    `hits`      int(10) unsigned    NOT NULL DEFAULT 0,
+    `isdel`     tinyint(3) unsigned          DEFAULT 0,
+    `buy`       int(10) unsigned    NOT NULL,
+    `imbuy`     int(10) unsigned    NOT NULL,
+    `rdt`       datetime                     DEFAULT current_timestamp(),
+    `mdt`       datetime                     DEFAULT current_timestamp(),
+    `buyer`     int(10) unsigned    NOT NULL DEFAULT 0,
+    `prebuyer`  int(10) unsigned    NOT NULL DEFAULT 0,
+    `prebuy`    int(10) unsigned    NOT NULL DEFAULT 0,
+    `bid`       TINYINT(3) UNSIGNED NULL     DEFAULT '0',
+    PRIMARY KEY (`iboard`),
+    KEY `lagarto_auction_iuser` (`iuser`),
+    KEY `lagarto_auction_buyer` (`buyer`),
+    CONSTRAINT `lagarto_auction_buyer` FOREIGN KEY (`buyer`) REFERENCES `lagarto_user` (`iuser`),
+    CONSTRAINT `lagarto_auction_iuser` FOREIGN KEY (`iuser`) REFERENCES `lagarto_user` (`iuser`)
+);
+
+-- `auction`에 기본 데이터 1개 수동으로 insert 해야 함
+INSERT INTO `lagarto`.`auction` (`iboard`, `icategory`, `title`, `ctnt`, `iuser`, `image1`, `image2`, `image3`,
+                                 `image4`,
+                                 `image5`, `hits`, `isdel`, `buy`, `imbuy`, `rdt`, `mdt`, `buyer`, `prebuyer`, `prebuy`)
+VALUES (1, 1, 'asdsa', 'asdas', 1, NULL, NULL, NULL, NULL, NULL, 0, 0, 2, 10000000, '2022-02-21 19:57:20',
+        '2022-02-22 17:36:28', 2, 1, 1);
+
+CREATE TABLE IF NOT EXISTS `lagarto`.`auction_category`
+(
+    `icategory` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `nm`        varchar(20)      NOT NULL,
+    `orderby`   int(10) unsigned DEFAULT 0,
+    PRIMARY KEY (`icategory`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3;
+
+CREATE TABLE IF NOT EXISTS `lagarto`.`auction_comment`
+(
+    `icmt`   int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `iboard` int(10) unsigned NOT NULL,
+    `iuser`  int(10) unsigned NOT NULL,
+    `ctnt`   text             NOT NULL,
+    `rdt`    datetime DEFAULT current_timestamp(),
+    `mdt`    datetime DEFAULT current_timestamp(),
+    PRIMARY KEY (`icmt`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3;
+
+CREATE TABLE IF NOT EXISTS `lagarto`.`auction_fav`
+(
+    `iboard` int(10) unsigned NOT NULL,
+    `iuser`  int(10) unsigned NOT NULL,
+    `rdt`    datetime DEFAULT current_timestamp(),
+    PRIMARY KEY (`iboard`, `iuser`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3;
+
+CREATE TABLE `lagarto`.`auction_bidtest`
+(
+    `iboard` INT(100)          NOT NULL,
+    `iuser`  INT(100) UNSIGNED NOT NULL,
+    `buy`    INT(10)           NOT NULL,
+    `rdt`    datetime DEFAULT current_timestamp()
+);
+
+
+-- ---------------- SUPPLIES TABLE ----------------
+
+CREATE TABLE `lagarto`.`supplies`
+(
+    `iboard`    INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
+    `icategory` INT(10) UNSIGNED    NOT NULL,
+    `title`     VARCHAR(50)         NOT NULL COLLATE 'utf8mb3_general_ci',
+    `ctnt`      TEXT                NOT NULL COLLATE 'utf8mb3_general_ci',
+    `iuser`     INT(10) UNSIGNED    NOT NULL,
+    `hits`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `isdel`     TINYINT(3) UNSIGNED NULL     DEFAULT '0',
+    `price`     INT(10) UNSIGNED    NOT NULL,
+    `rdt`       DATETIME            NULL     DEFAULT current_timestamp(),
+    `mdt`       DATETIME            NULL     DEFAULT current_timestamp(),
+    PRIMARY KEY (`iboard`) USING BTREE
+)
+    COLLATE = 'utf8mb3_general_ci'
+    ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `lagarto`.`supplies_category`
+(
+    `icategory` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `nm`        varchar(20)      NOT NULL,
+    `orderby`   int(10) unsigned DEFAULT 0,
+    PRIMARY KEY (`icategory`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3;
+
+INSERT INTO `lagarto`.`supplies_category` (`icategory`, `nm`, `orderby`)
+VALUES (1, '먹이/물그릇', 1),
+       (2, '온/습도계', 2),
+       (3, '사육장/바닥재', 3),
+       (4, '은신처/유목', 4);
+
+CREATE TABLE IF NOT EXISTS `lagarto`.`sup_attach`
+(
+    `idx`           int(11)        NOT NULL AUTO_INCREMENT COMMENT '파일 번호 (PK)',
+    `iboard`        int(11)        NOT NULL COMMENT '게시글 번호 (FK)',
+    `original_name` varchar(260)   NOT NULL COMMENT '원본 파일명',
+    `save_name`     varchar(40)    NOT NULL COMMENT '저장 파일명',
+    `size`          int(11)        NOT NULL COMMENT '파일 크기',
+    `delete_yn`     enum ('Y','N') NOT NULL DEFAULT 'N' COMMENT '삭제 여부',
+    `insert_time`   datetime       NOT NULL DEFAULT current_timestamp() COMMENT '등록일',
+    PRIMARY KEY (`idx`) USING BTREE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb3;
+
+CREATE TABLE `lagarto`.`cart`
+(
+    `iboard` INT(10) UNSIGNED NOT NULL,
+    `iuser`  INT(10) UNSIGNED NOT NULL,
+    `rdt`    DATETIME         NULL     DEFAULT current_timestamp(),
+    `num`    INT(10)          NOT NULL DEFAULT '1'
+)
+    COLLATE = 'utf8mb3_general_ci'
+    ENGINE = InnoDB
+;
+
+
+-- ---------------- CUSTOMER TABLE ----------------
+
+CREATE TABLE `lagarto`.`customer`
+(
+    `iboard`     INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '게시글 번호',
+    `board_cd`   INT(10) UNSIGNED NOT NULL COMMENT '게시판 카테고리',
+    `product_cd` INT(10) UNSIGNED NULL     DEFAULT NULL COMMENT '상품 번호',
+    `title`      VARCHAR(100)     NOT NULL COMMENT '제목' COLLATE 'utf8mb3_general_ci',
+    `ctnt`       VARCHAR(1000)    NOT NULL COMMENT '내용' COLLATE 'utf8mb3_general_ci',
+    `iuser`      INT(10) UNSIGNED NOT NULL COMMENT '작성자 번호',
+    `rdt`        DATETIME         NULL     DEFAULT current_timestamp() COMMENT '작성일시',
+    `isdel`      TINYINT(4)       NOT NULL DEFAULT '0' COMMENT '삭제여부',
+    `rating`     TINYINT(4)       NOT NULL DEFAULT '0' COMMENT '별점',
+    `secretYn`   ENUM ('Y','N')   NULL     DEFAULT 'N' COMMENT '비밀글' COLLATE 'utf8mb3_general_ci',
+    `noticeYn`   ENUM ('Y','N')   NULL     DEFAULT 'N' COMMENT '공지글' COLLATE 'utf8mb3_general_ci',
+    PRIMARY KEY (`iboard`) USING BTREE,
+    INDEX `FK_customer_lagarto_user` (`iuser`) USING BTREE,
+    INDEX `FK_customer_customer_board_type` (`board_cd`) USING BTREE,
+    INDEX `FK_customer_auction` (`product_cd`) USING BTREE,
+    CONSTRAINT `FK_customer_auction` FOREIGN KEY (`product_cd`) REFERENCES `lagarto`.`auction` (`iboard`) ON UPDATE NO ACTION ON DELETE NO ACTION,
+    CONSTRAINT `FK_customer_customer_board_type` FOREIGN KEY (`board_cd`) REFERENCES `lagarto`.`customer_board_type` (`board_cd`) ON UPDATE NO ACTION ON DELETE NO ACTION,
+    CONSTRAINT `FK_customer_lagarto_user` FOREIGN KEY (`iuser`) REFERENCES `lagarto`.`lagarto_user` (`iuser`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+    COLLATE = 'utf8mb3_general_ci'
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 1
+;
+
+CREATE TABLE `lagarto`.`customer_attach`
+(
+    `idx`           INT(10)          NOT NULL AUTO_INCREMENT COMMENT '파일 번호 (PK)',
+    `iboard`        INT(10) UNSIGNED NOT NULL COMMENT '게시글 번호 (FK)',
+    `original_name` VARCHAR(260)     NOT NULL COMMENT '원본 파일명' COLLATE 'utf8mb3_general_ci',
+    `save_name`     VARCHAR(40)      NOT NULL COMMENT '저장 파일명' COLLATE 'utf8mb3_general_ci',
+    `size`          INT(10)          NOT NULL COMMENT '파일 크기',
+    `delete_yn`     ENUM ('Y','N')   NOT NULL DEFAULT 'N' COMMENT '삭제 여부' COLLATE 'utf8mb3_general_ci',
+    `insert_time`   DATETIME         NOT NULL DEFAULT current_timestamp() COMMENT '등록일',
+    PRIMARY KEY (`idx`) USING BTREE,
+    INDEX `FK_customer_attach_customer` (`iboard`) USING BTREE,
+    CONSTRAINT `FK_customer_attach_customer` FOREIGN KEY (`iboard`) REFERENCES `lagarto`.`customer` (`iboard`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+    COMMENT ='첨부 파일'
+    COLLATE = 'utf8mb3_general_ci'
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 1
+;
+
+CREATE TABLE `lagarto`.`customer_board_type`
+(
+    `board_cd` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `board_nm` VARCHAR(10)         NOT NULL COLLATE 'utf8mb3_general_ci',
+    `orderby`  TINYINT(3) UNSIGNED NULL     DEFAULT NULL,
+    PRIMARY KEY (`board_cd`) USING BTREE
+)
+    COLLATE = 'utf8mb3_general_ci'
+    ENGINE = InnoDB
+;
+
+CREATE TABLE `lagarto`.`customer_comment`
+(
+    `icmt`   INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `iboard` INT(10) UNSIGNED NULL DEFAULT NULL,
+    `ctnt`   VARCHAR(500)     NOT NULL COLLATE 'utf8mb3_general_ci',
+    `iuser`  INT(10) UNSIGNED NOT NULL,
+    `rdt`    DATETIME         NULL DEFAULT current_timestamp(),
+    PRIMARY KEY (`icmt`) USING BTREE,
+    INDEX `FK_customer_comment_customer` (`iboard`) USING BTREE,
+    CONSTRAINT `FK_customer_comment_customer` FOREIGN KEY (`iboard`) REFERENCES `lagarto`.`customer` (`iboard`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+    COLLATE = 'utf8mb3_general_ci'
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 1
+;
+
+CREATE TABLE `lagarto`.`customer_like`
+(
+    `iboard` INT(10) UNSIGNED NOT NULL,
+    `iuser`  INT(10) UNSIGNED NOT NULL,
+    `rdt`    DATETIME         NULL DEFAULT current_timestamp(),
+    PRIMARY KEY (`iuser`, `iboard`) USING BTREE,
+    INDEX `FK_customer_like_customer` (`iboard`) USING BTREE,
+    CONSTRAINT `FK_customer_like_customer` FOREIGN KEY (`iboard`) REFERENCES `lagarto`.`customer` (`iboard`) ON UPDATE NO ACTION ON DELETE NO ACTION,
+    CONSTRAINT `FK_customer_like_lagarto_user` FOREIGN KEY (`iuser`) REFERENCES `lagarto`.`lagarto_user` (`iuser`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+    COLLATE = 'utf8mb3_general_ci'
+    ENGINE = InnoDB
+;
+
+INSERT INTO `lagarto`.`customer_board_type`
+    (`board_cd`, `board_nm`)
+VALUES (1, 'Review'),
+       (2, 'Community'),
+       (3, 'Help');
